@@ -14,12 +14,18 @@ public class ControladorTienda {
 		return "Index";
 	}
 	
-	// Métodos para la página principal
 	@RequestMapping(value="/crearProducto", method=RequestMethod.GET)
-	public String creaProducto_get() {
+	public String crearProducto_get() {
+
 
 		return "crearProducto";
 	}
 	
-	
+
+	@RequestMapping(value="/buscarProducto", method=RequestMethod.GET)
+	public String buscarProducto_get() {
+
+		return "buscarProducto";
+	}
+
 }
