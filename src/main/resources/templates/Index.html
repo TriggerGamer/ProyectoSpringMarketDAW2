@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
-
+<!--git pull origin master --allow-unrelated-histories-->
 	<head>
 
 		<meta charset='utf-8'> 
@@ -13,7 +13,11 @@
 	<body>
 		<h1> Tienda </h1>
 		<form th:action="@{/index}" method="POST">
-		<div class="otro cambio mas">
+		<nav>
+			<h3> <a th:href="@{CrearProducto.html}"> AÑADIR PRODUCTO </a> </h3> 
+			<h3> <a th:href="@{BuscarProducto.html}"> BUSCAR PRODUCTO </a> </h3>
+		</nav>
+		<div class="articulos">
 			<div class="impar"> 1 </div>
 			<div class="par"> 2 </div>
 			<div class="impar"> 3 </div>
@@ -22,8 +26,7 @@
 			<div class="par"> 6 </div>
 			<div class="impar"> 7 </div>
 			<div class="par"> 8 </div>
-		</section>
+		</div>
 		</form>
-		
 	</body>
 </html>

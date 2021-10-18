@@ -9,8 +9,21 @@ public class ControladorTienda {
 	
 	// Métodos para la página principal
 	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public String quiz_get() {
+	public String index_get() {
 
 		return "Index";
 	}
+	
+	@RequestMapping(value="/crearProducto", method=RequestMethod.GET)
+	public String crearProducto_get() {
+
+		return "crearProducto";
+	}
+	
+	@RequestMapping(value="/buscarProducto", method=RequestMethod.GET)
+	public String buscarProducto_get() {
+
+		return "buscarProducto";
+	}
+	
 }
