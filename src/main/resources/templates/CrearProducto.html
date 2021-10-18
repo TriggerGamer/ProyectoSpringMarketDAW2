@@ -13,9 +13,14 @@
 	<body>
 		<h1> Dar de alta un Producto </h1>
 		
-		<form th:action="@{/creaProducto}" method="POST">
+		<form th:action="@{/crearProducto}" method="POST">
 			
-			<h3> ¿Buenas en que le puedo ayudar? </h3>
+			<fieldset>
+				<legend> Datos del producto </legend>
+				<p> Nombre del producto:  <input type="text" name="tuitlo"> </p>
+				<p> Descripcion del producto:  <textarea name="descripcion" cols="35" rows="3"> </textarea></p>
+				<p> Precio que quiere ponerle al producto:  <input type="number" name="precio"> </p>
+			</fieldset>
 			
 			
 			<fieldset> 

@@ -6,11 +6,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ControladorTienda {
-	
+
 	// Métodos para la página principal
 	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public String quiz_get() {
+	public String index_get() {
 
 		return "Index";
 	}
+	
+	// Métodos para la página principal
+	@RequestMapping(value="/crearProducto", method=RequestMethod.GET)
+	public String creaProducto_get() {
+
+		return "crearProducto";
+	}
+	
+	
 }
