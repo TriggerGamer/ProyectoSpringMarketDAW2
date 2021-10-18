@@ -78,10 +78,24 @@
     scroll-behavior: smooth;
   }
 }
-
-.columnas{
-	display: block;
+.articulos{
+	width:100%;
+	height:auto;
+	margin:0 auto;
+}
+.impar{
 	float: left;
+	width: 40%;
+	height: 200px;
+	background-color: red;
+		margin: 0 auto;
+}
+
+.par{
+	float: left;
+	width: 40%;
+	height: 200px;
+	background-color: red;
 }
 
 body {
