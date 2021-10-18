@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
+
+	<head>
+
+		<meta charset='utf-8'> 
+		<meta name="author" content="Erick José Jáquez Encarnación">
+		<link rel="stylesheet" th:href="@{/css/bootstrap(Sketchy).css}">
+		<meta name="viewport" content="width=device-width">
+		<title> Tienda </title>
+
+	</head>
+
+	<body>
+		<h1> Dar de alta un Prducto </h1>
+		
+		<form th:action="@{/creaProducto}" method="POST">
+			
+			<h3> ¿Buenas en que le puedo ayudar? </h3>
+			
+			
+			<fieldset> 
+				<legend> Enviar Petición</legend>
+				<p> ¿Estás seguro? </p>
+
+				<input class="bg-danger text-white" type="Submit" value="Si">
+				<input class="bg-danger text-white" type="Reset" value="No">
+			</fieldset>
+		</form>
+	</body>
+</html>
