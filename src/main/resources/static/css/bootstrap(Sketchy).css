@@ -95,9 +95,9 @@ nav > h3{
 .impar{
 	float: left;
 	margin: 2%;
-	width: 38%;
-	height: 200px;
-	background-color: yellow;
+	width: 50%;
+	height: 50%;
+	background-color: white;
 }
 
 .par{

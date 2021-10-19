@@ -1,28 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
-	<head>
-		<meta charset='utf-8'> 
-		<meta name="author" content="Erick José Jáquez Encarnación">
-		<link rel="stylesheet" th:href="@{/css/bootstrap(Sketchy).css}">
-		<meta name="viewport" content="width=device-width">
-		<title> Buscar Productos </title>
 
-	</head>
+<head>
+	<meta charset='utf-8'>
+	<meta name="author" content="Erick José Jáquez Encarnación">
+	<link rel="stylesheet" th:href="@{/css/tienda.css}">
+	<meta name="viewport" content="width=device-width">
+	<title> Buscar Productos </title>
 
-	<body>
-		<h1> Buscar Productos </h1>
-		
-		<form th:action="@{/buscarProducto}" method="POST">
-			
-			<h3> ¿Buenas en que le puedo ayudar? </h3>
-			
-			
-			<fieldset> 
-				<legend> Enviar Petición</legend>
-				<p> ¿Estás seguro? </p>
+</head>
 
-				<input class="bg-danger text-white" type="Submit" value="Si">
-				<input class="bg-danger text-white" type="Reset" value="No">
-			</fieldset>
-		</form>
-	</body>
+<body>
+	<h1> BUSQUEDA DE PRODUCTOS </h1>
+
+	<form th:action="@{/buscarProducto}" method="POST">
+		<nav>
+			<h3> <a href="/index"> INICIO </a> </h3>
+			<h3> <a href="/crearProducto"> AÑADIR PRODUCTO </a> </h3>
+			<h3> <a href="/buscarProducto"> BUSCAR PRODUCTO </a> </h3>
+		</nav>
+		<fieldset>
+			<legend>Introduce el código del producto que desea buscar</legend>
+			<p> Código del producto: <input type="text" name="codigoProducto"> </p>
+			<input class="bg-danger text-white" type="submit" value="Buscar Producto">
+		</fieldset>
+	</form>
+</body>
+
 </html>

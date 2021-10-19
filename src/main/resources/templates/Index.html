@@ -1,31 +1,31 @@
 <html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
-<!--git pull origin master --allow-unrelated-histories-->
+<!--git pull origin master --allow-unrelated-histories -->
 	<head>
 
 		<meta charset='utf-8'> 
 		<meta name="author" content="Erick José Jáquez Encarnación">
-		<link rel="stylesheet" th:href="@{/css/bootstrap(Sketchy).css}">
+		<link rel="stylesheet" th:href="@{/css/tienda.css}">
 		<meta name="viewport" content="width=device-width">
 		<title> Tienda </title>
-
 	</head>
 
 	<body>
-		<h1> Tienda </h1>
+		<h1> TIENDA </h1>
 		<form th:action="@{/index}" method="POST">
 		<nav>
+			<h3> <a href="/index"> INICIO </a> </h3>
 			<h3> <a href="/crearProducto"> AÑADIR PRODUCTO </a> </h3> 
 			<h3> <a href="/buscarProducto"> BUSCAR PRODUCTO </a> </h3>
 		</nav>
 		<div class="articulos">
-			<div class="impar"> 1 </div>
-			<div class="par"> 2 </div>
-			<div class="impar"> 3 </div>
-			<div class="par"> 4 </div>
-			<div class="impar"> 5 </div>
-			<div class="par"> 6 </div>
-			<div class="impar"> 7 </div>
-			<div class="par"> 8 </div>
+			<div class="impar"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="par"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="impar"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="par"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="impar"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="par"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="impar"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="par"><a><img th:src="@{/img/Pc-producto.jpg}"></a></div>
 		</div>
 		</form>
 	</body>
