@@ -19,7 +19,6 @@ nav > h3{
 .impar{
 	float: left;
 	width: 38%;
-	background-color:red;
 	margin-left:10%;
 	margin-top:2%;
 	display:block;
@@ -28,7 +27,12 @@ nav > h3{
 .par{
 	float: left;
 	width: 38%;
-	margin-left:2%;
+	margin-left:4%;
 	margin-top:2%;
-	background-color:yellow;
+}
+img{
+	display:block;
+	margin:auto;
+	width:10vw;
+	height:10vw;
 }
