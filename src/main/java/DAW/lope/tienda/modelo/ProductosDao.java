@@ -9,7 +9,7 @@ public interface ProductosDao {
 	int update(Productos producto);
 	int deleteById(int id);
 	List<Productos> findAll();
-	Optional<Productos> findById(int id);
+	List<Productos> findById(int id);
 	String getNameById(int id);
 
 }

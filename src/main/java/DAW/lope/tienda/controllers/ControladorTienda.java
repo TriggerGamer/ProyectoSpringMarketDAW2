@@ -36,7 +36,7 @@ public class ControladorTienda {
 
 	@RequestMapping(value="/buscarProducto", method=RequestMethod.GET)
 	public String buscarProducto_get() {
-
+		
 		return "buscarProducto";
 	}
 	
