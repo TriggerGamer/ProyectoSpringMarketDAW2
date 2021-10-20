@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.modelo.Productos;
 import DAW.lope.tienda.modelo.ProductosDao;
@@ -30,6 +31,17 @@ public class ControladorTienda {
 	public String crearProducto_get() {
 
 
+		return "crearProducto";
+	}
+	@RequestMapping(value="/crearProducto", method=RequestMethod.POST)
+	public String crearProducto_post(@RequestParam String titulo,
+			@RequestParam String descripcion,
+			@RequestParam String precio) {
+		
+			double price = Double.parseDouble(precio);
+
+			Productos producto = new Productos(1,titulo, descripcion, price, 5);
+			productosdao.save(producto);			
 		return "crearProducto";
 	}
 	
