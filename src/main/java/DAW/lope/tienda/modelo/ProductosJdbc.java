@@ -20,9 +20,9 @@ public class ProductosJdbc implements ProductosDao {
 	}
 
 	@Override
-	public int save(Productos pts) {
+	public int save(Productos producto) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("INSERT INTO Puntuaciones(nombreUsuario, Puntuacion, Personaje) VALUES(?,?,?)", pts.getNombreUsuario(), pts.getPuntuacion(), pts.getPersonaje());
+		return jdbcTemplate.update("INSERT INTO Puntuaciones(nombreUsuario, Puntuacion, Personaje) VALUES(?,?,?)", producto.getTituloProducto(), producto.getDescripcionProducto(), producto.getPrecio());
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class ProductosJdbc implements ProductosDao {
 	@Override
 	public int deleteById(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return jdbcTemplate.update("DELETE FROM Productos WHERE id_Producto = " + id);
 	}
 
 	@Override
 	public List<Productos> findAll() {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("SELECT * FROM Puntuaciones ORDER BY id_Usuario DESC LIMIT 5", (rs, rowNum) -> new Productos(rs.getInt("id_Usuario"), rs.getString("nombreUsuario"), rs.getInt("Puntuacion"), rs.getString("Personaje")));
+		return jdbcTemplate.query("SELECT * FROM Puntuaciones ORDER BY id_Usuario DESC LIMIT 5", (rs, rowNum) -> new Productos(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
 
 	@Override
