@@ -22,7 +22,7 @@ public class ProductosJdbc implements ProductosDao {
 	@Override
 	public int save(Productos producto) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("INSERT INTO Productos(tituloProductos, descripcionProducto, precio) VALUES(?,?,?)", producto.getTituloProducto(), producto.getDescripcionProducto(), producto.getPrecio());
+		return jdbcTemplate.update("INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES(?,?,?,?)", producto.getTituloProducto(), producto.getDescripcionProducto(), producto.getPrecio(), producto.getDescuento());
 	}
 
 	@Override
