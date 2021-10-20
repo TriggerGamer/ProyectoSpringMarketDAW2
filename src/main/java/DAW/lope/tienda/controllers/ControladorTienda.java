@@ -1,12 +1,15 @@
 package DAW.lope.tienda.controllers;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import DAW.lope.tienda.modelo.Productos;
 import DAW.lope.tienda.modelo.ProductosDao;
 
@@ -60,22 +63,22 @@ public class ControladorTienda {
 		return "buscarProducto";
 	}
 	
-	@GetMapping(value="/Productos")
-	public String Productos_get(Model modelo) {
+	@GetMapping(value="/Productos/{id_Producto}")
+	public String Productos_get(Model modelo, @PathVariable int id_Producto) {
 		
 		//Declarar la lista para obtener los datos
 		List<Productos> Productos = productosdao.findAll();
+		
 		modelo.addAttribute("Productos", Productos);
 
-		return "producto/1";
+		return "producto/ProductosInfo";
 	}
 	
 	@PostMapping(value="/Productos")
 	public String Productos_post(Model modelo) {
 		
 		//Declarar la lista para obtener los datos
-		List<Productos> Productos = productosdao.findAll();
-		modelo.addAttribute("Productos", Productos);
+		productosdao.deleteById(1);
 
 		return "producto/1";
 	}
