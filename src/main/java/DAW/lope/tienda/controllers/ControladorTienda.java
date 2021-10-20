@@ -14,6 +14,7 @@ public class ControladorTienda {
 		return "Index";
 	}
 	
+	// Métodos para crear un producto
 	@RequestMapping(value="/crearProducto", method=RequestMethod.GET)
 	public String crearProducto_get() {
 
