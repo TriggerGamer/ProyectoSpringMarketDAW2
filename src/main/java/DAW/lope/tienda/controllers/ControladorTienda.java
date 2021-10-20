@@ -1,11 +1,22 @@
 package DAW.lope.tienda.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import DAW.lope.tienda.modelo.Productos;
+import DAW.lope.tienda.modelo.ProductosDao;
+
+
 @Controller
 public class ControladorTienda {
+	
+	@Autowired
+	private ProductosDao productosdao;
 
 	// Métodos para la página principal
 	@RequestMapping(value="/index", method=RequestMethod.GET)
@@ -28,5 +39,16 @@ public class ControladorTienda {
 
 		return "buscarProducto";
 	}
+	
+	@RequestMapping(value="/Productos", method=RequestMethod.GET)
+	public String Productos_get(Model modelo) {
+		
+		//Declarar la lista para obtener los datos
+		List<Productos> Productos = productosdao.findAll();
+		modelo.addAttribute("Productos", Productos);
+
+		return "ProductosInfo";
+	}
+
 
 }
