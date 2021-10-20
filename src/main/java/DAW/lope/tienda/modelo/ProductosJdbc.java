@@ -46,7 +46,7 @@ public class ProductosJdbc implements ProductosDao {
 	@Override
 	public List<Productos> findById(int id) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("SELECT * FROM Productos", (rs, rowNum) -> new Productos(rs.getInt("id_Productos"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
+		return jdbcTemplate.query("SELECT * FROM Productos WHERE id_Productos = " + id, (rs, rowNum) -> new Productos(rs.getInt("id_Productos"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
 
 	@Override

@@ -5,13 +5,14 @@
 
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick José Jáquez Encarnación">
-	<link rel="stylesheet" th:href="@{/css/bootstrap(Sketchy).css}">
+	<link rel="stylesheet" th:href="@{/css/tienda.css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Tienda </title>
 </head>
 
 <body>
 	<h1> TIENDA </h1>
+	
 	<form th:action="@{/index}" method="POST">
 		<nav>
 			<h3> <a href="/index"> INICIO </a> </h3>
@@ -19,8 +20,9 @@
 			<input type="search" placeholder="Nombre del producto...">
 			<button>Buscar</button>
 		</nav>
+		
 		<div class="articulos">
-			<div class="impar"><a href="/Productos"><img th:src="@{/img/Pc-producto.jpg}"></a></div>
+			<div class="impar"><button type="submit" value="1" name="Pr1"> <img th:src="@{/img/Pc-producto.jpg}"> </button></div>
 			<div class="par"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
 			<div class="impar"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
 			<div class="par"><a href=""> <img th:src="@{/img/Pc-producto.jpg}"></a></div>
@@ -29,6 +31,7 @@
 			<div class="impar"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
 			<div class="par"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
 		</div>
+		
 	</form>
 </body>
 
