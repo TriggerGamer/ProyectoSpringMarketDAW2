@@ -1,7 +1,6 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -53,6 +52,12 @@ public class ProductosJdbc implements ProductosDao {
 	public String getNameById(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Productos> getNamByName(String name) {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query("SELECT * FROM Productos WHERE tituloProducto = " + name, (rs, rowNum) -> new Productos(rs.getInt("id_Productos"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
 
 }

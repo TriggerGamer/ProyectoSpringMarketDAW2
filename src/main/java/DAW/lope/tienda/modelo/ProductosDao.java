@@ -11,5 +11,5 @@ public interface ProductosDao {
 	List<Productos> findAll();
 	List<Productos> findById(int id);
 	String getNameById(int id);
-
+	List <Productos> getNamByName(String name);
 }
