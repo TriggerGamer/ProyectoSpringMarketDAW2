@@ -1,39 +1,41 @@
 <html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
 
-	<head>
+<head>
 
-		<meta charset='utf-8'> 
-		<meta name="author" content="Erick José Jáquez Encarnación">
-		<link rel="stylesheet" th:href="@{/css/tienda.css}">
-		<meta name="viewport" content="width=device-width">
-		<title> Tienda </title>
+	<meta charset='utf-8'>
+	<meta name="author" content="Erick José Jáquez Encarnación">
+	<link rel="stylesheet" th:href="@{/css/tienda.css}">
+	<meta name="viewport" content="width=device-width">
+	<title> Tienda </title>
 
-	</head>
+</head>
 
-	<body>
-		<h1> Dar de alta un Producto </h1>
-		
-		<form th:action="@{/crearProducto}" method="POST">
+<body>
+	<h1> Dar de alta un Producto </h1>
+
+	<form th:action="@{/crearProducto}" method="POST">
 		<nav>
 			<h3> <a href="/index"> INICIO </a> </h3>
 			<h3> <a href="/crearProducto"> AÑADIR PRODUCTO </a> </h3>
-			<h3> <a href="/buscarProducto"> BUSCAR PRODUCTO </a> </h3>
+			<input type="search" placeholder="Nombre del producto...">
+			<button>Buscar</button>
 		</nav>
-			<fieldset>
-				<legend> Datos del producto </legend>
-				<p> Nombre del producto:  <input type="text" name="titulo"> </p>
-				<p> Descripcion del producto:  <textarea name="descripcion" cols="35" rows="3"> </textarea></p>
-				<p> Precio que quiere ponerle al producto:  <input type="number" name="precio"> </p>
-			</fieldset>
-			
-			
-			<fieldset> 
-				<legend> Enviar Petición</legend>
-				<p> ¿Estás seguro? </p>
+		<fieldset>
+			<legend> Datos del producto </legend>
+			<p> Nombre del producto: <input type="text" name="titulo"> </p>
+			<p> Descripcion del producto: <textarea name="descripcion" cols="35" rows="3"> </textarea></p>
+			<p> Precio que quiere ponerle al producto: <input type="number" name="precio"> </p>
+		</fieldset>
 
-				<input class="bg-danger text-white" type="Submit" value="Si">
-				<input class="bg-danger text-white" type="Reset" value="No">
-			</fieldset>
-		</form>
-	</body>
+
+		<fieldset>
+			<legend> Enviar Petición</legend>
+			<p> ¿Estás seguro? </p>
+
+			<input class="bg-danger text-white" type="Submit" value="Si">
+			<input class="bg-danger text-white" type="Reset" value="No">
+		</fieldset>
+	</form>
+</body>
+
 </html>
