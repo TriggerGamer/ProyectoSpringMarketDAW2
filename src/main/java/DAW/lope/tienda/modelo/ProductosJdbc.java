@@ -22,7 +22,7 @@ public class ProductosJdbc implements ProductosDao {
 	@Override
 	public int save(Productos producto) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("INSERT INTO Puntuaciones(nombreUsuario, Puntuacion, Personaje) VALUES(?,?,?)", producto.getTituloProducto(), producto.getDescripcionProducto(), producto.getPrecio());
+		return jdbcTemplate.update("INSERT INTO Productos(tituloProductos, descripcionProducto, precio) VALUES(?,?,?)", producto.getTituloProducto(), producto.getDescripcionProducto(), producto.getPrecio());
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class ProductosJdbc implements ProductosDao {
 	@Override
 	public List<Productos> findAll() {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("SELECT * FROM Puntuaciones ORDER BY id_Usuario DESC LIMIT 5", (rs, rowNum) -> new Productos(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
+		return jdbcTemplate.query("SELECT * FROM Productos ORDER BY id_Usuario", (rs, rowNum) -> new Productos(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
 
 	@Override
