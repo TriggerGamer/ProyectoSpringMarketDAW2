@@ -25,11 +25,13 @@ public class ControladorTienda {
 	}
 	
 	@PostMapping(value="/index")
-	public String index_post(@RequestParam String Pr1) {
+	public String index_post(@RequestParam (value="Pr1", required=false) String Pr1, 
+			@RequestParam(value="busqueda", required=false)String busqueda, Model modelo) {
 		
-		
-		
-		return "redirect:/Productos";
+		List<Productos> Productos = productosdao.getNamByName(busqueda);
+		modelo.addAttribute("busqueda", Productos);
+
+		return "/Productos";
 	}
 	
 	// Métodos para crear un producto
