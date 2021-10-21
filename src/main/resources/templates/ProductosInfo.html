@@ -20,6 +20,7 @@
 				<div th:text="${producto.descripcionProducto}"> </div>
 				<div th:text="${producto.precio}"> </div>
 				<div th:text="${producto.descuento}"> </div>
+				<div><a th:href="@{/Productos/{id}(id=${producto.id})}"/></diV>
 			</div>
 			
 			<button type="submit"> Borrar Producto </button>

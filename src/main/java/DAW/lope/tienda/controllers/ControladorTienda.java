@@ -22,8 +22,9 @@ public class ControladorTienda {
 
 	// Métodos para la página principal
 	@GetMapping(value="/index")
-	public String index_get() {
-
+	public String index_get (Model modelo) {
+		List<Productos> Productos = productosdao.findAll();
+		modelo.addAttribute("busqueda", Productos);
 		return "Index";
 	}
 	
@@ -69,8 +70,8 @@ public class ControladorTienda {
 		//Declarar la lista para obtener los datos
 		List<Productos> Productos = productosdao.findAll();
 		
-		modelo.addAttribute("Productos", Productos);
-
+		Productos.forEach(null);
+		
 		return "/ProductosInfo";
 	}
 	
