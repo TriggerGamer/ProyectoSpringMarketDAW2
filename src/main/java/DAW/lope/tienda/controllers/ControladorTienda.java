@@ -71,7 +71,7 @@ public class ControladorTienda {
 		
 		modelo.addAttribute("Productos", Productos);
 
-		return "producto/ProductosInfo";
+		return "/ProductosInfo";
 	}
 	
 	@PostMapping(value="/Productos")
@@ -80,7 +80,7 @@ public class ControladorTienda {
 		//Declarar la lista para obtener los datos
 		productosdao.deleteById(1);
 
-		return "producto/1";
+		return "/Productos";
 	}
 
 
