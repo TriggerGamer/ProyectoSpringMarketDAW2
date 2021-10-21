@@ -20,17 +20,24 @@
 			<input type="search"  name="busqueda" placeholder="Nombre del producto...">
 			<button type="submit">Buscar</button>
 		</nav>
-					<div th:each="producto: ${busqueda}">
-<!--
-		<div class="articulos">-->
-			 <div class="impar"> <a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/Pc-producto.jpg}"> </a></div>
-		<!--	<div class="par"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
-			<div class="impar"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
-			<div class="par"><a href=""> <img th:src="@{/img/Pc-producto.jpg}"></a></div>
-			<div class="impar"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
-			<div class="par"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
-			<div class="impar"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>
-			<div class="par"><a href=""><img th:src="@{/img/Pc-producto.jpg}"></a></div>-->
+				
+
+		<div th:each="producto: ${busqueda}" class="articulos">
+			<div class="impar"> <a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc1.jpg}"> </a></div>
+			
+			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc2.jpg}"></a></div>
+			
+			<div class="impar"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc3.jpg}"></a></div>
+			
+			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc4.jpg}"></a></div>
+			
+			<div class="impar"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc5.jpg}"></a></div>
+			
+			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc6.jpg}"></a></div>
+			
+			<div class="impar"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc7.jpg}"></a></div>
+			
+			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc8.jpg}"></a></div>
 		</div>
 		
 	</form>
