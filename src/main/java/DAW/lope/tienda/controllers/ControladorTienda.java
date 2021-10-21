@@ -23,8 +23,10 @@ public class ControladorTienda {
 	// Métodos para la página principal
 	@GetMapping(value="/index")
 	public String index_get (Model modelo) {
-		List<Productos> Productos = productosdao.findAll();
-		modelo.addAttribute("busqueda", Productos);
+		
+		List<Productos> Productos = productosdao.findEight();
+		modelo.addAttribute("Productos", Productos);
+		
 		return "Index";
 	}
 	
@@ -32,10 +34,10 @@ public class ControladorTienda {
 	public String index_post(@RequestParam (value="Pr1", required=false) String Pr1, 
 			@RequestParam(value="busqueda", required=false)String busqueda, Model modelo) {
 		
-		List<Productos> Productos = productosdao.getNamByName(busqueda);
+		List<Productos> Productos = productosdao.getProductoByName(busqueda);
 		modelo.addAttribute("busqueda", Productos);
 
-		return "/Productos";
+		return "";
 	}
 	
 	// Métodos para crear un producto
@@ -45,6 +47,7 @@ public class ControladorTienda {
 
 		return "crearProducto";
 	}
+	
 	@PostMapping(value="/crearProducto")
 	public String crearProducto_post(@RequestParam String titulo,
 			@RequestParam String descripcion,
@@ -64,24 +67,24 @@ public class ControladorTienda {
 		return "buscarProducto";
 	}
 	
-	@GetMapping(value="/Productos/{id_Producto}")
+	@GetMapping(value="/productos/{id_Producto}")
 	public String Productos_get(Model modelo, @PathVariable int id_Producto) {
 		
 		//Declarar la lista para obtener los datos
 		List<Productos> Productos = productosdao.findAll();
 		
-		Productos.forEach(null);
+		modelo.addAttribute("Productos", Productos);
 		
 		return "/ProductosInfo";
 	}
 	
-	@PostMapping(value="/Productos")
+	@PostMapping(value="/productos")
 	public String Productos_post(Model modelo) {
 		
 		//Declarar la lista para obtener los datos
 		productosdao.deleteById(1);
 
-		return "/Productos";
+		return "/productos";
 	}
 
 

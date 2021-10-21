@@ -41,6 +41,12 @@ public class ProductosJdbc implements ProductosDao {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.query("SELECT * FROM Productos ", (rs, rowNum) -> new Productos(rs.getInt("id_Productos"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
+	
+	@Override
+	public List<Productos> findEight() {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query("SELECT * FROM Productos ORDER BY id_Productos ASC LIMIT 8 ", (rs, rowNum) -> new Productos(rs.getInt("id_Productos"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
+	}
 
 	@Override
 	public List<Productos> findById(int id) {
@@ -55,7 +61,7 @@ public class ProductosJdbc implements ProductosDao {
 	}
 
 	@Override
-	public List<Productos> getNamByName(String name) {
+	public List<Productos> getProductoByName(String name) {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.query("SELECT * FROM Productos WHERE tituloProducto = " + name, (rs, rowNum) -> new Productos(rs.getInt("id_Productos"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
