@@ -23,15 +23,11 @@
 
 
 		<div th:each="producto: ${Productos}" class="articulos">
-<<<<<<< HEAD
-			<div class="impar"> <a th:href="@{/producto/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc${producto.id_Producto}.jpg}"></a></div>
-=======
 			<div class="impar">
 				<a th:href="@{/Productos/{id}(id=${producto.id_Producto})}">
 					<img th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}" />
 				</a>
 			</div>
->>>>>>> 4bfa8d0a2fb173045d6e6d8efe248a9ae31fd7e1
 		</div>
 	</form>
 </body>
