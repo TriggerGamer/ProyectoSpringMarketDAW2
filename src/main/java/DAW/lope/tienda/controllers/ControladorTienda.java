@@ -44,7 +44,6 @@ public class ControladorTienda {
 	@GetMapping(value="/crearProducto")
 	public String crearProducto_get() {
 
-
 		return "crearProducto";
 	}
 	
@@ -53,14 +52,21 @@ public class ControladorTienda {
 			@RequestParam String descripcion,
 			@RequestParam String precio) {
 		
-			double price = Double.parseDouble(precio);
-
-			Productos producto = new Productos(1,titulo, descripcion, price, 5);
-			productosdao.save(producto);			
+		double price = Double.parseDouble(precio);
+		int descuento = 10;
+		Productos producto = new Productos();
+		
+		producto.setTituloProducto(titulo);
+		producto.setDescripcionProducto(descripcion);
+		producto.setPrecio(price);
+		producto.setDescuento(descuento);
+		
+		productosdao.save(producto);	
+		
 		return "redirect:/index";
 	}
 	
-
+	//Métodos para buscar un producto
 	@GetMapping(value="/buscarProducto")
 	public String buscarProducto_get() {
 		
@@ -72,21 +78,15 @@ public class ControladorTienda {
 		
 		//Declarar la lista para obtener los datos
 		List<Productos> producto = productosdao.findById(id_Producto);
-		
 		modelo.addAttribute("productos", producto);
 		
 		return "/ProductosInfo";
 	}
 	
 	
-	//Borrar producto
+	// Métodos para Borrar producto
 	@GetMapping(value="/producto/borrar/{id_Producto}")
 	public String borrar_get(Model modelo, @PathVariable int id_Producto) {
-		
-		//Declarar la lista para obtener los datos
-		List<Productos> producto = productosdao.findById(id_Producto);
-				
-		modelo.addAttribute("productos", producto);
 		
 		return "borrar";
 	}
@@ -94,7 +94,7 @@ public class ControladorTienda {
 	@PostMapping(value="/producto/borrar/{id_Producto}")
 	public String borrar_post(Model modelo, @PathVariable int id_Producto) {
 		
-		//Declarar la lista para obtener los datos
+		//Borrar los datos
 		productosdao.deleteById(id_Producto);
 		
 		String borrar = "borrado correctamente";
