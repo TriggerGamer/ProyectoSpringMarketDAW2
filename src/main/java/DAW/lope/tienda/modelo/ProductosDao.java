@@ -2,6 +2,7 @@ package DAW.lope.tienda.modelo;
 
 import java.util.List;
 
+
 public interface ProductosDao {
 	int count();
 	int save(Productos producto);

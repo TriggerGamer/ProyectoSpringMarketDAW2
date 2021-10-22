@@ -71,15 +71,15 @@ public class ControladorTienda {
 	public String Productos_get(Model modelo, @PathVariable int id_Producto) {
 		
 		//Declarar la lista para obtener los datos
-		List<Productos> Productos = productosdao.findAll();
+		List<Productos> producto = productosdao.findById(id_Producto);
 		
-		modelo.addAttribute("Productos", Productos);
+		modelo.addAttribute("producto", producto);
 		
 		return "/ProductosInfo";
 	}
 	
-	@PostMapping(value="/productos")
-	public String Productos_post(Model modelo) {
+	@PostMapping(value="/producto/{id_Producto}")
+	public String Productos_post(Model modelo, @PathVariable int id_Producto) {
 		
 		//Declarar la lista para obtener los datos
 		productosdao.deleteById(1);

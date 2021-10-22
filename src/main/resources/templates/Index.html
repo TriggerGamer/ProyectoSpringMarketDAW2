@@ -4,7 +4,7 @@
 <head>
 
 	<meta charset='utf-8'>
-	<meta name="author" content="Erick José Jáquez Encarnación">
+	<meta name="author" content="Erick Jaquez y Luis">
 	<link rel="stylesheet" th:href="@{/css/tienda.css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Tienda </title>
@@ -23,14 +23,8 @@
 				
 
 		<div th:each="producto: ${Productos}" class="articulos">
-<<<<<<< HEAD
-			<div class="impar"> <a th:href="@{/productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc1.jpg}"> </a></div>
-=======
-			<div class="impar"> <a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc${producto.id_Producto}.jpg}"></a></div>
->>>>>>> 825d45dcb350eef2b6844743823e27994784e059
-			
+			<div class="impar"> <a th:href="@{/producto/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc${producto.id_Producto}.jpg}"></a></div>
 		</div>
-		
 	</form>
 </body>
 
