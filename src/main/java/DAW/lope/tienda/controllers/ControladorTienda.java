@@ -67,7 +67,7 @@ public class ControladorTienda {
 		return "buscarProducto";
 	}
 	
-	@GetMapping(value="/productos/{id_Producto}")
+	@GetMapping(value="/producto/{id_Producto}")
 	public String Productos_get(Model modelo, @PathVariable int id_Producto) {
 		
 		//Declarar la lista para obtener los datos
