@@ -21,10 +21,9 @@
 					<div th:text="${producto.precio}"> </div>
 					<div th:text="${producto.descuento}"> </div>
 				</div>
-				
-				<button type="submit"> Borrar Producto </button>
 			</form>
-			
-		
+			<div th:each="producto: ${productos}">
+				<a th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button> Borrar Producto </button> </a>
+			</div>
 	</body>
 </html>

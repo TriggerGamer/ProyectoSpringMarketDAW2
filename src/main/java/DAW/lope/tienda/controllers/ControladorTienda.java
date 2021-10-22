@@ -78,12 +78,6 @@ public class ControladorTienda {
 		return "/ProductosInfo";
 	}
 	
-	@PostMapping(value="/producto/{id_Producto}")
-	public String Productos_post(Model modelo, @PathVariable int id_Producto) {
-		
-		
-		return "borrar";
-	}
 	
 	//Borrar producto
 	@GetMapping(value="/producto/borrar/{id_Producto}")
