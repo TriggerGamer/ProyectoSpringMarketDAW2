@@ -73,7 +73,7 @@ public class ControladorTienda {
 		//Declarar la lista para obtener los datos
 		List<Productos> producto = productosdao.findById(id_Producto);
 		
-		modelo.addAttribute("producto", producto);
+		modelo.addAttribute("productos", producto);
 		
 		return "/ProductosInfo";
 	}
@@ -81,11 +81,34 @@ public class ControladorTienda {
 	@PostMapping(value="/producto/{id_Producto}")
 	public String Productos_post(Model modelo, @PathVariable int id_Producto) {
 		
-		//Declarar la lista para obtener los datos
-		productosdao.deleteById(1);
-
-		return "/productos";
+		
+		return "borrar";
 	}
+	
+	//Borrar producto
+	@GetMapping(value="/producto/borrar/{id_Producto}")
+	public String borrar_get(Model modelo, @PathVariable int id_Producto) {
+		
+		//Declarar la lista para obtener los datos
+		List<Productos> producto = productosdao.findById(id_Producto);
+				
+		modelo.addAttribute("productos", producto);
+		
+		return "borrar";
+	}
+	
+	@PostMapping(value="/producto/borrar/{id_Producto}")
+	public String borrar_post(Model modelo, @PathVariable int id_Producto) {
+		
+		//Declarar la lista para obtener los datos
+		productosdao.deleteById(id_Producto);
+		
+		String borrar = "borrado correctamente";
+		modelo.addAttribute("borrar", borrar);
+
+		return "borrar";
+	}
+	
 
 
 }

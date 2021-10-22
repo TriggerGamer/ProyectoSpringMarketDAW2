@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
+
+<head>
+
+	<meta charset='utf-8'>
+	<meta name="author" content="Erick Jaquez y Luis">
+	<link rel="stylesheet" th:href="@{/css/tienda.css}">
+	<meta name="viewport" content="width=device-width">
+	<title> Borrar producto </title>
+</head>
+
+<body>
+	<h1> ELIMINACION DE PRODUCTOS </h1>
+	<form th:action="@{/producto/borrar/{id_Producto}}" method="POST">
+		<h2>¿Esta seguro de que desea borrar el producto seleccionado?</h2>
+		<button type="submit">Borrar</button>
+		<h1 th:text="${borrar}"></h1>
+	</form>
+</body>
+
+</html>
