@@ -22,22 +22,9 @@
 		</nav>
 				
 
-		<div th:each="producto: ${busqueda}" class="articulos">
-			<div class="impar"> <a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc1.jpg}"> </a></div>
+		<div th:each="producto: ${Productos}" class="articulos">
+			<div class="impar"> <a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc${producto.id_Producto}.jpg}"></a></div>
 			
-			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc2.jpg}"></a></div>
-			
-			<div class="impar"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc3.jpg}"></a></div>
-			
-			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"> <img th:src="@{/img/pc4.jpg}"></a></div>
-			
-			<div class="impar"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc5.jpg}"></a></div>
-			
-			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc6.jpg}"></a></div>
-			
-			<div class="impar"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc7.jpg}"></a></div>
-			
-			<div class="par"><a th:href="@{/Productos/{id}(id=${producto.id_Producto})}"><img th:src="@{/img/pc8.jpg}"></a></div>
 		</div>
 		
 	</form>
