@@ -24,7 +24,7 @@
 
 		<div th:each="producto: ${Productos}" class="articulos">
 			<div class="impar">
-				<a th:href="@{/Productos/{id}(id=${producto.id_Producto})}">
+				<a th:href="@{/producto/{id}(id=${producto.id_Producto})}">
 					<img th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}" />
 				</a>
 			</div>
