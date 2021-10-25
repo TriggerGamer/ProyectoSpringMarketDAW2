@@ -87,22 +87,12 @@ public class ControladorTienda {
 	// Métodos para Borrar producto
 	@GetMapping(value="/producto/borrar/{id_Producto}")
 	public String borrar_get(Model modelo, @PathVariable int id_Producto) {
-		
-		return "borrar";
-	}
-	
-	@PostMapping(value="/producto/borrar/{id_Producto}")
-	public String borrar_post(Model modelo, @PathVariable int id_Producto) {
-		
 		//Borrar los datos
-		productosdao.deleteById(id_Producto);
-		
-		String borrar = "borrado correctamente";
-		modelo.addAttribute("borrar", borrar);
-
+				productosdao.deleteById(id_Producto);
+				
+				String borrar = "borrado correctamente";
+				modelo.addAttribute("borrar", borrar);
 		return "borrar";
 	}
-	
-
 
 }

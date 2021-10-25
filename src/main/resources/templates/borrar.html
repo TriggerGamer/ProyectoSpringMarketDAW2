@@ -12,8 +12,7 @@
 <body>
 	<h1> ELIMINACION DE PRODUCTOS </h1>
 	<form th:action="@{/producto/borrar/{id_Producto}}" method="POST">
-		<h2>¿Esta seguro de que desea borrar el producto seleccionado?</h2>
-		<button type="submit">Borrar</button>
+		
 		<h1 th:text="${borrar}"></h1>
 	</form>
 </body>

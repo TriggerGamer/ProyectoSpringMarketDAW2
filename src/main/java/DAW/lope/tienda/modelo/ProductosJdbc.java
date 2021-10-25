@@ -33,7 +33,7 @@ public class ProductosJdbc implements ProductosDao {
 	@Override
 	public int deleteById(int id) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("DELETE FROM Productos WHERE id_Producto = " + id);
+		return jdbcTemplate.update("DELETE FROM Productos WHERE id_Productos = " + id);
 	}
 
 	@Override
