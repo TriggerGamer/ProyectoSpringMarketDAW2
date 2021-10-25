@@ -16,11 +16,12 @@
 		<nav>
 			<h3> <a href="/index"> INICIO </a> </h3>
 			<h3> <a href="/crear"> AÑADIR PRODUCTO </a> </h3>
-			<input type="search" name="busqueda" placeholder="Nombre del producto...">
-		 	<a th:href="@{/producto/buscar}"> <button>Buscar</button> </a>
+			<form th:action="@{/producto/buscar}" method="GET">
+					<input type="search" name="nombre" placeholder="Nombre del producto...">
+					<input type="submit"> Buscar</input>
+			</form>
 		</nav>
-
-	<form th:action="@{/index}" method="POST">
+	
 		<div th:each="producto: ${Productos}" class="articulos">
 			<div class="impar">
 				<a th:href="@{/producto/{id}(id=${producto.id_Producto})}">
@@ -28,7 +29,8 @@
 				</a>
 			</div>
 		</div>
-	</form>
+
+	
 </body>
 
 </html>

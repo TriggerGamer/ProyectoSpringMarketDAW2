@@ -31,13 +31,30 @@ public class ControladorTienda {
 	}
 	
 	@PostMapping(value="/index")
-	public String index_post(@RequestParam (value="Pr1", required=false) String Pr1, 
-			@RequestParam(value="busqueda", required=false)String busqueda, Model modelo) {
+	public String index_post() {
+	
+		return "redirect:/producto/buscar";
+	}
+	
+	//Métodos para buscar un producto
+	@GetMapping(value="/producto/buscar")
+	public String buscarProducto_get(@RequestParam (value = "nombre", required = false) String busqueda, Model modelo) {
 		
-		List<Productos> Productos = productosdao.getProductoByName(busqueda);
-		modelo.addAttribute("busqueda", Productos);
-
-		return "";
+		//Declarar la lista para obtener los datos
+		List<Productos> producto = productosdao.getProductoByName(busqueda);
+		modelo.addAttribute("productos", producto);
+		
+		return "buscarProducto";
+	}
+	
+	@PostMapping(value="/producto/buscar")
+	public String buscar_post(@RequestParam (value = "busqueda", required = false) String busqueda, Model modelo) {
+		
+		//Declarar la lista para obtener los datos
+		List<Productos> producto = productosdao.getProductoByName(busqueda);
+		modelo.addAttribute("productos", producto);
+	
+		return "buscarProducto";
 	}
 	
 	// Métodos para crear un producto
@@ -66,13 +83,7 @@ public class ControladorTienda {
 		return "redirect:/index";
 	}
 	
-	//Métodos para buscar un producto
-	@GetMapping(value="/producto/buscar")
-	public String buscarProducto_get() {
-		
-		return "buscarProducto";
-	}
-	
+	//Métodos para ver la info de un producto
 	@GetMapping(value="/producto/{id_Producto}")
 	public String Productos_get(Model modelo, @PathVariable int id_Producto) {
 		
@@ -87,11 +98,13 @@ public class ControladorTienda {
 	// Métodos para Borrar producto
 	@GetMapping(value="/producto/borrar/{id_Producto}")
 	public String borrar_get(Model modelo, @PathVariable int id_Producto) {
+		
 		//Borrar los datos
-				productosdao.deleteById(id_Producto);
+		productosdao.deleteById(id_Producto);
 				
-				String borrar = "borrado correctamente";
-				modelo.addAttribute("borrar", borrar);
+		String borrar = "Borrado Correctamente";
+		modelo.addAttribute("borrar", borrar);
+		
 		return "borrar";
 	}
 }
