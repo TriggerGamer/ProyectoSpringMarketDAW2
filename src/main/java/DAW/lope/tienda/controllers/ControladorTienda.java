@@ -41,13 +41,13 @@ public class ControladorTienda {
 	}
 	
 	// Métodos para crear un producto
-	@GetMapping(value="/crearProducto")
+	@GetMapping(value="/crear")
 	public String crearProducto_get() {
 
 		return "crearProducto";
 	}
 	
-	@PostMapping(value="/crearProducto")
+	@PostMapping(value="/crear")
 	public String crearProducto_post(@RequestParam String titulo,
 			@RequestParam String descripcion,
 			@RequestParam String precio) {
@@ -67,7 +67,7 @@ public class ControladorTienda {
 	}
 	
 	//Métodos para buscar un producto
-	@GetMapping(value="/buscarProducto")
+	@GetMapping(value="/producto/buscar")
 	public String buscarProducto_get() {
 		
 		return "buscarProducto";
@@ -94,5 +94,4 @@ public class ControladorTienda {
 				modelo.addAttribute("borrar", borrar);
 		return "borrar";
 	}
-
 }

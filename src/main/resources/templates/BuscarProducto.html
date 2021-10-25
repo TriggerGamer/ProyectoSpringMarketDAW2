@@ -11,19 +11,9 @@
 
 <body>
 	<h1> BUSQUEDA DE PRODUCTOS </h1>
-	<form th:action="@{/buscarProducto}" method="POST">
-		<nav>
-			<h3> <a href="/index"> INICIO </a> </h3>
-			<h3> <a href="/crearProducto"> AÑADIR PRODUCTO </a> </h3>
-			<input type="search" placeholder="Nombre del producto...">
-			<button>Buscar</button>
-		</nav>
-		<fieldset>
-			<legend>Introduce el nombre del producto que desea buscar</legend>
-			<p> Nombre del producto: <input type="text" name="nombreProducto"> </p>
-			<input class="bg-danger text-white" type="submit" value="Buscar Producto">
-		</fieldset>
+	<form th:action="@{producto/buscar}" method="POST">
 	</form>
+	<a th:href="@{/index}"> <button> Volver a Inicio </button> </a>
 </body>
 
 </html>
