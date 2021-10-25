@@ -4,7 +4,7 @@
 
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jáquez y Luis">
-	<link rel="stylesheet" th:href="@{/css/tienda.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap(Sketchy).css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Tienda </title>
 
@@ -12,14 +12,27 @@
 
 <body>
 	<h1> Dar de alta un Producto </h1>
-
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="/index">INICIO
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link"href="/crear">AÑADIR PRODUCTO</a>
+					</li>					
+				</ul>
+					<input class="me-sm-2" type="search" name="busqueda" placeholder="Nombre del producto..." size="50">
+					<a th:href="@{/producto/buscar}"> <button>Buscar</button> </a>
+			</div>
+		</div>
+	</nav>
+	
+	<br>
+	
 	<form th:action="@{/crear}" method="POST">
-		<nav>
-			<h3> <a href="/index"> INICIO </a> </h3>
-			<h3> <a href="/crearProducto"> AÑADIR PRODUCTO </a> </h3>
-			<input type="search" placeholder="Nombre del producto...">
-			<button>Buscar</button>
-		</nav>
 		<fieldset>
 			<legend> Datos del producto </legend>
 			<p> Nombre del producto: <input type="text" name="titulo"> </p>

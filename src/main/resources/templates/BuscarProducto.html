@@ -12,6 +12,7 @@
 
 <body>
 	<h1> BUSQUEDA DE PRODUCTOS </h1>
+<<<<<<< HEAD
 	
 	<form th:action="@{/producto/buscar}" method="GET">
 	
@@ -30,6 +31,27 @@
 			<div th:text="${producto.descuento}"> </div>
 		</div>
 		
+=======
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="/index">INICIO
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link"href="/crear">AÑADIR PRODUCTO</a>
+					</li>					
+				</ul>
+					<input class="me-sm-2" type="search" name="busqueda" placeholder="Nombre del producto..." size="50">
+					<a th:href="@{/producto/buscar}"> <button>Buscar</button> </a>
+			</div>
+		</div>
+	</nav>
+		
+	<form th:action="@{producto/buscar}" method="POST">
+>>>>>>> b0f61de4a7cb572d189acdbfe27dfefe9d4ae651
 	</form>
 	
 	<a th:href="@{/index}"> <button> Volver a Inicio </button> </a>
