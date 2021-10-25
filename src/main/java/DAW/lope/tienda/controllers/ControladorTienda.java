@@ -30,12 +30,6 @@ public class ControladorTienda {
 		return "Index";
 	}
 	
-	@PostMapping(value="/index")
-	public String index_post() {
-	
-		return "redirect:/producto/buscar";
-	}
-	
 	//Métodos para buscar un producto
 	@GetMapping(value="/producto/buscar")
 	public String buscarProducto_get(@RequestParam (value = "nombre", required = false) String busqueda, Model modelo) {
@@ -44,16 +38,6 @@ public class ControladorTienda {
 		List<Productos> producto = productosdao.getProductoByName(busqueda);
 		modelo.addAttribute("productos", producto);
 		
-		return "buscarProducto";
-	}
-	
-	@PostMapping(value="/producto/buscar")
-	public String buscar_post(@RequestParam (value = "busqueda", required = false) String busqueda, Model modelo) {
-		
-		//Declarar la lista para obtener los datos
-		List<Productos> producto = productosdao.getProductoByName(busqueda);
-		modelo.addAttribute("productos", producto);
-	
 		return "buscarProducto";
 	}
 	

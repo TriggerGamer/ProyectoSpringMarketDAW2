@@ -15,26 +15,32 @@
 	<h1> ELIMINACION DE PRODUCTOS </h1>
 		
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav me-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/index">INICIO
-							<span class="visually-hidden">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link"href="/crear">AÑADIR PRODUCTO</a>
-					</li>					
-				</ul>
-					<input class="me-sm-2" type="search" name="busqueda" placeholder="Nombre del producto..." size="50">
-					<a th:href="@{/producto/buscar}"> <button>Buscar</button> </a>
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link active" href="/index">INICIO
+						<span class="visually-hidden">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"href="/crear">AÑADIR PRODUCTO</a>
+				</li>					
+			</ul>
+			
+			<form th:action="@{/producto/buscar}" method="GET">
+				<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="50">
+				<input type="submit" value="Buscar">
+			</form>
+			
 			</div>
-		</div>
 	</nav>
+	
 	<br>
+	
 	<form th:action="@{/producto/borrar/{id_Producto}}" method="POST">
 		<h1 th:text="${borrar}"> </h1>
 	</form>	
+	
 </body>
 
 </html>

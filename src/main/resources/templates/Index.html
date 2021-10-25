@@ -12,46 +12,35 @@
 
 <body>
 	<h1> TIENDA </h1>
-<<<<<<< HEAD
 	
-		<nav>
-			<h3> <a href="/index"> INICIO </a> </h3>
-			<h3> <a href="/crear"> AÑADIR PRODUCTO </a> </h3>
-			<form th:action="@{/producto/buscar}" method="GET">
-					<input type="search" name="nombre" placeholder="Nombre del producto...">
-					<input type="submit"> Buscar</input>
-			</form>
-		</nav>
-	
-=======
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav me-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/index">INICIO
-							<span class="visually-hidden">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link"href="/crear">AÑADIR PRODUCTO</a>
-					</li>					
-				</ul>
-					<input class="me-sm-2" type="search" name="busqueda" placeholder="Nombre del producto..." size="50">
-					<a th:href="@{/producto/buscar}"> <button>Buscar</button> </a>
-			</div>
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link active" href="/index"> INICIO
+						<span class="visually-hidden">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"href="/crear">AÑADIR PRODUCTO</a>
+				</li>					
+			</ul>
+				
+			<form th:action="@{/producto/buscar}" method="GET">
+				<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="50">
+				<input type="submit" value="Buscar">
+			</form>
 		</div>
 	</nav>
-	<form th:action="@{/index}" method="POST">
->>>>>>> b0f61de4a7cb572d189acdbfe27dfefe9d4ae651
-		<div th:each="producto: ${Productos}" class="articulos">
-			<div class="impar">
-				<a th:href="@{/producto/{id}(id=${producto.id_Producto})}">
-					<img th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}" />
-				</a>
-			</div>
-		</div>
-
 	
+	<div th:each="producto: ${Productos}" class="articulos">
+		<div class="impar">
+			<a th:href="@{/producto/{id}(id=${producto.id_Producto})}">
+				<img th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}" />
+			</a>
+		</div>
+	</div>
+
 </body>
 
 </html>
