@@ -7,14 +7,17 @@
 	<link rel="stylesheet" th:href="@{/css/tienda.css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Borrar producto </title>
+	
 </head>
 
 <body>
+
 	<h1> ELIMINACION DE PRODUCTOS </h1>
 	<form th:action="@{/producto/borrar/{id_Producto}}" method="POST">
-		
-		<h1 th:text="${borrar}"></h1>
+		<h1 th:text="${borrar}"> </h1>
 	</form>
+	<a th:href="@{/index}"> <button> Volver a Inicio </button> </a>
+	
 </body>
 
 </html>
