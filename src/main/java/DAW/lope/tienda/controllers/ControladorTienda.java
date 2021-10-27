@@ -75,7 +75,7 @@ public class ControladorTienda {
 		List<Productos> producto = productosdao.findById(id_Producto);
 		modelo.addAttribute("productos", producto);
 		
-		return "/ProductosInfo";
+		return "ProductosInfo";
 	}
 	
 	
@@ -91,4 +91,15 @@ public class ControladorTienda {
 		
 		return "borrar";
 	}
+	//Metodos para registro de usuarios
+	@GetMapping(value="/usuario/signup")
+	public String registrar_get(@RequestParam (value = "nombre", required = false) String busqueda, Model modelo) {
+		
+		//Declarar la lista para obtener los datos
+		List<Productos> producto = productosdao.getProductoByName(busqueda);
+		modelo.addAttribute("productos", producto);
+		
+		return "registro";
+	}
+	
 }
