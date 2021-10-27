@@ -73,14 +73,10 @@ public class ControladorTienda {
 		List<Productos> producto = productosdao.findById(id_Producto);
 		modelo.addAttribute("productos", producto);
 		
-<<<<<<< HEAD
-		return "/ProductosInfo";
-	}	
-=======
+
 		return "ProductosInfo";
-	}
-	
->>>>>>> 8a1a6b0cbb94309ac4fa06c3858e273bcfde4acd
+	}	
+
 	
 	// Métodos para Borrar producto
 	@GetMapping(value="/producto/borrar/{id_Producto}")
@@ -94,11 +90,7 @@ public class ControladorTienda {
 		
 		return "borrar";
 	}
-<<<<<<< HEAD
 	
-	
-}
-=======
 	//Metodos para registro de usuarios
 	@GetMapping(value="/usuario/signup")
 	public String registrar_get(@RequestParam (value = "nombre", required = false) String busqueda, Model modelo) {
@@ -111,4 +103,3 @@ public class ControladorTienda {
 	}
 	
 }
->>>>>>> 8a1a6b0cbb94309ac4fa06c3858e273bcfde4acd
