@@ -33,13 +33,16 @@
 		</div>
 	</nav>
 	
-	<div th:each="producto: ${Productos}" class="articulos">
-		<div class="impar">
+	<br>
+	<br>
+	<div class="imagenescambio" th:each="producto: ${Productos}">
+		<div>
 			<a th:href="@{/producto/{id}(id=${producto.id_Producto})}">
 				<img th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}" />
 			</a>
 		</div>
 	</div>
+
 
 </body>
 

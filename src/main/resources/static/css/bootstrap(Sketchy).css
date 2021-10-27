@@ -79,7 +79,11 @@
   }
 }
 
-
+.imagenescambio{
+	float:left;
+	margin:5%;
+	width:40%;
+}
 
 body {
   margin: 2rem;
