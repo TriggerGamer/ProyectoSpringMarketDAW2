@@ -80,24 +80,13 @@
 }
 
 .imagenescambio{
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: center;
-}
-
-.imginutiles{
-	width: 15em;
-	margin-bottom: 2em;
-	margin-left: 2em;
-}
-
-.imginutiles a {
-	width: 50%;
+	display: grid;
+ 	grid-template-columns: 25% 25% 25% 25%;
+  	grid-gap: 0.625em;
 }
 
 .imginutiles a img{
-	width: 50%;
+	width:70%;
 }
 	 
 body {
