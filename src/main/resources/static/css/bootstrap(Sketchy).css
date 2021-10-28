@@ -80,26 +80,6 @@
 }
 
 .imagenescambio{
-<<<<<<< HEAD
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: center;
-}
-
-.imginutiles{
-	width: 15em;
-	margin-bottom: 2em;
-	margin-left: 2em;
-}
-
-.imginutiles a {
-	width: 15em;
-}
-
-.imginutiles a img{
-	width: 15em;
-=======
 	display: grid;
  	grid-template-columns: 25% 25% 25% 25%;
   	grid-gap: 0.625em;
@@ -107,9 +87,8 @@
 
 .imginutiles a img{
 	width:70%;
->>>>>>> c979aee6ab0ee1ebeb43fad246378704a4b2f788
 }
-	 
+
 body {
   margin: 2rem;
   font-family: var(--bs-body-font-family);
