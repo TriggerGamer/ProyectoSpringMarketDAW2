@@ -80,9 +80,9 @@
 }
 
 .imagenescambio{
-	float:left;
-	margin:5%;
-	width:40%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 1fr 1fr;
 }
 
 body {
