@@ -80,11 +80,26 @@
 }
 
 .imagenescambio{
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-auto-rows: 1fr 1fr;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: center;
 }
 
+.imginutiles{
+	width: 15em;
+	margin-bottom: 2em;
+	margin-left: 2em;
+}
+
+.imginutiles a {
+	width: 50%;
+}
+
+.imginutiles a img{
+	width: 50%;
+}
+	 
 body {
   margin: 2rem;
   font-family: var(--bs-body-font-family);
