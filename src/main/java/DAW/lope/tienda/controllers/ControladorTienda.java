@@ -102,12 +102,21 @@ public class ControladorTienda {
 	}
 
 	@PostMapping(value = "/usuario/signup")
-	public String registrarUsuario_post(@RequestParam String nombreusuario, @RequestParam String apellidosusuario,
-			@RequestParam String contrasenia, @RequestParam String correo, @RequestParam String fechanacimiento,
-			@RequestParam long numerotarjeta, @RequestParam String titulartarjeta, @RequestParam int codigoseguridad,
+	public String registrarUsuario_post(@RequestParam String nombreusuario,
+			@RequestParam String apellidosusuario,
+			@RequestParam String contrasenia,
+			@RequestParam String correo,
+			@RequestParam String fechanacimiento,
+			@RequestParam (value = "numerotarjeta", required = false) int numerotarjeta,
+			@RequestParam String titulartarjeta,
+			@RequestParam int codigoseguridad,
 			@RequestParam String direccionfacturacion) {
 
 		Usuarios registrar = new Usuarios();
+		
+		if(numerotarjeta == 0) {
+			numerotarjeta = 1; 
+		}
 		
 
 		registrar.setNombre(nombreusuario);
