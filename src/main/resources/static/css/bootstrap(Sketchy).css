@@ -80,6 +80,7 @@
 }
 
 .imagenescambio{
+<<<<<<< HEAD
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -98,6 +99,15 @@
 
 .imginutiles a img{
 	width: 15em;
+=======
+	display: grid;
+ 	grid-template-columns: 25% 25% 25% 25%;
+  	grid-gap: 0.625em;
+}
+
+.imginutiles a img{
+	width:70%;
+>>>>>>> c979aee6ab0ee1ebeb43fad246378704a4b2f788
 }
 	 
 body {
