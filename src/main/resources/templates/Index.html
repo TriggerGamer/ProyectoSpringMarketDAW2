@@ -15,10 +15,10 @@
 	<header>
 		<h1> TIENDA </h1>
 		<div class="form-group">
-			<input size="15" class="form-control" id="disabledInput" type="text" />
-			<input size="15" class="form-control" id="disabledInput" type="text" />
-			<button type="button" class="btn btn-primary btn-sm">Entrar</button>
-			<a th:href="@{/usuario/signup}"><button type="button" class="btn btn-primary btn-sm">Registro</button></a>
+			<input name="usuario" size="20" type="text" placeholder="Usuario">
+			<input name="contrasenia" size="20" type="text" placeholder="Contraseña">
+			<button type="button" class="btn btn-primary btn-sm"> Entrar </button>
+			<a th:href="@{/usuario/signup}"> <button type="button" class="btn btn-primary btn-sm">Registro</button> </a>
 		</div>
 	</header>
 	<br>
@@ -26,17 +26,15 @@
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item">
-					<a class="nav-link active" href="/index"> INICIO
-						<span class="visually-hidden">(current)</span>
-					</a>
+					<a class="nav-link active" href="/index"> INICIO </a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/crear">AÑADIR PRODUCTO</a>
+					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
 				</li>
 			</ul>
 
 			<form th:action="@{/producto/buscar}" method="GET">
-				<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="50">
+				<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
 				<input type="submit" value="Buscar">
 			</form>
 		</div>
