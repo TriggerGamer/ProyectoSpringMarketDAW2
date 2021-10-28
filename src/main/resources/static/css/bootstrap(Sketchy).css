@@ -81,7 +81,8 @@
 
 .imagenescambio{
 	display: grid;
- 	grid-template-columns: 25% 25% 25% 25%;
+ 	grid-template-columns: 23% 23% 23% 23%;
+ 	margin-left:2%;
   	grid-gap: 0.625em;
 }
 
