@@ -7,7 +7,7 @@ public class Usuarios {
 	private String contrasenia;
 	private String email;
 	private String fechaNacimiento;
-	private int numeroTarjeta;
+	private long numeroTarjeta;
 	private String titularTarjeta;
 	private int codigoSeguridad;
 	private String direccionFacturacion;
@@ -67,12 +67,12 @@ public class Usuarios {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public int getNumeroTarjeta() {
+	public long getNumeroTarjeta() {
 		return numeroTarjeta;
 	}
 
-	public void setNumeroTarjeta(int numeroTarjeta) {
-		this.numeroTarjeta = numeroTarjeta;
+	public void setNumeroTarjeta(long numerotarjeta2) {
+		this.numeroTarjeta = numerotarjeta2;
 	}
 
 	public String getTitularTarjeta() {
