@@ -21,7 +21,7 @@ public class UsuariosJdbc implements UsuariosDao{
 	@Override
 	public int save(Usuarios usuario) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("INSERT INTO Productos(nombre, apellidos, contrasenia, email, fechaNacimiento, numeroTarjeta, titularTarjeta, codigoSeguridad, direccionFacturacion) VALUES(?,?,MD5('?'),?,?,?,?,?,?)", usuario.getNombre(), usuario.getApellidos(), usuario.getContrasenia(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getNumeroTarjeta(), usuario.getTitularTarjeta(), usuario.getCodigoSeguridad(), usuario.getDireccionFacturacion());
+		return jdbcTemplate.update("INSERT INTO Usuarios(nombre, apellidos, contrasenia, email, fechaNacimiento, numeroTarjeta, titularTarjeta, codigoSeguridad, direccionFacturacion) VALUES(?,?,?,?,?,?,?,?,?)", usuario.getNombre(), usuario.getApellidos(), usuario.getContrasenia(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getNumeroTarjeta(), usuario.getTitularTarjeta(), usuario.getCodigoSeguridad(), usuario.getDireccionFacturacion());
 	}
 
 	@Override
