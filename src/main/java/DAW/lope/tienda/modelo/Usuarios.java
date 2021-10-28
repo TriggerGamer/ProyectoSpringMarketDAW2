@@ -8,7 +8,7 @@ public class Usuarios {
 	private String email;
 	private String fechaNacimiento;
 	private int numeroTarjeta;
-	private String titulasTarjeta;
+	private String titularTarjeta;
 	private int codigoSeguridad;
 	private String direccionFacturacion;
 	
@@ -22,7 +22,7 @@ public class Usuarios {
 		this.email = email;
 		this.fechaNacimiento = fechaNacimiento;
 		this.numeroTarjeta = numeroTarjeta;
-		this.titulasTarjeta = titularTarjeta;
+		this.titularTarjeta = titularTarjeta;
 		this.codigoSeguridad = codigoSeguridad;
 		this.direccionFacturacion = direccionFacturacion;
 	}
@@ -75,12 +75,12 @@ public class Usuarios {
 		this.numeroTarjeta = numeroTarjeta;
 	}
 
-	public String getTitulasTarjeta() {
-		return titulasTarjeta;
+	public String getTitularTarjeta() {
+		return titularTarjeta;
 	}
 
-	public void setTitulasTarjeta(String titulasTarjeta) {
-		this.titulasTarjeta = titulasTarjeta;
+	public void setTitularTarjeta(String titularTarjeta) {
+		this.titularTarjeta = titularTarjeta;
 	}
 
 	public int getCodigoSeguridad() {

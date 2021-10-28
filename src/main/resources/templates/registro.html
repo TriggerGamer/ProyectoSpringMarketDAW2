@@ -35,33 +35,32 @@
 		</div>
 	</nav>
 	<br>
-	<br>
-	<form>
+	<form th:action="@{/usuario/signup}" method="POST">
  <div class="form-group">
  <fieldset>
  	<legend>Datos personales</legend>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu nombre...">
+      <input type="text" name="nombreusuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu nombre...">
       <br>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tus apellidos...">
+      <input type="text" name="apellidosusuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tus apellidos...">
       <br>
-      <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu contraseña...">
+      <input type="password" name="contrasenia" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu contraseña...">
 	  <br>
-	  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu correo...">
+	  <input type="email" name="correo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu correo...">
 	  <br>
-	  <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu fecha de nacimiento...">	
+	  <input type="date" name="fechanacimiento" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu fecha de nacimiento...">	
 	  <br>
 	  <legend>Datos de pago</legend>
-      <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Número de tarjeta...">
+      <input type="number" name"numerotarjeta" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Número de tarjeta...">
       <br>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titular de la tarjeta...">
+      <input type="text" name="titulartarjeta" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titular de la tarjeta...">
       <br>
-      <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Codigo de seguridad...">
+      <input type="number" name="codigoseguridad" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Codigo de seguridad...">
 	  <br>
-	  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dirección de facturación...">
+	  <input type="text" name="direccionfacturacion" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dirección de facturación...">
     </div>
  </fieldset>
  <br>
- <button type="button" class="btn btn-primary btn-lg">Large button</button>
+ <button type="button" class="btn btn-primary btn-lg">Darse de alta</button>
 	</form>
 </body>
 
