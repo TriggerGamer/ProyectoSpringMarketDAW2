@@ -33,35 +33,23 @@ public class UsuariosJdbc implements UsuariosDao{
 	@Override
 	public int deleteById(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return jdbcTemplate.update("DELETE FROM Productos WHERE id_Usuarios = " + id);
 	}
 
 	@Override
-	public List<Productos> findAll() {
+	public List<Usuarios> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return jdbcTemplate.query("SELECT * FROM Usuarios", (rs, rowNum) -> new Usuarios(rs.getInt("id_Usuarios"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"), rs.getInt("numeroTarjeta"), rs.getString("titularTarjet"), rs.getInt("codigoSeguridad"), rs.getString("direccionFacturacion)")));
 	}
 
 	@Override
-	public List<Productos> findEight() {
+	public List<Usuarios> findById(int id) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Productos> findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return jdbcTemplate.query("SELECT * FROM Usuarios WHERE id_Usuarios = " + id, (rs, rowNum) -> new Usuarios(rs.getInt("id_Usuarios"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"), rs.getInt("numeroTarjeta"), rs.getString("titularTarjet"), rs.getInt("codigoSeguridad"), rs.getString("direccionFacturacion)")));
 	}
 
 	@Override
 	public String getNameById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Productos> getProductoByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

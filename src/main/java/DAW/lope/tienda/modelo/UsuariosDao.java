@@ -7,9 +7,7 @@ public interface UsuariosDao {
 	int save(Usuarios usuario);
 	int update(Usuarios usuario);
 	int deleteById(int id);
-	List<Productos> findAll();
-	List<Productos> findEight();
-	List<Productos> findById(int id);
+	List<Usuarios> findAll();
+	List<Usuarios> findById(int id);
 	String getNameById(int id);
-	List <Productos> getProductoByName(String name);
 }
