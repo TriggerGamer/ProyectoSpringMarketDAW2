@@ -107,26 +107,19 @@ public class ControladorTienda {
 			@RequestParam String contrasenia,
 			@RequestParam String correo,
 			@RequestParam String fechanacimiento,
-			@RequestParam (value = "numerotarjeta", required = false) String numerotarjeta,
+			@RequestParam int numerotarjeta,
 			@RequestParam String titulartarjeta,
 			@RequestParam int codigoseguridad,
 			@RequestParam String direccionfacturacion) {
 
 		Usuarios registrar = new Usuarios();
-		
-		if(numerotarjeta == null) {
-			numerotarjeta = "1"; 
-		}
-		
-		int numeroTarjeta = Integer.parseInt(numerotarjeta);
-		
 
 		registrar.setNombre(nombreusuario);
 		registrar.setApellidos(apellidosusuario);
 		registrar.setContrasenia(contrasenia);
 		registrar.setEmail(correo);
 		registrar.setFechaNacimiento(fechanacimiento);
-		registrar.setNumeroTarjeta(numeroTarjeta);
+		registrar.setNumeroTarjeta(numerotarjeta);
 		registrar.setTitularTarjeta(titulartarjeta);
 		registrar.setCodigoSeguridad(codigoseguridad);
 		registrar.setDireccionFacturacion(direccionfacturacion);
