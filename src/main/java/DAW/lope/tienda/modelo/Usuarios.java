@@ -14,6 +14,11 @@ public class Usuarios {
 	
 	public Usuarios() {}
 	
+	public Usuarios(String nombre, String contrasenia) {
+		this.nombre = nombre;
+		this.contrasenia = contrasenia;
+	}
+	
 	public Usuarios(int id_usuario, String nombre, String apellidos, String contrasenia, String email, String fechaNacimiento, int numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
 		this.id_Usuario = id_usuario;
 		this.nombre = nombre;

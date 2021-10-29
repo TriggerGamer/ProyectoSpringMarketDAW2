@@ -128,5 +128,20 @@ public class ControladorTienda {
 
 		return "redirect:/index";
 	}
+	
+	// Metodos para inicio de sesion
+		@GetMapping(value = "/usuario/login")
+		public String loginUsuario_get() {
+
+			return "acceso";
+		}
+
+		@PostMapping(value = "/usuario/login")
+		public String loginUsuario_post(@RequestParam String nombreusuario,
+				@RequestParam String contrasenia) {
+			
+
+			return "redirect:/index";
+		}
 
 }
