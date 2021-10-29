@@ -19,7 +19,7 @@ public class Usuarios {
 		this.contrasenia = contrasenia;
 	}
 	
-	public Usuarios(int id_usuario, String nombre, String apellidos, String contrasenia, String email, String fechaNacimiento, int numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
+	public Usuarios(int id_usuario, String nombre, String apellidos, String contrasenia, String email, String fechaNacimiento, long numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
 		this.id_Usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellidos = apellidos;	
