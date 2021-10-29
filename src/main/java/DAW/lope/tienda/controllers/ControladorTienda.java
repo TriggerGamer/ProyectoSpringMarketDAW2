@@ -1,6 +1,7 @@
 package DAW.lope.tienda.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -132,13 +133,23 @@ public class ControladorTienda {
 	// Metodos para inicio de sesion
 	@GetMapping(value = "/usuario/login")
 	public String loginUsuario_get() {
-
+		
+		
 		return "acceso";
 	}
 
 	@PostMapping(value = "/usuario/login")
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia) {
-
+		
+		Optional<Usuarios> usuario = usuariosdao.login(nombreusuario, contrasenia);
+		Usuarios nombreUsuario = usuario.get();
+		
+		if(nombreusuario == nombreUsuario.getNombre() && contrasenia == nombreUsuario.getContrasenia()) {
+			
+		}
+		
+		
+		
 		return "redirect:/index";
 	}
 
