@@ -46,7 +46,7 @@ public class UsuariosJdbc implements UsuariosDao{
 	@Override
 	public List<Usuarios> findById(int id) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("SELECT * FROM Usuarios WHERE id_Usuarios = " + id, (rs, rowNum) -> new Usuarios(rs.getInt("id_Usuarios"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"), rs.getInt("numeroTarjeta"), rs.getString("titularTarjet"), rs.getInt("codigoSeguridad"), rs.getString("direccionFacturacion)")));
+		return jdbcTemplate.query("SELECT * FROM Usuarios WHERE id_Usuario = " + id, (rs, rowNum) -> new Usuarios(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"), rs.getLong("numeroTarjeta"), rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"), rs.getString("direccionFacturacion")));
 	}
 
 	@Override

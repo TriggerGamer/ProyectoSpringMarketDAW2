@@ -23,7 +23,7 @@ public class Usuarios {
 		this.id_Usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellidos = apellidos;	
-		this.setContrasenia(contrasenia);
+		this.contrasenia =contrasenia;
 		this.email = email;
 		this.fechaNacimiento = fechaNacimiento;
 		this.numeroTarjeta = numeroTarjeta;

@@ -102,14 +102,9 @@ public class ControladorTienda {
 	}
 
 	@PostMapping(value = "/usuario/signup")
-	public String registrarUsuario_post(@RequestParam String nombreusuario,
-			@RequestParam String apellidosusuario,
-			@RequestParam String contrasenia,
-			@RequestParam String correo,
-			@RequestParam String fechanacimiento,
-			@RequestParam int numerotarjeta,
-			@RequestParam String titulartarjeta,
-			@RequestParam int codigoseguridad,
+	public String registrarUsuario_post(@RequestParam String nombreusuario, @RequestParam String apellidosusuario,
+			@RequestParam String contrasenia, @RequestParam String correo, @RequestParam String fechanacimiento,
+			@RequestParam int numerotarjeta, @RequestParam String titulartarjeta, @RequestParam int codigoseguridad,
 			@RequestParam String direccionfacturacion) {
 
 		Usuarios registrar = new Usuarios();
@@ -128,20 +123,29 @@ public class ControladorTienda {
 
 		return "redirect:/index";
 	}
-	
+
 	// Metodos para inicio de sesion
-		@GetMapping(value = "/usuario/login")
-		public String loginUsuario_get() {
+	@GetMapping(value = "/usuario/login")
+	public String loginUsuario_get() {
 
-			return "acceso";
-		}
+		return "acceso";
+	}
 
-		@PostMapping(value = "/usuario/login")
-		public String loginUsuario_post(@RequestParam String nombreusuario,
-				@RequestParam String contrasenia) {
-			
+	@PostMapping(value = "/usuario/login")
+	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia) {
 
-			return "redirect:/index";
-		}
+		return "redirect:/index";
+	}
+
+	// Métodos para ver la info de un producto
+	@GetMapping(value = "/usuario/perfil/{id_Usuario}")
+	public String Usuarios_get(Model modelo, @PathVariable int id_Usuario) {
+
+		// Declarar la lista para obtener los datos
+		List<Usuarios> usuario = usuariosdao.findById(id_Usuario);
+		modelo.addAttribute("usuarios", usuario);
+
+		return "UsuariosInfo";
+	}
 
 }
