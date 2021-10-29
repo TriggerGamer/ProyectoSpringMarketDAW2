@@ -27,17 +27,18 @@
 					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
 				</li>
 			</ul>
-
-			<form th:action="@{/producto/buscar}" method="GET" class="d-flex">
-				<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
-				<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
-			</form>
+			<div class="d-block">
 			
-			<br>
-			
-			<div class="userLR">
-				<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
-				<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+				<form th:action="@{/producto/buscar}" method="GET">
+					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
+					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
+				</form>
+				
+				<div class="userLR">
+					<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
+					<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+				</div>
+				
 			</div>
 		</div>
 	</nav>
