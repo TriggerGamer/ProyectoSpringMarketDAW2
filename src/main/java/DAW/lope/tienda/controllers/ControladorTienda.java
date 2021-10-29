@@ -107,7 +107,7 @@ public class ControladorTienda {
 			@RequestParam String contrasenia,
 			@RequestParam String correo,
 			@RequestParam String fechanacimiento,
-			@RequestParam int numerotarjeta,
+			@RequestParam long numerotarjeta,
 			@RequestParam String titulartarjeta,
 			@RequestParam int codigoseguridad,
 			@RequestParam String direccionfacturacion) {
