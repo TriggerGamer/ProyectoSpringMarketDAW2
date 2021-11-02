@@ -12,28 +12,32 @@
 
 <body>
 	<h1> BUSQUEDA DE PRODUCTOS </h1>
-	
-	<form th:action="@{/producto/buscar}" method="GET">
-	
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav me-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/index">INICIO
-							<span class="visually-hidden">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link"href="/crear">AÑADIR PRODUCTO</a>
-					</li>					
-				</ul>
-				
+		
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link active" href="/index"> INICIO </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+				</li>
+			</ul>
+			<div class="d-block">
+			
 				<form th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
-					<input type="submit" value="Buscar">
+					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
 				</form>
+				
+				<div class="userLR">
+					<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
+					<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+				</div>
+				
 			</div>
-		</nav>
+		</div>
+	</nav>
 	
 		<div th:each="producto: ${productos}">
 			<div th:text="${producto.id_Producto}"> </div>

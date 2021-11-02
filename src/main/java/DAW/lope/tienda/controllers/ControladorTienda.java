@@ -153,7 +153,7 @@ public class ControladorTienda {
 		return "redirect:/index";
 	}
 
-	// Métodos para ver la info de un producto
+	// Métodos para ver la info de un usuario
 	@GetMapping(value = "/usuario/perfil/{id_Usuario}")
 	public String Usuarios_get(Model modelo, @PathVariable int id_Usuario) {
 

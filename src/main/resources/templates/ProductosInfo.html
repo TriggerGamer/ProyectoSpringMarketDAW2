@@ -23,12 +23,17 @@
 						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
 					</li>					
 				</ul>
-				
+				<div class="d-block">
 				<form th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
 					<input type="submit" value="Buscar">
 				</form>
+					<div class="userLR">
+					<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
+					<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+				</div>
 				
+			</div>
 			</div>
 		</nav>
 		
