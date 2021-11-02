@@ -64,7 +64,6 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #2B0000;
   --bs-body-bg: #fff;
-  --bs-body-text-align: ;
 }
 
 *,
@@ -105,6 +104,10 @@ body {
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.center{
+	text-align: center !important;
 }
 
 hr {
