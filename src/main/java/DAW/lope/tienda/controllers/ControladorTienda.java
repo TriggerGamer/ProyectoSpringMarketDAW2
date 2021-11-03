@@ -15,21 +15,19 @@ import DAW.lope.tienda.modelo.Productos;
 import DAW.lope.tienda.modelo.ProductosDao;
 import DAW.lope.tienda.modelo.Usuarios;
 import DAW.lope.tienda.modelo.UsuariosDao;
+import DAW.lope.tienda.servicios.ModuloServicioTemplate;
 
 @Controller
 public class ControladorTienda {
 
 	@Autowired
-	private ProductosDao productosdao;
-
-	@Autowired
-	private UsuariosDao usuariosdao;
+	private ModuloServicioTemplate servicio;
 
 	// Métodos para la página principal
 	@GetMapping(value = "/index")
 	public String index_get(Model modelo) {
 
-		List<Productos> Productos = productosdao.findEight();
+		List<Productos> Productos = servicio.findEight();
 		modelo.addAttribute("Productos", Productos);
 
 		return "Index";
@@ -40,7 +38,7 @@ public class ControladorTienda {
 	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo) {
 
 		// Declarar la lista para obtener los datos
-		List<Productos> producto = productosdao.getProductoByName(busqueda);
+		List<Productos> producto = servicio.getProductoByName(busqueda);
 		modelo.addAttribute("productos", producto);
 
 		return "buscarProducto";
@@ -66,7 +64,7 @@ public class ControladorTienda {
 		producto.setPrecio(price);
 		producto.setDescuento(descuento);
 
-		productosdao.save(producto);
+		servicio.saveProductos(producto);
 
 		return "redirect:/index";
 	}
@@ -76,7 +74,7 @@ public class ControladorTienda {
 	public String Productos_get(Model modelo, @PathVariable int id_Producto) {
 
 		// Declarar la lista para obtener los datos
-		List<Productos> producto = productosdao.findById(id_Producto);
+		List<Productos> producto = servicio.findProductoById(id_Producto);
 		modelo.addAttribute("productos", producto);
 
 		return "ProductosInfo";
@@ -87,8 +85,7 @@ public class ControladorTienda {
 	public String borrar_get(Model modelo, @PathVariable int id_Producto) {
 
 		// Borrar los datos
-		productosdao.deleteById(id_Producto);
-
+		servicio.deleteProductoById(id_Producto);
 		String borrar = "Borrado Correctamente";
 		modelo.addAttribute("borrar", borrar);
 
@@ -125,7 +122,7 @@ public class ControladorTienda {
 		registrar.setCodigoSeguridad(codigoseguridad);
 		registrar.setDireccionFacturacion(direccionfacturacion);
 
-		usuariosdao.save(registrar);
+		servicio.saveUsuarios(registrar);
 
 		return "redirect:/index";
 	}
@@ -141,7 +138,7 @@ public class ControladorTienda {
 	@PostMapping(value = "/usuario/login")
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia) {
 		
-		Optional<Usuarios> usuario = usuariosdao.login(nombreusuario, contrasenia);
+		Optional<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
 		Usuarios nombreUsuario = usuario.get();
 		
 		if(nombreusuario == nombreUsuario.getNombre() && contrasenia == nombreUsuario.getContrasenia()) {
@@ -158,7 +155,7 @@ public class ControladorTienda {
 	public String Usuarios_get(Model modelo, @PathVariable int id_Usuario) {
 
 		// Declarar la lista para obtener los datos
-		List<Usuarios> usuario = usuariosdao.findById(id_Usuario);
+		List<Usuarios> usuario = servicio.findUsuarioById(id_Usuario);
 		modelo.addAttribute("usuarios", usuario);
 
 		return "UsuariosInfo";
