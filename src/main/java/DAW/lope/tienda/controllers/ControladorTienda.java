@@ -1,8 +1,7 @@
 package DAW.lope.tienda.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import DAW.lope.tienda.modelo.Productos;
-import DAW.lope.tienda.modelo.ProductosDao;
 import DAW.lope.tienda.modelo.Usuarios;
-import DAW.lope.tienda.modelo.UsuariosDao;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
 
 @Controller
@@ -131,21 +127,22 @@ public class ControladorTienda {
 	@GetMapping(value = "/usuario/login")
 	public String loginUsuario_get() {
 		
-		
 		return "acceso";
 	}
 
 	@PostMapping(value = "/usuario/login")
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia) {
 		
-		Optional<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
-		Usuarios nombreUsuario = usuario.get();
+		List<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
 		
-		if(nombreusuario == nombreUsuario.getNombre() && contrasenia == nombreUsuario.getContrasenia()) {
+		Usuarios nombreUsuario = new Usuarios();
+		
+		if(usuario.isEmpty()) {
 			
+		} 
+		else{
+			nombreUsuario = usuario.get(0);
 		}
-		
-		
 		
 		return "redirect:/index";
 	}

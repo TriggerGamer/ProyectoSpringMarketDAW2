@@ -1,8 +1,7 @@
 package DAW.lope.tienda.servicios;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,7 +56,7 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public Optional<Usuarios> login(String nombre, String contrasenia) {
+	public List<Usuarios> login(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
 		return usuariodao.login(nombre, contrasenia);
 	}
