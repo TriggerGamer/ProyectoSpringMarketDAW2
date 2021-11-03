@@ -59,7 +59,7 @@ public class UsuariosJdbc implements UsuariosDao{
 		// TODO Auto-generated method stub
 		List<Usuarios> user = jdbcTemplate.query("SELECT * from Usuarios WHERE nombre = '" + nombre + "'" , (rs, rowNum) -> new Usuarios(rs.getString("nombre"), rs.getString("contrasenia")));
 		
-		if(user.isEmpty()) {
+		if(user.equals(null)) {
 			return null;
 		}
 		else if(user.size() == 1) {
