@@ -1,7 +1,6 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,12 +54,20 @@ public class UsuariosJdbc implements UsuariosDao{
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public Optional<Usuarios> login(String nombre, String contrasenia) {
+	public List<Usuarios> login(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.queryForObject("select * from books where id = ?", new Object[] {nombre, contrasenia}, (rs,
-				rowNum) -> Optional.of(new Usuarios(rs.getString("nombre"), rs.getString("contrasenia"))));
+		List<Usuarios> user = jdbcTemplate.query("SELECT * from Usuarios WHERE nombre = '" + nombre + "'" , (rs, rowNum) -> new Usuarios(rs.getString("nombre"), rs.getString("contrasenia")));
+		
+		if(user.equals(null)) {
+			return null;
+		}
+		else if(user.size() == 1) {
+		    return user;
+		}
+		else {
+			return user;
+		}
 	}
 
 }
