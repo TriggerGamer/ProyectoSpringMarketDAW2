@@ -138,7 +138,7 @@ public class ControladorTienda {
 
 		Usuarios nombreUsuario = new Usuarios();
 		 
-		session.setAttribute("Usuario", nombreUsuario);
+		session.setAttribute("Usuario", nombreUsuario.getNombre());
 
 		if(usuario.isEmpty()) {
 
