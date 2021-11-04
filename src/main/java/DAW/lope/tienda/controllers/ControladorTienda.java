@@ -3,6 +3,8 @@ package DAW.lope.tienda.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -130,11 +132,13 @@ public class ControladorTienda {
 	}
 
 	@PostMapping(value = "/usuario/login")
-	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia) {
+	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia, HttpSession session) {
 
 		List<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
 
 		Usuarios nombreUsuario = new Usuarios();
+		 
+		session.setAttribute("Usuario", nombreUsuario);
 
 		if(usuario.isEmpty()) {
 
