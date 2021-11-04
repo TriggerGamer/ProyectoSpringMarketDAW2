@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.modelo.Productos;
-import DAW.lope.tienda.modelo.ProductosDao;
 import DAW.lope.tienda.modelo.Usuarios;
-import DAW.lope.tienda.modelo.UsuariosDao;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
 
 @Controller
@@ -100,14 +98,9 @@ public class ControladorTienda {
 	}
 
 	@PostMapping(value = "/usuario/signup")
-	public String registrarUsuario_post(@RequestParam String nombreusuario,
-			@RequestParam String apellidosusuario,
-			@RequestParam String contrasenia,
-			@RequestParam String correo,
-			@RequestParam String fechanacimiento,
-			@RequestParam long numerotarjeta,
-			@RequestParam String titulartarjeta,
-			@RequestParam int codigoseguridad,
+	public String registrarUsuario_post(@RequestParam String nombreusuario, @RequestParam String apellidosusuario,
+			@RequestParam String contrasenia, @RequestParam String correo, @RequestParam String fechanacimiento,
+			@RequestParam long numerotarjeta, @RequestParam String titulartarjeta, @RequestParam int codigoseguridad,
 			@RequestParam String direccionfacturacion) {
 
 		Usuarios registrar = new Usuarios();
@@ -130,23 +123,20 @@ public class ControladorTienda {
 	// Metodos para inicio de sesion
 	@GetMapping(value = "/usuario/login")
 	public String loginUsuario_get() {
-		
-		
+
 		return "acceso";
 	}
 
 	@PostMapping(value = "/usuario/login")
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia) {
-		
+
 		Optional<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
 		Usuarios nombreUsuario = usuario.get();
-		
-		if(nombreusuario == nombreUsuario.getNombre() && contrasenia == nombreUsuario.getContrasenia()) {
-			
+
+		if (nombreusuario == nombreUsuario.getNombre() && contrasenia == nombreUsuario.getContrasenia()) {
+
 		}
-		
-		
-		
+
 		return "redirect:/index";
 	}
 
