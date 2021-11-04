@@ -30,9 +30,7 @@ codigoSeguridad INT(3),
 direccionFacturacion VARCHAR (200)
 );
 select contrasenia from Usuarios WHERE contrasenia = MD5('contrafulanito');
-INSERT INTO Usuarios VALUES(2,"Luis","Martinez",MD5('contrafulanito'),"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
-
-SELECT * FROM Productos;
+INSERT INTO Usuarios VALUES(2,"Luis","Martinez", 'contrafulanito',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 
 SELECT * FROM Usuarios;
 
@@ -40,8 +38,9 @@ delete from Usuarios;
 
 drop table Usuarios;
 
-select * from Productos;
+SELECT * FROM Productos;
 
 delete from Productos;
 
 drop table Productos;
+
