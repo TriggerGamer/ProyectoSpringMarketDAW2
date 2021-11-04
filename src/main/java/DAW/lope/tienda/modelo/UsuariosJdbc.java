@@ -57,7 +57,7 @@ public class UsuariosJdbc implements UsuariosDao{
 	@Override
 	public List<Usuarios> login(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
-		List<Usuarios> user = jdbcTemplate.query("SELECT * from Usuarios WHERE nombre = '" + nombre + "'" , (rs, rowNum) -> new Usuarios(rs.getString("nombre"), rs.getString("contrasenia")));
+		List<Usuarios> user = jdbcTemplate.query("SELECT * from Usuarios WHERE nombre = '" + nombre + "' AND contrasenia = '"+ contrasenia +"'" , (rs, rowNum) -> new Usuarios(rs.getString("nombre"), rs.getString("contrasenia")));
 		
 		if(user.equals(null)) {
 			return null;

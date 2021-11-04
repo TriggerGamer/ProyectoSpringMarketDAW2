@@ -1,8 +1,6 @@
 package DAW.lope.tienda.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.modelo.Productos;
-import DAW.lope.tienda.modelo.ProductosDao;
 import DAW.lope.tienda.modelo.Usuarios;
-import DAW.lope.tienda.modelo.UsuariosDao;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
 
 @Controller
@@ -27,10 +23,12 @@ public class ControladorTienda {
 
 	// Métodos para la página principal
 	@GetMapping(value = "/index")
-	public String index_get(Model modelo) {
+	public String index_get(Model modelo, HttpSession session) {
 
 		List<Productos> Productos = servicio.findEight();
 		modelo.addAttribute("Productos", Productos);
+		
+		String nombre = (String) session.getAttribute("Usuario");
 
 		return "Index";
 	}
