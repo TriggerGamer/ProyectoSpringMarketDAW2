@@ -20,6 +20,33 @@ public class ControladorTienda {
 
 	@Autowired
 	private ModuloServicioTemplate servicio;
+	
+	// Metodos para inicio de sesion
+	@GetMapping(value = "/usuario/login")
+	public String loginUsuario_get() {
+
+		return "acceso";
+	}
+
+	@PostMapping(value = "/usuario/login")
+	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia,
+			HttpSession session) {
+
+		List<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
+		
+		Usuarios nombreUsuario = new Usuarios();
+
+		if (usuario.isEmpty()) {
+
+		}
+		else {
+			nombreUsuario = usuario.get(0);
+			String nombre = nombreUsuario.getNombre();
+			session.setAttribute("user", nombre);
+		}
+
+		return "redirect:/index";
+	}
 
 	// Métodos para la página principal
 	@GetMapping(value = "/index")
@@ -28,7 +55,9 @@ public class ControladorTienda {
 		List<Productos> Productos = servicio.findEight();
 		modelo.addAttribute("Productos", Productos);
 		
-		String nombre = (String) session.getAttribute("Usuario");
+		String nombre = (String) session.getAttribute("user");
+		System.out.print(nombre);		
+		modelo.addAttribute("usuario", nombre);
 
 		return "Index";
 	}
@@ -122,33 +151,6 @@ public class ControladorTienda {
 		return "redirect:/index";
 	}
 
-	// Metodos para inicio de sesion
-	@GetMapping(value = "/usuario/login")
-	public String loginUsuario_get(HttpSession session) {
-		
-		String nombre = (String) session.getAttribute("Usuario");
-		
-		return "acceso";
-	}
-
-	@PostMapping(value = "/usuario/login")
-	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia, HttpSession session) {
-
-		List<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
-		
-		session.getAttribute("user");
-		Usuarios nombreUsuario = new Usuarios();
-		 
-		if(usuario.isEmpty()) {
-
-		} 
-		else{
-			nombreUsuario = usuario.get(0);
-			session.setAttribute("user", nombreUsuario.getNombre());
-		}
-
-		return "redirect:/index";
-	}
 
 	// Métodos para ver la info de un usuario
 	@GetMapping(value = "/usuario/perfil/{id_Usuario}")
