@@ -124,8 +124,10 @@ public class ControladorTienda {
 
 	// Metodos para inicio de sesion
 	@GetMapping(value = "/usuario/login")
-	public String loginUsuario_get() {
-
+	public String loginUsuario_get(HttpSession session) {
+		
+		String nombre = (String) session.getAttribute("Usuario");
+		
 		return "acceso";
 	}
 
@@ -133,16 +135,16 @@ public class ControladorTienda {
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia, HttpSession session) {
 
 		List<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
-
+		
+		session.getAttribute("user");
 		Usuarios nombreUsuario = new Usuarios();
 		 
-		session.setAttribute("Usuario", nombreUsuario.getNombre());
-
 		if(usuario.isEmpty()) {
 
 		} 
 		else{
 			nombreUsuario = usuario.get(0);
+			session.setAttribute("user", nombreUsuario.getNombre());
 		}
 
 		return "redirect:/index";
