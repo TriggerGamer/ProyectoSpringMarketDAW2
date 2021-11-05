@@ -2,7 +2,6 @@ package DAW.lope.tienda.servicios;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,5 +64,11 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	public List<Usuario> findUsuarioById(int id) {
 		// TODO Auto-generated method stub
 		return usuariodao.findById(id);
+	}
+
+	@Override
+	public Usuario findByName(String nombre) {
+		// TODO Auto-generated method stub
+		return usuariodao.findByName(nombre);
 	}
 }

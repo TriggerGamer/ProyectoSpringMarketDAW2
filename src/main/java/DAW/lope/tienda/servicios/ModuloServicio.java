@@ -12,6 +12,7 @@ public interface ModuloServicio {
 	List<Productos> findProductoById(int id);
 	List<Usuario> findUsuarioById(int id);
 	List<Productos> findEight();
+	Usuario findByName(String nombre);
 	List <Productos> getProductoByName(String name);
 	Usuario login(String nombre, String contrasenia);
 }

@@ -9,6 +9,7 @@ public interface UsuariosDao {
 	int deleteById(int id);
 	List<Usuario> findAll();
 	List<Usuario> findById(int id);
+	Usuario findByName(String nombre);
 	String getNameById(int id);
 	Usuario login(String nombre, String contrasenia);
 }
