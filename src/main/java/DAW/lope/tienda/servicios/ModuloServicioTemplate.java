@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.modelo.Productos;
 import DAW.lope.tienda.modelo.ProductosDao;
-import DAW.lope.tienda.modelo.Usuarios;
+import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.modelo.UsuariosDao;
 
 @Transactional
@@ -38,7 +38,7 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public int saveUsuarios(Usuarios usuario) {
+	public int saveUsuarios(Usuario usuario) {
 		// TODO Auto-generated method stub
 		return usuariodao.save(usuario);
 	}
@@ -56,13 +56,13 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public List<Usuarios> login(String nombre, String contrasenia) {
+	public Usuario login(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
 		return usuariodao.login(nombre, contrasenia);
 	}
 
 	@Override
-	public List<Usuarios> findUsuarioById(int id) {
+	public List<Usuario> findUsuarioById(int id) {
 		// TODO Auto-generated method stub
 		return usuariodao.findById(id);
 	}

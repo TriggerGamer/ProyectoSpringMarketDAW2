@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.modelo.Productos;
-import DAW.lope.tienda.modelo.Usuarios;
+import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
 
 @Controller
@@ -32,18 +32,14 @@ public class ControladorTienda {
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia,
 			HttpSession session) {
 
-		List<Usuarios> usuario = servicio.login(nombreusuario, contrasenia);
+		Usuario usuario = servicio.login(nombreusuario, contrasenia);
 		
-		Usuarios nombreUsuario = new Usuarios();
 
-		if (usuario.isEmpty()) {
-
+		if (usuario == null) {
+			return	"redirect:/usuario/login";
 		}
-		else {
-			nombreUsuario = usuario.get(0);
-			String nombre = nombreUsuario.getNombre();
-			session.setAttribute("user", nombre);
-		}
+		
+		session.setAttribute("user", usuario.getNombre());
 
 		return "redirect:/index";
 	}
@@ -134,7 +130,7 @@ public class ControladorTienda {
 			@RequestParam long numerotarjeta, @RequestParam String titulartarjeta, @RequestParam int codigoseguridad,
 			@RequestParam String direccionfacturacion) {
 
-		Usuarios registrar = new Usuarios();
+		Usuario registrar = new Usuario();
 
 		registrar.setNombre(nombreusuario);
 		registrar.setApellidos(apellidosusuario);
@@ -157,7 +153,7 @@ public class ControladorTienda {
 	public String Usuarios_get(Model modelo, @PathVariable int id_Usuario) {
 
 		// Declarar la lista para obtener los datos
-		List<Usuarios> usuario = servicio.findUsuarioById(id_Usuario);
+		List<Usuario> usuario = servicio.findUsuarioById(id_Usuario);
 		modelo.addAttribute("usuarios", usuario);
 
 		return "UsuariosInfo";

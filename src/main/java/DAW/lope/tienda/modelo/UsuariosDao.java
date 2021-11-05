@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface UsuariosDao {
 	int count();
-	int save(Usuarios usuario);
-	int update(Usuarios usuario);
+	int save(Usuario usuario);
+	int update(Usuario usuario);
 	int deleteById(int id);
-	List<Usuarios> findAll();
-	List<Usuarios> findById(int id);
+	List<Usuario> findAll();
+	List<Usuario> findById(int id);
 	String getNameById(int id);
-	List<Usuarios> login(String nombre, String contrasenia);
+	Usuario login(String nombre, String contrasenia);
 }

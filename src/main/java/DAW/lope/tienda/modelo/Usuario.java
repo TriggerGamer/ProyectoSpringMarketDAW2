@@ -1,6 +1,6 @@
 package DAW.lope.tienda.modelo;
 
-public class Usuarios {
+public class Usuario {
 	private int id_Usuario;
 	private String nombre;
 	private String apellidos;
@@ -12,14 +12,14 @@ public class Usuarios {
 	private int codigoSeguridad;
 	private String direccionFacturacion;
 	
-	public Usuarios() {}
+	public Usuario() {}
 	
-	public Usuarios(String nombre, String contrasenia) {
+	public Usuario(String nombre, String contrasenia) {
 		this.nombre = nombre;
 		this.contrasenia = contrasenia;
 	}
 	
-	public Usuarios(int id_usuario, String nombre, String apellidos, String contrasenia, String email, String fechaNacimiento, long numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
+	public Usuario(int id_usuario, String nombre, String apellidos, String contrasenia, String email, String fechaNacimiento, long numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
 		this.id_Usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellidos = apellidos;	
