@@ -86,7 +86,7 @@ public class UsuariosJdbc implements UsuariosDao {
 	public Usuario findByName(String nombre) {
 		// TODO Auto-generated method stub
 		try{ 
-			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre LIKE ? ", (rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"), rs.getLong("numeroTarjeta"), rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"), rs.getString("direccionFacturacion")), nombre);
+			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre = ? ", (rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"), rs.getLong("numeroTarjeta"), rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"), rs.getString("direccionFacturacion")), nombre);
 		}catch (EmptyResultDataAccessException e) {
 			// TODO: handle exception
 			return null;

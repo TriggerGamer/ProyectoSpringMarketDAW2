@@ -55,13 +55,13 @@ public class ControladorTienda {
 		
 		String nombre = (String) session.getAttribute("user");
 		String nombre2 = (String) session.getAttribute("usuario");
-		modelo.addAttribute("usuario", nombre);
+		modelo.addAttribute("usuario1", nombre);
 		modelo.addAttribute("usuario2", nombre2);
 		
 		
 		//Usuarios
 		Usuario usuario = servicio.findByName(nombre);
-		modelo.addAttribute("usuarios", usuario);
+		modelo.addAttribute("usuario", usuario);
 
 		return "Index";
 	}
