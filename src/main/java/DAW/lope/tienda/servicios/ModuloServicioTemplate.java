@@ -67,8 +67,8 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public Usuario findByName(String nombre) {
+	public Usuario findByName(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
-		return usuariodao.findByName(nombre);
+		return usuariodao.findByName(nombre, contrasenia);
 	}
 }
