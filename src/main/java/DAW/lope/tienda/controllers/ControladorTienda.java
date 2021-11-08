@@ -52,19 +52,51 @@ public class ControladorTienda {
 
 	// Métodos para buscar un producto
 	@GetMapping(value = "/producto/buscar")
-	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo) {
+	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
 		List<Productos> producto = servicio.getProductoByName(busqueda);
 		modelo.addAttribute("productos", producto);
 
+		String nombre = (String) session.getAttribute("user");
+		String nombre2 = (String) session.getAttribute("usuario");
+		String contrasenia = (String) session.getAttribute("contrasenia");
+		modelo.addAttribute("usuario1", nombre);
+		modelo.addAttribute("usuario2", nombre2);
+		
+		//Usuarios
+				Usuario usuario = servicio.findByName(nombre, contrasenia);
+				if(usuario == null) {
+					
+				}
+				else {
+					int id_usuario = usuario.getId_Usuario();
+					modelo.addAttribute("usuario", id_usuario);
+				}
+		
 		return "buscarProducto";
 	}
 
 	// Métodos para crear un producto
 	@GetMapping(value = "/crear")
-	public String crearProducto_get() {
+	public String crearProducto_get(HttpSession session,  Model modelo) {
 
+		String nombre = (String) session.getAttribute("user");
+		String nombre2 = (String) session.getAttribute("usuario");
+		String contrasenia = (String) session.getAttribute("contrasenia");
+		modelo.addAttribute("usuario1", nombre);
+		modelo.addAttribute("usuario2", nombre2);
+		
+		//Usuarios
+				Usuario usuario = servicio.findByName(nombre, contrasenia);
+				if(usuario == null) {
+					
+				}
+				else {
+					int id_usuario = usuario.getId_Usuario();
+					modelo.addAttribute("usuario", id_usuario);
+				}
+		
 		return "crearProducto";
 	}
 
@@ -88,11 +120,27 @@ public class ControladorTienda {
 
 	// Métodos para ver la info de un producto
 	@GetMapping(value = "/producto/{id_Producto}")
-	public String Productos_get(Model modelo, @PathVariable int id_Producto) {
+	public String Productos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
 		List<Productos> producto = servicio.findProductoById(id_Producto);
 		modelo.addAttribute("productos", producto);
+		
+		String nombre = (String) session.getAttribute("user");
+		String nombre2 = (String) session.getAttribute("usuario");
+		String contrasenia = (String) session.getAttribute("contrasenia");
+		modelo.addAttribute("usuario1", nombre);
+		modelo.addAttribute("usuario2", nombre2);
+		
+		//Usuarios
+				Usuario usuario = servicio.findByName(nombre, contrasenia);
+				if(usuario == null) {
+					
+				}
+				else {
+					int id_usuario = usuario.getId_Usuario();
+					modelo.addAttribute("usuario", id_usuario);
+				}
 
 		return "ProductosInfo";
 	}
@@ -175,11 +223,27 @@ public class ControladorTienda {
 
 	// Métodos para ver la info de un usuario
 	@GetMapping(value = "/usuario/perfil/{id_Usuario}")
-	public String perfilUsuarios_get(Model modelo, @PathVariable int id_Usuario) {
+	public String perfilUsuarios_get(Model modelo, @PathVariable int id_Usuario,  HttpSession session) {
 
 		// Declarar la lista para obtener los datos
 		List<Usuario> usuario = servicio.findUsuarioById(id_Usuario);
 		modelo.addAttribute("usuarios", usuario);
+		
+		String nombre = (String) session.getAttribute("user");
+		String nombre2 = (String) session.getAttribute("usuario");
+		String contrasenia = (String) session.getAttribute("contrasenia");
+		modelo.addAttribute("usuario1", nombre);
+		modelo.addAttribute("usuario2", nombre2);
+		
+		//Usuarios
+				Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+				if(usuario1 == null) {
+					
+				}
+				else {
+					int id_usuario = usuario1.getId_Usuario();
+					modelo.addAttribute("usuario", id_usuario);
+				}
 
 		return "UsuariosInfo";
 	}
