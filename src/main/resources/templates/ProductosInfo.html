@@ -55,6 +55,9 @@
 		<div th:each="producto: ${productos}">
 			<a th:href="@{/compra/producto/{id}(id=${producto.id_Producto})}"> <button> Comprar </button> </a>
 		</div>
+		
+		<br>
+		
 		<div th:each="producto: ${productos}">
 			<a th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button> Borrar Producto </button> </a>
 		</div>
