@@ -23,13 +23,13 @@
 					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
 				</li>
 			</ul>
+			
 			<div class="d-block">
 			
 				<form th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
 					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
 				</form>
-				
 				<div class="userLR"> 
 					<div th:if="${usuario1 != usuario2}">
 						<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
@@ -40,7 +40,7 @@
 					 	<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
 					</div>
 				</div>
-				
+					
 			</div>
 		</div>
 	</nav>
