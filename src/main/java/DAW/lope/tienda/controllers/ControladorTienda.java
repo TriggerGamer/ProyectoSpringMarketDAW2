@@ -280,5 +280,27 @@ public class ControladorTienda {
 
 		return "UsuariosInfo";
 	}
+	// Métodos para ver el carrito
+		@GetMapping(value = "/miCarrito")
+		public String carrito_get(Model modelo,  HttpSession session) {
+			
+			String nombre = (String) session.getAttribute("user");
+			String nombre2 = (String) session.getAttribute("usuario");
+			String contrasenia = (String) session.getAttribute("contrasenia");
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", nombre2);
+			
+			//Usuarios
+					Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+					if(usuario1 == null) {
+						
+					}
+					else {
+						int id_usuario = usuario1.getId_Usuario();
+						modelo.addAttribute("usuario", id_usuario);
+					}
+
+			return "carrito";
+		}
 
 }
