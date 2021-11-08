@@ -1,16 +1,16 @@
 package DAW.lope.tienda.modelo;
 
 
-public class Productos {
+public class Producto {
 	private int id_Producto;
 	private String tituloProducto;
 	private String descripcionProducto;
 	private double precio;
 	private int descuento;
 	
-	public Productos() {}
+	public Producto() {}
 	
-	public Productos(int id_producto, String tituloProducto, String descripcionProducto, double precio, int descuento) {
+	public Producto(int id_producto, String tituloProducto, String descripcionProducto, double precio, int descuento) {
 		this.id_Producto = id_producto;
 		this.tituloProducto = tituloProducto;
 		this.descripcionProducto = descripcionProducto;	

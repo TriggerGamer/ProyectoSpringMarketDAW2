@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import DAW.lope.tienda.modelo.Productos;
+import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.ProductosDao;
 import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.modelo.UsuariosDao;
@@ -20,18 +20,18 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	UsuariosDao usuariodao;
 
 	@Override
-	public List<Productos> findEight(){
+	public List<Producto> findEight(){
 		return productosdao.findEight();
 	}
 
 	@Override
-	public List<Productos> getProductoByName(String name) {
+	public List<Producto> getProductoByName(String name) {
 		// TODO Auto-generated method stub
 		return productosdao.getProductoByName(name);
 	}
 
 	@Override
-	public int saveProductos(Productos producto) {
+	public int saveProductos(Producto producto) {
 		// TODO Auto-generated method stub
 		return productosdao.save(producto);
 	}
@@ -49,7 +49,7 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public List<Productos> findProductoById(int id) {
+	public List<Producto> findProductoById(int id) {
 		// TODO Auto-generated method stub
 		return productosdao.findById(id);
 	}

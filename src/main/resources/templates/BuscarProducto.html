@@ -53,6 +53,9 @@
 			<div th:text="${producto.descuento}"> </div>
 		</div>
 		
+		<div th:each="producto: ${productos}">
+			<a th:href="@{/compra/producto/{id}(id=${producto.id_Producto})}"> <button> Comprar </button> </a>
+		</div>
 	</form>
 	
 </body>

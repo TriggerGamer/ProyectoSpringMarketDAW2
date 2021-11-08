@@ -39,7 +39,7 @@ public class UsuariosJdbc implements UsuariosDao {
 	@Override
 	public int deleteById(int id) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("DELETE FROM Productos WHERE id_Usuarios = " + id);
+		return jdbcTemplate.update("DELETE FROM Producto WHERE id_Usuarios = " + id);
 	}
 
 	@Override

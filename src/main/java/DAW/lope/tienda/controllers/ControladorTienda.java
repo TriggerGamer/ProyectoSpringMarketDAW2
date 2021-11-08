@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import DAW.lope.tienda.modelo.Productos;
+import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
 
@@ -26,9 +26,9 @@ public class ControladorTienda {
 	@GetMapping(value = "/index")
 	public String index_get(Model modelo, HttpSession session) {
 		
-		//Productos
-		List<Productos> Productos = servicio.findEight();
-		modelo.addAttribute("Productos", Productos);
+		//Producto
+		List<Producto> Producto = servicio.findEight();
+		modelo.addAttribute("Productos", Producto);
 		
 		String nombre = (String) session.getAttribute("user");
 		String nombre2 = (String) session.getAttribute("usuario");
@@ -55,7 +55,7 @@ public class ControladorTienda {
 	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		List<Productos> producto = servicio.getProductoByName(busqueda);
+		List<Producto> producto = servicio.getProductoByName(busqueda);
 		modelo.addAttribute("productos", producto);
 
 		String nombre = (String) session.getAttribute("user");
@@ -106,7 +106,7 @@ public class ControladorTienda {
 
 		double price = Double.parseDouble(precio);
 		int descuento = 10;
-		Productos producto = new Productos();
+		Producto producto = new Producto();
 
 		producto.setTituloProducto(titulo);
 		producto.setDescripcionProducto(descripcion);
@@ -120,10 +120,10 @@ public class ControladorTienda {
 
 	// Métodos para ver la info de un producto
 	@GetMapping(value = "/producto/{id_Producto}")
-	public String Productos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
+	public String infoProductos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		List<Productos> producto = servicio.findProductoById(id_Producto);
+		List<Producto> producto = servicio.findProductoById(id_Producto);
 		modelo.addAttribute("productos", producto);
 		
 		String nombre = (String) session.getAttribute("user");
@@ -143,6 +143,23 @@ public class ControladorTienda {
 				}
 
 		return "ProductosInfo";
+	}
+	
+	//Método para comprar un producto y guardarlo en session para el carrito
+	@GetMapping(value = "/compra/producto/{id_Producto}")
+	public String comprar_get(@RequestParam(value = "numeroProductos", required = false) int numeroProductos, Model modelo, @PathVariable int id_Producto, HttpSession session) {
+
+		// Obtener los datos del producto mediante el servicio
+		List<Producto> producto1 = servicio.findProductoById(id_Producto);
+		modelo.addAttribute("productos", producto1);
+		Producto producto2 = producto1.get(0);
+		
+		//Guardar los atributos del producto en session
+		/* 	session.setAttribute("id_Producto", producto2.getId_Producto());
+			session.setAttribute("nombreProducto", producto2.getTituloProducto());
+			session.setAttribute("numeroUnidades", numeroProductos); */
+		
+		return "redirect:/index";
 	}
 
 	// Métodos para Borrar producto
@@ -227,14 +244,14 @@ public class ControladorTienda {
 	}
 
 	// Métodos desloguear un usuario
-		@GetMapping(value = "/usuario/logOut")
-		public String usuarioLOGOUT_get(Model modelo, HttpSession session) {
-			
-			session.setAttribute("user", null);
-			session.setAttribute("usuario", "nada");
+	@GetMapping(value = "/usuario/logOut")
+	public String usuarioLOGOUT_get(Model modelo, HttpSession session) {
 
-			return "redirect:/index";
-		}
+		session.setAttribute("user", null);
+		session.setAttribute("usuario", "nada");
+
+		return "redirect:/index";
+	}
 
 
 	// Métodos para ver la info de un usuario

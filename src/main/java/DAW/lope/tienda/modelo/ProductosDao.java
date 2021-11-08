@@ -5,12 +5,12 @@ import java.util.List;
 
 public interface ProductosDao {
 	int count();
-	int save(Productos producto);
-	int update(Productos producto);
+	int save(Producto producto);
+	int update(Producto producto);
 	int deleteById(int id);
-	List<Productos> findAll();
-	List<Productos> findEight();
-	List<Productos> findById(int id);
+	List<Producto> findAll();
+	List<Producto> findEight();
+	List<Producto> findById(int id);
 	String getNameById(int id);
-	List <Productos> getProductoByName(String name);
+	List <Producto> getProductoByName(String name);
 }
