@@ -21,40 +21,32 @@ public class ControladorTienda {
 	@Autowired
 	private ModuloServicioTemplate servicio;
 	
-	// Metodos para inicio de sesion
-	@GetMapping(value = "/usuario/login")
-	public String loginUsuario_get() {
-
-		return "acceso";
-	}
-
-	@PostMapping(value = "/usuario/login")
-	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia,
-			HttpSession session) {
-
-		Usuario usuario = servicio.login(nombreusuario, contrasenia);
-		
-
-		if (usuario == null) {
-			return	"redirect:/usuario/login";
-		}
-		
-		session.setAttribute("user", usuario.getNombre());
-
-		return "redirect:/index";
-	}
 
 	// Métodos para la página principal
 	@GetMapping(value = "/index")
 	public String index_get(Model modelo, HttpSession session) {
-
+		
+		//Productos
 		List<Productos> Productos = servicio.findEight();
 		modelo.addAttribute("Productos", Productos);
 		
 		String nombre = (String) session.getAttribute("user");
-		System.out.print(nombre);		
-		modelo.addAttribute("usuario", nombre);
-
+		String nombre2 = (String) session.getAttribute("usuario");
+		String contrasenia = (String) session.getAttribute("contrasenia");
+		modelo.addAttribute("usuario1", nombre);
+		modelo.addAttribute("usuario2", nombre2);
+		
+		
+		//Usuarios
+		Usuario usuario = servicio.findByName(nombre, contrasenia);
+		if(usuario == null) {
+			
+		}
+		else {
+			int id_usuario = usuario.getId_Usuario();
+			modelo.addAttribute("usuario", id_usuario);
+		}
+		
 		return "Index";
 	}
 
@@ -146,11 +138,44 @@ public class ControladorTienda {
 
 		return "redirect:/index";
 	}
+	
+	// Metodos para iniciar sesion
+	@GetMapping(value = "/usuario/login")
+	public String loginUsuario_get() {
+
+		return "acceso";
+	}
+
+	@PostMapping(value = "/usuario/login")
+	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia, HttpSession session) {
+
+		Usuario usuario = servicio.login(nombreusuario, contrasenia);
+		
+		if (usuario == null) {
+			return	"redirect:/usuario/login";
+		}else {
+			session.setAttribute("user", usuario.getNombre());
+			session.setAttribute("usuario", nombreusuario);
+			session.setAttribute("contrasenia", usuario.getContrasenia());
+		}
+
+		return "redirect:/index";
+	}
+
+	// Métodos desloguear un usuario
+		@GetMapping(value = "/usuario/logOut")
+		public String usuarioLOGOUT_get(Model modelo, HttpSession session) {
+			
+			session.setAttribute("user", null);
+			session.setAttribute("usuario", "nada");
+
+			return "redirect:/index";
+		}
 
 
 	// Métodos para ver la info de un usuario
 	@GetMapping(value = "/usuario/perfil/{id_Usuario}")
-	public String Usuarios_get(Model modelo, @PathVariable int id_Usuario) {
+	public String perfilUsuarios_get(Model modelo, @PathVariable int id_Usuario) {
 
 		// Declarar la lista para obtener los datos
 		List<Usuario> usuario = servicio.findUsuarioById(id_Usuario);
