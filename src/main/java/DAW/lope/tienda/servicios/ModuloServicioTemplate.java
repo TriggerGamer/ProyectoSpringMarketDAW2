@@ -49,7 +49,7 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public List<Producto> findProductoById(int id) {
+	public Producto findProductoById(int id) {
 		// TODO Auto-generated method stub
 		return productosdao.findById(id);
 	}

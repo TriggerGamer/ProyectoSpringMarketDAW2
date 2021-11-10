@@ -9,7 +9,7 @@ public interface ModuloServicio {
 	int saveProductos(Producto producto);
 	int saveUsuarios(Usuario usuario);
 	int deleteProductoById(int id);
-	List<Producto> findProductoById(int id);
+	Producto findProductoById(int id);
 	List<Usuario> findUsuarioById(int id);
 	List<Producto> findEight();
 	Usuario findByName(String nombre, String contrasenia);

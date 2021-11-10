@@ -1,8 +1,8 @@
 package DAW.lope.tienda.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import DAW.lope.tienda.modelo.Carrito;
 import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
@@ -33,6 +33,9 @@ public class ControladorTienda {
 		String nombre = (String) session.getAttribute("user");
 		String nombre2 = (String) session.getAttribute("usuario");
 		String contrasenia = (String) session.getAttribute("contrasenia");
+		if(nombre == null) {
+			nombre = "f amigo";
+		}
 		modelo.addAttribute("usuario1", nombre);
 		modelo.addAttribute("usuario2", nombre2);
 		
@@ -123,8 +126,8 @@ public class ControladorTienda {
 	public String infoProductos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		List<Producto> producto = servicio.findProductoById(id_Producto);
-		modelo.addAttribute("productos", producto);
+		Producto producto = servicio.findProductoById(id_Producto);
+		modelo.addAttribute("producto", producto);
 		
 		String nombre = (String) session.getAttribute("user");
 		String nombre2 = (String) session.getAttribute("usuario");
@@ -145,20 +148,29 @@ public class ControladorTienda {
 		return "ProductosInfo";
 	}
 	
-	//Método para comprar un producto y guardarlo en session para el carrito
+	//Método para comprar un producto y guardarlo en session para el Carrito
 	@GetMapping(value = "/compra/producto/{id_Producto}")
 	public String comprar_get(@RequestParam(value = "numeroProductos", required = false) int numeroProductos, Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Obtener los datos del producto mediante el servicio
-		List<Producto> producto1 = servicio.findProductoById(id_Producto);
-		modelo.addAttribute("productos", producto1);
-		Producto producto2 = producto1.get(0);
+		Producto producto = servicio.findProductoById(id_Producto);
+
+		Carrito compra = new Carrito(producto.getId_Producto(), producto.getTituloProducto(), numeroProductos);
 		
 		//Guardar los atributos del producto en session
-		/* 	session.setAttribute("id_Producto", producto2.getId_Producto());
-			session.setAttribute("nombreProducto", producto2.getTituloProducto());
-			session.setAttribute("numeroUnidades", numeroProductos); */
+		@SuppressWarnings("unchecked")
+		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
 		
+		if(carrito == null){
+			carrito = new ArrayList<Carrito>();
+			session.setAttribute("carrito", carrito);
+		}
+		carrito.add(compra);
+		session.setAttribute("carrito", carrito);
+		
+		
+		
+ 		
 		return "redirect:/index";
 	}
 
@@ -280,7 +292,7 @@ public class ControladorTienda {
 
 		return "UsuariosInfo";
 	}
-	// Métodos para ver el carrito
+	// Métodos para ver el Carrito
 		@GetMapping(value = "/miCarrito")
 		public String carrito_get(Model modelo,  HttpSession session) {
 			
@@ -289,18 +301,26 @@ public class ControladorTienda {
 			String contrasenia = (String) session.getAttribute("contrasenia");
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre2);
-			
-			//Usuarios
-					Usuario usuario1 = servicio.findByName(nombre, contrasenia);
-					if(usuario1 == null) {
-						
-					}
-					else {
-						int id_usuario = usuario1.getId_Usuario();
-						modelo.addAttribute("usuario", id_usuario);
-					}
 
-			return "carrito";
+			// Usuarios
+			Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+			if (usuario1 == null) {
+
+			} else {
+				int id_usuario = usuario1.getId_Usuario();
+				modelo.addAttribute("usuario", id_usuario);
+			}
+			
+			@SuppressWarnings("unchecked")
+			List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
+			if(carrito == null) {
+				carrito = new ArrayList<Carrito>();
+			}
+			modelo.addAttribute("carrito", carrito);
+			//Coger los atributos del carrito en session
+			
+
+			return "Carrito";
 		}
 
 }

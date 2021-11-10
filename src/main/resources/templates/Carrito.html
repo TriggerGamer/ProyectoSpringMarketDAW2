@@ -1,17 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
-	<head>
 
-		<meta charset='utf-8'> 
-		<meta name="author" content="Erick Jáquez y Luis">
-		<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
-		<meta name="viewport" content="width=device-width">
-		<title> Tienda </title>
-	</head>
+<head>
 
-	<body>
-		<h1> Carrito </h1>
-		
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<meta charset='utf-8'>
+	<meta name="author" content="Erick Jáquez y Luis">
+	<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
+	<meta name="viewport" content="width=device-width">
+	<title> Tienda </title>
+</head>
+
+<body>
+	<h1> Carrito </h1>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item">
@@ -21,31 +22,44 @@
 					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
 				</li>
 			</ul>
-			
+
 			<div class="d-block">
-			
+
 				<form th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
 					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
 				</form>
-				<div class="userLR"> 
+				<div class="userLR">
 					<div th:if="${usuario1 != usuario2}">
 						<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
 						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
 					</div>
 					<div th:unless="${usuario1 != usuario2}">
-					 	<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white"> Perfil </a> 
-					 	<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
-						<a th:href="@{/miCarrito}"><div class="carrito"></div></a>
+						<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white">
+							Perfil </a>
+						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/miCarrito}">
+							<div class="carrito"></div>
+						</a>
 					</div>
 				</div>
-					
+
 			</div>
 		</div>
 	</nav>
-		
-		<br>
-		<h1>Estas en tu carrito madafuker</h1>
-		
-	</body>
+
+	<br>
+	
+	<h1>Estas en tu carrito madafuker</h1>
+	
+	<br>
+	
+	<div th:each="compra: ${carrito}">
+		<p th:text="${compra.id_Producto}"> </p> 
+		<p th:text="${compra.nombreProducto}"> </p> 
+		<p th:text="${compra.numeroUnidades}"> </p> 
+	</div>
+
+</body>
+
 </html>

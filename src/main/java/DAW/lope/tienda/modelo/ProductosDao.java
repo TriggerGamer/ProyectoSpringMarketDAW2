@@ -10,7 +10,7 @@ public interface ProductosDao {
 	int deleteById(int id);
 	List<Producto> findAll();
 	List<Producto> findEight();
-	List<Producto> findById(int id);
+	Producto findById(int id);
 	String getNameById(int id);
 	List <Producto> getProductoByName(String name);
 }
