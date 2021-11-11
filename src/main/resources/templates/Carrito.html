@@ -54,11 +54,23 @@
 	
 	<br>
 	
-	<div th:each="compra: ${carrito}">
-		<p th:text="${compra.id_Producto}"> </p> 
-		<p th:text="${compra.nombreProducto}"> </p> 
-		<p th:text="${compra.numeroUnidades}"> </p> 
-	</div>
+	<table th:each="compra: ${carrito}" class="table">
+		<thead>
+			<tr class="table-info">
+				<th scope="col"> Identificador de Producto </th>
+				<th scope="col"> Nombre del producto </th>
+				<th scope="col"> Número de Unidades </th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr class="table-info">
+				<td scope="row" th:text="${compra.id_Producto}" />
+				<td th:text="${compra.nombreProducto}"/> 
+				<td th:text="${compra.numeroUnidades}"/> 
+			</tr>
+		</tbody>
+	</table>
 
 </body>
 
