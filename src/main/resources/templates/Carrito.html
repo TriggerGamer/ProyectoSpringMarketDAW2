@@ -6,7 +6,8 @@
 	<meta name="author" content="Erick Jáquez y Luis">
 	<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
 	<meta name="viewport" content="width=device-width">
-	<title> Tienda </title>
+	<title> Carrito </title>
+	
 </head>
 
 <body>
@@ -38,7 +39,7 @@
 						<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white">
 							Perfil </a>
 						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
-						<a th:href="@{/miCarrito}">
+						<a th:href="@{/carrito/listar}">
 							<div class="carrito"></div>
 						</a>
 					</div>
@@ -60,6 +61,7 @@
 				<th scope="col"> Identificador de Producto </th>
 				<th scope="col"> Nombre del producto </th>
 				<th scope="col"> Número de Unidades </th>
+				<th scope="col"> Comprar </th>
 			</tr>
 		</thead>
 		
@@ -67,11 +69,17 @@
 			<tr class="table-info">
 				<td scope="row" th:text="${compra.id_Producto}" />
 				<td th:text="${compra.nombreProducto}"/> 
-				<td th:text="${compra.numeroUnidades}"/> 
+				<td th:text="${compra.numeroUnidades}"/>
+				<td> 
+					<form th:action="@{/comprar/producto/{id}(id=${compra.id_Producto})}" method="POST">
+						<input class="btn btn-success my-2 my-sm-0" type="submit" value="Comprar">
+					</form>
+				</td>
 			</tr>
 		</tbody>
 	</table>
-
+	
+	
 </body>
 
 </html>

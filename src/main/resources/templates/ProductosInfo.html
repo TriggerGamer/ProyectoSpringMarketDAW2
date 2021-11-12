@@ -38,7 +38,7 @@
 						<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white">
 							Perfil </a>
 						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
-						<a th:href="@{/miCarrito}">
+						<a th:href="@{/carrito/listar}">
 							<div class="carrito"></div>
 						</a>
 					</div>
@@ -50,22 +50,20 @@
 
 	<br>
 
-
-
 	<div th:text="${producto.id_Producto}"> </div>
 	<div th:text="${producto.tituloProducto}"> </div>
 	<div th:text="${producto.descripcionProducto}"> </div>
 	<div th:text="${producto.precio}"> </div>
 	<div th:text="${producto.descuento}"> </div>
 
-	<div th:if="${usuario1 == usuario2}">
-			<form th:action="@{/compra/producto/{id}(id=${producto.id_Producto})}" method="GET">
+	<div>
+			<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
 				<input type="number" name="numeroProductos" placeholder="Numero de productos que desea" size="500">
-				<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Comprar">
+				<input class="btn btn-success my-2 my-sm-0" type="submit" value="Comprar">
 			</form>
 	</div>
+	
 	<br>
-
 	
 	<a th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button> Borrar Producto </button> </a>
 	

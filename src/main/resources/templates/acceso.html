@@ -9,34 +9,38 @@
 </head>
 
 <body>
+	<h1 class="center"> Acceso a usuarios </h1>
+	
 	<header>
-		<h1> Acceso a usuarios </h1>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="/index"> INICIO </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+					</li>
+				</ul>
+	
+				<form th:action="@{/producto/buscar}" method="GET">
+					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
+					<input type="submit" value="Buscar">
+				</form>
+			</div>
+		</nav>
 	</header>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<div class="collapse navbar-collapse" id="navbarColor01">
-			<ul class="navbar-nav me-auto">
-				<li class="nav-item">
-					<a class="nav-link active" href="/index"> INICIO </a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
-				</li>
-			</ul>
-
-			<form th:action="@{/producto/buscar}" method="GET">
-				<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
-				<input type="submit" value="Buscar">
-			</form>
-		</div>
-	</nav>
-
-	<br>	
-		<form th:action="@{/usuario/login}" method="POST" class="form-group">		
-			<input name="nombreusuario" size="20" type="text" placeholder="Usuario">
-			<input name="contrasenia" size="20" type="password" placeholder="Contraseña">
-			<input type="submit" class="btn btn-primary btn-sm" value="Entrar"/>
-		</form>
-		
+	
+	<br>
+	
+	<form th:action="@{/usuario/login}" method="POST" class="form-group">
+		<input name="nombreusuario" size="20" type="text" placeholder="Usuario">
+		<input name="contrasenia" size="20" type="password" placeholder="Contraseña">
+		<input type="submit" class="btn btn-primary btn-sm" value="Entrar">
+		<p class="text-danger" th:text="${error}"> </p>
+	</form>
+	
+	
 </body>
 
 </html>
