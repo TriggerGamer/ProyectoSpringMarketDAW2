@@ -29,17 +29,22 @@ titularTarjeta VARCHAR (100),
 codigoSeguridad INT(3),
 direccionFacturacion VARCHAR (200)
 );
+create table Pedidos(
+id_Pedido int(10) NOT NULL PRIMARY KEY auto_increment,
+id_Usuario int(10) NOT NULL,
+id_Productos int(10) NOT NULL,
+numeroUnidades int(3) NOT NULL,
+fechaDeCompra DATE NOT NULL,
+FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario),
+FOREIGN KEY (id_Productos) REFERENCES Productos(id_Productos)
+);
 
 INSERT INTO Usuarios VALUES(2,"luis","Martinez", 'luis',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 INSERT INTO Usuarios VALUES(1,"Luis","Martinez", 'contrafulanito',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 
 delete from Usuarios;
-
 drop table Usuarios;
-
 SELECT * FROM Productos;
-
 delete from Productos;
-
 drop table Productos;
 
