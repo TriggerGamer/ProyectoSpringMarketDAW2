@@ -90,14 +90,12 @@
 
 .userLR{
 	float: right;
-	margin-right: 3em;
+	margin-right: 1em;
 }
 
 .carrito{
-	float: right;
 	width: 1.5em;
 	height:1.5em;
-	margin-left: 0.5em;
 	background: url("../img/carrito.png");
 	background-repeat: no-repeat;
 	background-size: cover;
