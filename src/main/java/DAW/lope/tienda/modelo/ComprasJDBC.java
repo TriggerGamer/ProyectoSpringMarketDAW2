@@ -16,7 +16,7 @@ public class ComprasJDBC implements ComprasDao{
 	public int save(Carrito carrito) {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.update(
-				"INSERT INTO Usuarios(id_Usuario, id_Producto, numeroUnidades, fechaDeCompra) VALUES(?,?,?,NOW())", carrito.getId_Usuario(), carrito.getId_Producto(), carrito.getNumeroUnidades());
+				"INSERT INTO Compras(id_Usuario, id_Producto, numeroUnidades, fechaDeCompra) VALUES(?,?,?,NOW())", carrito.getId_Usuario(), carrito.getId_Producto(), carrito.getNumeroUnidades());
 	}
 
 	@Override
