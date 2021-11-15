@@ -29,12 +29,13 @@ titularTarjeta VARCHAR (100),
 codigoSeguridad INT(3),
 direccionFacturacion VARCHAR (200)
 );
-create table Pedidos(
-id_Pedido int(10) NOT NULL PRIMARY KEY auto_increment,
+create table Compras(
+id_Compra int(10) NOT NULL auto_increment,
 id_Usuario int(10) NOT NULL,
 id_Producto int(10) NOT NULL,
 numeroUnidades int(3) NOT NULL,
 fechaDeCompra DATE NOT NULL,
+PRIMARY KEY(id_Compra, id_Usuario, id_Producto),
 FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario),
 FOREIGN KEY (id_Productos) REFERENCES Productos(id_Productos)
 );

@@ -13,16 +13,16 @@ public class ComprasJDBC implements ComprasDao{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public int save(Carrito carrito) {
+	public int save(Compras compra) {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.update(
-				"INSERT INTO Compras(id_Usuario, id_Producto, numeroUnidades, fechaDeCompra) VALUES(?,?,?,NOW())", carrito.getId_Usuario(), carrito.getId_Producto(), carrito.getNumeroUnidades());
+				"INSERT INTO Compras(id_Usuario, id_Producto, numeroUnidades, fechaDeCompra) VALUES(?,?,?,NOW())", compra.getId_Usuario(), compra.getId_Producto(), compra.getNumeroUnidades());
 	}
 
 	@Override
 	public int deleteById(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return jdbcTemplate.update("DELETE FROM Compras WHERE id_Compra = " + id);
 	}
 
 	@Override

@@ -9,9 +9,8 @@ public class Compras {
 	private String fechaDePedido;
 
 	
-	public Compras (){
-		
-	}
+	public Compras (){}
+	
 	public Compras (int id_Pedido, int id_Usuario, int id_Producto, int numeroUnidades, String fechaDePedido) {
 		this.id_Pedido = id_Pedido;
 		this.id_Usuario = id_Usuario;
@@ -42,5 +41,17 @@ public class Compras {
 
 	public void setFechaDePedido(String fechaDePedido) {
 		this.fechaDePedido = fechaDePedido;
+	}
+	public int getId_Producto() {
+		return id_Producto;
+	}
+	public void setId_Producto(int id_Producto) {
+		this.id_Producto = id_Producto;
+	}
+	public int getNumeroUnidades() {
+		return numeroUnidades;
+	}
+	public void setNumeroUnidades(int numeroUnidades) {
+		this.numeroUnidades = numeroUnidades;
 	}
 }
