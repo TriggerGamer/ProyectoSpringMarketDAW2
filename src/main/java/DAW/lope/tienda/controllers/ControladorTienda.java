@@ -321,7 +321,7 @@ public class ControladorTienda {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", "");
-			return "redirect:/index";
+			return "redirect:/usuario/login";
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
