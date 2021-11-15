@@ -384,6 +384,37 @@ public class ControladorTienda {
 
 		return "ListaCompras";
 	}
+	
+	// Método para ver las compras hechas
+		@GetMapping(value = "/compra/devolver/{idCompra}")
+		public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
+			
+
+			// session Usuarios
+			String nombre = (String) session.getAttribute("user");
+			String contrasenia = (String) session.getAttribute("contrasenia");
+
+			if (nombre == null) {
+				nombre = "f amigo";
+				modelo.addAttribute("usuario1", nombre);
+				modelo.addAttribute("usuario2", "");
+			} else {
+				modelo.addAttribute("usuario1", nombre);
+				modelo.addAttribute("usuario2", nombre);
+			}
+			
+			// Usuarios
+			Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+
+			if (usuario1 == null) {
+
+			} else {
+				int id_usuario = usuario1.getId_Usuario();
+				modelo.addAttribute("usuario", id_usuario);
+			}
+
+			return "ListaCompras";
+		}
 
 	// Métodos para ver el Carrito
 	@GetMapping(value = "/carrito/listar")
