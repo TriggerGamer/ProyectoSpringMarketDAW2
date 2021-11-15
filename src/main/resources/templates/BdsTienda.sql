@@ -2,7 +2,7 @@ use tienda;
 show tables;
 
 create table Productos(
-id_Productos int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_Producto int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 tituloProducto VARCHAR(30),
 descripcionProducto VARCHAR(100),
 precio double(10,2),
@@ -32,7 +32,7 @@ direccionFacturacion VARCHAR (200)
 create table Pedidos(
 id_Pedido int(10) NOT NULL PRIMARY KEY auto_increment,
 id_Usuario int(10) NOT NULL,
-id_Productos int(10) NOT NULL,
+id_Producto int(10) NOT NULL,
 numeroUnidades int(3) NOT NULL,
 fechaDeCompra DATE NOT NULL,
 FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario),
