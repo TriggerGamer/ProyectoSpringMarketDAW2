@@ -49,9 +49,9 @@ foreign key (id_Compra) REFERENCES Compras(id_Compra)
 INSERT INTO Usuarios VALUES(2,"luis","Martinez", 'luis',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 INSERT INTO Usuarios VALUES(1,"Luis","Martinez", 'contrafulanito',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 
-delete from Usuarios;
+/* delete from Usuarios;
 drop table Usuarios;
 SELECT * FROM Productos;
 delete from Productos;
-drop table Productos;
+drop table Productos; */
 
