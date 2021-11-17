@@ -3,7 +3,7 @@ show tables;
 
 create table Productos(
 id_Producto int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-tituloProducto VARCHAR(30),
+tituloProducto VARCHAR(100),
 descripcionProducto VARCHAR(100),
 precio double(10,2),
 descuento int(7)
@@ -37,7 +37,7 @@ numeroUnidades int(3) NOT NULL,
 fechaDeCompra DATE NOT NULL,
 PRIMARY KEY(id_Compra, id_Usuario, id_Producto),
 FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario),
-FOREIGN KEY (id_Productos) REFERENCES Productos(id_Productos)
+FOREIGN KEY (id_Producto) REFERENCES Productos(id_Producto)
 );
 
 INSERT INTO Usuarios VALUES(2,"luis","Martinez", 'luis',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");

@@ -332,13 +332,18 @@ public class ControladorTienda {
 
 	// Método guardar un producto en session para el Carrito
 	@GetMapping(value = "/carrito/guardar/{id_Producto}")
-	public String carritoGuardar_get(@RequestParam(value = "numeroProductos", required = false) int numeroProductos,
+	public String carritoGuardar_get(@RequestParam(value = "numeroProductos", required = false) String numeroProductos,
 			Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Obtener los datos del producto mediante el servicio
 		Producto producto = servicio.findProductoById(id_Producto);
-
-		Carrito compra = new Carrito(producto.getId_Producto(), producto.getTituloProducto(), numeroProductos);
+		
+		int numeroPr = Integer.parseInt(numeroProductos);
+		if(numeroProductos == null) {
+			numeroPr = 0;
+		}
+		
+		Carrito compra = new Carrito(producto.getId_Producto(), producto.getTituloProducto(), numeroPr);
 
 		// Guardar los atributos del producto en session
 		@SuppressWarnings("unchecked")
@@ -385,36 +390,35 @@ public class ControladorTienda {
 		return "ListaCompras";
 	}
 	
-	// Método para ver las compras hechas
-		@GetMapping(value = "/compra/devolver/{idCompra}")
-		public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
-			
+	// Método para devolver las compras hechas
+	@GetMapping(value = "/compra/devolver/{idCompra}")
+	public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
 
-			// session Usuarios
-			String nombre = (String) session.getAttribute("user");
-			String contrasenia = (String) session.getAttribute("contrasenia");
+		// session Usuarios
+		String nombre = (String) session.getAttribute("user");
+		String contrasenia = (String) session.getAttribute("contrasenia");
 
-			if (nombre == null) {
-				nombre = "f amigo";
-				modelo.addAttribute("usuario1", nombre);
-				modelo.addAttribute("usuario2", "");
-			} else {
-				modelo.addAttribute("usuario1", nombre);
-				modelo.addAttribute("usuario2", nombre);
-			}
-			
-			// Usuarios
-			Usuario usuario1 = servicio.findByName(nombre, contrasenia);
-
-			if (usuario1 == null) {
-
-			} else {
-				int id_usuario = usuario1.getId_Usuario();
-				modelo.addAttribute("usuario", id_usuario);
-			}
-
-			return "ListaCompras";
+		if (nombre == null) {
+			nombre = "f amigo";
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", "");
+		} else {
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", nombre);
 		}
+
+		// Usuarios
+		Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+
+		if (usuario1 == null) {
+
+		} else {
+			int id_usuario = usuario1.getId_Usuario();
+			modelo.addAttribute("usuario", id_usuario);
+		}
+
+		return "ListaCompras";
+	}
 
 	// Métodos para ver el Carrito
 	@GetMapping(value = "/carrito/listar")
@@ -432,7 +436,7 @@ public class ControladorTienda {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-		
+
 		// Usuarios
 		Usuario usuario1 = servicio.findByName(nombre, contrasenia);
 

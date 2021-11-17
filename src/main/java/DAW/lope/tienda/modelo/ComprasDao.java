@@ -5,5 +5,5 @@ import java.util.List;
 public interface ComprasDao{
 	int save(Compras compra);
 	int deleteById(int id);
-	List<Carrito> findAll(int id);
+	List<Compras> findAll(int id);
 }

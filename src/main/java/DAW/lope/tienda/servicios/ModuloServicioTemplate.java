@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import DAW.lope.tienda.modelo.Compras;
+import DAW.lope.tienda.modelo.ComprasDao;
 import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.ProductosDao;
 import DAW.lope.tienda.modelo.Usuario;
@@ -18,6 +20,8 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	ProductosDao productosdao;
 	@Autowired
 	UsuariosDao usuariodao;
+	@Autowired
+	ComprasDao comprasdao;
 
 	@Override
 	public List<Producto> findEight(){
@@ -70,5 +74,23 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	public Usuario findByName(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
 		return usuariodao.findByName(nombre, contrasenia);
+	}
+
+	@Override
+	public int saveCompras(Compras compra) {
+		// TODO Auto-generated method stub
+		return comprasdao.save(compra);
+	}
+
+	@Override
+	public int deleteCompra(int id) {
+		// TODO Auto-generated method stub
+		return comprasdao.deleteById(id);
+	}
+
+	@Override
+	public List<Compras> getCompras(int id) {
+		// TODO Auto-generated method stub
+		return comprasdao.findAll(id);
 	}
 }
