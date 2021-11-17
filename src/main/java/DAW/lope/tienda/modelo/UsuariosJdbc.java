@@ -53,13 +53,20 @@ public class UsuariosJdbc implements UsuariosDao {
 	}
 
 	@Override
-	public List<Usuario> findById(int id) {
+	public Usuario findById(int id) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("SELECT * FROM Usuarios WHERE id_Usuario = " + id,
-				(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("apellidos"),
-						rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"),
-						rs.getLong("numeroTarjeta"), rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"),
-						rs.getString("direccionFacturacion")));
+		try {
+			return jdbcTemplate.queryForObject("SELECT * FROM Usuarios WHERE id_Usuario = ?",
+					(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"),
+							rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"),
+							rs.getString("fechaNacimiento"), rs.getLong("numeroTarjeta"),
+							rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"),
+							rs.getString("direccionFacturacion")),
+					id);
+		} catch (EmptyResultDataAccessException e) {
+			// TODO: handle exception
+			return null;
+		}
 	}
 
 	@Override
@@ -71,26 +78,32 @@ public class UsuariosJdbc implements UsuariosDao {
 	@Override
 	public Usuario login(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
-		try{ 
+		try {
 			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre LIKE ? AND contrasenia = ?",
-				(rs, rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("contrasenia")), nombre, contrasenia);
-		}catch (EmptyResultDataAccessException e) {
+					(rs, rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("contrasenia")), nombre,
+					contrasenia);
+		} catch (EmptyResultDataAccessException e) {
 			// TODO: handle exception
 			return null;
 		}
-		
 
 	}
 
 	@Override
 	public Usuario findByName(String nombre, String contrasenia) {
 		// TODO Auto-generated method stub
-		try{ 
-			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre LIKE ? AND contrasenia LIKE ?", (rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"), rs.getString("fechaNacimiento"), rs.getLong("numeroTarjeta"), rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"), rs.getString("direccionFacturacion")), nombre, contrasenia);
-		}catch (EmptyResultDataAccessException e) {
+		try {
+			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre LIKE ? AND contrasenia LIKE ?",
+					(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"),
+							rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"),
+							rs.getString("fechaNacimiento"), rs.getLong("numeroTarjeta"),
+							rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"),
+							rs.getString("direccionFacturacion")),
+					nombre, contrasenia);
+		} catch (EmptyResultDataAccessException e) {
 			// TODO: handle exception
 			return null;
-		}catch(IncorrectResultSizeDataAccessException e) {
+		} catch (IncorrectResultSizeDataAccessException e) {
 			return null;
 		}
 	}
