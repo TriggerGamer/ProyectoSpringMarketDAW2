@@ -32,15 +32,14 @@ direccionFacturacion VARCHAR (200)
 create table Compras(
 id_Compra int(10) NOT NULL auto_increment,
 id_Usuario int(10) NOT NULL,
-numeroUnidades int(3) NOT NULL,
 fechaDeCompra DATE NOT NULL,
 PRIMARY KEY(id_Compra, id_Usuario),
 FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario)
 );
-
 create table ProductosCompras(
 id_Producto int(10),
 id_Compra int(10),
+numeroUnidades int(3) NOT NULL,
 PRIMARY KEY(id_Compra, id_Producto),
 foreign key (id_Producto) REFERENCES Productos(id_Producto),
 foreign key (id_Compra) REFERENCES Compras(id_Compra)
