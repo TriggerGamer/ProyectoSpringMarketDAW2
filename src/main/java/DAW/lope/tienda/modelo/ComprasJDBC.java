@@ -7,15 +7,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ComprasJDBC implements ComprasDao{
+public class ComprasJDBC implements ComprasDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Override
 	public int save(Compras compra) {
-		return jdbcTemplate.update(
-				"INSERT INTO Compras(id_Usuario, id_Producto, numeroUnidades, fechaDeCompra) VALUES(?,?,?,NOW())", compra.getId_Usuario(), compra.getId_Producto(), compra.getNumeroUnidades());
+		return jdbcTemplate.update("INSERT INTO Compras(id_Usuario, fechaDeCompra) VALUES(?,NOW())",
+				compra.getId_Usuario());
+	}
+	
+	@Override
+	public int saveProductosCompra(int id_Compra, int id_Producto, int  numeroUnidades) {
+		return jdbcTemplate.update("INSERT INTO ProductosCompra VALUES(?,?,?)",
+				id_Compra, id_Producto, numeroUnidades);
 	}
 
 	@Override
@@ -25,7 +31,15 @@ public class ComprasJDBC implements ComprasDao{
 
 	@Override
 	public List<Compras> findAll(int id) {
-		return jdbcTemplate.query("SELECT * FROM Compras Where id_Usuario  = " + id, (rs, rowNum) -> new Compras(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getInt("id_Producto"), rs.getInt("numeroUnidades"), rs.getString("fechaDeCompra")));
+		return jdbcTemplate.query("SELECT * FROM Compras Where id_Usuario  = " + id, (rs,
+				rowNum) -> new Compras(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getString("fechaDeCompra")));
 	}
 
+	@Override
+	public Compras findIdCompra() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

@@ -24,7 +24,7 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	ComprasDao comprasdao;
 
 	@Override
-	public List<Producto> findEight(){
+	public List<Producto> findEight() {
 		return productosdao.findEight();
 	}
 
@@ -65,7 +65,7 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public List<Usuario> findUsuarioById(int id) {
+	public Usuario findUsuarioById(int id) {
 		// TODO Auto-generated method stub
 		return usuariodao.findById(id);
 	}
@@ -92,5 +92,11 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	public List<Compras> getCompras(int id) {
 		// TODO Auto-generated method stub
 		return comprasdao.findAll(id);
+	}
+
+	@Override
+	public int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades) {
+		// TODO Auto-generated method stub
+		return comprasdao.saveProductosCompra(id_Compra, id_Producto, numeroUnidades);
 	}
 }

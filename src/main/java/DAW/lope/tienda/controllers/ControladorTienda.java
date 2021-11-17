@@ -2,7 +2,9 @@ package DAW.lope.tienda.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import DAW.lope.tienda.modelo.Carrito;
+import DAW.lope.tienda.modelo.Compras;
 import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
@@ -282,8 +286,8 @@ public class ControladorTienda {
 	public String perfilUsuarios_get(Model modelo, @PathVariable int id_Usuario,  HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		List<Usuario> usuario = servicio.findUsuarioById(id_Usuario);
-		modelo.addAttribute("usuarios", usuario);
+		Usuario usuario = servicio.findUsuarioById(id_Usuario);
+		modelo.addAttribute("usuario", usuario);
 		
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
@@ -311,12 +315,13 @@ public class ControladorTienda {
 	}
 	
 	// Método comprar un producto
-	@PostMapping(value = "/comprar/producto/{id_Producto}")
-	public String comprar_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
-
+	@PostMapping(value = "/comprar/producto")
+	public String comprar_get(Model modelo, HttpSession session) {
+		
 		// Comprobar usuario
 		String nombre = (String) session.getAttribute("user");
-
+		String contrasenia = (String) session.getAttribute("contrasenia");
+		
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -325,9 +330,28 @@ public class ControladorTienda {
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
+			
+			//Obtener el id_Usuario para la compra
+			Usuario usuario = servicio.findByName(nombre, contrasenia);
+			
+			//Obtener el carrito de la compra de session
+			@SuppressWarnings("unchecked")
+			List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
+			
+			for(int i = 0; i < carrito.size(); i++) {
+				Carrito carrito2 = carrito.get(i);
+				servicio.saveProductosCompra(1, carrito2.getId_Producto(), carrito2.getNumeroUnidades());
+				// Guardar cada producto el la base de datos
+				
+			}
+			
+			Compras compra = new Compras();
+			compra.setId_Usuario(usuario.getId_Usuario());
+			
+			//Guardar la compra
+			servicio.saveCompras(compra);
 			return "redirect:/compra/miscompras";
 		}
-
 	}
 
 	// Método guardar un producto en session para el Carrito

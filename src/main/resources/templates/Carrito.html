@@ -68,16 +68,14 @@
 				<td scope="row" th:text="${compra.id_Producto}" />
 				<td th:text="${compra.nombreProducto}"/> 
 				<td th:text="${compra.numeroUnidades}"/>
-				<td> 
-					<form th:action="@{/comprar/producto/{id}(id=${compra.id_Producto})}" method="POST">
-						<input class="btn btn-success my-2 my-sm-0" type="submit" value="Comprar">
-					</form>
-				</td>
+				<td> </td>
 			</tr>
 		</tbody>
 	</table>
 	
-	
+	<form th:action="@{/comprar/producto}" method="POST">
+		<input class="btn btn-success my-2 my-sm-0" type="submit" value="Comprar">
+	</form>
 </body>
 
 </html>
