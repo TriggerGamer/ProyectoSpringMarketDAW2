@@ -66,7 +66,7 @@
 				<td th:text="${compra.fechaDePedido}"/>
 				<td> 
 					<form th:action="@{/compra/devolver/{id}(id=${compra.id_Compra})}" method="POST">
-							<a th:href="@{/compra/miscompras}"><button>Devolver</button> </a>
+							<button type="submit">Devolver</button>
 					</form>
 				</td>
 			</tr>

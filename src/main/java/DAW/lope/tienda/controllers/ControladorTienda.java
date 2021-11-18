@@ -416,9 +416,12 @@ public class ControladorTienda {
 	}
 	
 	// Método para devolver las compras hechas
-	@GetMapping(value = "/compra/devolver/{idCompra}")
+	@PostMapping(value = "/compra/devolver/{id_Compra}")
 	public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
 
+		servicio.deleteProductoById(id_Compra);
+		servicio.deleteCompra(id_Compra);
+		
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
 		String contrasenia = (String) session.getAttribute("contrasenia");

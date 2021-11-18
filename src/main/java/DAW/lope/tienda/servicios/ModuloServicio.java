@@ -16,6 +16,8 @@ public interface ModuloServicio {
 	int saveProductosCompra(int id_Compra, int id_Producto, int  numeroUnidades);
 
 	int deleteProductoById(int id);
+	
+	int deleteProductosCompras(int id);
 
 	int deleteCompra(int id);
 
@@ -32,4 +34,6 @@ public interface ModuloServicio {
 	Usuario login(String nombre, String contrasenia);
 	
 	List<Compra> findComprasUsuario(int id);
+	
+	
 }
