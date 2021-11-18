@@ -30,4 +30,6 @@ public interface ModuloServicio {
 	Compra getCompras(int id);
 
 	Usuario login(String nombre, String contrasenia);
+	
+	List<Compra> findComprasUsuario(int id);
 }

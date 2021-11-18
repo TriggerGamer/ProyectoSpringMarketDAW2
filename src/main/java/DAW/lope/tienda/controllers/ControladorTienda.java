@@ -383,11 +383,16 @@ public class ControladorTienda {
 	@GetMapping(value = "/compra/miscompras")
 	public String listarcompra_get(Model modelo, HttpSession session) {
 		
-
 		// session Usuarios
-		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
+				String nombre = (String) session.getAttribute("user");
+				String contrasenia = (String) session.getAttribute("contrasenia");
+				int id = (int) session.getAttribute("id_Usuario");
+				
+		//Obtener las compras
 
+		List<Compra> compra = servicio.findComprasUsuario(id);
+		 modelo.addAttribute("compras", compra);
+		
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);

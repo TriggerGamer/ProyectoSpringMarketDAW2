@@ -100,5 +100,11 @@ public class ModuloServicioTemplate implements ModuloServicio {
 		// TODO Auto-generated method stub
 		return comprasdao.saveProductosCompra(id_Compra, id_Producto, numeroUnidades);
 	}
+
+	@Override
+	public List<Compra> findComprasUsuario(int id) {
+		// TODO Auto-generated method stub
+		return comprasdao.findAll(id);
+	}
 	
 }
