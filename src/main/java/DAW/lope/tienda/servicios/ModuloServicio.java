@@ -2,7 +2,7 @@ package DAW.lope.tienda.servicios;
 
 import java.util.List;
 
-import DAW.lope.tienda.modelo.Compras;
+import DAW.lope.tienda.modelo.Compra;
 import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.Usuario;
 
@@ -11,7 +11,7 @@ public interface ModuloServicio {
 
 	int saveUsuarios(Usuario usuario);
 
-	int saveCompras(Compras compra);
+	int saveCompras(int id_Usuario);
 	
 	int saveProductosCompra(int id_Compra, int id_Producto, int  numeroUnidades);
 
@@ -27,7 +27,7 @@ public interface ModuloServicio {
 
 	List<Producto> getProductoByName(String name);
 
-	List<Compras> getCompras(int id);
+	Compra getCompras(int id);
 
 	Usuario login(String nombre, String contrasenia);
 }

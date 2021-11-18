@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.mysql.cj.Session;
 
 import DAW.lope.tienda.modelo.Carrito;
-import DAW.lope.tienda.modelo.Compras;
+import DAW.lope.tienda.modelo.Compra;
 import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.servicios.ModuloServicioTemplate;
@@ -330,14 +330,10 @@ public class ControladorTienda {
 			return "redirect:/usuario/login";
 		} else {
 			
-			
-			Compras compra = new Compras();
-			compra.setId_Usuario(id_Usuario);
-			
 			//Guardar la compra
-			servicio.saveCompras(compra);
+			servicio.saveCompras(id_Usuario);
 			
-			List<Compras> compra2 = servicio.getCompras(id_Usuario);
+			Compra compra = servicio.getCompras(id_Usuario);
 			
 			//Obtener el carrito de la compra de session
 			@SuppressWarnings("unchecked")
@@ -345,9 +341,9 @@ public class ControladorTienda {
 			
 			for(int i = 0; i < carrito.size(); i++) {
 				Carrito carrito2 = carrito.get(i);
-				servicio.saveProductosCompra(1, carrito2.getId_Producto(), carrito2.getNumeroUnidades());
-				// Guardar cada producto el la base de datos
 				
+				// Guardar cada producto el la base de datos
+				servicio.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(), carrito2.getNumeroUnidades());
 			}
 			
 			return "redirect:/compra/miscompras";

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import DAW.lope.tienda.modelo.Compras;
+import DAW.lope.tienda.modelo.Compra;
 import DAW.lope.tienda.modelo.ComprasDao;
 import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.ProductosDao;
@@ -71,8 +71,10 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public int saveCompras(Compras compra) {
+	public int saveCompras(int id_Usuario) {
 		// TODO Auto-generated method stub
+		Compra compra = new Compra();
+		compra.setId_Usuario(id_Usuario);
 		return comprasdao.save(compra);
 	}
 
@@ -83,9 +85,14 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public List<Compras> getCompras(int id) {
-		// TODO Auto-generated method stub
-		return comprasdao.findAll(id);
+	public Compra getCompras(int id) {
+		Compra compra = new Compra();
+		
+		List<Compra> compras = comprasdao.findAll(id);
+		
+		compra = compras.get(0);
+		
+		return compra;
 	}
 
 	@Override
@@ -93,4 +100,5 @@ public class ModuloServicioTemplate implements ModuloServicio {
 		// TODO Auto-generated method stub
 		return comprasdao.saveProductosCompra(id_Compra, id_Producto, numeroUnidades);
 	}
+	
 }

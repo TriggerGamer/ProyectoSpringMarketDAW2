@@ -13,8 +13,8 @@ public class ComprasJDBC implements ComprasDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public int save(Compras compra) {
-		return jdbcTemplate.update("INSERT INTO Compras(id_Usuario, fechaDeCompra) VALUES(?,NOW())",
+	public int save(Compra compra) {
+		return jdbcTemplate.update("INSERT INTO Compra(id_Usuario, fechaDeCompra) VALUES(?,NOW())",
 				compra.getId_Usuario());
 	}
 	
@@ -26,17 +26,17 @@ public class ComprasJDBC implements ComprasDao {
 
 	@Override
 	public int deleteById(int id) {
-		return jdbcTemplate.update("DELETE FROM Compras WHERE id_Compra = " + id);
+		return jdbcTemplate.update("DELETE FROM Compra WHERE id_Compra = " + id);
 	}
 
 	@Override
-	public List<Compras> findAll(int id) {
-		return jdbcTemplate.query("SELECT * FROM Compras Where id_Usuario  = " + id + " ORDER BY id_Compra DESC", (rs,
-				rowNum) -> new Compras(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getString("fechaDeCompra")));
+	public List<Compra> findAll(int id) {
+		return jdbcTemplate.query("SELECT * FROM Compra Where id_Usuario  = " + id + " ORDER BY id_Compra DESC", (rs,
+				rowNum) -> new Compra(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getString("fechaDeCompra")));
 	}
 
 	@Override
-	public Compras findIdCompra() {
+	public Compra findIdCompra() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,20 +1,20 @@
 package DAW.lope.tienda.modelo;
 
-public class Compras {
+public class Compra {
 	private int id_Compra;
 	private int id_Usuario;
 	private String fechaDePedido;
 
 	
-	public Compras (){}
+	public Compra (){}
 	
-	public Compras (int id_Compra, int id_Usuario, String fechaDePedido) {
+	public Compra (int id_Compra, int id_Usuario, String fechaDePedido) {
 		this.id_Compra = id_Compra;
 		this.id_Usuario = id_Usuario;
 		this.fechaDePedido = fechaDePedido;
 	}
 	
-	public Compras(int id_Compra) {
+	public Compra(int id_Compra) {
 		this.id_Compra = id_Compra;
 	}
 	
