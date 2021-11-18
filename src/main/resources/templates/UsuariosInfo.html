@@ -35,7 +35,7 @@
 						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
 					</div>
 					<div th:unless="${usuario1 != usuario2}">
-					 	<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white"> Perfil </a> 
+					 	<a th:href="@{/usuario/perfil/{id}(id=${usuarios})}" class="btn btn-outline-info bg-white"> Perfil </a> 
 					 	<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
 					</div>
 						<a th:href="@{/carrito/listar}"><div class="carrito"></div></a>	

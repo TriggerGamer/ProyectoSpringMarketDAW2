@@ -31,7 +31,7 @@ public class ComprasJDBC implements ComprasDao {
 
 	@Override
 	public List<Compras> findAll(int id) {
-		return jdbcTemplate.query("SELECT * FROM Compras Where id_Usuario  = " + id, (rs,
+		return jdbcTemplate.query("SELECT * FROM Compras Where id_Usuario  = " + id + " ORDER BY id_Compra DESC", (rs,
 				rowNum) -> new Compras(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getString("fechaDeCompra")));
 	}
 

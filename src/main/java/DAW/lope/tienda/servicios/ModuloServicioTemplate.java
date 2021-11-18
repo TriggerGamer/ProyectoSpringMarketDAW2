@@ -71,12 +71,6 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	}
 
 	@Override
-	public Usuario findByName(String nombre, String contrasenia) {
-		// TODO Auto-generated method stub
-		return usuariodao.findByName(nombre, contrasenia);
-	}
-
-	@Override
 	public int saveCompras(Compras compra) {
 		// TODO Auto-generated method stub
 		return comprasdao.save(compra);

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mysql.cj.Session;
+
 import DAW.lope.tienda.modelo.Carrito;
 import DAW.lope.tienda.modelo.Compras;
 import DAW.lope.tienda.modelo.Producto;
@@ -48,7 +50,7 @@ public class ControladorTienda {
 		}
 		
 		//Usuarios
-		Usuario usuario = servicio.findByName(nombre, contrasenia);
+		Usuario usuario = servicio.login(nombre, contrasenia);
 		if(usuario == null) {
 			
 		}
@@ -82,7 +84,7 @@ public class ControladorTienda {
 		}
 
 		// Usuarios
-		Usuario usuario = servicio.findByName(nombre, contrasenia);
+		Usuario usuario = servicio.login(nombre, contrasenia);
 		if (usuario == null) {
 
 		} else {
@@ -111,7 +113,7 @@ public class ControladorTienda {
 		}
 		
 		// Usuarios
-		Usuario usuario = servicio.findByName(nombre, contrasenia);
+		Usuario usuario = servicio.login(nombre, contrasenia);
 		if (usuario == null) {
 
 		} else {
@@ -162,7 +164,7 @@ public class ControladorTienda {
 		}
 
 		// Usuarios
-		Usuario usuario = servicio.findByName(nombre, contrasenia);
+		Usuario usuario = servicio.login(nombre, contrasenia);
 		if (usuario == null) {
 
 		} else {
@@ -196,7 +198,7 @@ public class ControladorTienda {
 		}
 
 		//Usuarios
-		Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+		Usuario usuario1 = servicio.login(nombre, contrasenia);
 		if(usuario1 == null) {
 			
 		}
@@ -261,6 +263,7 @@ public class ControladorTienda {
 		if (usuario == null) {
 			return	"redirect:/usuario/login";
 		}else {
+			session.setAttribute("id_Usuario", usuario.getId_Usuario());
 			session.setAttribute("user", usuario.getNombre());
 			session.setAttribute("contrasenia", usuario.getContrasenia());
 			session.setAttribute("carrito", null);
@@ -303,36 +306,38 @@ public class ControladorTienda {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+		Usuario usuario1 = servicio.login(nombre, contrasenia);
 		if (usuario1 == null) {
 
 		} else {
 			int id_usuario = usuario1.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
+			modelo.addAttribute("usuarios", id_usuario);
 		}
 
 		return "UsuariosInfo";
 	}
 	
 	// Método comprar un producto
-	@PostMapping(value = "/comprar/producto")
+	@PostMapping(value = "/compra")
 	public String comprar_get(Model modelo, HttpSession session) {
 		
 		// Comprobar usuario
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
+		String id = (String) session.getAttribute("id_Usuario");
+		int id_Usuario = Integer.parseInt(id);
 		
 		if (nombre == null) {
-			nombre = "f amigo";
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", "");
 			return "redirect:/usuario/login";
 		} else {
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", nombre);
 			
-			//Obtener el id_Usuario para la compra
-			Usuario usuario = servicio.findByName(nombre, contrasenia);
+			
+			Compras compra = new Compras();
+			compra.setId_Usuario(id_Usuario);
+			
+			//Guardar la compra
+			servicio.saveCompras(compra);
+			
+			List<Compras> compra2 = servicio.getCompras(id_Usuario);
 			
 			//Obtener el carrito de la compra de session
 			@SuppressWarnings("unchecked")
@@ -345,11 +350,6 @@ public class ControladorTienda {
 				
 			}
 			
-			Compras compra = new Compras();
-			compra.setId_Usuario(usuario.getId_Usuario());
-			
-			//Guardar la compra
-			servicio.saveCompras(compra);
 			return "redirect:/compra/miscompras";
 		}
 	}
@@ -402,7 +402,7 @@ public class ControladorTienda {
 		}
 		
 		// Usuarios
-		Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+		Usuario usuario1 = servicio.login(nombre, contrasenia);
 
 		if (usuario1 == null) {
 
@@ -432,7 +432,7 @@ public class ControladorTienda {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+		Usuario usuario1 = servicio.login(nombre, contrasenia);
 
 		if (usuario1 == null) {
 
@@ -462,7 +462,7 @@ public class ControladorTienda {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.findByName(nombre, contrasenia);
+		Usuario usuario1 = servicio.login(nombre, contrasenia);
 
 		if (usuario1 == null) {
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -80,32 +79,13 @@ public class UsuariosJdbc implements UsuariosDao {
 		// TODO Auto-generated method stub
 		try {
 			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre LIKE ? AND contrasenia = ?",
-					(rs, rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("contrasenia")), nombre,
+					(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("contrasenia")), nombre,
 					contrasenia);
 		} catch (EmptyResultDataAccessException e) {
 			// TODO: handle exception
 			return null;
 		}
 
-	}
-
-	@Override
-	public Usuario findByName(String nombre, String contrasenia) {
-		// TODO Auto-generated method stub
-		try {
-			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre LIKE ? AND contrasenia LIKE ?",
-					(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"),
-							rs.getString("apellidos"), rs.getString("contrasenia"), rs.getString("email"),
-							rs.getString("fechaNacimiento"), rs.getLong("numeroTarjeta"),
-							rs.getString("titularTarjeta"), rs.getInt("codigoSeguridad"),
-							rs.getString("direccionFacturacion")),
-					nombre, contrasenia);
-		} catch (EmptyResultDataAccessException e) {
-			// TODO: handle exception
-			return null;
-		} catch (IncorrectResultSizeDataAccessException e) {
-			return null;
-		}
 	}
 
 }

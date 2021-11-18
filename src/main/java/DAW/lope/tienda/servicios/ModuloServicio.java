@@ -29,7 +29,5 @@ public interface ModuloServicio {
 
 	List<Compras> getCompras(int id);
 
-	Usuario findByName(String nombre, String contrasenia);
-
 	Usuario login(String nombre, String contrasenia);
 }

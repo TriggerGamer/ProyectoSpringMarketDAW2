@@ -14,7 +14,8 @@ public class Usuario {
 	
 	public Usuario() {}
 	
-	public Usuario(String nombre, String contrasenia) {
+	public Usuario(int id_usuario, String nombre, String contrasenia) {
+		this.id_Usuario = id_usuario;
 		this.nombre = nombre;
 		this.contrasenia = contrasenia;
 	}
