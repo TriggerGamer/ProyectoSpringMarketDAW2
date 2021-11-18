@@ -53,6 +53,7 @@
 		<thead>
 			<tr class="table-info">
 				<th scope="col"> Identificador de la Compra </th>
+				<th scope="col"> Identificador de Usuario </th>
 				<th scope="col"> Fecha de compra </th>
 				<th scope="col"> Devolver </th>
 			</tr>
@@ -61,6 +62,7 @@
 		<tbody>
 			<tr class="table-info">
 				<td scope="row" th:text="${compra.id_Compra}" />
+				<td scope="row" th:text="${compra.id_Usuario}" />
 				<td th:text="${compra.fechaDePedido}"/>
 				<td> 
 					<form th:action="@{/compra/devolver/{id}(id=${compra.id_Compra})}" method="POST">
