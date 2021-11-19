@@ -68,10 +68,11 @@
 			</tr>
 		</tbody>
 	</table>
-	
+	<div th:if="${vacio != novacio}">
 	<form th:action="@{/compra}" method="POST">
 		<input class="btn btn-success my-2 my-sm-0" type="submit" value="Comprar">
 	</form>
+	</div>
 </body>
 
 </html>

@@ -324,7 +324,6 @@ public class ControladorTienda {
 		// Comprobar usuario
 		String nombre = (String) session.getAttribute("user");
 		int id_Usuario = (int) session.getAttribute("id_Usuario");
-		//int id_Usuario = Integer.parseInt(id);
 		
 		if (nombre == null) {
 			return "redirect:/usuario/login";
@@ -345,7 +344,8 @@ public class ControladorTienda {
 				// Guardar cada producto el la base de datos
 				servicio.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(), carrito2.getNumeroUnidades());
 			}
-			
+			session.setAttribute("carrito", null);
+			session.setAttribute("vacio", null);
 			return "redirect:/compra/miscompras";
 		}
 	}
@@ -375,6 +375,7 @@ public class ControladorTienda {
 		}
 		carrito.add(compra);
 		session.setAttribute("carrito", carrito);
+		session.setAttribute("vacio", "Lleno");
 
 		return "redirect:/carrito/listar";
 	}
@@ -419,7 +420,7 @@ public class ControladorTienda {
 	@PostMapping(value = "/compra/devolver/{id_Compra}")
 	public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
 
-		servicio.deleteProductoById(id_Compra);
+		servicio.deleteProductosCompras(id_Compra);
 		servicio.deleteCompra(id_Compra);
 		
 		// session Usuarios
@@ -474,14 +475,20 @@ public class ControladorTienda {
 			int id_usuario = usuario1.getId_Usuario();
 			modelo.addAttribute("usuario", id_usuario);
 		}
-
+		
+		// Coger los atributos del carrito en session
 		@SuppressWarnings("unchecked")
 		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
 		if (carrito == null) {
 			carrito = new ArrayList<Carrito>();
 		}
 		modelo.addAttribute("carrito", carrito);
-		// Coger los atributos del carrito en session
+		
+		String vacio = (String) session.getAttribute("vacio");
+		
+		modelo.addAttribute("vacio", vacio);
+		modelo.addAttribute("novacio", null);
+		
 
 		return "Carrito";
 	}
