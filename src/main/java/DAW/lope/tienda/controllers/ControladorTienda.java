@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.mysql.cj.Session;
-
 import DAW.lope.tienda.modelo.Carrito;
 import DAW.lope.tienda.modelo.Compra;
 import DAW.lope.tienda.modelo.Producto;
@@ -23,7 +20,8 @@ import DAW.lope.tienda.servicios.ModuloServicioTemplate;
 
 @Controller
 public class ControladorTienda {
-
+	
+	//Conexión a los Servicios
 	@Autowired
 	private ModuloServicioTemplate servicio;
 	
@@ -360,10 +358,10 @@ public class ControladorTienda {
 		
 		int numeroPr = Integer.parseInt(numeroProductos);
 		if(numeroProductos == null) {
-			numeroPr = 0;
+			numeroPr = 1;
 		}
 		
-		Carrito compra = new Carrito(producto.getId_Producto(), producto.getTituloProducto(), numeroPr);
+		Carrito objeto = new Carrito(producto.getId_Producto(), producto.getTituloProducto(), numeroPr);
 
 		// Guardar los atributos del producto en session
 		@SuppressWarnings("unchecked")
@@ -373,10 +371,22 @@ public class ControladorTienda {
 			carrito = new ArrayList<Carrito>();
 			session.setAttribute("carrito", carrito);
 		}
-		carrito.add(compra);
+		else {
+			for(int i = 0; i < carrito.size(); i++) {
+				Carrito carrito2 = carrito.get(i);
+				
+				if(carrito2.getId_Producto() == objeto.getId_Producto()) {
+					objeto.setNumeroUnidades((carrito2.getNumeroUnidades() + objeto.getNumeroUnidades()));
+					carrito.remove(i);
+					break;
+				}
+			}
+		}
+		
+		carrito.add(objeto);
 		session.setAttribute("carrito", carrito);
 		session.setAttribute("vacio", "Lleno");
-
+		
 		return "redirect:/carrito/listar";
 	}
 
@@ -420,7 +430,6 @@ public class ControladorTienda {
 	@PostMapping(value = "/compra/devolver/{id_Compra}")
 	public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
 
-		servicio.deleteProductosCompras(id_Compra);
 		servicio.deleteCompra(id_Compra);
 		
 		// session Usuarios
@@ -446,7 +455,7 @@ public class ControladorTienda {
 			modelo.addAttribute("usuario", id_usuario);
 		}
 
-		return "ListaCompras";
+		return "redirect:/compra/miscompras";
 	}
 
 	// Métodos para ver el Carrito

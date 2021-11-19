@@ -81,15 +81,10 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	@Override
 	public int deleteCompra(int id) {
 		// TODO Auto-generated method stub
-		return comprasdao.deleteById(id);
+		comprasdao.deleteProductosCompraById(id);
+		return comprasdao.deleteCompraById(id);
 	}
 	
-	@Override
-	public int deleteProductosCompras(int id) {
-		// TODO Auto-generated method stub
-		return comprasdao.deleteProductosCompraById(id);
-	}
-
 	@Override
 	public Compra getCompras(int id) {
 		Compra compra = new Compra();

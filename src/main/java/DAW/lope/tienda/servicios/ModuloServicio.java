@@ -17,8 +17,6 @@ public interface ModuloServicio {
 
 	int deleteProductoById(int id);
 	
-	int deleteProductosCompras(int id);
-
 	int deleteCompra(int id);
 
 	Producto findProductoById(int id);

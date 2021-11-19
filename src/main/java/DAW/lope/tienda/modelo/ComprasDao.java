@@ -7,11 +7,9 @@ public interface ComprasDao {
 
 	int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades);
 
-	int deleteById(int id);
+	int deleteCompraById(int id);
 
 	int deleteProductosCompraById(int id);
 
 	List<Compra> findAll(int id);
-
-	Compra findIdCompra();
 }

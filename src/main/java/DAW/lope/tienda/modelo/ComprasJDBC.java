@@ -25,7 +25,7 @@ public class ComprasJDBC implements ComprasDao {
 	}
 
 	@Override
-	public int deleteById(int id) {
+	public int deleteCompraById(int id) {
 		return jdbcTemplate.update("DELETE FROM Compras WHERE id_Compra = " + id);
 	}
 	
@@ -40,11 +40,5 @@ public class ComprasJDBC implements ComprasDao {
 				rowNum) -> new Compra(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getString("fechaDeCompra")));
 	}
 
-	@Override
-	public Compra findIdCompra() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	
 }
