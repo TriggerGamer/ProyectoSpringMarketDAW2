@@ -49,7 +49,7 @@
 		</nav>
 	</header>
 	<br>
-		<table th:each="compra: ${carrito}" class="table">
+		<table th:each="compra: ${compras}" class="table">
 		<thead>
 			<tr class="table-info">
 				<th scope="col"> Identificador de la Compra </th>
@@ -66,7 +66,7 @@
 				<td th:text="${compra.fechaDePedido}"/>
 				<td> 
 					<form th:action="@{/compra/devolver/{id}(id=${compra.id_Compra})}" method="POST">
-							<a th:href="@{/compra/miscompras}"><button>Devolver</button> </a>
+							<button type="submit">Devolver</button>
 					</form>
 				</td>
 			</tr>

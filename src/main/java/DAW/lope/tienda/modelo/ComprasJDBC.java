@@ -28,6 +28,11 @@ public class ComprasJDBC implements ComprasDao {
 	public int deleteById(int id) {
 		return jdbcTemplate.update("DELETE FROM Compras WHERE id_Compra = " + id);
 	}
+	
+	@Override
+	public int deleteProductosCompraById(int id) {
+		return jdbcTemplate.update("DELETE FROM ProductosCompras WHERE id_Compra = " + id);
+	}
 
 	@Override
 	public List<Compra> findAll(int id) {

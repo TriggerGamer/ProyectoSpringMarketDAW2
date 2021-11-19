@@ -9,6 +9,8 @@ public interface ComprasDao {
 
 	int deleteById(int id);
 
+	int deleteProductosCompraById(int id);
+
 	List<Compra> findAll(int id);
 
 	Compra findIdCompra();

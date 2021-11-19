@@ -48,9 +48,7 @@
 	</nav>
 
 	<br>
-	
-	<h1>Estas en tu carrito madafuker</h1>
-	
+		
 	<br>
 	
 	<table th:each="compra: ${carrito}" class="table">
@@ -59,7 +57,6 @@
 				<th scope="col"> Identificador de Producto </th>
 				<th scope="col"> Nombre del producto </th>
 				<th scope="col"> Número de Unidades </th>
-				<th scope="col"> Comprar </th>
 			</tr>
 		</thead>
 		
@@ -68,7 +65,6 @@
 				<td scope="row" th:text="${compra.id_Producto}" />
 				<td th:text="${compra.nombreProducto}"/> 
 				<td th:text="${compra.numeroUnidades}"/>
-				<td> </td>
 			</tr>
 		</tbody>
 	</table>

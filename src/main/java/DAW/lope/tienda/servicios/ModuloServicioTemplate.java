@@ -83,6 +83,12 @@ public class ModuloServicioTemplate implements ModuloServicio {
 		// TODO Auto-generated method stub
 		return comprasdao.deleteById(id);
 	}
+	
+	@Override
+	public int deleteProductosCompras(int id) {
+		// TODO Auto-generated method stub
+		return comprasdao.deleteProductosCompraById(id);
+	}
 
 	@Override
 	public Compra getCompras(int id) {
@@ -99,6 +105,12 @@ public class ModuloServicioTemplate implements ModuloServicio {
 	public int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades) {
 		// TODO Auto-generated method stub
 		return comprasdao.saveProductosCompra(id_Compra, id_Producto, numeroUnidades);
+	}
+
+	@Override
+	public List<Compra> findComprasUsuario(int id) {
+		// TODO Auto-generated method stub
+		return comprasdao.findAll(id);
 	}
 	
 }
