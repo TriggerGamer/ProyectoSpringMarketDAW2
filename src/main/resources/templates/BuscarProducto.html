@@ -66,12 +66,12 @@
 
 		<tbody>
 			<tr class="table-info">
-				<td scope="row" th:text="${producto.id_Producto}" />
-				<td scope="row" th:text="${producto.tituloProducto}" />
-				<td scope="row" th:text="${producto.descripcionProducto}" />
-				<td scope="row" th:text="${producto.precio}" />
-				<td scope="row" th:text="${producto.descuento}" />
-				<td>
+				<td class="tablaCompras" scope="row" th:text="${producto.id_Producto}" />
+				<td class="tablaCompras" scope="row" th:text="${producto.tituloProducto}" />
+				<td class="tablaCompras" scope="row" th:text="${producto.descripcionProducto}" />
+				<td class="tablaCompras" scope="row" th:text="${producto.precio}" />
+				<td class="tablaCompras" scope="row" th:text="${producto.descuento}" />
+				<td class="tablaCompras">
 					<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
 						<input type="number" name="numeroProductos" placeholder="Numero de productos que desea"
 							size="500">

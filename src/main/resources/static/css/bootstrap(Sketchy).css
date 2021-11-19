@@ -1925,7 +1925,9 @@ progress {
     --bs-gutter-y: 3rem;
   }
 }
-
+.tablaCompras{
+	width:16.5%;
+}
 .table {
   --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
@@ -1951,6 +1953,7 @@ progress {
 
 .table > tbody {
   vertical-align: inherit;
+  text-align: center;
 }
 
 .table > thead {
