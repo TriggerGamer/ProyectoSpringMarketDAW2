@@ -323,8 +323,8 @@ public class ControladorTienda {
 		
 		// Comprobar usuario
 		String nombre = (String) session.getAttribute("user");
-		String id = (String) session.getAttribute("id_Usuario");
-		int id_Usuario = Integer.parseInt(id);
+		int id_Usuario = (int) session.getAttribute("id_Usuario");
+		//int id_Usuario = Integer.parseInt(id);
 		
 		if (nombre == null) {
 			return "redirect:/usuario/login";
