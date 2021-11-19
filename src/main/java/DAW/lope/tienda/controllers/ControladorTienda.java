@@ -211,7 +211,7 @@ public class ControladorTienda {
 	public String registrarUsuario_get(HttpSession session, Model modelo) {
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
+		
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -257,11 +257,10 @@ public class ControladorTienda {
 		if (nombre == null && primeravez != null) {
 			modelo.addAttribute("error", "Usuario incorrecto");
 		}
+		
 		session.setAttribute("1vez", "hola");
+		
 		// Session Usuarios
-
-		String contrasenia = (String) session.getAttribute("contrasenia");
-
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
