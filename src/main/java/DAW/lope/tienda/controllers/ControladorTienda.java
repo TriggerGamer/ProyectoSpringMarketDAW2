@@ -24,45 +24,44 @@ public class ControladorTienda {
 	//Conexión a los Servicios
 	@Autowired
 	private ModuloServicioTemplate servicio;
-	
+
 	// Métodos para la página principal
 	@GetMapping(value = "/index")
 	public String index_get(Model modelo, HttpSession session) {
-		
-		//Producto
+
+		// Producto
 		List<Producto> Producto = servicio.findEight();
 		modelo.addAttribute("Productos", Producto);
-		
-		//session Usuarios
+
+		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
 		String contrasenia = (String) session.getAttribute("contrasenia");
-		
-		if(nombre == null) {
+
+		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", "");
-		}
-		else {
+		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-		
-		//Usuarios
+
+		// Usuarios
 		Usuario usuario = servicio.login(nombre, contrasenia);
-		if(usuario == null) {
-			
-		}
-		else {
+		if (usuario == null) {
+
+		} else {
 			int id_usuario = usuario.getId_Usuario();
 			modelo.addAttribute("id_usuario", id_usuario);
 		}
-		
+
 		return "Index";
 	}
 
 	// Métodos para buscar un producto
 	@GetMapping(value = "/producto/buscar")
-	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo, HttpSession session) {
+	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo,
+			HttpSession session) {
 
 		// Declarar la lista para obtener los datos
 		List<Producto> producto = servicio.getProductoByName(busqueda);
@@ -89,13 +88,13 @@ public class ControladorTienda {
 			int id_usuario = usuario.getId_Usuario();
 			modelo.addAttribute("usuario", id_usuario);
 		}
-		
+
 		return "buscarProducto";
 	}
 
 	// Métodos para crear un producto
 	@GetMapping(value = "/crear")
-	public String crearProducto_get(HttpSession session,  Model modelo) {
+	public String crearProducto_get(HttpSession session, Model modelo) {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
@@ -109,7 +108,7 @@ public class ControladorTienda {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-		
+
 		// Usuarios
 		Usuario usuario = servicio.login(nombre, contrasenia);
 		if (usuario == null) {
@@ -147,7 +146,7 @@ public class ControladorTienda {
 		// Declarar la lista para obtener los datos
 		Producto producto = servicio.findProductoById(id_Producto);
 		modelo.addAttribute("producto", producto);
-		
+
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
 		String contrasenia = (String) session.getAttribute("contrasenia");
@@ -172,7 +171,7 @@ public class ControladorTienda {
 
 		return "ProductosInfo";
 	}
-	
+
 	// Métodos para Borrar producto
 	@GetMapping(value = "/producto/borrar/{id_Producto}")
 	public String borrar_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
@@ -181,7 +180,7 @@ public class ControladorTienda {
 		servicio.deleteProductoById(id_Producto);
 		String borrar = "Borrado Correctamente";
 		modelo.addAttribute("borrar", borrar);
-		
+
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
 		String contrasenia = (String) session.getAttribute("contrasenia");
@@ -195,12 +194,11 @@ public class ControladorTienda {
 			modelo.addAttribute("usuario2", nombre);
 		}
 
-		//Usuarios
+		// Usuarios
 		Usuario usuario1 = servicio.login(nombre, contrasenia);
-		if(usuario1 == null) {
-			
-		}
-		else {
+		if (usuario1 == null) {
+
+		} else {
 			int id_usuario = usuario1.getId_Usuario();
 			modelo.addAttribute("usuario", id_usuario);
 		}
@@ -210,7 +208,19 @@ public class ControladorTienda {
 
 	// Metodos para registro de usuarios
 	@GetMapping(value = "/usuario/signup")
-	public String registrarUsuario_get() {
+	public String registrarUsuario_get(HttpSession session, Model modelo) {
+		// Session Usuarios
+		String nombre = (String) session.getAttribute("user");
+		String contrasenia = (String) session.getAttribute("contrasenia");
+
+		if (nombre == null) {
+			nombre = "f amigo";
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", "");
+		} else {
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", nombre);
+		}
 
 		return "registro";
 	}
@@ -237,30 +247,42 @@ public class ControladorTienda {
 
 		return "redirect:/index";
 	}
-	
+
 	// Metodos para iniciar sesion
 	@GetMapping(value = "/usuario/login")
 	public String loginUsuario_get(Model modelo, HttpSession session) {
-		
+		String primeravez = (String) session.getAttribute("1vez");
+
 		String nombre = (String) session.getAttribute("user");
-		String primeravez= (String) session.getAttribute("1vez");
-		
-		if(nombre == null && primeravez != null) {
+		if (nombre == null && primeravez != null) {
 			modelo.addAttribute("error", "Usuario incorrecto");
 		}
 		session.setAttribute("1vez", "hola");
-		
+		// Session Usuarios
+
+		String contrasenia = (String) session.getAttribute("contrasenia");
+
+		if (nombre == null) {
+			nombre = "f amigo";
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", "");
+		} else {
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", nombre);
+		}
+
 		return "acceso";
 	}
 
 	@PostMapping(value = "/usuario/login")
-	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia, HttpSession session, Model modelo) {
+	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia,
+			HttpSession session, Model modelo) {
 
 		Usuario usuario = servicio.login(nombreusuario, contrasenia);
-		
+
 		if (usuario == null) {
-			return	"redirect:/usuario/login";
-		}else {
+			return "redirect:/usuario/login";
+		} else {
 			session.setAttribute("id_Usuario", usuario.getId_Usuario());
 			session.setAttribute("user", usuario.getNombre());
 			session.setAttribute("contrasenia", usuario.getContrasenia());
@@ -284,12 +306,12 @@ public class ControladorTienda {
 
 	// Métodos para ver la info de un usuario
 	@GetMapping(value = "/usuario/perfil/{id_Usuario}")
-	public String perfilUsuarios_get(Model modelo, @PathVariable int id_Usuario,  HttpSession session) {
+	public String perfilUsuarios_get(Model modelo, @PathVariable int id_Usuario, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
 		Usuario usuario = servicio.findUsuarioById(id_Usuario);
 		modelo.addAttribute("usuario", usuario);
-		
+
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
 		String contrasenia = (String) session.getAttribute("contrasenia");
@@ -314,33 +336,34 @@ public class ControladorTienda {
 
 		return "UsuariosInfo";
 	}
-	
+
 	// Método comprar un producto
 	@PostMapping(value = "/compra")
 	public String comprar_get(Model modelo, HttpSession session) {
-		
+
 		// Comprobar usuario
 		String nombre = (String) session.getAttribute("user");
 		int id_Usuario = (int) session.getAttribute("id_Usuario");
-		
+
 		if (nombre == null) {
 			return "redirect:/usuario/login";
 		} else {
-			
-			//Guardar la compra
+
+			// Guardar la compra
 			servicio.saveCompras(id_Usuario);
-			
+
 			Compra compra = servicio.getCompras(id_Usuario);
-			
-			//Obtener el carrito de la compra de session
+
+			// Obtener el carrito de la compra de session
 			@SuppressWarnings("unchecked")
 			List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
-			
-			for(int i = 0; i < carrito.size(); i++) {
+
+			for (int i = 0; i < carrito.size(); i++) {
 				Carrito carrito2 = carrito.get(i);
-				
+
 				// Guardar cada producto el la base de datos
-				servicio.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(), carrito2.getNumeroUnidades());
+				servicio.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(),
+						carrito2.getNumeroUnidades());
 			}
 			session.setAttribute("carrito", null);
 			session.setAttribute("vacio", null);
@@ -355,8 +378,9 @@ public class ControladorTienda {
 
 		// Obtener los datos del producto mediante el servicio
 		Producto producto = servicio.findProductoById(id_Producto);
-		
+
 		int numeroPr = Integer.parseInt(numeroProductos);
+
 		if(numeroProductos == null) {
 			numeroPr = 1;
 		}
@@ -393,17 +417,17 @@ public class ControladorTienda {
 	// Método para ver las compras hechas
 	@GetMapping(value = "/compra/miscompras")
 	public String listarcompra_get(Model modelo, HttpSession session) {
-		
+
 		// session Usuarios
-				String nombre = (String) session.getAttribute("user");
-				String contrasenia = (String) session.getAttribute("contrasenia");
-				int id = (int) session.getAttribute("id_Usuario");
-				
-		//Obtener las compras
+		String nombre = (String) session.getAttribute("user");
+		String contrasenia = (String) session.getAttribute("contrasenia");
+		int id = (int) session.getAttribute("id_Usuario");
+
+		// Obtener las compras
 
 		List<Compra> compra = servicio.findComprasUsuario(id);
-		 modelo.addAttribute("compras", compra);
-		
+		modelo.addAttribute("compras", compra);
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -412,7 +436,7 @@ public class ControladorTienda {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-		
+
 		// Usuarios
 		Usuario usuario1 = servicio.login(nombre, contrasenia);
 
@@ -425,13 +449,13 @@ public class ControladorTienda {
 
 		return "ListaCompras";
 	}
-	
+
 	// Método para devolver las compras hechas
 	@PostMapping(value = "/compra/devolver/{id_Compra}")
 	public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
 
 		servicio.deleteCompra(id_Compra);
-		
+
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
 		String contrasenia = (String) session.getAttribute("contrasenia");
@@ -484,7 +508,7 @@ public class ControladorTienda {
 			int id_usuario = usuario1.getId_Usuario();
 			modelo.addAttribute("usuario", id_usuario);
 		}
-		
+
 		// Coger los atributos del carrito en session
 		@SuppressWarnings("unchecked")
 		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
@@ -492,12 +516,11 @@ public class ControladorTienda {
 			carrito = new ArrayList<Carrito>();
 		}
 		modelo.addAttribute("carrito", carrito);
-		
+
 		String vacio = (String) session.getAttribute("vacio");
-		
+
 		modelo.addAttribute("vacio", vacio);
 		modelo.addAttribute("novacio", null);
-		
 
 		return "Carrito";
 	}

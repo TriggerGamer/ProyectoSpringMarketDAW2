@@ -10,8 +10,9 @@
 </head>
 
 <body>
-	<h1> Productos </h1>
-
+	<header>
+		<h1 class="center"> Productos </h1>
+	</header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav me-auto">
@@ -35,11 +36,14 @@
 						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
 					</div>
 					<div th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white">
-							Perfil </a>
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white">
+							Perfil
+						</a>
 						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/carrito/listar}">
+							<div th:if="${usuario1 == usuario2}" class="userLR carrito"> </div>
+						</a>
 					</div>
-						<a th:href="@{/carrito/listar}"><div class="carrito"></div></a>	
 				</div>
 
 			</div>
@@ -55,16 +59,16 @@
 	<div th:text="${producto.descuento}"> </div>
 
 	<div>
-			<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
-				<input type="number" name="numeroProductos" placeholder="Numero de productos que desea" size="500">
-				<input class="btn btn-success my-2 my-sm-0" type="submit" value="Añadir al carrito">
-			</form>
+		<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
+			<input type="number" name="numeroProductos" placeholder="Numero de productos que desea" size="500">
+			<input class="btn btn-success my-2 my-sm-0" type="submit" value="Añadir al carrito">
+		</form>
 	</div>
-	
+
 	<br>
-	
+
 	<a th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button> Borrar Producto </button> </a>
-	
+
 </body>
 
 </html>

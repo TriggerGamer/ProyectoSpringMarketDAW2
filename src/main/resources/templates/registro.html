@@ -12,7 +12,7 @@
 
 <body>
 	<header>
-		<h1> REGISTRO </h1>
+		<h1 class="center"> REGISTRO </h1>
 	</header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="collapse navbar-collapse" id="navbarColor01">
@@ -24,25 +24,29 @@
 					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
 				</li>
 			</ul>
-			
+
 			<div class="d-block">
-			
+
 				<form th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
 					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
 				</form>
-				<div class="userLR"> 
+				<div class="userLR">
 					<div th:if="${usuario1 != usuario2}">
 						<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
 						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
 					</div>
 					<div th:if="${usuario1 == usuario2}">
-					 	<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white"> Perfil </a> 
-					 	<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white">
+							Perfil
+						</a>
+						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/carrito/listar}">
+							<div th:if="${usuario1 == usuario2}" class="userLR carrito"> </div>
+						</a>
 					</div>
-					<a th:href="@{/carrito/listar}"><div class="carrito"></div></a>	
 				</div>
-					
+
 			</div>
 		</div>
 	</nav>
@@ -51,34 +55,37 @@
 		<div class="form-group">
 			<fieldset>
 				<legend>Datos personales</legend>
-				
+
 				<input type="text" name="nombreusuario" class="form-control" placeholder="Introduce tu nombre...">
 				<br>
-				<input type="text" name="apellidosusuario" class="form-control" placeholder="Introduce tus apellidos...">
+				<input type="text" name="apellidosusuario" class="form-control"
+					placeholder="Introduce tus apellidos...">
 				<br>
 				<input type="password" name="contrasenia" class="form-control" placeholder="Introduce tu contraseña...">
 				<br>
 				<input type="email" name="correo" class="form-control" placeholder="Introduce tu correo...">
 				<br>
-				<input type="date" name="fechanacimiento" class="form-control" placeholder="Introduce tu fecha de nacimiento..." required="required">
-			
+				<input type="date" name="fechanacimiento" class="form-control"
+					placeholder="Introduce tu fecha de nacimiento..." required="required">
+
 			</fieldset>
-			
+
 			<br>
-			
+
 			<fieldset>
 				<legend>Datos de pago</legend>
-		
+
 				<input type="number" name="numerotarjeta" class="form-control" placeholder="Número de tarjeta...">
 				<br>
 				<input type="text" name="titulartarjeta" class="form-control" placeholder="Titular de la tarjeta...">
 				<br>
 				<input type="number" name="codigoseguridad" class="form-control" placeholder="Codigo de seguridad...">
 				<br>
-				<input type="text" name="direccionfacturacion" class="form-control" placeholder="Dirección de facturación...">
+				<input type="text" name="direccionfacturacion" class="form-control"
+					placeholder="Dirección de facturación...">
 			</fieldset>
 		</div>
-		
+
 		<br>
 		<button type="submit" class="btn btn-primary btn-lg">Darse de alta</button>
 	</form>

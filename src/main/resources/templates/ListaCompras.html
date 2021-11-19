@@ -11,45 +11,49 @@
 
 <body>
 
-	<h1> Mis compras </h1>
-	
+
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav me-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/index"> INICIO </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
-					</li>
-				</ul>
+		<h1 class="center"> Mis compras </h1>
+	</header>
 
-				<div class="d-block">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link active" href="/index"> INICIO </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+				</li>
+			</ul>
 
-					<form th:action="@{/producto/buscar}" method="GET">
-						<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..."
-							size="30">
-						<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
-					</form>
-					<div class="userLR">
-						<div th:if="${usuario1 != usuario2}">
-							<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
-							<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
-						</div>
-						<div th:unless="${usuario1 != usuario2}">
-							<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white">
-								Perfil </a>
-							<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
-						</div>
-							<a th:href="@{/carrito/listar}"><div class="carrito"></div></a>
+			<div class="d-block">
+
+				<form th:action="@{/producto/buscar}" method="GET">
+					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
+					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
+				</form>
+				<div class="userLR">
+					<div th:if="${usuario1 != usuario2}">
+						<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
+						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+					</div>
+					<div th:if="${usuario1 == usuario2}">
+						<a th:href="@{/usuario/perfil/{id}(id=${usuario})}" class="btn btn-outline-info bg-white">
+							Perfil
+						</a>
+						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/carrito/listar}">
+							<div th:if="${usuario1 == usuario2}" class="userLR carrito"> </div>
+						</a>
 					</div>
 				</div>
+
 			</div>
-		</nav>
-	</header>
+		</div>
+	</nav>
 	<br>
-		<table th:each="compra: ${compras}" class="table">
+	<table th:each="compra: ${compras}" class="table">
 		<thead>
 			<tr class="table-info">
 				<th scope="col"> Identificador de la Compra </th>
@@ -58,15 +62,15 @@
 				<th scope="col"> Devolver </th>
 			</tr>
 		</thead>
-		
+
 		<tbody>
 			<tr class="table-info">
 				<td scope="row" th:text="${compra.id_Compra}" />
 				<td scope="row" th:text="${compra.id_Usuario}" />
-				<td th:text="${compra.fechaDePedido}"/>
-				<td> 
+				<td th:text="${compra.fechaDePedido}" />
+				<td>
 					<form th:action="@{/compra/devolver/{id}(id=${compra.id_Compra})}" method="POST">
-							<button type="submit">Devolver</button>
+						<button type="submit">Devolver</button>
 					</form>
 				</td>
 			</tr>
