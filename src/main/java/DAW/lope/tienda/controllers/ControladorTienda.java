@@ -378,11 +378,12 @@ public class ControladorTienda {
 		// Obtener los datos del producto mediante el servicio
 		Producto producto = servicio.findProductoById(id_Producto);
 
-		int numeroPr = Integer.parseInt(numeroProductos);
-
 		if(numeroProductos == null) {
-			numeroPr = 1;
+			numeroProductos = "1";
 		}
+		
+		int numeroPr = Integer.parseInt(numeroProductos);
+		
 		
 		Carrito objeto = new Carrito(producto.getId_Producto(), producto.getTituloProducto(), numeroPr);
 

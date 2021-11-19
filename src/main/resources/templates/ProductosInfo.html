@@ -52,18 +52,35 @@
 
 	<br>
 
-	<div th:text="${producto.id_Producto}"> </div>
-	<div th:text="${producto.tituloProducto}"> </div>
-	<div th:text="${producto.descripcionProducto}"> </div>
-	<div th:text="${producto.precio}"> </div>
-	<div th:text="${producto.descuento}"> </div>
+	<table class="table">
+		<thead>
+			<tr class="table-info">
+				<th scope="col"> Identificador de Producto </th>
+				<th scope="col"> Nombre de Producto </th>
+				<th scope="col"> Descripcion del Producto </th>
+				<th scope="col"> Precio </th>
+				<th scope="col"> Descuento </th>
+				<th scope="col"> </th>
+			</tr>
+		</thead>
 
-	<div>
-		<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
-			<input type="number" name="numeroProductos" placeholder="Numero de productos que desea" size="500">
-			<input class="btn btn-success my-2 my-sm-0" type="submit" value="Añadir al carrito">
-		</form>
-	</div>
+		<tbody>
+			<tr class="table-info">
+				<td scope="row" th:text="${producto.id_Producto}" />
+				<td scope="row" th:text="${producto.tituloProducto}" />
+				<td scope="row" th:text="${producto.descripcionProducto}" />
+				<td scope="row" th:text="${producto.precio}" />
+				<td scope="row" th:text="${producto.descuento}" />
+				<td>
+					<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
+						<input type="number" name="numeroProductos" placeholder="Numero de productos que desea"
+							size="500">
+						<input class="btn btn-success my-2 my-sm-0" type="submit" value="Añadir al carrito">
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
 	<br>
 
