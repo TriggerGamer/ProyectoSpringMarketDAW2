@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
+
 <head>
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jaquez y Luis">
@@ -9,38 +10,56 @@
 </head>
 
 <body>
-	<h1 class="center"> Acceso a usuarios </h1>
-	
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav me-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/index"> INICIO </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
-					</li>
-				</ul>
+		<h1 class="center"> Acceso a usuarios </h1>
+	</header>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link active" href="/index"> INICIO </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+				</li>
+			</ul>
+	
+			<div class="d-block">
 	
 				<form th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
-					<input type="submit" value="Buscar">
+					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
 				</form>
+				<div class="userLR">
+					<div th:if="${usuario1 != usuario2}">
+						<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
+						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+					</div>
+					<div th:if="${usuario1 == usuario2}">
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white"> Perfil
+						</a>
+						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/carrito/listar}">
+							<div th:if="${usuario1 == usuario2}" class="userLR carrito"> </div>
+						</a>
+					</div>
+				</div>
+	
 			</div>
-		</nav>
-	</header>
-	
+		</div>
+	</nav>
+
 	<br>
-	
+
 	<form th:action="@{/usuario/login}" method="POST" class="form-group">
 		<input name="nombreusuario" size="20" type="text" placeholder="Usuario">
 		<input name="contrasenia" size="20" type="password" placeholder="Contraseña">
 		<input type="submit" class="btn btn-primary btn-sm" value="Entrar">
 		<p class="text-danger" th:text="${error}"> </p>
 	</form>
-	
-	
+
+
 </body>
 
 </html>
