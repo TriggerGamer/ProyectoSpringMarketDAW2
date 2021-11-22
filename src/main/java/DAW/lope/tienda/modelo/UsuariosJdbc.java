@@ -71,20 +71,13 @@ public class UsuariosJdbc implements UsuariosDao {
 	}
 
 	@Override
-	public String getNameById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Usuario login(String nombre, String contrasenia) {
-		// TODO Auto-generated method stub
+		
 		try {
 			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombre LIKE ? AND contrasenia = ?",
 					(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("contrasenia")), nombre,
 					contrasenia);
 		} catch (EmptyResultDataAccessException e) {
-			// TODO: handle exception
 			return null;
 		}
 

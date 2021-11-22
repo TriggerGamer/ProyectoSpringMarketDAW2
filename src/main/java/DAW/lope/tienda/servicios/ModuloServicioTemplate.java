@@ -30,49 +30,45 @@ public class ModuloServicioTemplate implements ModuloServicio {
 
 	@Override
 	public List<Producto> getProductoByName(String name) {
-		// TODO Auto-generated method stub
 		return productosdao.getProductoByName(name);
 	}
 
 	@Override
 	public int saveProductos(Producto producto) {
-		// TODO Auto-generated method stub
 		return productosdao.save(producto);
 	}
 
 	@Override
 	public int saveUsuarios(Usuario usuario) {
-		// TODO Auto-generated method stub
+
 		return usuariodao.save(usuario);
 	}
 
 	@Override
 	public int deleteProductoById(int id) {
-		// TODO Auto-generated method stub
+
 		return productosdao.deleteById(id);
 	}
 
 	@Override
 	public Producto findProductoById(int id) {
-		// TODO Auto-generated method stub
+
 		return productosdao.findById(id);
 	}
 
 	@Override
 	public Usuario login(String nombre, String contrasenia) {
-		// TODO Auto-generated method stub
+
 		return usuariodao.login(nombre, contrasenia);
 	}
 
 	@Override
-	public Usuario findUsuarioById(int id) {
-		// TODO Auto-generated method stub
+	public Usuario findUsuarioById(int id){
 		return usuariodao.findById(id);
 	}
 
 	@Override
 	public int saveCompras(int id_Usuario) {
-		// TODO Auto-generated method stub
 		Compra compra = new Compra();
 		compra.setId_Usuario(id_Usuario);
 		return comprasdao.save(compra);
@@ -80,7 +76,6 @@ public class ModuloServicioTemplate implements ModuloServicio {
 
 	@Override
 	public int deleteCompra(int id) {
-		// TODO Auto-generated method stub
 		comprasdao.deleteProductosCompraById(id);
 		return comprasdao.deleteCompraById(id);
 	}
@@ -98,13 +93,11 @@ public class ModuloServicioTemplate implements ModuloServicio {
 
 	@Override
 	public int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades) {
-		// TODO Auto-generated method stub
 		return comprasdao.saveProductosCompra(id_Compra, id_Producto, numeroUnidades);
 	}
 
 	@Override
 	public List<Compra> findComprasUsuario(int id) {
-		// TODO Auto-generated method stub
 		return comprasdao.findAll(id);
 	}
 	

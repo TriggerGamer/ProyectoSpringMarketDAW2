@@ -34,27 +34,27 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		HttpSession session = request.getSession();
-		Usuario authUser = Servicio.findUsuarioById(0);
-		session.setAttribute("apellidos", authUser.getApellidos());
+		Usuario authUser = Servicio.login(userDetails.getUsername(), userDetails.getPassword());
+		session.setAttribute("contrasenia", authUser.getContrasenia());
 		session.setAttribute("nombre", authUser.getNombre());
 		session.setAttribute("id_Usuario", authUser.getId_Usuario());
 
-		boolean isProfesor = false;
+		boolean isRegistrado = false;
 		boolean isAdmin = false;
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ROL_PROFESOR")) {
-				isProfesor = true;
+			if (grantedAuthority.getAuthority().equals("registrado")) {
+				isRegistrado = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equals("ROL_ADMIN")) {
+			} else if (grantedAuthority.getAuthority().equals("admin")) {
 				isAdmin = true;
 				break;
 			}
 		}
 
 		String targetUrl;
-		if (isProfesor) {
-			targetUrl = "/";
+		if (isRegistrado) {
+			targetUrl = "/index";
 		} else if (isAdmin) {
 			targetUrl = "/index";
 		} else {
