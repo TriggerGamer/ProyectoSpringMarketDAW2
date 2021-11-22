@@ -6,32 +6,20 @@ import DAW.lope.tienda.Entidades.Compra;
 import DAW.lope.tienda.Entidades.Producto;
 import DAW.lope.tienda.Entidades.Usuario;
 
-public interface ModuloServicio {
-	int saveProductos(Producto producto);
-
-	int saveUsuarios(Usuario usuario);
+public interface ServiciosCompras {
+	
 
 	int saveCompras(int id_Usuario);
 	
 	int saveProductosCompra(int id_Compra, int id_Producto, int  numeroUnidades);
 
-	int deleteProductoById(int id);
 	
 	int deleteCompra(int id);
 
-	Producto findProductoById(int id);
-
-	Usuario findUsuarioById(int id);
-
-	List<Producto> findEight();
-
-	List<Producto> getProductoByName(String name);
-
+	
 	Compra getCompras(int id);
 
-	Usuario login(String nombre, String contrasenia);
 	
 	List<Compra> findComprasUsuario(int id);
-	
 	
 }

@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.Entidades.Usuario;
-import DAW.lope.tienda.servicios.ModuloServicioTemplate;
+import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
 
 @Controller
 public class ControladorUsuarios {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ModuloServicioTemplate servicio;
+	private ServicioUsuariosImpl servicioUsuarios;
 
 	// Metodos para registro de usuarios
 	@GetMapping(value = "/usuario/signup")
@@ -56,7 +56,7 @@ public class ControladorUsuarios {
 		registrar.setCodigoSeguridad(codigoseguridad);
 		registrar.setDireccionFacturacion(direccionfacturacion);
 
-		servicio.saveUsuarios(registrar);
+		servicioUsuarios.saveUsuarios(registrar);
 
 		return "redirect:/index";
 	}
@@ -90,7 +90,7 @@ public class ControladorUsuarios {
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia,
 			HttpSession session, Model modelo) {
 
-		Usuario usuario = servicio.login(nombreusuario, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
 
 		if (usuario == null) {
 			return "redirect:/usuario/login";
@@ -121,7 +121,7 @@ public class ControladorUsuarios {
 	public String perfilUsuarios_get(Model modelo, @PathVariable int id_Usuario, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		Usuario usuario = servicio.findUsuarioById(id_Usuario);
+		Usuario usuario = servicioUsuarios.findUsuarioById(id_Usuario);
 		modelo.addAttribute("usuario", usuario);
 
 		// Session Usuarios
@@ -138,7 +138,7 @@ public class ControladorUsuarios {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
 		if (usuario1 == null) {
 
 		} else {

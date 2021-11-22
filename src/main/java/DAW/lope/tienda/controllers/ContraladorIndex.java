@@ -11,21 +11,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import DAW.lope.tienda.Entidades.Producto;
 import DAW.lope.tienda.Entidades.Usuario;
-import DAW.lope.tienda.servicios.ModuloServicioTemplate;
+import DAW.lope.tienda.servicios.ServicioProductosImpl;
+import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
 
 @Controller
 public class ContraladorIndex {
 	
 	//Conexión a los Servicios
 	@Autowired
-	private ModuloServicioTemplate servicio;
+	private ServicioUsuariosImpl servicioUsuarios;
+	@Autowired
+	private ServicioProductosImpl servicioProductos;
 
 	// Métodos para la página principal
 	@GetMapping(value = "/index")
 	public String index_get(Model modelo, HttpSession session) {
 
 		// Producto
-		List<Producto> Producto = servicio.findEight();
+		List<Producto> Producto = servicioProductos.findEight();
 		modelo.addAttribute("Productos", Producto);
 
 		// session Usuarios
@@ -42,7 +45,7 @@ public class ContraladorIndex {
 		}
 
 		// Usuarios
-		Usuario usuario = servicio.login(nombre, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombre, contrasenia);
 		if (usuario == null) {
 
 		} else {

@@ -17,13 +17,13 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import DAW.lope.tienda.Entidades.Usuario;
-import DAW.lope.tienda.servicios.ModuloServicioTemplate;
+import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
 
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
   
 	
 	@Autowired
-	private ModuloServicioTemplate Servicio;
+	private ServicioUsuariosImpl servicio;
  
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -34,7 +34,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		HttpSession session = request.getSession();
-		Usuario authUser = Servicio.login(userDetails.getUsername(), userDetails.getPassword());
+		Usuario authUser = servicio.login(userDetails.getUsername(), userDetails.getPassword());
 		session.setAttribute("contrasenia", authUser.getContrasenia());
 		session.setAttribute("nombre", authUser.getNombre());
 		session.setAttribute("id_Usuario", authUser.getId_Usuario());

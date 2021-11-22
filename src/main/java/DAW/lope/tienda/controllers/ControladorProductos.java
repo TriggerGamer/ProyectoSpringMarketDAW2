@@ -14,22 +14,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.Entidades.Producto;
 import DAW.lope.tienda.Entidades.Usuario;
-import DAW.lope.tienda.servicios.ModuloServicioTemplate;
+import DAW.lope.tienda.servicios.ServicioProductosImpl;
+import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
 
 @Controller
 public class ControladorProductos {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ModuloServicioTemplate servicio;
-
+	private ServicioUsuariosImpl servicioUsuarios;
+	@Autowired
+	private ServicioProductosImpl servicioProductos;
+	
 	// Métodos para buscar un producto
 	@GetMapping(value = "/producto/buscar")
 	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo,
 			HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		List<Producto> producto = servicio.getProductoByName(busqueda);
+		List<Producto> producto = servicioProductos.getProductoByName(busqueda);
 		modelo.addAttribute("productos", producto);
 
 		// session Usuarios
@@ -46,7 +49,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario = servicio.login(nombre, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombre, contrasenia);
 		if (usuario == null) {
 
 		} else {
@@ -75,7 +78,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario = servicio.login(nombre, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombre, contrasenia);
 		if (usuario == null) {
 
 		} else {
@@ -99,7 +102,7 @@ public class ControladorProductos {
 		producto.setPrecio(price);
 		producto.setDescuento(descuento);
 
-		servicio.saveProductos(producto);
+		servicioProductos.saveProductos(producto);
 
 		return "redirect:/index";
 	}
@@ -109,7 +112,7 @@ public class ControladorProductos {
 	public String infoProductos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		Producto producto = servicio.findProductoById(id_Producto);
+		Producto producto = servicioProductos.findProductoById(id_Producto);
 		modelo.addAttribute("producto", producto);
 
 		// Session Usuarios
@@ -126,7 +129,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario = servicio.login(nombre, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombre, contrasenia);
 		if (usuario == null) {
 
 		} else {
@@ -142,7 +145,7 @@ public class ControladorProductos {
 	public String borrar_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Borrar los datos
-		servicio.deleteProductoById(id_Producto);
+		servicioProductos.deleteProductoById(id_Producto);
 		String borrar = "Borrado Correctamente";
 		modelo.addAttribute("borrar", borrar);
 
@@ -160,7 +163,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
 		if (usuario1 == null) {
 
 		} else {

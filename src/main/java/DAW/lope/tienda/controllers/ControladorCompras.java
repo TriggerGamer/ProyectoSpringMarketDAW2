@@ -17,14 +17,20 @@ import DAW.lope.tienda.Entidades.Carrito;
 import DAW.lope.tienda.Entidades.Compra;
 import DAW.lope.tienda.Entidades.Producto;
 import DAW.lope.tienda.Entidades.Usuario;
-import DAW.lope.tienda.servicios.ModuloServicioTemplate;
+import DAW.lope.tienda.servicios.ServicioComprasImpl;
+import DAW.lope.tienda.servicios.ServicioProductosImpl;
+import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
 
 @Controller
 public class ControladorCompras {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ModuloServicioTemplate servicio;
+	private ServicioComprasImpl servicioCompras;
+	@Autowired
+	private ServicioUsuariosImpl servicioUsuarios;
+	@Autowired
+	private ServicioProductosImpl servicioProductos;
 
 	// Método comprar un producto
 	@PostMapping(value = "/compra")
@@ -39,9 +45,9 @@ public class ControladorCompras {
 		} else {
 
 			// Guardar la compra
-			servicio.saveCompras(id_Usuario);
+			servicioCompras.saveCompras(id_Usuario);
 
-			Compra compra = servicio.getCompras(id_Usuario);
+			Compra compra = servicioCompras.getCompras(id_Usuario);
 
 			// Obtener el carrito de la compra de session
 			@SuppressWarnings("unchecked")
@@ -51,7 +57,7 @@ public class ControladorCompras {
 				Carrito carrito2 = carrito.get(i);
 
 				// Guardar cada producto el la base de datos
-				servicio.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(),
+				servicioCompras.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(),
 						carrito2.getNumeroUnidades());
 			}
 			session.setAttribute("carrito", null);
@@ -66,7 +72,7 @@ public class ControladorCompras {
 			Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Obtener los datos del producto mediante el servicio
-		Producto producto = servicio.findProductoById(id_Producto);
+		Producto producto = servicioProductos.findProductoById(id_Producto);
 
 		if (numeroProductos == null) {
 			numeroProductos = "1";
@@ -113,7 +119,7 @@ public class ControladorCompras {
 
 		// Obtener las compras
 
-		List<Compra> compra = servicio.findComprasUsuario(id);
+		List<Compra> compra = servicioCompras.findComprasUsuario(id);
 		modelo.addAttribute("compras", compra);
 
 		if (nombre == null) {
@@ -126,7 +132,7 @@ public class ControladorCompras {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
 
 		if (usuario1 == null) {
 
@@ -142,7 +148,7 @@ public class ControladorCompras {
 	@PostMapping(value = "/compra/devolver/{id_Compra}")
 	public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
 
-		servicio.deleteCompra(id_Compra);
+		servicioCompras.deleteCompra(id_Compra);
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
@@ -158,7 +164,7 @@ public class ControladorCompras {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
 
 		if (usuario1 == null) {
 
@@ -188,7 +194,7 @@ public class ControladorCompras {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicio.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
 
 		if (usuario1 == null) {
 
