@@ -1,10 +1,10 @@
+CREATE DATABASE tienda;
 use tienda;
-show tables;
 
 create table Productos(
 id_Producto int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 tituloProducto VARCHAR(100),
-descripcionProducto VARCHAR(100),
+descripcionProducto VARCHAR(300),
 precio double(10,2),
 descuento int(7)
 );
@@ -45,7 +45,7 @@ foreign key (id_Producto) REFERENCES Productos(id_Producto),
 foreign key (id_Compra) REFERENCES Compras(id_Compra)
 );
 
-INSERT INTO Usuarios VALUES(2,"luis","Martinez", 'luis',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
+INSERT INTO Usuarios VALUES(2,"Erick","Jaquez", 'Erick',"ff@.com","2002-05-29","1452345678","erick","313","el quinto pino");
 INSERT INTO Usuarios VALUES(1,"Luis","Martinez", 'contrafulanito',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 
 create table Roles(
@@ -76,5 +76,6 @@ drop table UsuarioRol;
 drop table Usuarios;
 SELECT * FROM Productos;
 delete from Productos;
-drop table Productos; */
+drop table Productos; 
+show tables; */
 
