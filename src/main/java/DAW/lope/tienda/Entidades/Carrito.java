@@ -1,4 +1,4 @@
-package DAW.lope.tienda.modelo;
+package DAW.lope.tienda.Entidades;
 
 import java.io.Serializable;
 

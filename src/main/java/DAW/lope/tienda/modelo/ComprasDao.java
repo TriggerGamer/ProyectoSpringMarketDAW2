@@ -2,6 +2,8 @@ package DAW.lope.tienda.modelo;
 
 import java.util.List;
 
+import DAW.lope.tienda.Entidades.Compra;
+
 public interface ComprasDao {
 	int save(Compra compra);
 

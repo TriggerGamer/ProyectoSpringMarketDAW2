@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import DAW.lope.tienda.modelo.Compra;
+import DAW.lope.tienda.Entidades.Compra;
+import DAW.lope.tienda.Entidades.Producto;
+import DAW.lope.tienda.Entidades.Usuario;
 import DAW.lope.tienda.modelo.ComprasDao;
-import DAW.lope.tienda.modelo.Producto;
 import DAW.lope.tienda.modelo.ProductosDao;
-import DAW.lope.tienda.modelo.Usuario;
 import DAW.lope.tienda.modelo.UsuariosDao;
 
 @Transactional

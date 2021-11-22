@@ -1,4 +1,4 @@
-package DAW.lope.tienda.modelo;
+package DAW.lope.tienda.Entidades;
 
 public class Compra {
 	private int id_Compra;
