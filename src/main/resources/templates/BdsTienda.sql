@@ -48,6 +48,30 @@ foreign key (id_Compra) REFERENCES Compras(id_Compra)
 INSERT INTO Usuarios VALUES(2,"luis","Martinez", 'luis',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 INSERT INTO Usuarios VALUES(1,"Luis","Martinez", 'contrafulanito',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
 
+create table Roles(
+id_Rol int(10) primary key auto_increment,
+nombre_Rol varchar(50)
+);
+
+INSERT INTO Roles (nombre_rol) VALUES ("Administrador");
+INSERT INTO Roles (nombre_rol) VALUES ("Registrados");
+INSERT INTO Roles (nombre_rol) VALUES ("Publicos");
+
+create table UsuarioRol(
+id_Rol int(10),
+id_Usuario int(10),
+PRIMARY KEY (id_Rol, id_Usuario),
+foreign key (id_Rol) REFERENCES Roles(id_Rol)
+);
+
+
+drop table Productos;
+drop table Compras;
+drop table Usuarios;
+drop table ProductosCompras;
+drop table Roles;
+drop table UsuarioRol;
+
 /* delete from Usuarios;
 drop table Usuarios;
 SELECT * FROM Productos;
