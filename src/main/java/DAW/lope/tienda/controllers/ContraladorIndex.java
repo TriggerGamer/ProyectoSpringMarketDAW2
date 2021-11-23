@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import DAW.lope.tienda.Entidades.Producto;
 import DAW.lope.tienda.Entidades.Usuario;
-import DAW.lope.tienda.servicios.ServicioProductosImpl;
-import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
+import DAW.lope.tienda.servicios.ServiciosProductos;
+import DAW.lope.tienda.servicios.ServiciosUsuarios;
 
 @Controller
 public class ContraladorIndex {
 	
 	//Conexión a los Servicios
 	@Autowired
-	private ServicioUsuariosImpl servicioUsuarios;
+	ServiciosUsuarios servicioUsuarios;
 	@Autowired
-	private ServicioProductosImpl servicioProductos;
+	ServiciosProductos servicioProductos;
 
 	// Métodos para la página principal
 	@GetMapping(value = "/index")

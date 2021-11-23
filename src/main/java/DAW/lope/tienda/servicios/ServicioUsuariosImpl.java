@@ -1,10 +1,14 @@
 package DAW.lope.tienda.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.Entidades.Usuario;
 import DAW.lope.tienda.modelo.UsuariosDao;
 
+@Transactional
+@Service
 public class ServicioUsuariosImpl implements ServiciosUsuarios {
 	@Autowired
 	UsuariosDao usuariodao;
