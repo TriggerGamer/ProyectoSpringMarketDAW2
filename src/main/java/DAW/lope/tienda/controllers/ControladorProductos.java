@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import DAW.lope.tienda.Entidades.Producto;
-import DAW.lope.tienda.Entidades.Usuario;
+import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioProductosImpl;
 import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
 

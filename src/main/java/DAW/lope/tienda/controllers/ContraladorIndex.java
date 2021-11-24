@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import DAW.lope.tienda.Entidades.Producto;
-import DAW.lope.tienda.Entidades.Usuario;
+import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServiciosProductos;
 import DAW.lope.tienda.servicios.ServiciosUsuarios;
 

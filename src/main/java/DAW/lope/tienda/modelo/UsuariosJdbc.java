@@ -7,7 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import DAW.lope.tienda.Entidades.Usuario;
+import DAW.lope.tienda.entidades.Usuario;
 
 @Repository
 public class UsuariosJdbc implements UsuariosDao {

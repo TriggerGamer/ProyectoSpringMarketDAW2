@@ -1,4 +1,4 @@
-package DAW.lope.tienda.Seguridad;
+package DAW.lope.tienda.seguridad;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

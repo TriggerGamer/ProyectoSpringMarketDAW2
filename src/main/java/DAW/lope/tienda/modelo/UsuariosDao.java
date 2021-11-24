@@ -2,7 +2,7 @@ package DAW.lope.tienda.modelo;
 
 import java.util.List;
 
-import DAW.lope.tienda.Entidades.Usuario;
+import DAW.lope.tienda.entidades.Usuario;
 
 public interface UsuariosDao {
 	int count();

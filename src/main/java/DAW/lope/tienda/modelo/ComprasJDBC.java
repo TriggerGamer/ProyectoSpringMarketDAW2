@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import DAW.lope.tienda.Entidades.Compra;
+import DAW.lope.tienda.entidades.Compra;
 
 @Repository
 public class ComprasJDBC implements ComprasDao {

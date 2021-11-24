@@ -1,4 +1,4 @@
-package DAW.lope.tienda.Entidades;
+package DAW.lope.tienda.entidades;
 
 public class Usuario {
 	private int id_Usuario;

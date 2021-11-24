@@ -2,7 +2,7 @@ package DAW.lope.tienda.servicios;
 
 import java.util.List;
 
-import DAW.lope.tienda.Entidades.Producto;
+import DAW.lope.tienda.entidades.Producto;
 
 public interface ServiciosProductos {
 	int saveProductos(Producto producto);

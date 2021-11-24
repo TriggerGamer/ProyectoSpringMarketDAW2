@@ -1,8 +1,10 @@
 package DAW.lope.tienda.servicios;
 
-import DAW.lope.tienda.Entidades.Usuario;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface ServiciosUsuarios {
+import DAW.lope.tienda.entidades.Usuario;
+
+public interface ServiciosUsuarios extends UserDetailsService{
 	
 	int saveUsuarios(Usuario usuario);
 	Usuario findUsuarioById(int id);

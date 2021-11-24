@@ -2,9 +2,7 @@ package DAW.lope.tienda.servicios;
 
 import java.util.List;
 
-import DAW.lope.tienda.Entidades.Compra;
-import DAW.lope.tienda.Entidades.Producto;
-import DAW.lope.tienda.Entidades.Usuario;
+import DAW.lope.tienda.entidades.Compra;
 
 public interface ServiciosCompras {
 	

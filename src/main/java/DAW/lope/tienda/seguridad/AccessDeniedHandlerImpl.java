@@ -1,4 +1,4 @@
-package DAW.lope.tienda.Seguridad;
+package DAW.lope.tienda.seguridad;
 
 import java.io.IOException;
 
@@ -12,11 +12,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
+
+
 @Component
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
 
-//    private static Logger log = (Logger) LoggerFactory.getLogger(AccessDeniedHandlerImpl.class);
 
+	// private Logger log = LoggerFactory.getLogger(AccessDeniedHandlerImpl.class);
+	
     @Override
     public void handle(HttpServletRequest request,
                        HttpServletResponse response,

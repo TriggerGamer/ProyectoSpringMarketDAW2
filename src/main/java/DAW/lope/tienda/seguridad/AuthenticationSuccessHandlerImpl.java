@@ -1,4 +1,4 @@
-package DAW.lope.tienda.Seguridad;
+package DAW.lope.tienda.seguridad;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -16,7 +16,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import DAW.lope.tienda.Entidades.Usuario;
+import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
 
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
