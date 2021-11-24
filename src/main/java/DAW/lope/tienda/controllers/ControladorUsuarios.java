@@ -42,11 +42,12 @@ public class ControladorUsuarios {
 	public String registrarUsuario_post(@RequestParam String nombreusuario, @RequestParam String apellidosusuario,
 			@RequestParam String contrasenia, @RequestParam String correo, @RequestParam String fechanacimiento,
 			@RequestParam long numerotarjeta, @RequestParam String titulartarjeta, @RequestParam int codigoseguridad,
-			@RequestParam String direccionfacturacion) {
+			@RequestParam String direccionfacturacion, @RequestParam String nombre) {
 
 		Usuario registrar = new Usuario();
 
-		registrar.setNombre(nombreusuario);
+		registrar.setNombre(nombre);
+		registrar.setNombreUsuario(nombreusuario);
 		registrar.setApellidos(apellidosusuario);
 		registrar.setContrasenia(contrasenia);
 		registrar.setEmail(correo);

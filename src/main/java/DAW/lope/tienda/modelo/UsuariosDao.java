@@ -17,5 +17,5 @@ public interface UsuariosDao {
 
 	Usuario findById(int id);
 
-	Usuario login(String nombre, String contrasenia);
+	Usuario findByName(String nombreUsuario);
 }

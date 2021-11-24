@@ -8,6 +8,6 @@ public interface ServiciosUsuarios extends UserDetailsService{
 	
 	int saveUsuarios(Usuario usuario);
 	Usuario findUsuarioById(int id);
-	Usuario login(String nombre, String contrasenia);
+	Usuario login(String nombreUsuario, String contrasenia);
 	
 }

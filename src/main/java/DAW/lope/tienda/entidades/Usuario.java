@@ -3,6 +3,7 @@ package DAW.lope.tienda.entidades;
 public class Usuario {
 	private int id_Usuario;
 	private String nombre;
+	private String nombreUsuario;
 	private String apellidos;
 	private String contrasenia;
 	private String email;
@@ -14,15 +15,16 @@ public class Usuario {
 	
 	public Usuario() {}
 	
-	public Usuario(int id_usuario, String nombre, String contrasenia) {
+	public Usuario(int id_usuario, String nombreUsuario, String contrasenia) {
 		this.id_Usuario = id_usuario;
-		this.nombre = nombre;
+		this.nombreUsuario = nombreUsuario;
 		this.contrasenia = contrasenia;
 	}
 	
-	public Usuario(int id_usuario, String nombre, String apellidos, String contrasenia, String email, String fechaNacimiento, long numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
+	public Usuario(int id_usuario, String nombre, String nombreUsuario, String apellidos, String contrasenia, String email, String fechaNacimiento, long numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
 		this.id_Usuario = id_usuario;
 		this.nombre = nombre;
+		this.nombreUsuario = nombreUsuario;
 		this.apellidos = apellidos;	
 		this.contrasenia =contrasenia;
 		this.email = email;
@@ -111,5 +113,13 @@ public class Usuario {
 
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
+	}
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 }

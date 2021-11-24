@@ -1,6 +1,10 @@
 package DAW.lope.tienda.servicios;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,9 +34,9 @@ public class ServicioUsuariosImpl implements ServiciosUsuarios, UserDetailsServi
 	
 
 	@Override
-	public Usuario login(String nombre, String contrasenia) {
+	public Usuario login(String nombreUsuario, String contrasenia) {
 
-		return usuariodao.login(nombre, contrasenia);
+		return usuariodao.findByName(nombreUsuario);
 	}
 
 	@Override
@@ -43,8 +47,11 @@ public class ServicioUsuariosImpl implements ServiciosUsuarios, UserDetailsServi
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Usuario usuario = usuariodao.findByName(username);
+		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+
+		return new org.springframework.security.core.userdetails.User(usuario.getNombreUsuario(), usuario.getContrasenia(), grantedAuthorities);
 	}
 
 }
