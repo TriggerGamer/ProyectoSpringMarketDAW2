@@ -19,13 +19,13 @@
 				<li class="nav-item">
 					<a class="nav-link active" href="/index"> INICIO </a>
 				</li>
-				<li class="nav-item">
+				<li th:if="${roles == 'Admin'}" class="nav-item">
 					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
 				</li>
 			</ul>
-
+	
 			<div class="d-block">
-
+	
 				<form th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
 					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
@@ -36,8 +36,7 @@
 						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
 					</div>
 					<div th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white">
-							Perfil
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white"> Perfil
 						</a>
 						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
 						<a th:href="@{/carrito/listar}">
@@ -45,7 +44,7 @@
 						</a>
 					</div>
 				</div>
-
+	
 			</div>
 		</div>
 	</nav>
