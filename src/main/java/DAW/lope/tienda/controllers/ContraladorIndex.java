@@ -34,15 +34,9 @@ public class ContraladorIndex {
 		modelo.addAttribute("Productos", Producto);
 
 		// session Usuarios
-		String nombre = (String) session.getAttribute("user");
-	
-		String roles =  (String) session.getAttribute("rol");
-	
-		modelo.addAttribute("roles", roles);
-				
-		
-		
-		
+		String nombre = (String) session.getAttribute("user");	
+		String roles =  (String) session.getAttribute("rol");	
+		modelo.addAttribute("roles", roles);	
 		
 		if (nombre == null) {
 			nombre = "f amigo";

@@ -22,7 +22,7 @@ public class ControladorProductos {
 	private ServicioUsuarios servicioUsuarios;
 	@Autowired
 	private ServicioProductos servicioProductos;
-	
+
 	// Métodos para buscar un producto
 	@GetMapping(value = "/producto/buscar")
 	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo,
@@ -35,10 +35,10 @@ public class ControladorProductos {
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
 
-		String roles =  (String) session.getAttribute("rol");
-		
+		String roles = (String) session.getAttribute("rol");
+
 		modelo.addAttribute("roles", roles);
-		
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -66,6 +66,8 @@ public class ControladorProductos {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
+		String roles = (String) session.getAttribute("rol");
+		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -116,9 +118,9 @@ public class ControladorProductos {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		
-		String roles =  (String) session.getAttribute("rol");
-		
+
+		String roles = (String) session.getAttribute("rol");
+
 		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {
@@ -154,6 +156,10 @@ public class ControladorProductos {
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
 
+		String roles = (String) session.getAttribute("rol");
+
+		modelo.addAttribute("roles", roles);
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -174,5 +180,5 @@ public class ControladorProductos {
 
 		return "borrar";
 	}
-	
+
 }

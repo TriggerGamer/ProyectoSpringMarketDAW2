@@ -35,7 +35,7 @@ public class ControladorCarrito {
 		// Obtener los datos del producto mediante el servicio
 		Producto producto = servicioProductos.findProductoById(id_Producto);
 
-		if (numeroProductos == null) {
+		if (numeroProductos == "") {
 			numeroProductos = "1";
 		}
 
@@ -75,6 +75,8 @@ public class ControladorCarrito {
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
+		String roles =  (String) session.getAttribute("rol");		
+		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {
 			nombre = "f amigo";
