@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import DAW.lope.tienda.entidades.Carrito;
 import DAW.lope.tienda.entidades.Producto;
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.servicios.ServicioProductosImpl;
-import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
+import DAW.lope.tienda.servicios.ServicioProductos;
+import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 @Controller
 public class ControladorCarrito {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ServicioUsuariosImpl servicioUsuarios;
+	private ServicioUsuarios servicioUsuarios;
 	@Autowired
-	private ServicioProductosImpl servicioProductos;
+	private ServicioProductos servicioProductos;
 
 	// Método guardar un producto en session para el Carrito
 	@GetMapping(value = "/carrito/guardar/{id_Producto}")
@@ -75,7 +75,6 @@ public class ControladorCarrito {
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -87,7 +86,7 @@ public class ControladorCarrito {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre);
 
 		if (usuario1 == null) {
 

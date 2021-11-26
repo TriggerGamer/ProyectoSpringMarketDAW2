@@ -17,13 +17,12 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
+import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
   
-	
 	@Autowired
-	private ServicioUsuariosImpl servicio;
+	private ServicioUsuarios servicio;
  
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -34,19 +33,21 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		HttpSession session = request.getSession();
-		Usuario authUser = servicio.login(userDetails.getUsername(), userDetails.getPassword());
-		session.setAttribute("contrasenia", authUser.getContrasenia());
-		session.setAttribute("nombre", authUser.getNombre());
+		Usuario authUser = servicio.login(userDetails.getUsername());
+		session.setAttribute("user", userDetails.getUsername());
 		session.setAttribute("id_Usuario", authUser.getId_Usuario());
+		
 
 		boolean isRegistrado = false;
 		boolean isAdmin = false;
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("registrado")) {
+			if (grantedAuthority.getAuthority().equals("Registrado")) {
+				session.setAttribute("rol", "Registrado");
 				isRegistrado = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equals("admin")) {
+			} else if (grantedAuthority.getAuthority().equals("Admin")) {
+				session.setAttribute("rol", "Admin");
 				isAdmin = true;
 				break;
 			}

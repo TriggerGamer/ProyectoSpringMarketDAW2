@@ -1,9 +1,7 @@
 package DAW.lope.tienda.controllers;
 
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,20 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import DAW.lope.tienda.entidades.Producto;
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.servicios.ServicioProductosImpl;
-import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
+import DAW.lope.tienda.servicios.ServicioProductos;
+import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 @Controller
 public class ControladorProductos {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ServicioUsuariosImpl servicioUsuarios;
+	private ServicioUsuarios servicioUsuarios;
 	@Autowired
-	private ServicioProductosImpl servicioProductos;
+	private ServicioProductos servicioProductos;
 	
 	// Métodos para buscar un producto
 	@GetMapping(value = "/producto/buscar")
@@ -37,8 +34,11 @@ public class ControladorProductos {
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
 
+		String roles =  (String) session.getAttribute("rol");
+		
+		modelo.addAttribute("roles", roles);
+		
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -49,7 +49,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombre);
 		if (usuario == null) {
 
 		} else {
@@ -66,7 +66,6 @@ public class ControladorProductos {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -78,7 +77,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombre);
 		if (usuario == null) {
 
 		} else {
@@ -117,7 +116,10 @@ public class ControladorProductos {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
+		
+		String roles =  (String) session.getAttribute("rol");
+		
+		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -129,7 +131,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario = servicioUsuarios.login(nombre);
 		if (usuario == null) {
 
 		} else {
@@ -151,7 +153,6 @@ public class ControladorProductos {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -163,7 +164,7 @@ public class ControladorProductos {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre);
 		if (usuario1 == null) {
 
 		} else {

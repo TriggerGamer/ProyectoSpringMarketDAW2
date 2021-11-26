@@ -4,9 +4,9 @@ import java.util.List;
 
 import DAW.lope.tienda.entidades.Producto;
 
-public interface ServiciosProductos {
+public interface ServicioProductos {
 	int saveProductos(Producto producto);
-	
+
 	int deleteProductoById(int id);
 
 	Producto findProductoById(int id);

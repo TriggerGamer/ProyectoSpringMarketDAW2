@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import DAW.lope.tienda.servicios.ServiciosUsuarios;
+import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled=true)
@@ -20,7 +20,7 @@ import DAW.lope.tienda.servicios.ServiciosUsuarios;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	 
 	 @Autowired
-	 private ServiciosUsuarios userDetailsService;
+	 private ServicioUsuarios userDetailsService;
 		
 
 	    @Override
@@ -39,18 +39,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/carrito/guardar/{id_Producto}",
 	                            "/carrito/listar",
 	                            "/webjars/**").permitAll()
-	                    .antMatchers("/crear").hasAuthority("admin")
+	                    .antMatchers("/crear").hasAuthority("Admin")
+	                    .antMatchers("/producto/borrar/{id_Producto}").hasAuthority("Admin")
 	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()
 	                    .loginPage("/usuario/login")
 	                    .loginProcessingUrl("/usuario/login")
+	                    .usernameParameter("nombreusuario")
+	                    .passwordParameter("contrasenia")
 	                    .successHandler(myAuthenticationSuccessHandler())
 	                    .permitAll()
 	                .and()
 	                .logout()
 	                    .invalidateHttpSession(true)
-	                    .deleteCookies("")
 	                    .clearAuthentication(true)
 	                    .logoutUrl("/usuario/logOut")
 	                    .logoutRequestMatcher(new AntPathRequestMatcher("/usuario/logOut"))

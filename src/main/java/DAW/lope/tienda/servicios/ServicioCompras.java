@@ -4,7 +4,7 @@ import java.util.List;
 
 import DAW.lope.tienda.entidades.Compra;
 
-public interface ServiciosCompras {
+public interface ServicioCompras {
 	
 
 	int saveCompras(int id_Usuario);

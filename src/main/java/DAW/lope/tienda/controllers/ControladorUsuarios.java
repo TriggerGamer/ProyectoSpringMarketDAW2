@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
+import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 @Controller
 public class ControladorUsuarios {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ServicioUsuariosImpl servicioUsuarios;
+	private ServicioUsuarios servicioUsuarios;
 
 	// Metodos para registro de usuarios
 	@GetMapping(value = "/usuario/signup")
@@ -65,14 +65,8 @@ public class ControladorUsuarios {
 	// Metodos para iniciar sesion
 	@GetMapping(value = "/usuario/login")
 	public String loginUsuario_get(Model modelo, HttpSession session) {
-		String primeravez = (String) session.getAttribute("1vez");
 
 		String nombre = (String) session.getAttribute("user");
-		if (nombre == null && primeravez != null) {
-			modelo.addAttribute("error", "Usuario incorrecto");
-		}
-
-		session.setAttribute("1vez", "hola");
 
 		// Session Usuarios
 		if (nombre == null) {
@@ -91,7 +85,7 @@ public class ControladorUsuarios {
 	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia,
 			HttpSession session, Model modelo) {
 
-		Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
+		/*Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
 
 		if (usuario == null) {
 			return "redirect:/usuario/login";
@@ -100,7 +94,7 @@ public class ControladorUsuarios {
 			session.setAttribute("user", usuario.getNombre());
 			session.setAttribute("contrasenia", usuario.getContrasenia());
 			session.setAttribute("carrito", null);
-		}
+		}*/
 
 		return "redirect:/index";
 	}
@@ -127,7 +121,6 @@ public class ControladorUsuarios {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -139,7 +132,7 @@ public class ControladorUsuarios {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre);
 		if (usuario1 == null) {
 
 		} else {

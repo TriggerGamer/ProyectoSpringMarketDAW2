@@ -12,7 +12,7 @@ import DAW.lope.tienda.modelo.ProductosDao;
 
 @Transactional
 @Service
-public class ServicioProductosImpl implements ServiciosProductos {
+public class ServicioProductosImpl implements ServicioProductos {
 	@Autowired
 	ProductosDao productosdao;
 

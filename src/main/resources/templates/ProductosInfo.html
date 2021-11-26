@@ -54,7 +54,7 @@
 
 	<table class="table">
 		<thead>
-			<tr class="table-info">
+			<tr class="table-info text-start">
 				<th scope="col"> Identificador de Producto </th>
 				<th scope="col"> Nombre de Producto </th>
 				<th scope="col"> Descripcion del Producto </th>
@@ -65,7 +65,7 @@
 		</thead>
 
 		<tbody>
-			<tr class="table-info">
+			<tr class="table-info text-start">
 				<td scope="row" th:text="${producto.id_Producto}" />
 				<td scope="row" th:text="${producto.tituloProducto}" />
 				<td scope="row" th:text="${producto.descripcionProducto}" />
@@ -84,8 +84,9 @@
 
 	<br>
 
-	<a th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button> Borrar Producto </button> </a>
-
+	<div th:each="rol : ${roles}">
+		<a th:if="${rol == 'Admin'}" th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button> Borrar Producto </button> </a>
+	</div>
 </body>
 
 </html>

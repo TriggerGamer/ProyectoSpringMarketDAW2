@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import DAW.lope.tienda.entidades.Carrito;
 import DAW.lope.tienda.entidades.Compra;
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.servicios.ServicioComprasImpl;
-import DAW.lope.tienda.servicios.ServicioUsuariosImpl;
+import DAW.lope.tienda.servicios.ServicioCompras;
+import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 @Controller
 public class ControladorCompras {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ServicioComprasImpl servicioCompras;
+	private ServicioCompras servicioCompras;
 	@Autowired
-	private ServicioUsuariosImpl servicioUsuarios;
+	private ServicioUsuarios servicioUsuarios;
 
 	// Método comprar un producto
 	@PostMapping(value = "/compra")
@@ -66,7 +66,6 @@ public class ControladorCompras {
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
 		int id = (int) session.getAttribute("id_Usuario");
 
 		// Obtener las compras
@@ -84,7 +83,7 @@ public class ControladorCompras {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre);
 
 		if (usuario1 == null) {
 
@@ -104,7 +103,6 @@ public class ControladorCompras {
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String contrasenia = (String) session.getAttribute("contrasenia");
 
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -116,7 +114,7 @@ public class ControladorCompras {
 		}
 
 		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre, contrasenia);
+		Usuario usuario1 = servicioUsuarios.login(nombre);
 
 		if (usuario1 == null) {
 
