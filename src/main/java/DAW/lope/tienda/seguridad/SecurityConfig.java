@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/webjars/**").permitAll()
 	                    .antMatchers("/crear").hasAuthority("Admin")
 	                    .antMatchers("/producto/borrar/{id_Producto}").hasAuthority("Admin")
+	                    .antMatchers("/producto/crear").hasAuthority("Admin")
 	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()

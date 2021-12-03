@@ -89,11 +89,11 @@ public class ControladorUsuarios {
 		return "acceso";
 	}
 
-	@PostMapping(value = "/usuario/login")
+	/* @PostMapping(value = "/usuario/login")
 	public String loginUsuario_post(@RequestParam String nombreUsuario, @RequestParam String contrasenia,
 			HttpSession session, Model modelo) {
 
-		/* Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
+		 Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
 
 		if (usuario == null) {
 			return "redirect:/usuario/login";
@@ -102,11 +102,11 @@ public class ControladorUsuarios {
 			session.setAttribute("user", usuario.getNombre());
 			session.setAttribute("contrasenia", usuario.getContrasenia());
 			session.setAttribute("carrito", null);
-		} */
+		}
 		
 		return "redirect:/index";
 		
-	}
+	} */
 
 	// Métodos desloguear un usuario
 	@GetMapping(value = "/usuario/logOut")
