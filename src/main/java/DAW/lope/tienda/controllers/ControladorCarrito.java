@@ -94,7 +94,7 @@ public class ControladorCarrito {
 
 		} else {
 			int id_usuario = usuario1.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
+			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
 		// Coger los atributos del carrito en session
