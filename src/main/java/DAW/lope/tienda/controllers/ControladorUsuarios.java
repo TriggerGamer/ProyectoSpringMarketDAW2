@@ -43,7 +43,7 @@ public class ControladorUsuarios {
 	}
 
 	@PostMapping(value = "/usuario/signup")
-	public String registrarUsuario_post(@RequestParam String nombreusuario, @RequestParam String apellidosusuario,
+	public String registrarUsuario_post(@RequestParam String nombreUsuario, @RequestParam String apellidosusuario,
 			@RequestParam String contrasenia, @RequestParam String correo, @RequestParam String fechanacimiento,
 			@RequestParam long numerotarjeta, @RequestParam String titulartarjeta, @RequestParam int codigoseguridad,
 			@RequestParam String direccionfacturacion, @RequestParam String nombre) {
@@ -51,7 +51,7 @@ public class ControladorUsuarios {
 		Usuario registrar = new Usuario();
 
 		registrar.setNombre(nombre);
-		registrar.setNombreUsuario(nombreusuario);
+		registrar.setNombreUsuario(nombreUsuario);
 		registrar.setApellidos(apellidosusuario);
 		registrar.setContrasenia(contrasenia);
 		registrar.setEmail(correo);
@@ -90,10 +90,10 @@ public class ControladorUsuarios {
 	}
 
 	@PostMapping(value = "/usuario/login")
-	public String loginUsuario_post(@RequestParam String nombreusuario, @RequestParam String contrasenia,
+	public String loginUsuario_post(@RequestParam String nombreUsuario, @RequestParam String contrasenia,
 			HttpSession session, Model modelo) {
 
-		/*Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
+		/* Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
 
 		if (usuario == null) {
 			return "redirect:/usuario/login";
@@ -102,9 +102,10 @@ public class ControladorUsuarios {
 			session.setAttribute("user", usuario.getNombre());
 			session.setAttribute("contrasenia", usuario.getContrasenia());
 			session.setAttribute("carrito", null);
-		}*/
-
+		} */
+		
 		return "redirect:/index";
+		
 	}
 
 	// Métodos desloguear un usuario

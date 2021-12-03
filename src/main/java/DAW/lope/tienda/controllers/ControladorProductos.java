@@ -57,7 +57,7 @@ public class ControladorProductos {
 			modelo.addAttribute("usuario", id_usuario);
 		}
 
-		return "buscarProducto";
+		return "BuscarProducto";
 	}
 
 	// Métodos para crear un producto
@@ -87,7 +87,7 @@ public class ControladorProductos {
 			modelo.addAttribute("usuario", id_usuario);
 		}
 
-		return "crearProducto";
+		return "CrearProducto";
 	}
 
 	@PostMapping(value = "/crear")

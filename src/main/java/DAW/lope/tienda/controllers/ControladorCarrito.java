@@ -110,7 +110,7 @@ public class ControladorCarrito {
 		modelo.addAttribute("vacio", vacio);
 		modelo.addAttribute("novacio", null);
 
-		return "Carrito";
+		return "carrito";
 	}
 
 }

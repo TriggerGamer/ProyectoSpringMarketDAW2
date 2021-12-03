@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import DAW.lope.tienda.entidades.Compra;
 import DAW.lope.tienda.modelo.ComprasDao;
 
-
 @Transactional
 @Service
 public class ServicioComprasImpl implements ServicioCompras {
