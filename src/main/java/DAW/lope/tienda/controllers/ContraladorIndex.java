@@ -31,7 +31,15 @@ public class ContraladorIndex {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		int id = (int) session.getAttribute("id_Usuario");
+		int id;
+		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
 		modelo.addAttribute("id_usuario", id);
 		String roles = (String) session.getAttribute("rol");
 		modelo.addAttribute("roles", roles);
