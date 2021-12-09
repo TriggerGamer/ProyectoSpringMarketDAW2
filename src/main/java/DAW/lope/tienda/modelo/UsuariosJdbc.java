@@ -76,7 +76,7 @@ public class UsuariosJdbc implements UsuariosDao {
 		
 		try {
 			return jdbcTemplate.queryForObject("SELECT * from Usuarios WHERE nombreUsuario LIKE ?",
-					(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombre"), rs.getString("contrasenia")), nombreUsuario);
+					(rs, rowNum) -> new Usuario(rs.getInt("id_Usuario"), rs.getString("nombreUsuario"), rs.getString("contrasenia")), nombreUsuario);
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

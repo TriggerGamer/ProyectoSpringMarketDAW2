@@ -54,14 +54,14 @@ public class ControladorProductos {
 
 		} else {
 			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
+			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
-		return "buscarProducto";
+		return "BuscarProducto";
 	}
 
 	// Métodos para crear un producto
-	@GetMapping(value = "/crear")
+	@GetMapping(value = "/producto/crear")
 	public String crearProducto_get(HttpSession session, Model modelo) {
 
 		// Session Usuarios
@@ -84,13 +84,13 @@ public class ControladorProductos {
 
 		} else {
 			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
+			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
-		return "crearProducto";
+		return "CrearProducto";
 	}
 
-	@PostMapping(value = "/crear")
+	@PostMapping(value = "/producto/crear")
 	public String crearProducto_post(@RequestParam String titulo, @RequestParam String descripcion,
 			@RequestParam String precio) {
 
@@ -138,7 +138,7 @@ public class ControladorProductos {
 
 		} else {
 			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
+			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
 		return "ProductosInfo";
@@ -175,7 +175,7 @@ public class ControladorProductos {
 
 		} else {
 			int id_usuario = usuario1.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
+			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
 		return "borrar";

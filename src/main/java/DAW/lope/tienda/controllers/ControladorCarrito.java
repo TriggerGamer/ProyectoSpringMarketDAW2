@@ -74,10 +74,10 @@ public class ControladorCarrito {
 	public String carrito_get(Model modelo, HttpSession session) {
 
 		// session Usuarios
-		String nombre = (String) session.getAttribute("user");
-		String roles =  (String) session.getAttribute("rol");		
-		modelo.addAttribute("roles", roles);
-
+		String nombre = (String) session.getAttribute("user");	
+		String roles =  (String) session.getAttribute("rol");	
+		modelo.addAttribute("roles", roles);	
+		
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -86,17 +86,16 @@ public class ControladorCarrito {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-
+		
 		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre);
-
-		if (usuario1 == null) {
+		Usuario usuario = servicioUsuarios.login(nombre);
+		if (usuario == null) {
 
 		} else {
-			int id_usuario = usuario1.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
+			int id_usuario = usuario.getId_Usuario();
+			modelo.addAttribute("id_usuario", id_usuario);
 		}
-
+		
 		// Coger los atributos del carrito en session
 		@SuppressWarnings("unchecked")
 		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
@@ -110,7 +109,7 @@ public class ControladorCarrito {
 		modelo.addAttribute("vacio", vacio);
 		modelo.addAttribute("novacio", null);
 
-		return "Carrito";
+		return "carrito";
 	}
 
 }

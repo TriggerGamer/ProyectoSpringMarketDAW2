@@ -14,22 +14,25 @@
 	<header>
 		<h1 class="center"> REGISTRO </h1>
 	</header>
+
+	<!-- Apertura del menu -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<div class="collapse navbar-collapse" id="navbarColor01">
-			<ul class="navbar-nav me-auto">
-				<li class="nav-item">
-					<a class="nav-link active" href="/index"> INICIO </a>
-				</li>
-				<li th:if="${roles == 'Admin'}" class="nav-item">
-					<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
-				</li>
-			</ul>
-	
-			<div class="d-block">
-	
-				<form th:action="@{/producto/buscar}" method="GET">
+		<div class="container-fluid">
+			<a class="nav-link text-white" href="/index"> INICIO </a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+				aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li th:if="${roles == 'Admin'}" class="nav-item">
+						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+					</li>
+				</ul>
+				<form class="d-flex" th:action="@{/producto/buscar}" method="GET">
 					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
-					<input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Buscar">
+					<button class="btn btn-secondary my-2 my-sm-0" type="submit"> Buscar </button>
 				</form>
 				<div class="userLR">
 					<div th:if="${usuario1 != usuario2}">
@@ -37,7 +40,8 @@
 						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
 					</div>
 					<div th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white"> Perfil
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white">
+							Perfil
 						</a>
 						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
 						<a th:href="@{/carrito/listar}">
@@ -45,21 +49,21 @@
 						</a>
 					</div>
 				</div>
-	
 			</div>
 		</div>
 	</nav>
+	<!-- Cierre del menú -->
+
 	<br>
 	<form th:action="@{/usuario/signup}" method="POST">
 		<div class="form-group">
 			<fieldset>
 				<legend>Datos personales</legend>
-				
-				<input type="text" name="nombreusuario" class="form-control"
+
+				<input type="text" name="nombreUsuario" class="form-control"
 					placeholder="Introduce tu nombre de usuario...">
 				<br>
-				<input type="text" name="nombre" class="form-control"
-					placeholder="Introduce tu nombre...">
+				<input type="text" name="nombre" class="form-control" placeholder="Introduce tu nombre...">
 				<br>
 				<input type="text" name="apellidosusuario" class="form-control"
 					placeholder="Introduce tus apellidos...">

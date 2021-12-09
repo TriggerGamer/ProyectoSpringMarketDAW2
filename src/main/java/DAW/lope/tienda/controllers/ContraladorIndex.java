@@ -56,7 +56,7 @@ public class ContraladorIndex {
 			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
-		return "Index";
+		return "index";
 	}
 
 }

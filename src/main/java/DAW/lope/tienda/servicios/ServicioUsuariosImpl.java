@@ -54,7 +54,6 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 
 	@Override
 	public Usuario login(String nombreUsuario) {
-
 		return usuariodao.findByName(nombreUsuario);
 	}
 
@@ -82,7 +81,6 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 
 	@Override
 	public List<Rol> getRoles(int id_Usuario) {
-		// TODO Auto-generated method stub
 		return roldao.buscarRol(id_Usuario);
 	}
 

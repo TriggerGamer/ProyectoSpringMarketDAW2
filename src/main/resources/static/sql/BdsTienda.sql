@@ -1,5 +1,5 @@
-CREATE DATABASE tienda;
-use tienda;
+CREATE DATABASE Tienda;
+use Tienda;
 
 create table Productos(
 id_Producto int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -19,6 +19,7 @@ INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VA
 
 create table Usuarios(
 id_Usuario int(10) NOT NULL PRIMARY KEY auto_increment,
+nombreUsuario VARCHAR(50) unique,
 nombre VARCHAR(50),
 apellidos varchar(100),
 contrasenia VARCHAR(100),
@@ -45,17 +46,17 @@ foreign key (id_Producto) REFERENCES Productos(id_Producto),
 foreign key (id_Compra) REFERENCES Compras(id_Compra)
 );
 
-INSERT INTO Usuarios VALUES(2,"Erick","Jaquez", 'Erick',"ff@.com","2002-05-29","1452345678","erick","313","el quinto pino");
-INSERT INTO Usuarios VALUES(1,"Luis","Martinez", 'contrafulanito',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
+INSERT INTO Usuarios VALUES(1,"Luis","Martinez", 'luis',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
+INSERT INTO Usuarios VALUES(2,"Erick","Jaquez", 'erick',"ff@.com","2002-05-29","1452345678","erick","313","el quinto pino");
 
 create table Roles(
 id_Rol int(10) primary key auto_increment,
 nombre_Rol varchar(50)
 );
 
-INSERT INTO Roles (nombre_rol) VALUES ("Administrador");
-INSERT INTO Roles (nombre_rol) VALUES ("Registrados");
-INSERT INTO Roles (nombre_rol) VALUES ("Publicos");
+INSERT INTO Roles (nombre_rol) VALUES ("Admin");
+INSERT INTO Roles (nombre_rol) VALUES ("Registrado");
+INSERT INTO Roles (nombre_rol) VALUES ("Publico");
 
 create table UsuarioRol(
 id_Rol int(10),
@@ -65,13 +66,16 @@ foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario),
 foreign key (id_Rol) REFERENCES Roles(id_Rol)
 );
 
+INSERT INTO UsuarioRol VALUES(1, 1);
+INSERT INTO UsuarioRol VALUES(2, 1);
 
-drop table Productos;
+
+/* drop table Productos;
 drop table Compras;
 drop table Usuarios;
 drop table ProductosCompras;
 drop table Roles;
-drop table UsuarioRol;
+drop table UsuarioRol; */
 
 /* delete from Usuarios;
 drop table Usuarios;
