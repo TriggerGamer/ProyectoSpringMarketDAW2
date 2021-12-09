@@ -130,6 +130,8 @@ public class ControladorUsuarios {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
+		int id = (int) session.getAttribute("id_Usuario");
+		modelo.addAttribute("id_usuario", id);
 		String roles =  (String) session.getAttribute("rol");
 		modelo.addAttribute("roles", roles);
 		
@@ -140,15 +142,6 @@ public class ControladorUsuarios {
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
-		}
-
-		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre);
-		if (usuario1 == null) {
-
-		} else {
-			int id_usuario = usuario1.getId_Usuario();
-			modelo.addAttribute("usuarios", id_usuario);
 		}
 
 		return "UsuariosInfo";
