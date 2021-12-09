@@ -88,33 +88,9 @@ public class ControladorUsuarios {
 		return "acceso";
 	}
 
-	/* @PostMapping(value = "/usuario/login")
-	public String loginUsuario_post(@RequestParam String nombreUsuario, @RequestParam String contrasenia,
-			HttpSession session, Model modelo) {
-
-		 Usuario usuario = servicioUsuarios.login(nombreusuario, contrasenia);
-
-		if (usuario == null) {
-			return "redirect:/usuario/login";
-		} else {
-			session.setAttribute("id_Usuario", usuario.getId_Usuario());
-			session.setAttribute("user", usuario.getNombre());
-			session.setAttribute("contrasenia", usuario.getContrasenia());
-			session.setAttribute("carrito", null);
-		}
-		
-		return "redirect:/index";
-		
-	} */
-
 	// Métodos desloguear un usuario
 	@GetMapping(value = "/usuario/logOut")
 	public String usuarioLOGOUT_get(Model modelo, HttpSession session) {
-
-		session.setAttribute("user", null);
-		session.setAttribute("contrasenia", null);
-		session.setAttribute("carrito", null);
-		session.setAttribute("1vez", null);
 
 		return "redirect:/index";
 	}
@@ -145,5 +121,29 @@ public class ControladorUsuarios {
 
 		return "UsuariosInfo";
 	}
+	
+	// Métodos para ver la info de un usuario
+		@GetMapping(value = "/acceso-denegado")
+		public String usuario_incorrecto(Model modelo, HttpSession session) {
+			
+
+			// Session Usuarios
+			String nombre = (String) session.getAttribute("user");
+			int id = (int) session.getAttribute("id_Usuario");
+			modelo.addAttribute("id_usuario", id);
+			String roles =  (String) session.getAttribute("rol");
+			modelo.addAttribute("roles", roles);
+			
+			if (nombre == null) {
+				nombre = "f amigo";
+				modelo.addAttribute("usuario1", nombre);
+				modelo.addAttribute("usuario2", "");
+			} else {
+				modelo.addAttribute("usuario1", nombre);
+				modelo.addAttribute("usuario2", nombre);
+			}
+
+			return "UsuarioIncorrecto";
+		}
 	
 }
