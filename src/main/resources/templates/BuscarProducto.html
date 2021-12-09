@@ -37,13 +37,15 @@
 				</form>
 				<div class="userLR">
 					<div th:if="${usuario1 != usuario2}">
-						<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
-						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+						<a th:href="@{/usuario/login}" class="btn btn-info"> Entrar </a>
+						<a th:href="@{/usuario/signup}" class="btn btn-info"> Registro </a>
 					</div>
 					<div th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white"> Perfil
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-info">
+							Perfil
 						</a>
-						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/usuario/logOut}" class="btn btn-info"> Salir </a>
+						<br>
 						<a th:href="@{/carrito/listar}">
 							<div th:if="${usuario1 == usuario2}" class="userLR carrito"> </div>
 						</a>
