@@ -26,7 +26,7 @@
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav me-auto">
 					<li th:if="${roles == 'Admin'}" class="nav-item">
-						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+						<a class="nav-link" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
 					</li>
 				</ul>
 				<form class="d-flex" th:action="@{/producto/buscar}" method="GET">
@@ -39,8 +39,7 @@
 						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
 					</div>
 					<div th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white">
-							Perfil
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white"> Perfil
 						</a>
 						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
 						<a th:href="@{/carrito/listar}">
@@ -52,6 +51,7 @@
 		</div>
 	</nav>
 	<!-- Cierre del menú -->
+	
 	<br>
 
 	<table class="table">
