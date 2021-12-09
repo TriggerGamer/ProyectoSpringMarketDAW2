@@ -28,7 +28,7 @@
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav me-auto">
 					<li th:if="${roles == 'Admin'}" class="nav-item">
-						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+						<a class="nav-link" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
 					</li>
 				</ul>
 				<form class="d-flex" th:action="@{/producto/buscar}" method="GET">

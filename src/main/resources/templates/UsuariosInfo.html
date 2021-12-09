@@ -27,7 +27,7 @@
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav me-auto">
 					<li th:if="${roles == 'Admin'}" class="nav-item">
-						<a class="nav-link" href="/crear"> AÑADIR PRODUCTO </a>
+						<a class="nav-link" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
 					</li>
 				</ul>
 				<form class="d-flex" th:action="@{/producto/buscar}" method="GET">
@@ -54,20 +54,39 @@
 	<!-- Cierre del menú -->
 
 	<br>
+	
+	<table class="table">
+		<thead>
+			<tr class="table-info text-start">
+				<th scope="col"> Nombre de Usuario </th>
+				<th scope="col"> Nombre Real </th>
+				<th scope="col"> Apellidos </th>
+				<th scope="col"> E-mail </th>
+				<th scope="col"> Fecha de Nacimiento </th>
+				<th scope="col"> Número de tarjeta </th>
+				<th scope="col"> Titular de la tarjeta </th>
+				<th scope="col"> Codigo de seguridad </th>
+				<th scope="col"> Dirrección de Facturación </th>
+			</tr>
+		</thead>
 
-	<div>
-		<div th:text="${usuario.id_Usuario}"> </div>
-		<div th:text="${usuario.nombre}"> </div>
-		<div th:text="${usuario.apellidos}"> </div>
-		<div th:text="${usuario.contrasenia}"> </div>
-		<div th:text="${usuario.email}"> </div>
-		<div th:text="${usuario.fechaNacimiento}"> </div>
-		<div th:text="${usuario.numeroTarjeta}"> </div>
-		<div th:text="${usuario.titularTarjeta}"> </div>
-		<div th:text="${usuario.codigoSeguridad}"> </div>
-		<div th:text="${usuario.direccionFacturacion}"> </div>
-	</div>
+		<tbody>
+			<tr class="table-info text-start">
+				<td scope="row" th:text="${usuario.nombreUsuario}"/>
+				<td th:text="${usuario.nombre}" />
+				<td th:text="${usuario.apellidos}" />
+				<td th:text="${usuario.email}" />
+				<td th:text="${usuario.fechaNacimiento}" />
+				<td th:text="${usuario.numeroTarjeta}" />
+				<td th:text="${usuario.titularTarjeta}" />
+				<td th:text="${usuario.codigoSeguridad}" />
+				<td th:text="${usuario.direccionFacturacion}"/>
+			</tr>
+		</tbody>
+	</table>
+
 	<br>
+	
 	<a th:href="@{/compra/miscompras}"><button>Mis compras</button> </a>
 
 </body>
