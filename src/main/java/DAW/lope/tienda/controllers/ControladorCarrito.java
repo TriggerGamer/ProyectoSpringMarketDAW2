@@ -14,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.entidades.Carrito;
 import DAW.lope.tienda.entidades.Producto;
-import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioProductos;
-import DAW.lope.tienda.servicios.ServicioUsuarios;
+
 
 @Controller
 public class ControladorCarrito {
 
 	// Conexión a los Servicios
-	@Autowired
-	private ServicioUsuarios servicioUsuarios;
 	@Autowired
 	private ServicioProductos servicioProductos;
 
@@ -73,11 +70,13 @@ public class ControladorCarrito {
 	@GetMapping(value = "/carrito/listar")
 	public String carrito_get(Model modelo, HttpSession session) {
 
-		// session Usuarios
-		String nombre = (String) session.getAttribute("user");	
-		String roles =  (String) session.getAttribute("rol");	
-		modelo.addAttribute("roles", roles);	
-		
+		// Session Usuarios
+		String nombre = (String) session.getAttribute("user");
+		int id = (int) session.getAttribute("id_Usuario");
+		modelo.addAttribute("id_usuario", id);
+		String roles = (String) session.getAttribute("rol");
+		modelo.addAttribute("roles", roles);
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -85,15 +84,6 @@ public class ControladorCarrito {
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
-		}
-		
-		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre);
-		if (usuario == null) {
-
-		} else {
-			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("id_usuario", id_usuario);
 		}
 		
 		// Coger los atributos del carrito en session

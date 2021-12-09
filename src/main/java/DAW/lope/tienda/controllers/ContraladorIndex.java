@@ -11,16 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import DAW.lope.tienda.entidades.Producto;
-import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioProductos;
-import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 @Controller
 public class ContraladorIndex {
 	
 	//Conexión a los Servicios
-	@Autowired
-	ServicioUsuarios servicioUsuarios;
 	@Autowired
 	ServicioProductos servicioProductos;
 
@@ -33,11 +29,13 @@ public class ContraladorIndex {
 		List<Producto> Producto = servicioProductos.findEight();
 		modelo.addAttribute("Productos", Producto);
 
-		// session Usuarios
-		String nombre = (String) session.getAttribute("user");	
-		String roles =  (String) session.getAttribute("rol");	
-		modelo.addAttribute("roles", roles);	
-		
+		// Session Usuarios
+		String nombre = (String) session.getAttribute("user");
+		int id = (int) session.getAttribute("id_Usuario");
+		modelo.addAttribute("id_usuario", id);
+		String roles = (String) session.getAttribute("rol");
+		modelo.addAttribute("roles", roles);
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -45,15 +43,6 @@ public class ContraladorIndex {
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
-		}
-		
-		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre);
-		if (usuario == null) {
-
-		} else {
-			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
 		return "index";

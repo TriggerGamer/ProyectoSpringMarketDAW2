@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import DAW.lope.tienda.entidades.Carrito;
 import DAW.lope.tienda.entidades.Compra;
-import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioCompras;
-import DAW.lope.tienda.servicios.ServicioUsuarios;
 
 @Controller
 public class ControladorCompras {
@@ -23,8 +21,6 @@ public class ControladorCompras {
 	// Conexión a los Servicios
 	@Autowired
 	private ServicioCompras servicioCompras;
-	@Autowired
-	private ServicioUsuarios servicioUsuarios;
 
 	// Método comprar un producto
 	@PostMapping(value = "/compra")
@@ -73,7 +69,6 @@ public class ControladorCompras {
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		
 		String roles = (String) session.getAttribute("rol");
 		modelo.addAttribute("roles", roles);
 
@@ -97,6 +92,8 @@ public class ControladorCompras {
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");
+		int id = (int) session.getAttribute("id_Usuario");
+		modelo.addAttribute("id_usuario", id);
 		String roles =  (String) session.getAttribute("rol");		
 		modelo.addAttribute("roles", roles);
 
@@ -108,17 +105,7 @@ public class ControladorCompras {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-
-		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre);
-
-		if (usuario1 == null) {
-
-		} else {
-			int id_usuario = usuario1.getId_Usuario();
-			modelo.addAttribute("usuario", id_usuario);
-		}
-
+		
 		return "redirect:/compra/miscompras";
 	}
 	

@@ -23,9 +23,9 @@ public class ControladorUsuarios {
 	// Metodos para registro de usuarios
 	@GetMapping(value = "/usuario/signup")
 	public String registrarUsuario_get(HttpSession session, Model modelo) {
+		
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-
 		String roles =  (String) session.getAttribute("rol");
 		
 		modelo.addAttribute("roles", roles);
@@ -73,7 +73,6 @@ public class ControladorUsuarios {
 		// Session Usuarios
 
 		String nombre = (String) session.getAttribute("user");
-
 		String roles =  (String) session.getAttribute("rol");
 		
 		modelo.addAttribute("roles", roles);
