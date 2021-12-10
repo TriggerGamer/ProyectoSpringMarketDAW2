@@ -67,6 +67,9 @@
 				</form>
 			</div>
 		</div>
+		<div th:if="${param.error}" class="row"> 
+			<p class="alert alert-danger"> Usuario o Contraseña Incorrectos </p>
+		</div>
 	</div>
 
 	<br>

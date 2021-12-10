@@ -12,7 +12,7 @@
 
 <body>
 	<header>
-		<h1 class="center"> Acceso a usuarios </h1>
+		<h1 class="center"> Acceso Denegado </h1>
 	</header>
 
 	<!-- Apertura del menu -->
@@ -56,22 +56,32 @@
 	<!-- Cierre del menú -->
 
 	<br>
-	
-	<h1 class="display-1 text-danger center"> Usuario Incorrecto </h1> 
-	<a class="btn btn-outline-danger btn-lg" th:href="@{/usuario/login}"> Intentalo de nuevo </a>
-	
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-4">
-			</div>
-			<div class="col-3">
-				<p> ¿No tienes cuenta? </p>
-				<a  class="btn btn-outline-danger btn-lg" th:href="@{/usuario/signup}"> Regístrate </a>
-			</div>
 
-		</div>
-	</div>
+	<h1 class="display-1 text-danger alert alert-danger center"> Acceso denegado </h1>
+
+	<p class="center text-danger"> Usted no tiene acceso a esta página </p>
+	
 	<br>
+
+	<div class="center">
+		<p> ¿Tienes cuenta? </p>
+		<a class="btn btn-outline-primary btn-lg" th:href="@{/usuario/login}"> Iniciar sesion </a>
+	</div>
+
+	<br>
+
+	<div class="center">
+		<p> ¿No tienes cuenta? </p>
+		<a class="btn btn-outline-danger btn-lg" th:href="@{/usuario/signup}"> Regístrate </a>
+	</div>
+	
+	<br>
+	
+	<div class="center">
+		<p> ¿Volver a inicio? </p>
+		<a class="btn btn-outline-info btn-lg" th:href="@{/index}"> Inicio </a>
+	</div>
+
 
 </body>
 

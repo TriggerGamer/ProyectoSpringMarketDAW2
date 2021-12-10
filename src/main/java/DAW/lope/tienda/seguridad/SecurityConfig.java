@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        http
 	                .authorizeRequests()
 	                    .antMatchers(
-	                            "/","/index",
+	                            "/index",
 	                            "/js/**",
 	                            "/css/**",
 	                            "/img/**",
@@ -37,10 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/producto/{id_Producto}",
 	                            "/carrito/guardar/{id_Producto}",
 	                            "/carrito/listar",
+	                            "/acceso-denegado",
 	                            "/webjars/**").permitAll()
-	                    .antMatchers("/producto/crear").hasAuthority("Admin")
-	                    .antMatchers("/producto/borrar/{id_Producto}").hasAuthority("Admin")      
-	                    .anyRequest().authenticated()
+	                    .antMatchers(
+	                    		"/producto/crear",
+	                    		"/producto/borrar/{id_Producto}").hasAuthority("Admin")
+	                    .antMatchers(
+	                    		"/compra/miscompras",
+	                    		"/compra").hasRole("Publico")
 	                .and()
 	                .formLogin()
 	                    .loginPage("/usuario/login")

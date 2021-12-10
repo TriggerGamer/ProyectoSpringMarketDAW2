@@ -32,37 +32,45 @@ public class ControladorCompras {
 
 		if (nombre == null) {
 			return "redirect:/usuario/login";
-		} else {
-
-			// Guardar la compra
-			servicioCompras.saveCompras(id_Usuario);
-
-			Compra compra = servicioCompras.getCompras(id_Usuario);
-
-			// Obtener el carrito de la compra de session
-			@SuppressWarnings("unchecked")
-			List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
-
-			for (int i = 0; i < carrito.size(); i++) {
-				Carrito carrito2 = carrito.get(i);
-
-				// Guardar cada producto el la base de datos
-				servicioCompras.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(),
-						carrito2.getNumeroUnidades());
-			}
-			session.setAttribute("carrito", null);
-			session.setAttribute("vacio", null);
-			return "redirect:/compra/miscompras";
 		}
+
+		// Guardar la compra
+		servicioCompras.saveCompras(id_Usuario);
+
+		Compra compra = servicioCompras.getCompras(id_Usuario);
+
+		// Obtener el carrito de la compra de session
+		@SuppressWarnings("unchecked")
+		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
+
+		for (int i = 0; i < carrito.size(); i++) {
+			Carrito carrito2 = carrito.get(i);
+
+			// Guardar cada producto el la base de datos
+			servicioCompras.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(),
+					carrito2.getNumeroUnidades());
+		}
+		session.setAttribute("carrito", null);
+		session.setAttribute("vacio", null);
+		return "redirect:/compra/miscompras";
+
 	}
 
 	// Método para ver las compras hechas
 	@GetMapping(value = "/compra/miscompras")
 	public String listarcompra_get(Model modelo, HttpSession session) {
 
-		int id = (int) session.getAttribute("id_Usuario");
-		modelo.addAttribute("id_usuario", id);
+		int id;
 		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
+		modelo.addAttribute("id_usuario", id);
+
 		// Obtener las compras
 		List<Compra> compra = servicioCompras.findComprasUsuario(id);
 		modelo.addAttribute("compras", compra);
@@ -90,23 +98,7 @@ public class ControladorCompras {
 
 		servicioCompras.deleteCompra(id_Compra);
 
-		// session Usuarios
-		String nombre = (String) session.getAttribute("user");
-		int id = (int) session.getAttribute("id_Usuario");
-		modelo.addAttribute("id_usuario", id);
-		String roles =  (String) session.getAttribute("rol");		
-		modelo.addAttribute("roles", roles);
-
-		if (nombre == null) {
-			nombre = "f amigo";
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", "");
-		} else {
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", nombre);
-		}
-		
 		return "redirect:/compra/miscompras";
 	}
-	
+
 }
