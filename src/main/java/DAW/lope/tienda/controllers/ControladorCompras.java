@@ -27,6 +27,11 @@ public class ControladorCompras {
 	public String comprar_get(Model modelo, HttpSession session) {
 		
 		int id_Usuario = (int) session.getAttribute("id_Usuario");
+		String roles = (String) session.getAttribute("rol");
+		
+		if(roles.equals("Publico")) {
+			return "redirect:/acceso-denegado";
+		}
 
 		// Guardar la compra
 		servicioCompras.saveCompras(id_Usuario);

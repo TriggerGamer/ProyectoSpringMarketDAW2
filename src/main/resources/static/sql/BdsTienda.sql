@@ -6,8 +6,9 @@ id_Producto int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 tituloProducto VARCHAR(100),
 descripcionProducto VARCHAR(300),
 precio double(10,2),
-descuento int(7)
+descuento int(5)
 );
+
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("Lenovo IdeaCentre","Diseñado específicamente para catapultarte al mundo de los videojuegos y los deportes electrónicos, esta formidable torre desatará tus opciones de productividad y creatividad",757.07,7);
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("Silver AMD Ryzen 5","La nueva línea de Pcs de sobremesa para juegos creada tras un amplio trabajo de investigación para ofrecer el mayor rendimiento y optimización en el juego para nuestros cliente",1347.42,2);
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("MSI GF75 Thin","Te presentamos el portátil GF75 Thin de MSI, un portátil gaming con procesador Intel Core i7, 16GB de RAM, 512GB de SSD y gráfica Nvidia GeForce RTX 3060.",1227.34,0);
@@ -30,6 +31,7 @@ titularTarjeta VARCHAR (100),
 codigoSeguridad INT(3),
 direccionFacturacion VARCHAR (200)
 );
+
 create table Compras(
 id_Compra int(10) NOT NULL auto_increment,
 id_Usuario int(10) NOT NULL,
@@ -37,17 +39,15 @@ fechaDeCompra DATE NOT NULL,
 PRIMARY KEY(id_Compra, id_Usuario),
 FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario)
 );
+
 create table ProductosCompras(
-id_Producto int(10),
 id_Compra int(10),
+id_Producto int(10),
 numeroUnidades int(3) NOT NULL,
 PRIMARY KEY(id_Compra, id_Producto),
-foreign key (id_Producto) REFERENCES Productos(id_Producto),
+foreign key (id_Producto) REFERENCES Productos(id_Producto) ON DELETE SET NULL,
 foreign key (id_Compra) REFERENCES Compras(id_Compra)
 );
-
-INSERT INTO Usuarios VALUES(1,"Luis","Martinez", 'luis',"luis@.com","1994-12-12","12345678","luis","123","garcia plata de osma");
-INSERT INTO Usuarios VALUES(2,"Erick","Jaquez", 'erick',"ff@.com","2002-05-29","1452345678","erick","313","el quinto pino");
 
 create table Roles(
 id_Rol int(10) primary key auto_increment,

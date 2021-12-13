@@ -44,7 +44,7 @@ public class ContraladorIndex {
 		modelo.addAttribute("id_usuario", id);
 		String roles = (String) session.getAttribute("rol");
 		if (roles == null) {
-			session.setAttribute("rol", "Público");
+			session.setAttribute("rol", "Publico");
 		}
 		modelo.addAttribute("roles", roles);
 

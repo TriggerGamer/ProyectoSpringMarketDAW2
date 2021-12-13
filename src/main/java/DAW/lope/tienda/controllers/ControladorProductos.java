@@ -25,6 +25,10 @@ public class ControladorProductos {
 	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo,
 			HttpSession session) {
 
+		if(busqueda == null) {
+			busqueda = " ";
+		}
+		
 		// Declarar la lista para obtener los datos
 		List<Producto> producto = servicioProductos.getProductoByName(busqueda);
 		modelo.addAttribute("productos", producto);

@@ -76,10 +76,14 @@
 			</tr>
 		</tbody>
 	</table>
-
-	<div th:if="${vacio != novacio}">
+	
+	<div class="center">
+		<a class="btn btn-lg btn-outline-primary" th:href="@{/producto/buscar}"> Seguir comprando </a>
+	</div>
+	
+	<div th:if="${vacio != novacio}" class="center">
 		<form th:action="@{/compra}" method="POST">
-			<input class="btn btn-success my-2 my-sm-0" type="submit" value="Comprar">
+			<input class="btn btn-success btn-lg my-2 my-sm-0 " type="submit" value="Comprar">
 		</form>
 	</div>
 </body>

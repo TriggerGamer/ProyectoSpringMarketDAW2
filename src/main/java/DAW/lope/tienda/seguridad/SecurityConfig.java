@@ -36,12 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/producto/buscar",
 	                            "/producto/{id_Producto}",
 	                            "/carrito/guardar/{id_Producto}",
+	                            "/carrito/borrar/{id_Producto}",
 	                            "/carrito/listar",
 	                            "/acceso-denegado",
 	                            "/webjars/**").permitAll()
 	                    .antMatchers(
 	                    		"/producto/crear",
-	                    		"/producto/borrar/{id_Producto}").hasRole("Admin")
+	                    		"/producto/borrar/{id_Producto}").hasAuthority("Admin")
+	                    .antMatchers(
+	                    		"/compra").hasAnyAuthority("Registrado", "Admin")
 	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()
