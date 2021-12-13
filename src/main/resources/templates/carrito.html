@@ -63,14 +63,16 @@
 				<th scope="col"> Identificador de Producto </th>
 				<th scope="col"> Nombre del producto </th>
 				<th scope="col"> Número de Unidades </th>
+				<th scope="col"> </th>
 			</tr>
 		</thead>
 
 		<tbody>
 			<tr class="table-info text-start">
 				<td scope="row" th:text="${compra.id_Producto}" />
-				<td th:text="${compra.nombreProducto}" />
-				<td th:text="${compra.numeroUnidades}" />
+				<td scope="row" th:text="${compra.nombreProducto}" />
+				<td scope="row" th:text="${compra.numeroUnidades}" />
+				<td scope="row" > <a th:href="@{/carrito/borrar/{id}(id=${compra.id_Producto})}"> <button class="btn btn-warning text-primary"> Borrar del carrito </button> </a> </td>
 			</tr>
 		</tbody>
 	</table>

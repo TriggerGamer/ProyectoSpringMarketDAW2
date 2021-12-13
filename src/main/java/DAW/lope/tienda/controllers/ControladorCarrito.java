@@ -26,7 +26,7 @@ public class ControladorCarrito {
 
 	// Método guardar un producto en session para el Carrito
 	@GetMapping(value = "/carrito/guardar/{id_Producto}")
-	public String carritoGuardar_get(@RequestParam(value = "numeroProductos", required = false) String numeroProductos,
+	public String carrito_guardar(@RequestParam(value = "numeroProductos", required = false) String numeroProductos,
 			Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Obtener los datos del producto mediante el servicio
@@ -68,7 +68,7 @@ public class ControladorCarrito {
 
 	// Métodos para ver el Carrito
 	@GetMapping(value = "/carrito/listar")
-	public String carrito_get(Model modelo, HttpSession session) {
+	public String carrito_listar(Model modelo, HttpSession session) {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
@@ -108,6 +108,30 @@ public class ControladorCarrito {
 		modelo.addAttribute("novacio", null);
 
 		return "carrito";
+	}
+	
+	@GetMapping(value = "/carrito/borrar/{id_Producto}")
+	public String carrito_borrar(Model modelo, HttpSession session, @PathVariable int id_Producto) {
+		
+		// Coger los atributos del carrito en session
+		@SuppressWarnings("unchecked")
+		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
+		if (carrito == null) {
+			carrito = new ArrayList<Carrito>();
+		}
+		else {
+			for (int i = 0; i < carrito.size(); i++) {
+				Carrito carrito2 = carrito.get(i);
+
+				if (carrito2.getId_Producto() == id_Producto) {
+					carrito.remove(i);
+					break;
+				}
+			}
+		}
+		session.setAttribute("carrito", carrito);
+
+		return "redirect:/carrito/listar";
 	}
 
 }

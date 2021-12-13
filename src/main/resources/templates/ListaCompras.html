@@ -70,8 +70,8 @@
 			<tr class="table-info text-start">
 				<td scope="row" th:text="${compra.id_Compra}" />
 				<td scope="row" th:text="${compra.id_Usuario}" />
-				<td th:text="${compra.fechaDePedido}" />
-				<td>
+				<td scope="row" th:text="${compra.fechaDePedido}" />
+				<td scope="row">
 					<form th:action="@{/compra/devolver/{id}(id=${compra.id_Compra})}" method="POST">
 						<button type="submit">Devolver</button>
 					</form>

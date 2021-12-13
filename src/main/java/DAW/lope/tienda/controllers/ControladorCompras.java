@@ -25,14 +25,8 @@ public class ControladorCompras {
 	// Método comprar un producto
 	@PostMapping(value = "/compra")
 	public String comprar_get(Model modelo, HttpSession session) {
-
-		// Comprobar usuario
-		String nombre = (String) session.getAttribute("user");
+		
 		int id_Usuario = (int) session.getAttribute("id_Usuario");
-
-		if (nombre == null) {
-			return "redirect:/usuario/login";
-		}
 
 		// Guardar la compra
 		servicioCompras.saveCompras(id_Usuario);
@@ -52,6 +46,7 @@ public class ControladorCompras {
 		}
 		session.setAttribute("carrito", null);
 		session.setAttribute("vacio", null);
+		
 		return "redirect:/compra/miscompras";
 
 	}

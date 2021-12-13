@@ -41,10 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/webjars/**").permitAll()
 	                    .antMatchers(
 	                    		"/producto/crear",
-	                    		"/producto/borrar/{id_Producto}").hasAuthority("Admin")
-	                    .antMatchers(
-	                    		"/compra/miscompras",
-	                    		"/compra").hasRole("Publico")
+	                    		"/producto/borrar/{id_Producto}").hasRole("Admin")
+	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()
 	                    .loginPage("/usuario/login")

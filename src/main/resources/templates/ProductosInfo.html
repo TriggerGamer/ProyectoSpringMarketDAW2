@@ -75,7 +75,7 @@
 				<td scope="row" th:text="${producto.descripcionProducto}" />
 				<td scope="row" th:text="${producto.precio}" />
 				<td scope="row" th:text="${producto.descuento}" />
-				<td>
+				<td scope="row">
 					<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
 						<input type="number" name="numeroProductos" placeholder="Numero de productos que desea"
 							size="500">

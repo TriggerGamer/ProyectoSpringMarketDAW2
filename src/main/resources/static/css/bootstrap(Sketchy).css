@@ -103,6 +103,15 @@
 	background-size: cover;
 }
 
+.tablaCompras{
+	width:16.5%;
+}
+
+.center{
+	text-align: center !important;
+}
+
+
 body {
   margin: 2rem;
   font-family: var(--bs-body-font-family);
@@ -116,9 +125,6 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.center{
-	text-align: center !important;
-}
 
 hr {
   margin: 1rem 0;
@@ -1925,9 +1931,7 @@ progress {
     --bs-gutter-y: 3rem;
   }
 }
-.tablaCompras{
-	width:16.5%;
-}
+
 .table {
   --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
