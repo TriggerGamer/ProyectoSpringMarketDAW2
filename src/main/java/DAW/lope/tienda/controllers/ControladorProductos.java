@@ -10,16 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import DAW.lope.tienda.entidades.Producto;
-import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioProductos;
-import DAW.lope.tienda.servicios.ServicioUsuarios;
+
 
 @Controller
 public class ControladorProductos {
 
 	// Conexión a los Servicios
-	@Autowired
-	private ServicioUsuarios servicioUsuarios;
 	@Autowired
 	private ServicioProductos servicioProductos;
 
@@ -28,15 +25,27 @@ public class ControladorProductos {
 	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo,
 			HttpSession session) {
 
+		if(busqueda == null) {
+			busqueda = " ";
+		}
+		
 		// Declarar la lista para obtener los datos
 		List<Producto> producto = servicioProductos.getProductoByName(busqueda);
 		modelo.addAttribute("productos", producto);
 
-		// session Usuarios
+		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-
+		int id;
+		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
+		modelo.addAttribute("id_usuario", id);
 		String roles = (String) session.getAttribute("rol");
-
 		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {
@@ -46,15 +55,6 @@ public class ControladorProductos {
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
-		}
-
-		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre);
-		if (usuario == null) {
-
-		} else {
-			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
 		return "BuscarProducto";
@@ -63,9 +63,18 @@ public class ControladorProductos {
 	// Métodos para crear un producto
 	@GetMapping(value = "/producto/crear")
 	public String crearProducto_get(HttpSession session, Model modelo) {
-
+		
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
+		int id;
+		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		modelo.addAttribute("id_usuario", id);
 		String roles = (String) session.getAttribute("rol");
 		modelo.addAttribute("roles", roles);
 
@@ -77,17 +86,15 @@ public class ControladorProductos {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-
-		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre);
-		if (usuario == null) {
-
-		} else {
-			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("id_usuario", id_usuario);
+		
+		if(roles.equals("Admin")){
+			return "CrearProducto";
+		}
+		else {
+			return "redirect:/acceso-denegado";
 		}
 
-		return "CrearProducto";
+		
 	}
 
 	@PostMapping(value = "/producto/crear")
@@ -118,9 +125,17 @@ public class ControladorProductos {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-
+		int id;
+		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
+		modelo.addAttribute("id_usuario", id);
 		String roles = (String) session.getAttribute("rol");
-
 		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {
@@ -131,16 +146,7 @@ public class ControladorProductos {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
 		}
-
-		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre);
-		if (usuario == null) {
-
-		} else {
-			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("id_usuario", id_usuario);
-		}
-
+		
 		return "ProductosInfo";
 	}
 
@@ -155,9 +161,9 @@ public class ControladorProductos {
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-
+		int id = (int) session.getAttribute("id_Usuario");
+		modelo.addAttribute("id_usuario", id);
 		String roles = (String) session.getAttribute("rol");
-
 		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {
@@ -167,15 +173,6 @@ public class ControladorProductos {
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
-		}
-
-		// Usuarios
-		Usuario usuario1 = servicioUsuarios.login(nombre);
-		if (usuario1 == null) {
-
-		} else {
-			int id_usuario = usuario1.getId_Usuario();
-			modelo.addAttribute("id_usuario", id_usuario);
 		}
 
 		return "borrar";

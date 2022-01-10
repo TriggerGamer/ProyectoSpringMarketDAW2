@@ -14,22 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.entidades.Carrito;
 import DAW.lope.tienda.entidades.Producto;
-import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioProductos;
-import DAW.lope.tienda.servicios.ServicioUsuarios;
+
 
 @Controller
 public class ControladorCarrito {
 
 	// Conexión a los Servicios
 	@Autowired
-	private ServicioUsuarios servicioUsuarios;
-	@Autowired
 	private ServicioProductos servicioProductos;
 
 	// Método guardar un producto en session para el Carrito
 	@GetMapping(value = "/carrito/guardar/{id_Producto}")
-	public String carritoGuardar_get(@RequestParam(value = "numeroProductos", required = false) String numeroProductos,
+	public String carrito_guardar(@RequestParam(value = "numeroProductos", required = false) String numeroProductos,
 			Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Obtener los datos del producto mediante el servicio
@@ -71,13 +68,23 @@ public class ControladorCarrito {
 
 	// Métodos para ver el Carrito
 	@GetMapping(value = "/carrito/listar")
-	public String carrito_get(Model modelo, HttpSession session) {
+	public String carrito_listar(Model modelo, HttpSession session) {
 
-		// session Usuarios
-		String nombre = (String) session.getAttribute("user");	
-		String roles =  (String) session.getAttribute("rol");	
-		modelo.addAttribute("roles", roles);	
+		// Session Usuarios
+		String nombre = (String) session.getAttribute("user");
+		int id;
 		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
+		modelo.addAttribute("id_usuario", id);
+		String roles = (String) session.getAttribute("rol");
+		modelo.addAttribute("roles", roles);
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -85,15 +92,6 @@ public class ControladorCarrito {
 		} else {
 			modelo.addAttribute("usuario1", nombre);
 			modelo.addAttribute("usuario2", nombre);
-		}
-		
-		// Usuarios
-		Usuario usuario = servicioUsuarios.login(nombre);
-		if (usuario == null) {
-
-		} else {
-			int id_usuario = usuario.getId_Usuario();
-			modelo.addAttribute("id_usuario", id_usuario);
 		}
 		
 		// Coger los atributos del carrito en session
@@ -110,6 +108,30 @@ public class ControladorCarrito {
 		modelo.addAttribute("novacio", null);
 
 		return "carrito";
+	}
+	
+	@GetMapping(value = "/carrito/borrar/{id_Producto}")
+	public String carrito_borrar(Model modelo, HttpSession session, @PathVariable int id_Producto) {
+		
+		// Coger los atributos del carrito en session
+		@SuppressWarnings("unchecked")
+		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
+		if (carrito == null) {
+			carrito = new ArrayList<Carrito>();
+		}
+		else {
+			for (int i = 0; i < carrito.size(); i++) {
+				Carrito carrito2 = carrito.get(i);
+
+				if (carrito2.getId_Producto() == id_Producto) {
+					carrito.remove(i);
+					break;
+				}
+			}
+		}
+		session.setAttribute("carrito", carrito);
+
+		return "redirect:/carrito/listar";
 	}
 
 }

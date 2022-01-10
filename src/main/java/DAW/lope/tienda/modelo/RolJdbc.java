@@ -17,7 +17,7 @@ public class RolJdbc implements RolDao {
 	@Override
 	public List<Rol> buscarRol(int id) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("SELECT * FROM Roles, UsuarioRol WHERE id_Usuario = " + id + " and Roles.id_Rol = UsuarioRol.id_Rol;", (rs, rowNum) -> new Rol(rs.getInt("id_Rol"), rs.getString("nombre_Rol")));
+		return jdbcTemplate.query("SELECT Roles.id_Rol AS id, Roles.nombre_Rol AS nombre FROM Roles, UsuarioRol WHERE id_Usuario = " + id + " and Roles.id_Rol = UsuarioRol.id_Rol;", (rs, rowNum) -> new Rol(rs.getInt("id"), rs.getString("nombre")));
 	}
 
 	@Override

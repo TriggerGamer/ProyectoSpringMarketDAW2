@@ -22,13 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	 @Autowired
 	 private ServicioUsuarios userDetailsService;
 		
-
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http
 	                .authorizeRequests()
 	                    .antMatchers(
-	                            "/","/index",
+	                            "/index",
 	                            "/js/**",
 	                            "/css/**",
 	                            "/img/**",
@@ -37,10 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/producto/buscar",
 	                            "/producto/{id_Producto}",
 	                            "/carrito/guardar/{id_Producto}",
+	                            "/carrito/borrar/{id_Producto}",
 	                            "/carrito/listar",
+	                            "/acceso-denegado",
 	                            "/webjars/**").permitAll()
-	                    .antMatchers("/producto/crear").hasAuthority("Admin")
-	                    .antMatchers("/producto/borrar/{id_Producto}").hasAuthority("Admin")      
+	                    .antMatchers(
+	                    		"/producto/crear",
+	                    		"/producto/borrar/{id_Producto}").hasAuthority("Admin")
+	                    .antMatchers(
+	                    		"/compra").hasAnyAuthority("Registrado", "Admin")
 	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()
@@ -59,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                    .logoutSuccessUrl("/index")
 	                    .permitAll()
 	        		.and()
-	        		.exceptionHandling().accessDeniedPage("/index");
+	        		.exceptionHandling().accessDeniedPage("/acceso-denegado");
 	    }
 
 		@Autowired

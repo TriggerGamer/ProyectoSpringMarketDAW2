@@ -3,16 +3,16 @@
 <head>
 
 	<meta charset='utf-8'>
-	<meta name="author" content="Erick Jáquez y Luis">
-	<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
+	<meta name="author" content="Erick Jaquez y Luis">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/Bootstrap(Sketchy).css}">
 	<meta name="viewport" content="width=device-width">
-	<title> Carrito </title>
+	<title> Acceso a usuarios </title>
 
 </head>
 
 <body>
 	<header>
-		<h1 class="center"> Carrito </h1>
+		<h1 class="center"> Acceso Denegado </h1>
 	</header>
 
 	<!-- Apertura del menu -->
@@ -57,35 +57,32 @@
 
 	<br>
 
-	<table th:each="compra: ${carrito}" class="table">
-		<thead>
-			<tr class="table-info text-start">
-				<th scope="col"> Identificador de Producto </th>
-				<th scope="col"> Nombre del producto </th>
-				<th scope="col"> Número de Unidades </th>
-				<th scope="col"> </th>
-			</tr>
-		</thead>
+	<h1 class="display-1 text-danger alert alert-danger center"> Acceso denegado </h1>
 
-		<tbody>
-			<tr class="table-info text-start">
-				<td scope="row" th:text="${compra.id_Producto}" />
-				<td scope="row" th:text="${compra.nombreProducto}" />
-				<td scope="row" th:text="${compra.numeroUnidades}" />
-				<td scope="row" > <a th:href="@{/carrito/borrar/{id}(id=${compra.id_Producto})}"> <button class="btn btn-warning text-primary"> Borrar del carrito </button> </a> </td>
-			</tr>
-		</tbody>
-	</table>
+	<p class="center text-danger"> Usted no tiene acceso a esta página </p>
+	
+	<br>
+
+	<div class="center">
+		<p> ¿Tienes cuenta? </p>
+		<a class="btn btn-outline-primary btn-lg" th:href="@{/usuario/login}"> Iniciar sesion </a>
+	</div>
+
+	<br>
+
+	<div class="center">
+		<p> ¿No tienes cuenta? </p>
+		<a class="btn btn-outline-danger btn-lg" th:href="@{/usuario/signup}"> Regístrate </a>
+	</div>
+	
+	<br>
 	
 	<div class="center">
-		<a class="btn btn-lg btn-outline-primary" th:href="@{/producto/buscar}"> Seguir comprando </a>
+		<p> ¿Volver a inicio? </p>
+		<a class="btn btn-outline-info btn-lg" th:href="@{/index}"> Inicio </a>
 	</div>
-	
-	<div th:if="${vacio != novacio}" class="center">
-		<form th:action="@{/compra}" method="POST">
-			<input class="btn btn-success btn-lg my-2 my-sm-0 " type="submit" value="Comprar">
-		</form>
-	</div>
+
+
 </body>
 
 </html>

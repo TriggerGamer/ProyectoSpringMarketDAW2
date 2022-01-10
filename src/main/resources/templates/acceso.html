@@ -35,13 +35,15 @@
 				</form>
 				<div class="userLR">
 					<div th:if="${usuario1 != usuario2}">
-						<a th:href="@{/usuario/login}" class="btn btn-outline-info bg-white"> Entrar </a>
-						<a th:href="@{/usuario/signup}" class="btn btn-outline-info bg-white"> Registro </a>
+						<a th:href="@{/usuario/login}" class="btn btn-info"> Entrar </a>
+						<a th:href="@{/usuario/signup}" class="btn btn-info"> Registro </a>
 					</div>
 					<div th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-outline-info bg-white"> Perfil
+						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-info">
+							Perfil
 						</a>
-						<a th:href="@{/usuario/logOut}" class="btn btn-outline-info bg-white"> Salir </a>
+						<a th:href="@{/usuario/logOut}" class="btn btn-info"> Salir </a>
+						<br>
 						<a th:href="@{/carrito/listar}">
 							<div th:if="${usuario1 == usuario2}" class="userLR carrito"> </div>
 						</a>
@@ -53,16 +55,24 @@
 	<!-- Cierre del menú -->
 
 	<br>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-4">
+				<form th:action="@{/usuario/login}" method="POST">
+					<input class="me-sm-2" name="nombreUsuario" size="20" type="text" placeholder="Nombre de Usuario">
+					<input class="me-sm-2" name="contrasenia" size="20" type="password" placeholder="Contraseña">
 
-	<div class="d-block">
-		<form th:action="@{/usuario/login}" method="POST">
-
-			<input class="me-sm-2" name="nombreUsuario" size="20" type="text" placeholder="Nombre de Usuario">
-			<input class="me-sm-2" name="contrasenia" size="20" type="password" placeholder="Contraseña">
-			<input class="btn btn-primary my-2 my-sm-0" type="submit" value="Entrar">
-
-		</form>
+					<input class="btn btn-outline-primary my-2 my-sm-0 btn-lg" type="submit" value="Entrar">
+				</form>
+			</div>
+		</div>
+		<div th:if="${param.error}" class="row"> 
+			<p class="alert alert-danger"> Usuario o Contraseña Incorrectos </p>
+		</div>
 	</div>
+
+	<br>
 
 </body>
 
