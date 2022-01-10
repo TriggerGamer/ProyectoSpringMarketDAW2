@@ -1,11 +1,35 @@
 package DAW.lope.tienda.entidades;
 
+import java.io.Serializable;
 
-public class Producto {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Productos")
+public class Producto implements Serializable {
+	
+	private static final long serialVersionUID = -8668594760203621162L;
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "id_Producto")
 	private int id_Producto;
+	
+	@Column(name = "tituloProducto")
 	private String tituloProducto;
+	
+	@Column(name = "descripcionProducto")
 	private String descripcionProducto;
+	
+	@Column(name = "precio")
 	private double precio;
+	
+	@Column(name = "descuento")
 	private int descuento;
 	
 	public Producto() {}

@@ -4,7 +4,6 @@ public class Compra {
 	private int id_Compra;
 	private int id_Usuario;
 	private String fechaDePedido;
-
 	
 	public Compra (){}
 	
