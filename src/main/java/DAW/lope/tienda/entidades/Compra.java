@@ -1,49 +1,56 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Compras")
+public class Compra implements Serializable {
 
-public class Compra implements Serializable{
-	
 	private static final long serialVersionUID = 1278961066258620588L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Compra")
 	private int id_Compra;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_Usuario")
 	private Usuario usuario;
-	
+
 	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
+
+	@OneToMany(mappedBy = "compra")
+    public Set<Compra> compras = new HashSet<>();
 	
-	
-	
-	public Compra (){}
-	
-	public Compra (int id_Compra,Usuario usuario, String fechaDePedido) {
+	public Compra() {
+	}
+
+	public Compra(int id_Compra, Usuario usuario, String fechaDePedido) {
 		this.id_Compra = id_Compra;
 		this.usuario = usuario;
 		this.fechaDePedido = fechaDePedido;
 	}
-	
+
 	public Compra(int id_Compra) {
 		this.id_Compra = id_Compra;
 	}
-	
+
 	public int getId_Compra() {
 		return id_Compra;
 	}

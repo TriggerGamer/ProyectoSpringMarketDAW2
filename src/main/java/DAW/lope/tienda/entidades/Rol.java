@@ -1,9 +1,33 @@
 package DAW.lope.tienda.entidades;
 
-public class Rol {
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Roles")
+public class Rol implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "id_Rol")
 	private int id_Rol;
-	private String nombreRol;
-	private int id_Usuario;
+	
+	@Column(name = "nombre_Rol")
+	private String nombreRol; 
+	
+	@ManyToMany(mappedBy = "roles")
+	private Set<Usuario> Usuarios = new HashSet<>();
 	
 	public Rol() {}
 	
@@ -11,12 +35,12 @@ public class Rol {
 		this.id_Rol = iD_Rol;
 		this.nombreRol = nombreRol;		
 	}
-	public Rol(int iD_Rol, String nombreRol, int id_Usuario) {
-		this.id_Rol = iD_Rol;
-		this.nombreRol = nombreRol;		
-		this.id_Usuario = id_Usuario;
-	}
-	
+//	public Rol(int iD_Rol, String nombreRol, int id_Usuario) {
+//		this.id_Rol = iD_Rol;
+//		this.nombreRol = nombreRol;		
+//		this.id_Usuario = id_Usuario;
+//	}
+//	
 	
 	public int getId_Rol() {
 		return id_Rol;
@@ -29,14 +53,6 @@ public class Rol {
 	}
 	public void setNombreRol(String nombreRol) {
 		this.nombreRol = nombreRol;
-	}
-
-	public int getId_Usuario() {
-		return id_Usuario;
-	}
-
-	public void setId_Usuario(int id_Usuario) {
-		this.id_Usuario = id_Usuario;
 	}
 	
 }

@@ -1,12 +1,14 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +33,9 @@ public class Producto implements Serializable {
 	
 	@Column(name = "descuento")
 	private int descuento;
+	
+	@OneToMany(mappedBy = "producto")
+    public Set<Producto> productos = new HashSet<>();
 	
 	public Producto() {}
 	

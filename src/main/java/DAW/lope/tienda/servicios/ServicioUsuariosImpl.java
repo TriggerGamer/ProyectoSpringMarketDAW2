@@ -3,7 +3,6 @@ package DAW.lope.tienda.servicios;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import DAW.lope.tienda.entidades.Rol;
 import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.modelo.RolDao;
@@ -43,7 +41,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 		//Guardar el rol de registrado a un nuevo usuario;
 		Rol rol = new Rol();
 		
-		rol.setId_Usuario(usuario2.getId_Usuario());
+//		rol.setId_Usuario(usuario2.getId_Usuario());
 		rol.setId_Rol(2);
 
 		roldao.save(rol);

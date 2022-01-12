@@ -11,6 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,61 +21,68 @@ import javax.persistence.Table;
 @Table(name = "Usuarios")
 
 public class Usuario implements Serializable {
-	
+
 	private static final long serialVersionUID = -7470679502117636926L;
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Usuario")
 	private int id_Usuario;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
-	
+
 	@Column(name = "nombreUsuario")
 	private String nombreUsuario;
-	
+
 	@Column(name = "apellidos")
 	private String apellidos;
-	
+
 	@Column(name = "contrasenia")
 	private String contrasenia;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "fechaNacimiento")
 	private String fechaNacimiento;
-	
+
 	@Column(name = "numeroTarjeta")
 	private long numeroTarjeta;
-	
+
 	@Column(name = "titularTarjeta")
 	private String titularTarjeta;
-	
+
 	@Column(name = "codigoSeguridad")
 	private int codigoSeguridad;
-	
+
 	@Column(name = "direccionFacturacion")
 	private String direccionFacturacion;
-	
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Compra> compras = new HashSet<>();
-	
-	public Usuario() {}
-	
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "UsuarioRol", joinColumns = @JoinColumn(name = "id_Usuario"), inverseJoinColumns = @JoinColumn(name = "id_UsuarioRol"))
+	private Set<Rol> roles = new HashSet<>();
+
+	public Usuario() {
+	}
+
 	public Usuario(int id_usuario, String nombreUsuario, String contrasenia) {
 		this.id_Usuario = id_usuario;
 		this.nombreUsuario = nombreUsuario;
 		this.contrasenia = contrasenia;
 	}
-	
-	public Usuario(int id_usuario, String nombre, String nombreUsuario, String apellidos, String contrasenia, String email, String fechaNacimiento, long numeroTarjeta, String titularTarjeta, int codigoSeguridad, String direccionFacturacion) {
+
+	public Usuario(int id_usuario, String nombre, String nombreUsuario, String apellidos, String contrasenia,
+			String email, String fechaNacimiento, long numeroTarjeta, String titularTarjeta, int codigoSeguridad,
+			String direccionFacturacion) {
 		this.id_Usuario = id_usuario;
 		this.nombre = nombre;
 		this.nombreUsuario = nombreUsuario;
-		this.apellidos = apellidos;	
-		this.contrasenia =contrasenia;
+		this.apellidos = apellidos;
+		this.contrasenia = contrasenia;
 		this.email = email;
 		this.fechaNacimiento = fechaNacimiento;
 		this.numeroTarjeta = numeroTarjeta;
