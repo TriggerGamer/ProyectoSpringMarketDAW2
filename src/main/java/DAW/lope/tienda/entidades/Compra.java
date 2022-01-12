@@ -1,15 +1,42 @@
 package DAW.lope.tienda.entidades;
 
-public class Compra {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Compras")
+
+public class Compra implements Serializable{
+	
+	private static final long serialVersionUID = 1278961066258620588L;
+
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "id_Compra")
 	private int id_Compra;
-	private int id_Usuario;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_Usuario")
+	private Usuario usuario;
+	
+	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
+	
+	
 	
 	public Compra (){}
 	
-	public Compra (int id_Compra, int id_Usuario, String fechaDePedido) {
+	public Compra (int id_Compra,Usuario usuario, String fechaDePedido) {
 		this.id_Compra = id_Compra;
-		this.id_Usuario = id_Usuario;
+		this.usuario = usuario;
 		this.fechaDePedido = fechaDePedido;
 	}
 	
@@ -25,12 +52,12 @@ public class Compra {
 		this.id_Compra = id_Compra;
 	}
 
-	public int getId_Usuario() {
-		return id_Usuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setId_Usuario(int id_Usuario) {
-		this.id_Usuario = id_Usuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getFechaDePedido() {

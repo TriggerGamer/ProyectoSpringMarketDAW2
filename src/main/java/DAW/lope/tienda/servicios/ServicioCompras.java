@@ -3,11 +3,12 @@ package DAW.lope.tienda.servicios;
 import java.util.List;
 
 import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Usuario;
 
 public interface ServicioCompras {
 	
 
-	int saveCompras(int id_Usuario);
+	int saveCompras(Usuario id_Usuario);
 	
 	int saveProductosCompra(int id_Compra, int id_Producto, int  numeroUnidades);
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.modelo.ComprasDao;
 
 @Transactional
@@ -17,9 +18,9 @@ public class ServicioComprasImpl implements ServicioCompras {
 	ComprasDao comprasdao;
 
 	@Override
-	public int saveCompras(int id_Usuario) {
+	public int saveCompras(Usuario id_Usuario) {
 		Compra compra = new Compra();
-		compra.setId_Usuario(id_Usuario);
+		compra.setUsuario(id_Usuario);
 		return comprasdao.save(compra);
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import DAW.lope.tienda.entidades.Usuario;
 
-public interface UsuariosDao {
+public interface UsuariosDao extends DaoGenerico<Usuario>{
 	int count();
 
 	int save(Usuario usuario);

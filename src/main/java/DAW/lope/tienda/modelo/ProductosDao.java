@@ -1,11 +1,9 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
-
 import DAW.lope.tienda.entidades.Producto;
 
-
-public interface ProductosDao {
+public interface ProductosDao  extends DaoGenerico<Producto> {
 	int count();
 	int save(Producto producto);
 	int update(Producto producto);

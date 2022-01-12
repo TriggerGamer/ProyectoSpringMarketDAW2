@@ -1,17 +1,63 @@
 package DAW.lope.tienda.entidades;
 
-public class Usuario {
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Usuarios")
+
+public class Usuario implements Serializable {
+	
+	private static final long serialVersionUID = -7470679502117636926L;
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "id_Usuario")
 	private int id_Usuario;
+	
+	@Column(name = "nombre")
 	private String nombre;
+	
+	@Column(name = "nombreUsuario")
 	private String nombreUsuario;
+	
+	@Column(name = "apellidos")
 	private String apellidos;
+	
+	@Column(name = "contrasenia")
 	private String contrasenia;
+	
+	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "fechaNacimiento")
 	private String fechaNacimiento;
+	
+	@Column(name = "numeroTarjeta")
 	private long numeroTarjeta;
+	
+	@Column(name = "titularTarjeta")
 	private String titularTarjeta;
+	
+	@Column(name = "codigoSeguridad")
 	private int codigoSeguridad;
+	
+	@Column(name = "direccionFacturacion")
 	private String direccionFacturacion;
+	
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Compra> compras = new HashSet<>();
 	
 	public Usuario() {}
 	

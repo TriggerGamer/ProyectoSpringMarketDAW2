@@ -34,7 +34,7 @@ public class ControladorCompras {
 		}
 
 		// Guardar la compra
-		servicioCompras.saveCompras(id_Usuario);
+		servicioCompras.saveCompras(null);
 
 		Compra compra = servicioCompras.getCompras(id_Usuario);
 
