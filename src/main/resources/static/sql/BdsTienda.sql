@@ -45,7 +45,7 @@ id_Compra int(10),
 id_Producto int(10),
 numeroUnidades int(3) NOT NULL,
 PRIMARY KEY(id_Compra, id_Producto),
-foreign key (id_Producto) REFERENCES Productos(id_Producto) ON DELETE SET NULL,
+foreign key (id_Producto) REFERENCES Productos(id_Producto),
 foreign key (id_Compra) REFERENCES Compras(id_Compra)
 );
 
