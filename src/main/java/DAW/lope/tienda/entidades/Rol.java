@@ -35,12 +35,6 @@ public class Rol implements Serializable {
 		this.id_Rol = iD_Rol;
 		this.nombreRol = nombreRol;		
 	}
-//	public Rol(int iD_Rol, String nombreRol, int id_Usuario) {
-//		this.id_Rol = iD_Rol;
-//		this.nombreRol = nombreRol;		
-//		this.id_Usuario = id_Usuario;
-//	}
-//	
 	
 	public int getId_Rol() {
 		return id_Rol;

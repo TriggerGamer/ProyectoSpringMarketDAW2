@@ -44,7 +44,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 //		rol.setId_Usuario(usuario2.getId_Usuario());
 		rol.setId_Rol(2);
 
-		roldao.save(rol);
+		//roldao.save(rol);
 		
 		return 0;
 	}

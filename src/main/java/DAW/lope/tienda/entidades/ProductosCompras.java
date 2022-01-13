@@ -19,12 +19,10 @@ public class ProductosCompras implements Serializable {
 	@Column(name = "numeroUnidades")
 	private int numeroUnidades;
 	
-	@Id
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_Producto")  
     private Producto producto;
  
-	@Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_Compra")
     private Compra compras;
