@@ -5,15 +5,14 @@ import java.util.List;
 import DAW.lope.tienda.entidades.Usuario;
 
 public interface UsuariosDao extends DaoGenerico<Usuario>{
-	int count();
 
-	int save(Usuario usuario);
+	public Usuario save(Usuario usuario);
 
 	int update(Usuario usuario);
 
 	int deleteById(int id);
 
-	List<Usuario> findAll();
+	public List<Usuario> findAll();
 
 	Usuario findById(int id);
 

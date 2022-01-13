@@ -1,9 +1,11 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
+
 import DAW.lope.tienda.entidades.Rol;
+import DAW.lope.tienda.entidades.Usuario;
 
 public interface RolDao extends DaoGenerico<Rol> {
-	int save(Rol rol);
+	Rol save(int id_Rol, Usuario usuario);
 	List<Rol> buscarRol(int id);
 }

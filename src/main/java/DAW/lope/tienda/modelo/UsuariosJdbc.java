@@ -1,10 +1,9 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
-import java.util.Map;
+import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-
 import DAW.lope.tienda.entidades.Usuario;
 
 @Repository
@@ -12,21 +11,9 @@ import DAW.lope.tienda.entidades.Usuario;
 public class UsuariosJdbc extends DaoGenericoImpl<Usuario> implements UsuariosDao {
 
 	@Override
-	public long contarTodos(Map<String, Object> params) {
+	public Usuario save(Usuario usuario) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int save(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
@@ -43,22 +30,41 @@ public class UsuariosJdbc extends DaoGenericoImpl<Usuario> implements UsuariosDa
 
 	@Override
 	public List<Usuario> findAll() {
-		// TODO Auto-generated method stub
+		
+		Query query = this.em.createQuery("FROM Usuario");
+		
+		List<Usuario> usuario = query.getResultList();
+
+		if (usuario != null) {
+			return usuario;
+		}
 		return null;
 	}
 
 	@Override
 	public Usuario findById(int id) {
-		// TODO Auto-generated method stub
+		Query query = this.em.createQuery("FROM Usuario u where u.id_Usuario = :id");
+		query.setParameter("id", id);
+		Usuario usuario = (Usuario) query.getSingleResult();
+
+		if (usuario != null) {
+			return usuario;
+		}
 		return null;
 	}
 
 	@Override
 	public Usuario findByName(String nombreUsuario) {
-		// TODO Auto-generated method stub
+		Query query = this.em.createQuery("FROM Usuario u where u.nombreUsuario= :nombreUs");
+		query.setParameter("nombreUs", nombreUsuario);
+		Usuario usuario = (Usuario) query.getSingleResult();
+
+		if (usuario != null) {
+			return usuario;
+		}
 		return null;
 	}
-
+	
 //	@Autowired
 //	private JdbcTemplate jdbcTemplate;
 //
