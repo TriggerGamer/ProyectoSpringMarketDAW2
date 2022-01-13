@@ -11,8 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,8 +33,8 @@ public class Compra implements Serializable {
 	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
 
-	@OneToMany(mappedBy = "compra")
-    public Set<Compra> compras = new HashSet<>();
+	@OneToMany(mappedBy = "compras", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Compra> compra = new HashSet<>();
 	
 	public Compra() {
 	}

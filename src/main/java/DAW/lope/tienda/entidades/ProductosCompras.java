@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -12,25 +13,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ProductosCompras")
 public class ProductosCompras implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	private Producto producto;
-	private Compra compra;
+	
+	private static final long serialVersionUID = 5086722733899392543L;
 	
 	@Column(name = "numeroUnidades")
 	private int numeroUnidades;
 	
+	@Id
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_Producto")  
-    public Producto producto() {
-        return producto;
-    }
+    private Producto producto;
  
+	@Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_Compra")
-    public Compra compra() {
-        return compra;
-    }
+    private Compra compras;
 
 	public int getNumeroUnidades() {
 		return numeroUnidades;
@@ -44,8 +41,7 @@ public class ProductosCompras implements Serializable {
 		this.producto = producto;
 	}
 
-	public void setCompra(Compra compra) {
-		this.compra = compra;
+	public void setCompras(Compra compra) {
+		this.compras = compra;
 	}
-    
 }

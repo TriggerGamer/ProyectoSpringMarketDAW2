@@ -9,9 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
-
-
 public abstract class DaoGenericoImpl<T> implements DaoGenerico<T> {
 	@PersistenceContext
 	protected EntityManager em;
@@ -23,7 +20,7 @@ public abstract class DaoGenericoImpl<T> implements DaoGenerico<T> {
 		type = (Class) pt.getActualTypeArguments()[0];
 	}
 
-	@Override
+	//@Override
 	public long contarTodos(final Map<String, Object> params) {
 		final StringBuffer queryString = new StringBuffer("SELECT count(o) from ");
 		queryString.append(type.getSimpleName()).append(" o ");
