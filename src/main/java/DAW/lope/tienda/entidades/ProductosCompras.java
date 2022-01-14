@@ -22,11 +22,11 @@ public class ProductosCompras implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Compra")
-	private Compra compra;
+	private Compras compra;
 	
 	public ProductosCompras() {}
 	
-	public ProductosCompras(Producto Producto, Compra compra) {
+	public ProductosCompras(Producto producto, Compras compra) {
 		this.compra = compra;
         this.producto = producto;	
 		this.id = new ProductosComprasId(producto.getId_Producto(), compra.getId_Compra());
@@ -58,11 +58,11 @@ public class ProductosCompras implements Serializable {
 		return producto;
 	}
 
-	public Compra getCompra() {
+	public Compras getCompra() {
 		return compra;
 	}
 
-	public void setCompra(Compra compra) {
+	public void setCompra(Compras compra) {
 		this.compra = compra;
 	}
 }

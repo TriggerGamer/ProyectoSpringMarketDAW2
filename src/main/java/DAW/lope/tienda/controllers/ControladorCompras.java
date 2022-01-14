@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import DAW.lope.tienda.entidades.Carrito;
-import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Compras;
 import DAW.lope.tienda.servicios.ServicioCompras;
 
 @Controller
@@ -36,7 +36,7 @@ public class ControladorCompras {
 		// Guardar la compra
 		servicioCompras.saveCompras(null);
 
-		Compra compra = servicioCompras.getCompras(id_Usuario);
+		Compras compras = servicioCompras.getCompras(id_Usuario);
 
 		// Obtener el carrito de la compra de session
 		@SuppressWarnings("unchecked")
@@ -46,7 +46,7 @@ public class ControladorCompras {
 			Carrito carrito2 = carrito.get(i);
 
 			// Guardar cada producto el la base de datos
-			servicioCompras.saveProductosCompra(compra.getId_Compra(), carrito2.getId_Producto(),
+			servicioCompras.saveProductosCompra(compras.getId_Compra(), carrito2.getId_Producto(),
 					carrito2.getNumeroUnidades());
 		}
 		session.setAttribute("carrito", null);
@@ -72,8 +72,8 @@ public class ControladorCompras {
 		modelo.addAttribute("id_usuario", id);
 
 		// Obtener las compras
-		List<Compra> compra = servicioCompras.findComprasUsuario(id);
-		modelo.addAttribute("compras", compra);
+		List<Compras> compras = servicioCompras.findComprasUsuario(id);
+		modelo.addAttribute("compras", compras);
 
 		// session Usuarios
 		String nombre = (String) session.getAttribute("user");

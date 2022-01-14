@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Compras;
 import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.modelo.ComprasDao;
 
@@ -19,9 +19,9 @@ public class ServicioComprasImpl implements ServicioCompras {
 
 	@Override
 	public int saveCompras(Usuario id_Usuario) {
-		Compra compra = new Compra();
-		compra.setUsuario(id_Usuario);
-		return comprasdao.save(compra);
+		Compras compras = new Compras();
+		compras.setUsuario(id_Usuario);
+		return comprasdao.save(compras);
 	}
 
 	@Override
@@ -31,14 +31,14 @@ public class ServicioComprasImpl implements ServicioCompras {
 	}
 	
 	@Override
-	public Compra getCompras(int id) {
-		Compra compra = new Compra();
+	public Compras getCompras(int id) {
+		Compras compras = new Compras();
 		
-		List<Compra> compras = comprasdao.comprasUsuario(id);
+		List<Compras> compras1 = comprasdao.comprasUsuario(id);
 		
-		compra = compras.get(0);
+		compras1 = (List<Compras>) compras1.get(0);
 		
-		return compra;
+		return (Compras) compras1;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class ServicioComprasImpl implements ServicioCompras {
 	}
 
 	@Override
-	public List<Compra> findComprasUsuario(int id) {
+	public List<Compras> findComprasUsuario(int id) {
 		return comprasdao.comprasUsuario(id);
 	}
 	

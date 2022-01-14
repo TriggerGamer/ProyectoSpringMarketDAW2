@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Compras")
-public class Compra implements Serializable {
+public class Compras implements Serializable {
 
 	private static final long serialVersionUID = 1278961066258620588L;
 
@@ -26,9 +26,6 @@ public class Compra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Compra")
 	private int id_Compra;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<Compra> comprado = new HashSet<>();
 
 	@ManyToOne
 	@JoinColumn(name = "id_Usuario")
@@ -37,26 +34,27 @@ public class Compra implements Serializable {
 	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Compras> comprado = new HashSet<>();
 	
-	
-	public Set<Compra> getCompras() {
+	public Set<Compras> getCompras() {
 		return comprado;
 	}
 
-	public void setCompras(Set<Compra> compras) {
+	public void setCompras(Set<Compras> compras) {
 		this.comprado = compras;
 	}
 
-	public Compra() {
+	public Compras() {
 	}
 
-	public Compra(int id_Compra, Usuario usuario, String fechaDePedido) {
+	public Compras(int id_Compra, Usuario usuario, String fechaDePedido) {
 		this.id_Compra = id_Compra;
 		this.usuario = usuario;
 		this.fechaDePedido = fechaDePedido;
 	}
 
-	public Compra(int id_Compra) {
+	public Compras(int id_Compra) {
 		this.id_Compra = id_Compra;
 	}
 

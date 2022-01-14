@@ -2,14 +2,14 @@ package DAW.lope.tienda.modelo;
 
 import java.util.List;
 
-import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Compras;
 
-public interface ComprasDao extends DaoGenerico<Compra> {
+public interface ComprasDao extends DaoGenerico<Compras> {
 	
-	int save(Compra compra);
+	int save(Compras compras);
 	int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades);
 	int deleteCompraById(int id);
 	int deleteProductosCompraById(int id);
-	List<Compra> comprasUsuario(int id);
+	List<Compras> comprasUsuario(int id);
 	
 }

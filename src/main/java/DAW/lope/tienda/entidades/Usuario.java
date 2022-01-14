@@ -60,17 +60,17 @@ public class Usuario implements Serializable {
 	private String direccionFacturacion;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Compra> compras = new HashSet<>();
+	private Set<Compras> compras = new HashSet<>();
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "UsuarioRol", joinColumns = @JoinColumn(name = "id_Usuario"), inverseJoinColumns = @JoinColumn(name = "id_UsuarioRol"))
 	private Set<Rol> roles = new HashSet<>();
 
-	public Set<Compra> getCompras() {
+	public Set<Compras> getCompras() {
 		return compras;
 	}
 
-	public void setCompras(Set<Compra> compras) {
+	public void setCompras(Set<Compras> compras) {
 		this.compras = compras;
 	}
 

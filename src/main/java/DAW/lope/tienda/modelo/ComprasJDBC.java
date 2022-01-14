@@ -7,15 +7,15 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Compras;
 import DAW.lope.tienda.entidades.Producto;
 
 @Repository
 @Component("ComprasDao")
-public class ComprasJDBC extends DaoGenericoImpl<Compra> implements ComprasDao {
+public class ComprasJDBC extends DaoGenericoImpl<Compras> implements ComprasDao {
 
 	@Override
-	public int save(Compra compra) {
+	public int save(Compras compras) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -39,13 +39,13 @@ public class ComprasJDBC extends DaoGenericoImpl<Compra> implements ComprasDao {
 	}
 
 	@Override
-	public List<Compra> comprasUsuario(int id) {
-		Query query = this.em.createQuery("FROM Compra u WHERE u.id_Usuario = :id");
+	public List<Compras> comprasUsuario(int id) {
+		Query query = this.em.createQuery("FROM Compras u WHERE u.id_Usuario = :id");
 		query.setParameter("id", id);
-		List<Compra> compra = query.getResultList();
+		List<Compras> compras = query.getResultList();
 
-		if (compra != null) {
-			return compra;
+		if (compras != null) {
+			return compras;
 		}
 		return null;
 	}
@@ -54,7 +54,7 @@ public class ComprasJDBC extends DaoGenericoImpl<Compra> implements ComprasDao {
 //	private JdbcTemplate jdbcTemplate;
 //
 //	@Override
-//	public int save(Compra compra) {
+//	public int save(Compras compra) {
 //		return jdbcTemplate.update("INSERT INTO Compras(id_Usuario, fechaDeCompra) VALUES(?,NOW())",
 //				compra.getUsuario());
 //	}
@@ -76,9 +76,9 @@ public class ComprasJDBC extends DaoGenericoImpl<Compra> implements ComprasDao {
 //	}
 //
 //	@Override
-//	public List<Compra> findAll(int id) {
+//	public List<Compras> findAll(int id) {
 //		return jdbcTemplate.query("SELECT * FROM Compras Where id_Usuario  = " + id + " ORDER BY id_Compra DESC", (rs,
-//				rowNum) -> new Compra(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getString("fechaDeCompra")));
+//				rowNum) -> new Compras(rs.getInt("id_Compra"), rs.getInt("id_Usuario"), rs.getString("fechaDeCompra")));
 //	}
 
 

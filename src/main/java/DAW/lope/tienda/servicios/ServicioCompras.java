@@ -2,7 +2,7 @@ package DAW.lope.tienda.servicios;
 
 import java.util.List;
 
-import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Compras;
 import DAW.lope.tienda.entidades.Usuario;
 
 public interface ServicioCompras {
@@ -16,9 +16,9 @@ public interface ServicioCompras {
 	int deleteCompra(int id);
 
 	
-	Compra getCompras(int id);
+	Compras getCompras(int id);
 
 	
-	List<Compra> findComprasUsuario(int id);
+	List<Compras> findComprasUsuario(int id);
 	
 }
