@@ -2,29 +2,27 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ProductosCompras")
 public class ProductosCompras implements Serializable {
-	
+
 	private static final long serialVersionUID = 5086722733899392543L;
 	
+	@EmbeddedId
+	private ProductosComprasId id;
+
 	@Column(name = "numeroUnidades")
 	private int numeroUnidades;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Producto")  
-    private Producto producto;
- 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Compra")
-    private Compra compras;
+	@JoinColumn(name = "id_Producto")
+	private Producto producto;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_Compra")
+	private Compra compra;
 
 	public int getNumeroUnidades() {
 		return numeroUnidades;
@@ -38,7 +36,23 @@ public class ProductosCompras implements Serializable {
 		this.producto = producto;
 	}
 
-	public void setCompras(Compra compra) {
-		this.compras = compra;
+	public ProductosComprasId getId() {
+		return id;
+	}
+
+	public void setId(ProductosComprasId id) {
+		this.id = id;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public Compra getCompra() {
+		return compra;
+	}
+
+	public void setCompra(Compra compra) {
+		this.compra = compra;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,8 +37,16 @@ public class Producto implements Serializable {
 	@Column(name = "descuento")
 	private int descuento;
 
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<Producto> productos = new HashSet<>();
+
+	public Set<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(Set<Producto> productos) {
+		this.productos = productos;
+	}
 
 	public Producto() {
 	}

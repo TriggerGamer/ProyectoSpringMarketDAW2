@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +26,9 @@ public class Compra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Compra")
 	private int id_Compra;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Compra> comprado = new HashSet<>();
 
 	@ManyToOne
 	@JoinColumn(name = "id_Usuario")
@@ -33,9 +37,16 @@ public class Compra implements Serializable {
 	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
 
-	@OneToMany(mappedBy = "compras", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<Compra> compra = new HashSet<>();
 	
+	
+	public Set<Compra> getCompras() {
+		return comprado;
+	}
+
+	public void setCompras(Set<Compra> compras) {
+		this.comprado = compras;
+	}
+
 	public Compra() {
 	}
 
