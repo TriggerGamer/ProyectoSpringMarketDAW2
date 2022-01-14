@@ -23,6 +23,16 @@ public class ProductosCompras implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Compra")
 	private Compra compra;
+	
+	public ProductosCompras() {}
+	
+	public ProductosCompras(Producto Producto, Compra compra) {
+		this.compra = compra;
+        this.producto = producto;	
+		this.id = new ProductosComprasId(producto.getId_Producto(), compra.getId_Compra());
+	}
+	
+	
 
 	public int getNumeroUnidades() {
 		return numeroUnidades;

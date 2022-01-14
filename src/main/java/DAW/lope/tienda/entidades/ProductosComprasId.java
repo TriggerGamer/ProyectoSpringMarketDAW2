@@ -15,10 +15,8 @@ public class ProductosComprasId implements Serializable {
  
     @Column(name = "id_Producto")
     private int id_Producto;
- 
-    private ProductosComprasId(){
-    	
-    }
+    
+    public ProductosComprasId(){}
  
     public ProductosComprasId(int id_Compra, int id_Producto) {
         this.id_Compra = id_Compra;
