@@ -26,16 +26,16 @@ public class ServicioProductosImpl implements ServicioProductos {
 		return productosdao.getProductoByName(name);
 	}
 
-	@Override
-	public int saveProductos(Producto producto) {
-		return productosdao.save(producto);
-	}
-	
-	@Override
-	public int deleteProductoById(int id) {
-
-		return productosdao.deleteById(id);
-	}
+//	@Override
+//	public int saveProductos(Producto producto) {
+//		return productosdao.save(producto);
+//	}
+//	
+//	@Override
+//	public int deleteProductoById(int id) {
+//
+//		return productosdao.deleteById(id);
+//	}
 
 	@Override
 	public Producto findProductoById(int id) {

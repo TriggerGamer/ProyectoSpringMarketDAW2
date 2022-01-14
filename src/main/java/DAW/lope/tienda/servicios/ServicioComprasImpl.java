@@ -34,7 +34,7 @@ public class ServicioComprasImpl implements ServicioCompras {
 	public Compra getCompras(int id) {
 		Compra compra = new Compra();
 		
-		List<Compra> compras = comprasdao.findAll(id);
+		List<Compra> compras = comprasdao.comprasUsuario(id);
 		
 		compra = compras.get(0);
 		
@@ -48,7 +48,7 @@ public class ServicioComprasImpl implements ServicioCompras {
 
 	@Override
 	public List<Compra> findComprasUsuario(int id) {
-		return comprasdao.findAll(id);
+		return comprasdao.comprasUsuario(id);
 	}
 	
 }

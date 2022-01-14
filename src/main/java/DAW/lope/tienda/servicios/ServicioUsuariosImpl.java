@@ -34,7 +34,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 	public int saveUsuarios(Usuario usuario) {
 		
 		usuario.setContrasenia(bCryptPasswordEncoder.encode(usuario.getContrasenia()));
-		usuariodao.save(usuario);
+//		usuariodao.save(usuario);
 		
 		Usuario usuario2 = usuariodao.findByName(usuario.getNombreUsuario());
 		

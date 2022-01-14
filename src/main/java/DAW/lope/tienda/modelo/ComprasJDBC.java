@@ -2,19 +2,17 @@ package DAW.lope.tienda.modelo;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import DAW.lope.tienda.entidades.Compra;
+import DAW.lope.tienda.entidades.Producto;
 
 @Repository
 @Component("ComprasDao")
 public class ComprasJDBC extends DaoGenericoImpl<Compra> implements ComprasDao {
-
-	@Override
-	public long contarTodos(Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int save(Compra compra) {
@@ -41,8 +39,14 @@ public class ComprasJDBC extends DaoGenericoImpl<Compra> implements ComprasDao {
 	}
 
 	@Override
-	public List<Compra> findAll(int id) {
-		// TODO Auto-generated method stub
+	public List<Compra> comprasUsuario(int id) {
+		Query query = this.em.createQuery("FROM Compra u WHERE u.id_Usuario = :id");
+		query.setParameter("id", id);
+		List<Compra> compra = query.getResultList();
+
+		if (compra != null) {
+			return compra;
+		}
 		return null;
 	}
 

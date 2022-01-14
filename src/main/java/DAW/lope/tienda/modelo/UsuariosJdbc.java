@@ -11,24 +11,6 @@ import DAW.lope.tienda.entidades.Usuario;
 public class UsuariosJdbc extends DaoGenericoImpl<Usuario> implements UsuariosDao {
 
 	@Override
-	public Usuario save(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int update(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteById(int id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<Usuario> findAll() {
 		
 		Query query = this.em.createQuery("FROM Usuario");
@@ -65,14 +47,7 @@ public class UsuariosJdbc extends DaoGenericoImpl<Usuario> implements UsuariosDa
 		return null;
 	}
 	
-//	@Autowired
-//	private JdbcTemplate jdbcTemplate;
-//
-//	@Override
-//	public int count() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+
 //
 //	@Override
 //	public int save(Usuario usuario) {
@@ -83,13 +58,7 @@ public class UsuariosJdbc extends DaoGenericoImpl<Usuario> implements UsuariosDa
 //				usuario.getFechaNacimiento(), usuario.getNumeroTarjeta(), usuario.getTitularTarjeta(),
 //				usuario.getCodigoSeguridad(), usuario.getDireccionFacturacion());
 //	}
-//
-//	@Override
-//	public int update(Usuario usuario) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
+
 //	@Override
 //	public int deleteById(int id) {
 //		// TODO Auto-generated method stub

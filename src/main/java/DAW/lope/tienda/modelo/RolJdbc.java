@@ -12,12 +12,6 @@ import DAW.lope.tienda.entidades.Usuario;
 public class RolJdbc  extends DaoGenericoImpl<Rol> implements RolDao {
 
 	@Override
-	public long contarTodos(Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public Rol save(int id_Rol, Usuario usuario) {
 		Rol rol = this.buscar(id_Rol);
 		rol.addUsuario(usuario);

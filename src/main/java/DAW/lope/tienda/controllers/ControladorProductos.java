@@ -110,7 +110,7 @@ public class ControladorProductos {
 		producto.setPrecio(price);
 		producto.setDescuento(descuento);
 
-		servicioProductos.saveProductos(producto);
+//		servicioProductos.saveProductos(producto);
 
 		return "redirect:/index";
 	}
@@ -155,7 +155,7 @@ public class ControladorProductos {
 	public String borrar_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Borrar los datos
-		servicioProductos.deleteProductoById(id_Producto);
+	//	servicioProductos.deleteProductoById(id_Producto);
 		String borrar = "Borrado Correctamente";
 		modelo.addAttribute("borrar", borrar);
 

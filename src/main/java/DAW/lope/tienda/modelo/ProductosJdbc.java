@@ -1,40 +1,74 @@
 package DAW.lope.tienda.modelo;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Usuario;
 
 @Repository
 @Component("ProductosDao")
-public class ProductosJdbc extends DaoGenericoImpl<Producto> {
+public class ProductosJdbc extends DaoGenericoImpl<Producto> implements ProductosDao {
 
 	@Override
-	public long contarTodos(Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Producto> findAll() {
+
+		Query query = this.em.createQuery("FROM Producto");
+		
+		List<Producto> producto = query.getResultList();
+
+		if (producto != null) {
+			return producto;
+		}
+		return null;
 	}
 
-//	@Autowired
-//	private JdbcTemplate jdbcTemplate;
-//
-//	@Override
-//	public int count() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
+	@Override
+	public List<Producto> findEight() {
+		Query query = this.em.createQuery("FROM Producto ORDER BY id_Producto ASC LIMIT 8");
+
+		List<Producto> producto = query.getResultList();
+
+		if (producto != null) {
+			return producto;
+		}
+		return null;
+	}
+
+	@Override
+	public Producto findById(int id) {
+		Query query = this.em.createQuery("FROM Producto u where u.id_Producto = :id");
+		query.setParameter("id", id);
+		Producto producto = (Producto) query.getSingleResult();
+
+		if (producto != null) {
+			return producto;
+		}
+		return null;
+	}
+
+	@Override
+	public List<Producto> getProductoByName(String name) {
+		Query query = this.em.createQuery("FROM Producto u where u.tituloProducto = :nombre");
+		query.setParameter("nombre", name);
+		List<Producto> producto = query.getResultList();
+
+		if (producto != null) {
+			return producto;
+		}
+		return null;
+	}
+
 //	@Override
 //	public int save(Producto producto) {
 //		// TODO Auto-generated method stub
 //		return jdbcTemplate.update("INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES(?,?,?,?)", producto.getTituloProducto(), producto.getDescripcionProducto(), producto.getPrecio(), producto.getDescuento());
 //	}
-//
-//	@Override
-//	public int update(Producto pts) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+
 //
 //	@Override
 //	public int deleteById(int id) {
@@ -57,12 +91,6 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> {
 //	@Override
 //	public Producto findById(int id) {
 //		return jdbcTemplate.queryForObject("SELECT * FROM Productos WHERE id_Producto = ?", (rs, rowNum) -> new Producto(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")),id);
-//	}
-//
-//	@Override
-//	public String getNameById(int id) {
-//		// TODO Auto-generated method stub
-//		return null;
 //	}
 //
 //	@Override
