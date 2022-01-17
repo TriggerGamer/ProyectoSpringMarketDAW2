@@ -6,7 +6,6 @@ import DAW.lope.tienda.entidades.Compras;
 
 public interface ComprasDao extends DaoGenerico<Compras> {
 	
-	int save(Compras compras);
 	int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades);
 	int deleteCompraById(int id);
 	int deleteProductosCompraById(int id);

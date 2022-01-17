@@ -17,11 +17,11 @@ public class ProductosCompras implements Serializable {
 	private int numeroUnidades;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_Producto")
+	@MapsId("idProducto")
 	private Producto producto;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_Compra")
+	@MapsId("idCompra")
 	private Compras compra;
 	
 	public ProductosCompras() {}

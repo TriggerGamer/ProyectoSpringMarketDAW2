@@ -59,7 +59,7 @@ public class ControladorUsuarios {
 		registrar.setCodigoSeguridad(codigoseguridad);
 		registrar.setDireccionFacturacion(direccionfacturacion);
 
-		servicioUsuarios.saveUsuarios(registrar);
+		servicioUsuarios.crear(registrar);
 
 		return "redirect:/index";
 	}

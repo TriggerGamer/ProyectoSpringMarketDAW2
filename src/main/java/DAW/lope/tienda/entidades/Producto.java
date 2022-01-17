@@ -38,14 +38,14 @@ public class Producto implements Serializable {
 	private int descuento;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
-	public Set<Producto> productos = new HashSet<>();
+	public Set<ProductosCompras> Productos = new HashSet<>();
 
-	public Set<Producto> getProductos() {
-		return productos;
+	public Set<ProductosCompras> getProductos() {
+		return Productos;
 	}
 
-	public void setProductos(Set<Producto> productos) {
-		this.productos = productos;
+	public void setProductos(Set<ProductosCompras> productos) {
+		this.Productos = productos;
 	}
 
 	public Producto() {
@@ -98,6 +98,11 @@ public class Producto implements Serializable {
 
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
+	}
+	
+	public void addProductoCompra(ProductosCompras producto) {
+		this.Productos.add(producto);
+		producto.setProducto(this);
 	}
 	
 }

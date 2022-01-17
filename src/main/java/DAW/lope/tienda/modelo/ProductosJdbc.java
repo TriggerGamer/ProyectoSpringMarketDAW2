@@ -1,14 +1,14 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+
 import DAW.lope.tienda.entidades.Producto;
-import DAW.lope.tienda.entidades.Usuario;
+import DAW.lope.tienda.entidades.ProductosCompras;
 
 @Repository
 @Component("ProductosDao")
@@ -29,7 +29,7 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 
 	@Override
 	public List<Producto> findEight() {
-		Query query = this.em.createQuery("FROM Producto ORDER BY id_Producto ASC LIMIT 8");
+		Query query = this.em.createQuery("FROM Producto p ORDER BY p.id_Producto ASC").setMaxResults(8);
 
 		List<Producto> producto = query.getResultList();
 
@@ -61,6 +61,16 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 			return producto;
 		}
 		return null;
+	}
+
+	@Override
+	public ProductosCompras guardarProductoCompra(int id_Producto, ProductosCompras productos) {
+		Producto producto  = this.buscar(id_Producto);
+		producto.addProductoCompra(productos);
+		this.em.merge(productos);
+		this.em.refresh(productos);
+
+		return productos;
 	}
 
 //	@Override

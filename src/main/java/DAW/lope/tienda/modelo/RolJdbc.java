@@ -1,7 +1,7 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
-import java.util.Map;
+import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import DAW.lope.tienda.entidades.Rol;
@@ -27,19 +27,16 @@ public class RolJdbc  extends DaoGenericoImpl<Rol> implements RolDao {
 		return null;
 	}
 
-//	@Autowired
-//	private JdbcTemplate jdbcTemplate;
-//	
-//	@Override
-//	public List<Rol> buscarRol(int id) {
-//		// TODO Auto-generated method stub
-//		return jdbcTemplate.query("SELECT Roles.id_Rol AS id, Roles.nombre_Rol AS nombre FROM Roles, UsuarioRol WHERE id_Usuario = " + id + " and Roles.id_Rol = UsuarioRol.id_Rol;", (rs, rowNum) -> new Rol(rs.getInt("id"), rs.getString("nombre")));
-//	}
-//
-//	@Override
-//	public int save(Rol rol) {
-//		// TODO Auto-generated method stub
-//		return jdbcTemplate.update("INSERT INTO UsuarioRol VALUES(?,?)", rol.getId_Rol(), rol.getId_Usuario());
-//	}
+	@Override
+	public Rol findById(int id) {
+		Query query = this.em.createQuery("FROM Rol u where u.id_Rol = :id");
+		query.setParameter("id", id);
+		Rol rol = (Rol) query.getSingleResult();
+
+		if (rol != null) {
+			return rol;
+		}
+		return null;
+	}
 
 }

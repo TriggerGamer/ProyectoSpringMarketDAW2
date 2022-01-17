@@ -1,16 +1,13 @@
 package DAW.lope.tienda.controllers;
 
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import DAW.lope.tienda.entidades.Carrito;
 import DAW.lope.tienda.entidades.Compras;
 import DAW.lope.tienda.servicios.ServicioCompras;
@@ -34,7 +31,7 @@ public class ControladorCompras {
 		}
 
 		// Guardar la compra
-		servicioCompras.saveCompras(null);
+		servicioCompras.crear(id_Usuario);
 
 		Compras compras = servicioCompras.getCompras(id_Usuario);
 
@@ -96,7 +93,7 @@ public class ControladorCompras {
 	@PostMapping(value = "/compra/devolver/{id_Compra}")
 	public String devolvercompra_get(Model modelo, @PathVariable int id_Compra, HttpSession session) {
 
-		servicioCompras.deleteCompra(id_Compra);
+		servicioCompras.borrar(id_Compra);
 
 		return "redirect:/compra/miscompras";
 	}

@@ -15,12 +15,6 @@ import DAW.lope.tienda.entidades.Producto;
 public class ComprasJDBC extends DaoGenericoImpl<Compras> implements ComprasDao {
 
 	@Override
-	public int save(Compras compras) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades) {
 		// TODO Auto-generated method stub
 		return 0;

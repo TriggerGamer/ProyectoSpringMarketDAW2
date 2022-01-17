@@ -7,18 +7,11 @@ import DAW.lope.tienda.entidades.Usuario;
 
 public interface ServicioCompras {
 	
-
-	int saveCompras(Usuario id_Usuario);
-	
-	int saveProductosCompra(int id_Compra, int id_Producto, int  numeroUnidades);
-
-	
-	int deleteCompra(int id);
-
-	
-	Compras getCompras(int id);
-
-	
-	List<Compras> findComprasUsuario(int id);
+	public Compras crear(int id);
+	public void borrar(Object id);	
+	public int saveProductosCompra(int id_Compra, int id_Producto, int  numeroUnidades);	
+	public int borrar(int id);	
+	public Compras getCompras(int id);	
+	public List<Compras> findComprasUsuario(int id);
 	
 }

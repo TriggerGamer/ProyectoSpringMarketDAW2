@@ -66,22 +66,6 @@ public class Usuario implements Serializable {
 	@JoinTable(name = "UsuarioRol", joinColumns = @JoinColumn(name = "id_Usuario"), inverseJoinColumns = @JoinColumn(name = "id_UsuarioRol"))
 	private Set<Rol> roles = new HashSet<>();
 
-	public Set<Compras> getCompras() {
-		return compras;
-	}
-
-	public void setCompras(Set<Compras> compras) {
-		this.compras = compras;
-	}
-
-	public Set<Rol> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Rol> roles) {
-		this.roles = roles;
-	}
-
 	public Usuario() {
 	}
 
@@ -193,5 +177,26 @@ public class Usuario implements Serializable {
 
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
+	}
+	
+	public Set<Compras> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(Set<Compras> compras) {
+		this.compras = compras;
+	}
+
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
+	}
+	
+	public boolean anadirRol(Rol rol) {
+	    rol.addUsuario(this);
+		return getRoles().add(rol);
 	}
 }

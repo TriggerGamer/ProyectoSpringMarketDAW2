@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import DAW.lope.tienda.entidades.Compras;
 import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.modelo.ComprasDao;
+import DAW.lope.tienda.modelo.UsuariosDao;
 
 @Transactional
 @Service
@@ -16,28 +17,30 @@ public class ServicioComprasImpl implements ServicioCompras {
 	
 	@Autowired
 	ComprasDao comprasdao;
+	
+	@Autowired
+	UsuariosDao usuariodao;
 
 	@Override
-	public int saveCompras(Usuario id_Usuario) {
+	public Compras crear(int id) {
 		Compras compras = new Compras();
-		compras.setUsuario(id_Usuario);
-		return comprasdao.save(compras);
+		Usuario usuario = usuariodao.findById(id);
+		compras.setUsuario(usuario);
+		return comprasdao.crear(compras);
 	}
 
 	@Override
-	public int deleteCompra(int id) {
+	public int borrar(int id) {
 		comprasdao.deleteProductosCompraById(id);
 		return comprasdao.deleteCompraById(id);
 	}
 	
 	@Override
 	public Compras getCompras(int id) {
-		Compras compras = new Compras();
 		
-		List<Compras> compras1 = comprasdao.comprasUsuario(id);
-		
-		compras1 = (List<Compras>) compras1.get(0);
-		
+		Compras compras = new Compras();		
+		List<Compras> compras1 = comprasdao.comprasUsuario(id);		
+		compras1 = (List<Compras>) compras1.get(0);		
 		return (Compras) compras1;
 	}
 
@@ -49,6 +52,11 @@ public class ServicioComprasImpl implements ServicioCompras {
 	@Override
 	public List<Compras> findComprasUsuario(int id) {
 		return comprasdao.comprasUsuario(id);
+	}
+
+	@Override
+	public void borrar(Object id) {
+		comprasdao.borrar(id);
 	}
 	
 }

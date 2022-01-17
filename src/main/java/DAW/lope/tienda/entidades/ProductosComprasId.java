@@ -1,7 +1,7 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
-
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -11,32 +11,48 @@ public class ProductosComprasId implements Serializable {
 	private static final long serialVersionUID = -646454952592380157L;
 
 	@Column(name = "id_Compra")
-    private int id_Compra;
+    private int idCompra;
  
     @Column(name = "id_Producto")
-    private int id_Producto;
+    private int idProducto;
     
     public ProductosComprasId(){}
  
     public ProductosComprasId(int id_Compra, int id_Producto) {
-        this.id_Compra = id_Compra;
-        this.id_Producto = id_Producto;
+        this.idCompra = id_Compra;
+        this.idProducto = id_Producto;
     }
 
 	public int getId_Compra() {
-		return id_Compra;
+		return idCompra;
 	}
 
 	public void setId_Compra(int id_Compra) {
-		this.id_Compra = id_Compra;
+		this.idCompra = id_Compra;
 	}
 
 	public int getId_Producto() {
-		return id_Producto;
+		return idProducto;
 	}
 
 	public void setId_Producto(int id_Producto) {
-		this.id_Producto = id_Producto;
+		this.idProducto = id_Producto;
 	}
     
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+ 
+        if (o == null || getClass() != o.getClass())
+            return false;
+ 
+        ProductosComprasId that = (ProductosComprasId) o;
+        return Objects.equals(idCompra, that.idCompra) &&
+               Objects.equals(idProducto, that.idProducto);
+    }
+ 
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCompra, idProducto);
+    }
 }

@@ -35,13 +35,13 @@ public class Compras implements Serializable {
 	private String fechaDePedido;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<Compras> comprado = new HashSet<>();
+    public Set<ProductosCompras> comprado = new HashSet<>();
 	
-	public Set<Compras> getCompras() {
+	public Set<ProductosCompras> getCompras() {
 		return comprado;
 	}
 
-	public void setCompras(Set<Compras> compras) {
+	public void setCompras(Set<ProductosCompras> compras) {
 		this.comprado = compras;
 	}
 

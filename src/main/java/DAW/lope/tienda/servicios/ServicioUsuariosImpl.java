@@ -20,6 +20,7 @@ import DAW.lope.tienda.modelo.UsuariosDao;
 @Transactional
 @Service
 public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsService {
+	
 	@Autowired
 	UsuariosDao usuariodao;
 	
@@ -27,28 +28,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 	RolDao roldao;
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	
-	@Override
-	public int saveUsuarios(Usuario usuario) {
-		
-		usuario.setContrasenia(bCryptPasswordEncoder.encode(usuario.getContrasenia()));
-//		usuariodao.save(usuario);
-		
-		Usuario usuario2 = usuariodao.findByName(usuario.getNombreUsuario());
-		
-		//Guardar el rol de registrado a un nuevo usuario;
-		Rol rol = new Rol();
-		
-//		rol.setId_Usuario(usuario2.getId_Usuario());
-		rol.setId_Rol(2);
-
-		//roldao.save(rol);
-		
-		return 0;
-	}
-	
+	private BCryptPasswordEncoder bCryptPasswordEncoder;	
 
 	@Override
 	public Usuario login(String nombreUsuario) {
@@ -80,6 +60,19 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 	@Override
 	public List<Rol> getRoles(int id_Usuario) {
 		return roldao.buscarRol(id_Usuario);
+	}
+
+	@Override
+	public Usuario crear(Usuario usuario) {		
+		usuario.setContrasenia(bCryptPasswordEncoder.encode(usuario.getContrasenia()));
+		Rol rol = roldao.findById(2);
+		usuario.anadirRol(rol);
+		return usuariodao.crear(usuario);
+	}
+
+	@Override
+	public void borrar(Object id) {
+		usuariodao.borrar(id);
 	}
 
 }
