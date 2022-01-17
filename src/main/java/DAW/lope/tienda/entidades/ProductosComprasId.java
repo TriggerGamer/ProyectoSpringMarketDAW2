@@ -23,22 +23,23 @@ public class ProductosComprasId implements Serializable {
         this.idProducto = id_Producto;
     }
 
-	public int getId_Compra() {
+    
+	public int getIdCompra() {
 		return idCompra;
 	}
 
-	public void setId_Compra(int id_Compra) {
-		this.idCompra = id_Compra;
+	public void setIdCompra(int idCompra) {
+		this.idCompra = idCompra;
 	}
 
-	public int getId_Producto() {
+	public int getIdProducto() {
 		return idProducto;
 	}
 
-	public void setId_Producto(int id_Producto) {
-		this.idProducto = id_Producto;
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
 	}
-    
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;

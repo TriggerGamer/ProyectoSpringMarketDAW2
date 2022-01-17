@@ -37,7 +37,7 @@ public class Producto implements Serializable {
 	@Column(name = "descuento")
 	private int descuento;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<ProductosCompras> Productos = new HashSet<>();
 
 	public Set<ProductosCompras> getProductos() {

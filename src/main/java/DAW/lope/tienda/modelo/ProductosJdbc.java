@@ -29,7 +29,7 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 
 	@Override
 	public List<Producto> findEight() {
-		Query query = this.em.createQuery("FROM Producto p ORDER BY p.id_Producto ASC").setMaxResults(8);
+		Query query = this.em.createQuery("FROM Producto ORDER BY id_Producto ASC").setMaxResults(8);
 
 		List<Producto> producto = query.getResultList();
 
