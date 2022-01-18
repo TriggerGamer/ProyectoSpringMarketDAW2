@@ -41,7 +41,7 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 
 	@Override
 	public Producto findById(int id) {
-		Query query = this.em.createQuery("FROM Producto u where u.id_Producto = :id");
+		Query query = this.em.createQuery("FROM Producto where id_Producto =:id");
 		query.setParameter("id", id);
 		Producto producto = (Producto) query.getSingleResult();
 
@@ -53,13 +53,14 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 
 	@Override
 	public List<Producto> getProductoByName(String name) {
-		Query query = this.em.createQuery("FROM Producto u where u.tituloProducto = :nombre");
-		query.setParameter("nombre", name);
+		Query query = this.em.createQuery("FROM Producto where tituloProducto =:name");
+		query.setParameter("name", name);
 		List<Producto> producto = query.getResultList();
 
 		if (producto != null) {
 			return producto;
 		}
+		else
 		return null;
 	}
 
@@ -72,41 +73,5 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 
 		return productos;
 	}
-
-//	@Override
-//	public int save(Producto producto) {
-//		// TODO Auto-generated method stub
-//		return jdbcTemplate.update("INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES(?,?,?,?)", producto.getTituloProducto(), producto.getDescripcionProducto(), producto.getPrecio(), producto.getDescuento());
-//	}
-
-//
-//	@Override
-//	public int deleteById(int id) {
-//		// TODO Auto-generated method stub
-//		return jdbcTemplate.update("DELETE FROM Productos WHERE id_Producto = " + id);
-//	}
-//
-//	@Override
-//	public List<Producto> findAll() {
-//		// TODO Auto-generated method stub
-//		return jdbcTemplate.query("SELECT * FROM Productos", (rs, rowNum) -> new Producto(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
-//	}
-//	
-//	@Override
-//	public List<Producto> findEight() {
-//		// TODO Auto-generated method stub
-//		return jdbcTemplate.query("SELECT * FROM Productos ORDER BY id_Producto ASC LIMIT 8", (rs, rowNum) -> new Producto(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
-//	}
-//
-//	@Override
-//	public Producto findById(int id) {
-//		return jdbcTemplate.queryForObject("SELECT * FROM Productos WHERE id_Producto = ?", (rs, rowNum) -> new Producto(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")),id);
-//	}
-//
-//	@Override
-//	public List<Producto> getProductoByName(String name) {
-//		// TODO Auto-generated method stub
-//		return jdbcTemplate.query("SELECT * FROM Productos WHERE tituloProducto LIKE '%" + name + "%' ", (rs, rowNum) -> new Producto(rs.getInt("id_Producto"), rs.getString("tituloProducto"), rs.getString("descripcionProducto"), rs.getDouble("precio"), rs.getInt("descuento")));
-//	}
 
 }
