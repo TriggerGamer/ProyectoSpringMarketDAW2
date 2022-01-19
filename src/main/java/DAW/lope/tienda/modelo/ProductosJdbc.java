@@ -53,8 +53,8 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 
 	@Override
 	public List<Producto> getProductoByName(String name) {
-		Query query = this.em.createQuery("FROM Producto where tituloProducto =:name");
-		query.setParameter("name", name);
+		Query query = this.em.createQuery("FROM Producto where tituloProducto LIKE :name");
+		query.setParameter("name", "%"+name+"%");
 		List<Producto> producto = query.getResultList();
 
 		if (producto != null) {

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Rol implements Serializable {
 	@Column(name = "nombre_Rol")
 	private String nombreRol; 
 	
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
 	private Set<Usuario> Usuarios = new HashSet<>();
 	
 	public Rol() {}

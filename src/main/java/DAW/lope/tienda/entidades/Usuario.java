@@ -59,11 +59,11 @@ public class Usuario implements Serializable {
 	@Column(name = "direccionFacturacion")
 	private String direccionFacturacion;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Compras> compras = new HashSet<>();
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "UsuarioRol", joinColumns = @JoinColumn(name = "id_Usuario"), inverseJoinColumns = @JoinColumn(name = "id_UsuarioRol"))
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "UsuarioRol", joinColumns = @JoinColumn(name = "id_Usuario"), inverseJoinColumns = @JoinColumn(name = "id_Rol"))
 	private Set<Rol> roles = new HashSet<>();
 
 	public Usuario() {

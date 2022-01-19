@@ -34,7 +34,7 @@ public class Compras implements Serializable {
 	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<ProductosCompras> comprado = new HashSet<>();
 	
 	public Set<ProductosCompras> getCompras() {
