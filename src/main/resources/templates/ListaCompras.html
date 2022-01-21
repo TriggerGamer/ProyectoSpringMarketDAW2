@@ -1,7 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
 
 <head>
-
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jáquez y Luis">
 	<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
@@ -69,7 +68,7 @@
 		<tbody>
 			<tr class="table-info text-start">
 				<td scope="row" th:text="${compra.id_Compra}" />
-				<td scope="row" th:text="${compra.id_Usuario}" />
+				<td scope="row" th:text="${compra.usuario.id_Usuario}" />
 				<td scope="row" th:text="${compra.fechaDePedido}" />
 				<td scope="row">
 					<form th:action="@{/compra/devolver/{id}(id=${compra.id_Compra})}" method="POST">

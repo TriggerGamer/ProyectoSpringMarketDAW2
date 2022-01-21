@@ -33,7 +33,7 @@ public class ControladorCompras {
 		// Guardar la compra
 		servicioCompras.crear(id_Usuario);
 
-		Compras compras = servicioCompras.getCompras(id_Usuario);
+		Compras compras = servicioCompras.getComprasbyId(id_Usuario);
 
 		// Obtener el carrito de la compra de session
 		@SuppressWarnings("unchecked")

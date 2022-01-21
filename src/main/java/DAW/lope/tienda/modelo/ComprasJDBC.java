@@ -1,40 +1,27 @@
 package DAW.lope.tienda.modelo;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import DAW.lope.tienda.entidades.Compras;
-import DAW.lope.tienda.entidades.Producto;
+
 
 @Repository
 @Component("ComprasDao")
 public class ComprasJDBC extends DaoGenericoImpl<Compras> implements ComprasDao {
 
-	@Override
-	public int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
-	public int deleteCompraById(int id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteProductosCompraById(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean deleteCompraById(int id) {
+		borrar(id);
+		return true;
 	}
 
 	@Override
 	public List<Compras> comprasUsuario(int id) {
-		Query query = this.em.createQuery("FROM Compras u WHERE u.id_Usuario = :id");
+		Query query = this.em.createQuery("FROM Compras WHERE id_Usuario = :id");
 		query.setParameter("id", id);
 		List<Compras> compras = query.getResultList();
 

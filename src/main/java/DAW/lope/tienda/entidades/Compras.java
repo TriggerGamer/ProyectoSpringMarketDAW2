@@ -1,6 +1,7 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class Compras implements Serializable {
 	private Usuario usuario;
 
 	@Column(name = "fechaDeCompra")
-	private String fechaDePedido;
+	private LocalDateTime fechaDePedido;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<ProductosCompras> comprado = new HashSet<>();
@@ -48,7 +49,7 @@ public class Compras implements Serializable {
 	public Compras() {
 	}
 
-	public Compras(int id_Compra, Usuario usuario, String fechaDePedido) {
+	public Compras(int id_Compra, Usuario usuario, LocalDateTime fechaDePedido) {
 		this.id_Compra = id_Compra;
 		this.usuario = usuario;
 		this.fechaDePedido = fechaDePedido;
@@ -66,6 +67,14 @@ public class Compras implements Serializable {
 		this.id_Compra = id_Compra;
 	}
 
+	public LocalDateTime getFechaDePedido() {
+		return fechaDePedido;
+	}
+
+	public void setFechaDePedido(LocalDateTime fechaDePedido) {
+		this.fechaDePedido = fechaDePedido;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -74,11 +83,12 @@ public class Compras implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public String getFechaDePedido() {
-		return fechaDePedido;
+	public Set<ProductosCompras> getComprado() {
+		return comprado;
 	}
 
-	public void setFechaDePedido(String fechaDePedido) {
-		this.fechaDePedido = fechaDePedido;
+	public void setComprado(Set<ProductosCompras> comprado) {
+		this.comprado = comprado;
 	}
+
 }

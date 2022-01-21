@@ -20,15 +20,6 @@ public abstract class DaoGenericoImpl<T> implements DaoGenerico<T> {
 		type = (Class) pt.getActualTypeArguments()[0];
 	}
 
-	//@Override
-	public long contarTodos(final Map<String, Object> params) {
-		final StringBuffer queryString = new StringBuffer("SELECT count(o) from ");
-		queryString.append(type.getSimpleName()).append(" o ");
-		queryString.append(this.getQueryClauses(params, null));
-		final Query query = this.em.createQuery(queryString.toString());
-		return (Long) query.getSingleResult();
-	}
-
 	@Override
 	public T crear(final T t) {
 		this.em.persist(t);
