@@ -11,7 +11,6 @@ public interface ServicioUsuarios extends UserDetailsService{
 	public Usuario crear(Usuario usuario);
 	public void borrar(Object id);
 	public Usuario findUsuarioById(int id);
-	public Usuario login(String nombreUsuario);
-	public List<Rol> getRoles(int id_Usuario);	
+	public Usuario login(String nombreUsuario);	
 	
 }

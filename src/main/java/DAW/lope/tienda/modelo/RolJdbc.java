@@ -35,17 +35,4 @@ public class RolJdbc  extends DaoGenericoImpl<Rol> implements RolDao {
 		return null;
 	}
 
-	@Override
-	public List<Rol> buscarRol(int id) {
-		Query query = this.em.createQuery("FROM UsuarioRol where id_Usuario = :id");
-		query.setParameter("id", id);
-		List<Rol> roles = query.getResultList();
-
-		if (roles != null) {
-			return roles;
-		}
-		else
-		return null;
-	}
-
 }

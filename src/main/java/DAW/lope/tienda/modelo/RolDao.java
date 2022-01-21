@@ -8,7 +8,5 @@ import DAW.lope.tienda.entidades.Usuario;
 public interface RolDao extends DaoGenerico<Rol> {
 	
 	public Rol save(int id_Rol, Usuario usuario);
-	public Rol findById(int id);
-	public List<Rol> buscarRol(int id);
-	
+	public Rol findById(int id);	
 }

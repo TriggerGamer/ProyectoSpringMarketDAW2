@@ -46,7 +46,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 		
 		Usuario usuario = usuariodao.findByName(username);
 		
-		List<Rol> roles = getRoles(usuario.getId_Usuario());
+		Set<Rol> roles = usuario.getRoles();
 		
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		
@@ -55,13 +55,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 		}
 		return new org.springframework.security.core.userdetails.User(usuario.getNombreUsuario(), usuario.getContrasenia(), grantedAuthorities);
 	}
-
-
-	@Override
-	public List<Rol> getRoles(int id_Usuario) {
-		return roldao.buscarRol(id_Usuario);
-	}
-
+	
 	@Override
 	public Usuario crear(Usuario usuario) {		
 		usuario.setContrasenia(bCryptPasswordEncoder.encode(usuario.getContrasenia()));
