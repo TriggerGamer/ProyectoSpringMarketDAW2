@@ -64,14 +64,4 @@ public class ProductosJdbc extends DaoGenericoImpl<Producto> implements Producto
 		return null;
 	}
 
-	@Override
-	public ProductosCompras guardarProductoCompra(int id_Producto, ProductosCompras productos) {
-		Producto producto  = this.buscar(id_Producto);
-		producto.addProductoCompra(productos);
-		this.em.merge(productos);
-		this.em.refresh(productos);
-
-		return productos;
-	}
-
 }

@@ -13,6 +13,5 @@ public interface ServicioProductos {
 	public Producto findProductoById(int id);
 	public List<Producto> findEight();
 	public List<Producto> getProductoByName(String name);
-	public ProductosCompras guardarProductoCompra(int id_Producto, ProductosCompras producto);
 	
 }

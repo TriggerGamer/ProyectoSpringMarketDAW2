@@ -41,11 +41,6 @@ public class ServicioProductosImpl implements ServicioProductos {
 	}
 
 	@Override
-	public ProductosCompras guardarProductoCompra(int id_Producto, ProductosCompras producto) {
-		return productosdao.guardarProductoCompra(id_Producto, producto);
-	}
-
-	@Override
 	public Producto crear(Producto producto) {
 		return productosdao.crear(producto);
 	}

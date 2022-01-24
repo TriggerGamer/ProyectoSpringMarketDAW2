@@ -199,4 +199,9 @@ public class Usuario implements Serializable {
 	    rol.addUsuario(this);
 		return getRoles().add(rol);
 	}
+	
+	public boolean anadirCompra(Compras compra) {
+	    compra.addUsuario(this);
+		return getCompras().add(compra);
+	}
 }

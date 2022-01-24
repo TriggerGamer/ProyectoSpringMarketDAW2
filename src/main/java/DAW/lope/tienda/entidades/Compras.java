@@ -90,5 +90,14 @@ public class Compras implements Serializable {
 	public void setComprado(Set<ProductosCompras> comprado) {
 		this.comprado = comprado;
 	}
-
+	
+	public void addUsuario(Usuario usuario) {
+		setUsuario(usuario);
+		usuario.getCompras().add(this);
+	}
+	
+	public boolean anadirProductosCompra(ProductosCompras compra) {
+		compra.addCompra(this);
+		return getCompras().add(compra);
+	}
 }

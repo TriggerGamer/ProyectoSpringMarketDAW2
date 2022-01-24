@@ -100,9 +100,10 @@ public class Producto implements Serializable {
 		this.descuento = descuento;
 	}
 	
-	public void addProductoCompra(ProductosCompras producto) {
-		this.Productos.add(producto);
-		producto.setProducto(this);
+	
+	public boolean anadirProductosCompra(ProductosCompras producto) {
+		producto.addProductos(this);
+		return getProductos().add(producto);
 	}
 	
 }
