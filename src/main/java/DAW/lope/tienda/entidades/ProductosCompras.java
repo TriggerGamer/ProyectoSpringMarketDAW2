@@ -16,20 +16,20 @@ public class ProductosCompras implements Serializable {
 	@Column(name = "numeroUnidades")
 	private int numeroUnidades;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idProducto")
-	private Producto producto;
+	private Productos producto;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idCompra")
 	private Compras compra;
 	
 	public ProductosCompras() {}
 	
-	public ProductosCompras(Producto producto, Compras compra) {
+	public ProductosCompras(Productos productos, Compras compra) {
 		this.compra = compra;
-        this.producto = producto;	
-		this.id = new ProductosComprasId(producto.getId_Producto(), compra.getId_Compra());
+        this.producto = productos;	
+		this.id = new ProductosComprasId(productos.getId_Producto(), compra.getId_Compra());
 	}
 	
 	
@@ -42,8 +42,8 @@ public class ProductosCompras implements Serializable {
 		this.numeroUnidades = numeroUnidades;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setProducto(Productos productos) {
+		this.producto = productos;
 	}
 
 	public ProductosComprasId getId() {
@@ -54,7 +54,7 @@ public class ProductosCompras implements Serializable {
 		this.id = id;
 	}
 
-	public Producto getProducto() {
+	public Productos getProducto() {
 		return producto;
 	}
 
@@ -64,16 +64,6 @@ public class ProductosCompras implements Serializable {
 
 	public void setCompra(Compras compra) {
 		this.compra = compra;
-	}
-	
-	public void addCompra(Compras compra)  {
-		setCompra(compra);
-		compra.getComprado().add(this);
-	}
-	
-	public void addProductos(Producto producto ) {
-		setProducto(producto);
-		producto.anadirProductosCompra(this);
 	}
 	
 }

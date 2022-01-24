@@ -41,12 +41,12 @@ FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario)
 );
 
 create table ProductosCompras(
-id_Compra int(10),
-id_Producto int(10),
 numeroUnidades int(3) NOT NULL,
+compra_id_Compra int(10),
+producto_id_Producto int(10),
 PRIMARY KEY(id_Compra, id_Producto),
-foreign key (id_Producto) REFERENCES Productos(id_Producto),
-foreign key (id_Compra) REFERENCES Compras(id_Compra)
+foreign key (producto_id_Producto) REFERENCES Productos(id_Producto),
+foreign key (compra_id_Compra) REFERENCES Compras(id_Compra)
 );
 
 create table Roles(

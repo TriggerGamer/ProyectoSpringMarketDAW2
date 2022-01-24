@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.entidades.ProductosCompras;
 import DAW.lope.tienda.modelo.ProductosDao;
 
@@ -19,30 +19,30 @@ public class ServicioProductosImpl implements ServicioProductos {
 	ProductosDao productosdao;
 
 	@Override
-	public List<Producto> findEight() {
+	public List<Productos> findEight() {
 		return productosdao.findEight();
 	}
 
 	@Override
-	public List<Producto> getProductoByName(String name) {
+	public List<Productos> getProductoByName(String name) {
 		return productosdao.getProductoByName(name);
 	}
 
 
 	@Override
-	public Producto findProductoById(int id) {
+	public Productos findProductoById(int id) {
 
 		return productosdao.findById(id);
 	}
 
 	@Override
-	public List<Producto> findAll() {
+	public List<Productos> findAll() {
 		return productosdao.findAll();
 	}
 
 	@Override
-	public Producto crear(Producto producto) {
-		return productosdao.crear(producto);
+	public Productos crear(Productos productos) {
+		return productosdao.crear(productos);
 	}
 
 	@Override

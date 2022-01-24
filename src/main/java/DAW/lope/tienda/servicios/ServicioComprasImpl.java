@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.entidades.Compras;
-import DAW.lope.tienda.entidades.Producto;
+
 import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.modelo.ComprasDao;
 import DAW.lope.tienda.modelo.ProductosComprasDao;
@@ -33,13 +33,12 @@ public class ServicioComprasImpl implements ServicioCompras {
 	UsuariosDao usuariodao;
 
 	@Override
-	public Compras crear(int id_usuario) {
-		 
-		Compras compras = new Compras();
+	public Compras crear(int id_usuario, Compras compras) {
+		
 		Usuario usuario = usuariodao.findById(id_usuario);
+		compras.setFechaDePedido(LocalDateTime.now());
 		//usuario.anadirCompra(compras);
 		compras.addUsuario(usuario);
-		compras.setFechaDePedido(LocalDateTime.now());
 		return comprasdao.crear(compras);
 	}
 
@@ -56,14 +55,6 @@ public class ServicioComprasImpl implements ServicioCompras {
 		List<Compras> compras1 = comprasdao.comprasUsuario(id);		
 		compras = compras1.get(0);		
 		return compras;
-	}
-
-	@Override
-	public int saveProductosCompra(int id_Compra, int id_Producto, int numeroUnidades) {
-		Compras compra = comprasdao.buscar(id_Compra);
-		Producto productos = productosdao.buscar(id_Producto);
-		
-		return productoscomprasdao.saveProductosCompra(compra, productos, numeroUnidades);
 	}
 
 	@Override

@@ -2,16 +2,15 @@ package DAW.lope.tienda.servicios;
 
 import java.util.List;
 
-import DAW.lope.tienda.entidades.Producto;
-import DAW.lope.tienda.entidades.ProductosCompras;
+import DAW.lope.tienda.entidades.Productos;
 
 public interface ServicioProductos {
 	
-	public Producto crear(Producto producto);
+	public Productos crear(Productos productos);
 	public void borrar(Object id);
-	public List<Producto> findAll();
-	public Producto findProductoById(int id);
-	public List<Producto> findEight();
-	public List<Producto> getProductoByName(String name);
+	public List<Productos> findAll();
+	public Productos findProductoById(int id);
+	public List<Productos> findEight();
+	public List<Productos> getProductoByName(String name);
 	
 }

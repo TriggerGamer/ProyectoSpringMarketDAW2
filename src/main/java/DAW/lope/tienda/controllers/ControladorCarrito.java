@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import DAW.lope.tienda.entidades.Carrito;
-import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.servicios.ServicioProductos;
 
 
@@ -30,7 +30,7 @@ public class ControladorCarrito {
 			Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Obtener los datos del producto mediante el servicio
-		Producto producto = servicioProductos.findProductoById(id_Producto);
+		Productos productos = servicioProductos.findProductoById(id_Producto);
 
 		if (numeroProductos == "") {
 			numeroProductos = "1";
@@ -38,7 +38,7 @@ public class ControladorCarrito {
 
 		int numeroPr = Integer.parseInt(numeroProductos);
 
-		Carrito objeto = new Carrito(producto.getId_Producto(), producto.getTituloProducto(), numeroPr);
+		Carrito objeto = new Carrito(productos.getId_Producto(), productos.getTituloProducto(), numeroPr);
 
 		// Guardar los atributos del producto en session
 		@SuppressWarnings("unchecked")

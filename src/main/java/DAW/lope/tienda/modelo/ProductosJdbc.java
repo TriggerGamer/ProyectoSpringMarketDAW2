@@ -7,58 +7,58 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.entidades.ProductosCompras;
 
 @Repository
 @Component("ProductosDao")
-public class ProductosJdbc extends DaoGenericoImpl<Producto> implements ProductosDao {
+public class ProductosJdbc extends DaoGenericoImpl<Productos> implements ProductosDao {
 
 	@Override
-	public List<Producto> findAll() {
+	public List<Productos> findAll() {
 
-		Query query = this.em.createQuery("FROM Producto");
+		Query query = this.em.createQuery("FROM Productos");
 		
-		List<Producto> producto = query.getResultList();
+		List<Productos> productos = query.getResultList();
 
-		if (producto != null) {
-			return producto;
+		if (productos != null) {
+			return productos;
 		}
 		return null;
 	}
 
 	@Override
-	public List<Producto> findEight() {
-		Query query = this.em.createQuery("FROM Producto ORDER BY id_Producto ASC").setMaxResults(8);
+	public List<Productos> findEight() {
+		Query query = this.em.createQuery("FROM Productos ORDER BY id_Producto ASC").setMaxResults(8);
 
-		List<Producto> producto = query.getResultList();
+		List<Productos> productos = query.getResultList();
 
-		if (producto != null) {
-			return producto;
+		if (productos != null) {
+			return productos;
 		}
 		return null;
 	}
 
 	@Override
-	public Producto findById(int id) {
-		Query query = this.em.createQuery("FROM Producto where id_Producto =:id");
+	public Productos findById(int id) {
+		Query query = this.em.createQuery("FROM Productos where id_Producto =:id");
 		query.setParameter("id", id);
-		Producto producto = (Producto) query.getSingleResult();
+		Productos productos = (Productos) query.getSingleResult();
 
-		if (producto != null) {
-			return producto;
+		if (productos != null) {
+			return productos;
 		}
 		return null;
 	}
 
 	@Override
-	public List<Producto> getProductoByName(String name) {
-		Query query = this.em.createQuery("FROM Producto where tituloProducto LIKE :name");
+	public List<Productos> getProductoByName(String name) {
+		Query query = this.em.createQuery("FROM Productos where tituloProducto LIKE :name");
 		query.setParameter("name", "%"+name+"%");
-		List<Producto> producto = query.getResultList();
+		List<Productos> productos = query.getResultList();
 
-		if (producto != null) {
-			return producto;
+		if (productos != null) {
+			return productos;
 		}
 		else
 		return null;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.servicios.ServicioProductos;
 
 @Controller
@@ -25,9 +25,9 @@ public class ContraladorIndex {
 	@GetMapping(value = "/index")
 	public String index_get(Model modelo, HttpSession session) {
 
-		// Producto
-		List<Producto> Producto = servicioProductos.findEight();
-		modelo.addAttribute("Productos", Producto);
+		// Productos
+		List<Productos> Productos = servicioProductos.findEight();
+		modelo.addAttribute("Productos", Productos);
 
 		// Session Usuarios
 		

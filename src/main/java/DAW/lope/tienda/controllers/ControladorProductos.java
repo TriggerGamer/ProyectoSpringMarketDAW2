@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import DAW.lope.tienda.entidades.Producto;
+import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.servicios.ServicioProductos;
 
 
@@ -30,8 +30,8 @@ public class ControladorProductos {
 		}
 		
 		// Declarar la lista para obtener los datos
-		List<Producto> producto = servicioProductos.getProductoByName(busqueda);
-		modelo.addAttribute("productos", producto);
+		List<Productos> productos = servicioProductos.getProductoByName(busqueda);
+		modelo.addAttribute("productos", productos);
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
@@ -103,14 +103,14 @@ public class ControladorProductos {
 
 		double price = Double.parseDouble(precio);
 		int descuento = 10;
-		Producto producto = new Producto();
+		Productos productos = new Productos();
 
-		producto.setTituloProducto(titulo);
-		producto.setDescripcionProducto(descripcion);
-		producto.setPrecio(price);
-		producto.setDescuento(descuento);
+		productos.setTituloProducto(titulo);
+		productos.setDescripcionProducto(descripcion);
+		productos.setPrecio(price);
+		productos.setDescuento(descuento);
 
-		servicioProductos.crear(producto);
+		servicioProductos.crear(productos);
 
 		return "redirect:/index";
 	}
@@ -120,8 +120,8 @@ public class ControladorProductos {
 	public String infoProductos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		Producto producto = servicioProductos.findProductoById(id_Producto);
-		modelo.addAttribute("producto", producto);
+		Productos productos = servicioProductos.findProductoById(id_Producto);
+		modelo.addAttribute("producto", productos);
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");

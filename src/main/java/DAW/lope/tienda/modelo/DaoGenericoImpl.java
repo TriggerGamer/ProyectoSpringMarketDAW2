@@ -40,6 +40,7 @@ public abstract class DaoGenericoImpl<T> implements DaoGenerico<T> {
 	public void borrar(final Object id) {
 		this.em.remove(this.em.getReference(type, id));
 	}
+	
 	private String getQueryClauses(final Map<String, Object> params, final Map<String, Object> orderParams) {
 		final StringBuffer queryString = new StringBuffer();
 		if ((params != null) && !params.isEmpty()) {

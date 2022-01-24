@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,8 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalIdCache;
+
+@Entity(name = "Compras")
 @Table(name = "Compras")
+
 public class Compras implements Serializable {
 
 	private static final long serialVersionUID = 1278961066258620588L;
@@ -35,17 +39,10 @@ public class Compras implements Serializable {
 	@Column(name = "fechaDeCompra")
 	private LocalDateTime fechaDePedido;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<ProductosCompras> comprado = new HashSet<>();
+	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<ProductosCompras> productos = new HashSet<>();
 	
-	public Set<ProductosCompras> getCompras() {
-		return comprado;
-	}
-
-	public void setCompras(Set<ProductosCompras> compras) {
-		this.comprado = compras;
-	}
-
+	
 	public Compras() {
 	}
 
@@ -53,6 +50,15 @@ public class Compras implements Serializable {
 		this.id_Compra = id_Compra;
 		this.usuario = usuario;
 		this.fechaDePedido = fechaDePedido;
+	}
+	
+	//getter and setters
+	public Set<ProductosCompras> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(Set<ProductosCompras> productos) {
+		this.productos = productos;
 	}
 
 	public Compras(int id_Compra) {
@@ -82,22 +88,16 @@ public class Compras implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-	public Set<ProductosCompras> getComprado() {
-		return comprado;
-	}
-
-	public void setComprado(Set<ProductosCompras> comprado) {
-		this.comprado = comprado;
-	}
 	
 	public void addUsuario(Usuario usuario) {
 		setUsuario(usuario);
 		usuario.getCompras().add(this);
 	}
 	
-	public boolean anadirProductosCompra(ProductosCompras compra) {
-		compra.addCompra(this);
-		return getCompras().add(compra);
+	public void anadirProductos(Productos productos, int numerounidades) {
+		ProductosCompras productoscompra = new ProductosCompras(productos, this);
+		productoscompra.setNumeroUnidades(numerounidades);
+		this.productos.add(productoscompra);
+		productos.getCompra().add(productoscompra);
 	}
 }
