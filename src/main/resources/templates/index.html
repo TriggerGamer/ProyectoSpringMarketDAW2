@@ -15,12 +15,9 @@
 </head>
 
 <body>
-	<header>
-		<h1 class="center"> TIENDA </h1>
-	</header>
 
-	<!-- Apertura del menu -->
-	<div class="container">
+	<header>
+		<div class="container">
 		<nav class="navbar navbar-expand-sm navbardark bg-dark">
 		<a class="navbar-brand" href="/index"><img class="foto" th:src="@{/img/informatica-1.svg}"/></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
@@ -53,47 +50,9 @@
 					<div class="userLR carrito m-2"> </div>
 				</a>
 		</nav>
-		<!--
-	
-		<nav class="navbar navbar-expand-lg navbardark bg-dark">
-			<div class="navbar-nav">
-				<a class="nav-link text-white" href="/index"> INICIO </a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-					aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarColor01">
-					<ul class="navbar-nav me-auto">
-						<li th:if="${roles == 'Admin'}" class="nav-item">
-							<a class="nav-link" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
-						</li>
-					</ul>
-					<form class="d-flex" th:action="@{/producto/buscar}" method="GET">
-						<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..."
-							size="30">
-						<button class="btn btn-secondary my-2 my-sm-0" type="submit"> Buscar </button>
-					</form>
-					<div class="userLR">
-						<div th:if="${usuario1 != usuario2}">
-							<a th:href="@{/usuario/login}" class="btn btn-info"> Entrar </a>
-							<a th:href="@{/usuario/signup}" class="btn btn-info"> Registro </a>
-						</div>
-						<div th:if="${usuario1 == usuario2}">
-							<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-info">
-								Perfil
-							</a>
-							<a th:href="@{/usuario/logOut}" class="btn btn-info"> Salir </a>
-							<br>
-						</div>
-						<a th:href="@{/carrito/listar}">
-							<div class="userLR carrito"> </div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</nav>-->
 	</div>
+	</header>
+	
 	<!-- Cierre del menú -->
 
 	<br>
