@@ -22,7 +22,7 @@ public class ContraladorIndex {
 
 	// Métodos para la página principal
 
-	@GetMapping(value = "/index")
+	@GetMapping(value={"/index","/"})
 	public String index_get(Model modelo, HttpSession session) {
 
 		// Productos
