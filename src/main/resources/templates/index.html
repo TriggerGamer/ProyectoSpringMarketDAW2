@@ -5,6 +5,9 @@
 
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jaquez y Luis">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/Bootstrap(Sketchy).css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Tienda </title>
@@ -17,51 +20,88 @@
 	</header>
 
 	<!-- Apertura del menu -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<div class="container-fluid">
-			<a class="nav-link text-white" href="/index"> INICIO </a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-				aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-sm navbardark bg-dark">
+		<a class="navbar-brand" href="/index"><img class="foto" th:src="@{/img/informatica-1.svg}"/></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+				aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+			<div class="collapse navbar-collapse" id="menu">
+				<nav class="navbar-nav">
+					<a class="nav-link text-white" href="/index">INICIO</a>
+					<div th:if="${roles == 'Admin'}">
+						<a class="nav-link text-white" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
+					</div>
+				</nav>
+			</div>
+			<form class="form-inline navbar-nav" th:action="@{/producto/buscar}" method="GET">
+				<input class="form-control form-control-md" type="search" name="nombre"
+					placeholder="Nombre del producto..." size="30">
+				<button class="btn btn-primary m-1" type="submit"> Buscar </button>
+			</form>
+			<div class="form-inline">
+				<div class="form-inline m-2" th:if="${usuario1 != usuario2}">
+					<a th:href="@{/usuario/login}" class="btn btn-primary m-2"> Entrar </a>
+					<a th:href="@{/usuario/signup}" class="btn btn-primary"> Registro </a>
+				</div>
+				<div class="form-inline m-2" th:if="${usuario1 == usuario2}">
+					<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-primary m-2">Perfil</a>
+					<a th:href="@{/usuario/logOut}" class="btn btn-primary">Salir</a>
+				</div>
+				<a th:href="@{/carrito/listar}">
+					<div class="userLR carrito m-2"> </div>
+				</a>
+		</nav>
+		<!--
+	
+		<nav class="navbar navbar-expand-lg navbardark bg-dark">
+			<div class="navbar-nav">
+				<a class="nav-link text-white" href="/index"> INICIO </a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+					aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav me-auto">
-					<li th:if="${roles == 'Admin'}" class="nav-item">
-						<a class="nav-link" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
-					</li>
-				</ul>
-				<form class="d-flex" th:action="@{/producto/buscar}" method="GET">
-					<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..." size="30">
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit"> Buscar </button>
-				</form>
-				<div class="userLR">
-					<div th:if="${usuario1 != usuario2}">
-						<a th:href="@{/usuario/login}" class="btn btn-info"> Entrar </a>
-						<a th:href="@{/usuario/signup}" class="btn btn-info"> Registro </a>
-					</div>
-					<div th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-info">
-							Perfil
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav me-auto">
+						<li th:if="${roles == 'Admin'}" class="nav-item">
+							<a class="nav-link" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
+						</li>
+					</ul>
+					<form class="d-flex" th:action="@{/producto/buscar}" method="GET">
+						<input class="me-sm-2" type="search" name="nombre" placeholder="Nombre del producto..."
+							size="30">
+						<button class="btn btn-secondary my-2 my-sm-0" type="submit"> Buscar </button>
+					</form>
+					<div class="userLR">
+						<div th:if="${usuario1 != usuario2}">
+							<a th:href="@{/usuario/login}" class="btn btn-info"> Entrar </a>
+							<a th:href="@{/usuario/signup}" class="btn btn-info"> Registro </a>
+						</div>
+						<div th:if="${usuario1 == usuario2}">
+							<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-info">
+								Perfil
+							</a>
+							<a th:href="@{/usuario/logOut}" class="btn btn-info"> Salir </a>
+							<br>
+						</div>
+						<a th:href="@{/carrito/listar}">
+							<div class="userLR carrito"> </div>
 						</a>
-						<a th:href="@{/usuario/logOut}" class="btn btn-info"> Salir </a>
-						<br>
 					</div>
-					<a th:href="@{/carrito/listar}">
-						<div class="userLR carrito"> </div>
-					</a>
 				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>-->
+	</div>
 	<!-- Cierre del menú -->
 
 	<br>
-	
+
 	<div class="imagenescambio">
 		<div class="imginutiles" th:each="producto: ${Productos}">
 			<a th:href="@{/producto/{id}(id=${producto.id_Producto})}">
-				<img  th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}">
+				<img th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}">
 			</a>
 		</div>
 	</div>

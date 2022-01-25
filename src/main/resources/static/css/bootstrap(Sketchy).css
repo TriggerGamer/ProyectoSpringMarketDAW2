@@ -96,11 +96,15 @@
 	padding:1em;
 }
 .carrito{
-	width: 1.5em;
-	height:1.5em;
+	width: 1.2em;
+	height:1.2em;
 	background: url("../img/carrito.png");
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+.foto{
+	width: 4em;
+	height:4em;
 }
 
 .tablaCompras{
