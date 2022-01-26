@@ -6,7 +6,7 @@
 	<meta name="author" content="Erick Jaquez y Luis">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/Bootstrap(Sketchy).css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap(1).css}">
 	<meta name="viewport" content="width=device-width">
 	<script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
@@ -16,7 +16,7 @@
 <body>
 	<header>
 		<div clas="container-fluid">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 				<a class="navbar-brand" href="/"><img class="foto" th:src="@{/img/logo.png}" /></a>
 				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
 					data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
@@ -25,7 +25,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<div class="navbar-collapse">
-						<nav class="h5 navbar-nav enlace">
+						<nav class="navbar-nav enlace">
 							<a class="nav-link text-white" href="/index">INICIO</a>
 							<div class="nav-item" th:if="${roles == 'Admin'}">
 								<a class="nav-link text-white" th:href="@{/producto/crear}">AÑADIR PRODUCTO </a>

@@ -6,7 +6,7 @@
 	<meta name="author" content="Erick Jáquez y Luis">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
+	<link rel="stylesheet" th:href="@{/css/Bootstrap(1).css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Creación de productos </title>
 
@@ -17,24 +17,26 @@
 	<header th:replace="nav/header.html"> </header>
 
 	<br>
-	
+
 	<div class="container-fluid">
-		<form th:action="@{/producto/crear}" method="POST">
-			<fieldset>
-				<legend> Datos del producto </legend>
-				<p> Nombre del producto: <input type="text" name="titulo"> </p>
-				<p> Descripcion del producto: <textarea name="descripcion" cols="35" rows="3"> </textarea></p>
-				<p> Precio que quiere ponerle al producto: <input type="number" name="precio" step="any"> </p>
-			</fieldset>
+		<form th:action="@{/producto/crear}" method="POST" class="registro centrol">
+			<div class="form-control">
+				<fieldset>
+					<legend> Datos del producto </legend>
+					<input type="text" name="titulo" class="form-control mt-2" placeholder="Nombre del producto...">
+					<input type="text" name="precio" step="any" class="form-control mt-2"
+						placeholder="Precio del producto...">
+					<textarea name="descripcion" class="form-control mt-2"
+						placeholder="Introduce una descripción..." cols="35" rows="3"></textarea>
+				</fieldset>
 
 
-			<fieldset>
-				<legend> Enviar Petición</legend>
-				<p> ¿Estás seguro? </p>
-
-				<input type="Submit" value="Si">
-				<input type="Reset" value="No">
-			</fieldset>
+				<fieldset>
+					<legend class="mt-2"> Enviar Petición</legend>
+					<button type="submit" class="mt-2 btn btn-outline-primary btn-lg">Si</button>
+					<button type="reset" class="mt-2 btn btn-outline-primary btn-lg">No</button>
+				</fieldset>
+			</div>
 		</form>
 	</div>
 </body>

@@ -6,7 +6,7 @@
 	<meta name="author" content="Erick Jaquez y Luis">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
+	<link rel="stylesheet" th:href="@{/css/Bootstrap(1).css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Registro de Usuarios </title>
 
@@ -15,13 +15,13 @@
 <body>
 
 	<header th:replace="nav/header.html"> </header>
-	
+
 	<br>
-	
+
 	<div class="container-fluid">
 
-		<form th:action="@{/usuario/signup}" method="POST">
-			<div class="form-group">
+		<form th:action="@{/usuario/signup}" method="POST" class="registro centro">
+			<div class="form-control-md form-control">
 				<fieldset>
 					<legend>Datos personales</legend>
 
@@ -60,9 +60,7 @@
 						placeholder="Dirección de facturación...">
 				</fieldset>
 			</div>
-
-			<br>
-			<button type="submit" class="btn btn-primary btn-lg">Darse de alta</button>
+				<button type="submit" class="mt-2 btn btn-primary btn-lg">Darse de alta</button>
 		</form>
 	</div>
 </body>

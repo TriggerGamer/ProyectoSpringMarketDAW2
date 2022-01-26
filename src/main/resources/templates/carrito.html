@@ -6,7 +6,7 @@
 	<meta name="author" content="Erick Jáquez y Luis">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" th:href="@{/css/Bootstrap(Sketchy).css}">
+	<link rel="stylesheet" th:href="@{/css/Bootstrap(1).css}">
 	<meta name="viewport" content="width=device-width">
 	<title> Carrito </title>
 
@@ -36,7 +36,7 @@
 					<td scope="row" th:text="${compra.nombreProducto}" />
 					<td scope="row" th:text="${compra.numeroUnidades}" />
 					<td scope="row"> <a th:href="@{/carrito/borrar/{id}(id=${compra.id_Producto})}"> <button
-								class="btn btn-warning text-primary"> Borrar del carrito </button> </a> </td>
+								class="btn btn-success"> Borrar del carrito </button> </a> </td>
 				</tr>
 			</tbody>
 		</table>
@@ -47,7 +47,7 @@
 
 		<div th:if="${vacio != novacio}" class="center">
 			<form th:action="@{/compra}" method="POST">
-				<input class="btn btn-success btn-lg my-2 my-sm-0 " type="submit" value="Comprar">
+				<input class="btn btn-success btn-lg mt-2" type="submit" value="Comprar">
 			</form>
 		</div>
 	</div>
