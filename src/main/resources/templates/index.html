@@ -5,7 +5,6 @@
 
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jaquez y Luis">
-
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/Bootstrap(Sketchy).css}">
@@ -15,46 +14,10 @@
 </head>
 
 <body>
+	<header th:replace="nav/header.html"> </header>
 
-	<header>
-		<div clas="container-fluid">
-			<nav class="navbar navbar-expand-sm navbardark bg-dark">
-				<a class="navbar-brand" href="/index"><img class="foto" th:src="@{/img/logo.png}" /></a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
-					aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="menu">
-					<nav class="navbar-nav">
-						<a class="nav-link text-white" href="/index">INICIO</a>
-						<div th:if="${roles == 'Admin'}">
-							<a class="nav-link text-white" th:href="@{/producto/crear}"> AÑADIR PRODUCTO </a>
-						</div>
-					</nav>
-				</div>
-				<form class="form-inline navbar-nav" th:action="@{/producto/buscar}" method="GET">
-					<input class="form-control form-control-md" type="search" name="nombre"
-						placeholder="Nombre del producto..." size="30">
-					<button class="btn btn-primary m-1" type="submit"> Buscar </button>
-				</form>
-				<div class="form-inline">
-					<div class="form-inline m-2" th:if="${usuario1 != usuario2}">
-						<a th:href="@{/usuario/login}" class="btn btn-primary m-2"> Entrar </a>
-						<a th:href="@{/usuario/signup}" class="btn btn-primary"> Registro </a>
-					</div>
-					<div class="form-inline m-2" th:if="${usuario1 == usuario2}">
-						<a th:href="@{/usuario/perfil/{id}(id=${id_usuario})}" class="btn btn-primary m-2">Perfil</a>
-						<a th:href="@{/usuario/logOut}" class="btn btn-primary">Salir</a>
-					</div>
-					<a th:href="@{/carrito/listar}">
-						<div class="userLR carrito m-2"> </div>
-					</a>
-			</nav>
-		</div>
-	</header>
-
-	<!-- Cierre del menú -->
 	<br>
+	
 	<div clas="container-fluid">
 		<div class="imagenescambio">
 			<div class="imginutiles" th:each="producto: ${Productos}">

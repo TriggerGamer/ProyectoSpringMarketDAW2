@@ -95,12 +95,21 @@
 .unico{
 	padding:1em;
 }
+
 .carrito{
 	width: 1.2em;
 	height:1.2em;
 	background: url("../img/carrito.png");
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+.carrito:hover {
+	background: url("../img/carrito3.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.enlace a:hover{
+	color:#00FFFF  !important;
 }
 .foto{
 	width: 4em;
@@ -3526,8 +3535,8 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-info {
-  color: #17a2b8;
-  border-color: #17a2b8;
+  color: #00FFFF ;
+  border-color: #00FFFF ;
 }
 
 .btn-outline-info:hover {
