@@ -1,14 +1,3 @@
-CREATE DATABASE Tienda;
-use Tienda;
-
-create table Productos(
-id_Producto int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-tituloProducto VARCHAR(100),
-descripcionProducto VARCHAR(300),
-precio double(10,2),
-descuento int(5)
-);
-
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("Lenovo IdeaCentre","Diseñado específicamente para catapultarte al mundo de los videojuegos y los deportes electrónicos, esta formidable torre desatará tus opciones de productividad y creatividad",757.07,7);
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("Silver AMD Ryzen 5","La nueva línea de Pcs de sobremesa para juegos creada tras un amplio trabajo de investigación para ofrecer el mayor rendimiento y optimización en el juego para nuestros cliente",1347.42,2);
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("MSI GF75 Thin","Te presentamos el portátil GF75 Thin de MSI, un portátil gaming con procesador Intel Core i7, 16GB de RAM, 512GB de SSD y gráfica Nvidia GeForce RTX 3060.",1227.34,0);
@@ -18,69 +7,14 @@ INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VA
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("Razer BlackWidow V3 Pro","El primer y más icónico teclado mecánico para juegos del mundo hace su próxima evolución revolucionaria. Entra a un nuevo meta inalámbrico con el Razer BlackWidow V3 Pro.",329.99,5);
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES("Sony PlayStation 5 Standard + Ratchet & Clank","PlayStation® 5: Jugar no tiene límites. Experimenta cargas superrápidas gracias a una unidad de estado sólido (SSD) de alta velocidad, una inmersión más profunda con retroalimentación háptica, gatillos adaptables y audio 3D.",579.99,10);
 
-create table Usuarios(
-id_Usuario int(10) NOT NULL PRIMARY KEY auto_increment,
-nombreUsuario VARCHAR(50) unique,
-nombre VARCHAR(50),
-apellidos varchar(100),
-contrasenia VARCHAR(100),
-email VARCHAR(100),
-fechaNacimiento date,
-numeroTarjeta BIGINT,
-titularTarjeta VARCHAR (100),
-codigoSeguridad INT(3),
-direccionFacturacion VARCHAR (200)
-);
-
-create table Compras(
-id_Compra int(10) NOT NULL auto_increment,
-id_Usuario int(10) NOT NULL,
-fechaDeCompra DATE NOT NULL,
-PRIMARY KEY(id_Compra, id_Usuario),
-FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario)
-);
-
-create table ProductosCompras(
-numeroUnidades int(3) NOT NULL,
-compra_id_Compra int(10),
-producto_id_Producto int(10),
-PRIMARY KEY(id_Compra, id_Producto),
-foreign key (producto_id_Producto) REFERENCES Productos(id_Producto),
-foreign key (compra_id_Compra) REFERENCES Compras(id_Compra)
-);
-
-create table Roles(
-id_Rol int(10) primary key auto_increment,
-nombre_Rol varchar(50)
-);
+INSERT INTO Usuarios(nombreUsuario, nombre, apellidos, contrasenia, email, fechaNacimiento, numeroTarjeta, titularTarjeta, codigoSeguridad, direccionFacturacion) VALUES("erick", "Erick", "Jaquez", "$2a$10$QZNeYmpAQxPhaoHI5boMVunUHScXf4Miqsj/ybhjqXmAZvkbxv0Xu", "ff@bruh.es", "2002-05-29", 515454153, "Erick", 214, "Algun sitio");
+INSERT INTO Usuarios(nombreUsuario, nombre, apellidos, contrasenia, email, fechaNacimiento, numeroTarjeta, titularTarjeta, codigoSeguridad, direccionFacturacion) VALUES("luis", "Luis", "Martinez", "$2a$10$GGKnxwVNXW5Nv4gOfEK04O3GetwwQ474sdC5E03TroYaCfIx1ItaS", "ereasgfawdf@ff.com", "1994-06-15", 12342456454, "Luis", 452, "Lugar lugar"); 
 
 INSERT INTO Roles (nombre_rol) VALUES ("Admin");
 INSERT INTO Roles (nombre_rol) VALUES ("Registrado");
 INSERT INTO Roles (nombre_rol) VALUES ("Publico");
 
-create table UsuarioRol(
-id_Rol int(10),
-id_Usuario int(10),
-PRIMARY KEY (id_Rol, id_Usuario),
-foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario),
-foreign key (id_Rol) REFERENCES Roles(id_Rol)
-);
-
 INSERT INTO UsuarioRol VALUES(1, 1);
+INSERT INTO UsuarioRol VALUES(1, 2); 
 INSERT INTO UsuarioRol VALUES(2, 1);
-
-
-/* drop table Productos;
-drop table Compras;
-drop table Usuarios;
-drop table ProductosCompras;
-drop table Roles;
-drop table UsuarioRol; */
-
-/* delete from Usuarios;
-drop table Usuarios;
-SELECT * FROM Productos;
-delete from Productos;
-drop table Productos; 
-show tables; */
-
+INSERT INTO UsuarioRol VALUES(2, 2); 
