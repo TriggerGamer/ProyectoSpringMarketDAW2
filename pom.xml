@@ -15,7 +15,6 @@
 	<name>Tienda</name>
 	<description>Tienda con Spring </description>
 	<properties>
-
 	</properties>
 	<dependencies>
 		<dependency>
