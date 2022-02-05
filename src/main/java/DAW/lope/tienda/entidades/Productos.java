@@ -2,6 +2,7 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -44,6 +45,9 @@ public class Productos implements Serializable {
 
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<ProductosCompras> compra = new HashSet<>();
+	
+	@OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Imagen> imagen = new HashSet<>();
 
 	public Productos() {
 	}
@@ -106,13 +110,26 @@ public class Productos implements Serializable {
 		this.descuento = descuento;
 	}
 	
-	
-	public void anadirProductos(Compras compras, int numerounidades) {
-		ProductosCompras productoscompra = new ProductosCompras(this, compras);
-		productoscompra.setNumeroUnidades(numerounidades);
-		compra.add(productoscompra);
-		compras.getProductos().add(productoscompra);
+	public void addImagen(Imagen img) {
+		this.imagen.add(img);
+		img.setProducto(this);
 	}
+
+	public void removeImagen(Imagen img) {
+		img.setProducto(null);
+		this.imagen.remove(img);
+	}
+
+	public void removeImagenes() {
+		Iterator<Imagen> iterator = this.imagen.iterator();
+		while (iterator.hasNext()) {
+			Imagen img = iterator.next();
+			img.setProducto(null);
+			iterator.remove();
+		}
+	}
+	
+	
 	
 }
 

@@ -54,6 +54,13 @@ foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario),
 foreign key (id_Rol) REFERENCES Roles(id_Rol)
 );
 
+create table Imagen(
+id_Imagen int(5) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+id_Producto int(10) NOT NULL,
+Imagen LONGBLOB,
+foreign key (id_Producto) REFERENCES Productos(id_Producto)
+);
+
 CREATE TABLE `SPRING_SESSION` (
 `PRIMARY_ID` char(36) NOT NULL,
  `SESSION_ID` char(36) NOT NULL,

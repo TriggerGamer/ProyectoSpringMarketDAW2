@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS ProductosCompras;
 DROP TABLE IF EXISTS UsuarioRol;
+DROP TABLE IF EXISTS Imagen;
 DROP TABLE IF EXISTS Productos;
 DROP TABLE  IF EXISTS Compras;
 DROP TABLE IF EXISTS Roles;
@@ -10,7 +11,7 @@ DROP TABLE IF EXISTS SPRING_SESSION;
 
 CREATE TABLE Productos 
 (
-id_Producto serial PRIMARY KEY,
+id_Producto serial PRIMARY KEY NOT NULL,
 tituloProducto VARCHAR ( 100 ),
 descripcionProducto VARCHAR ( 300 ),
 precio decimal ( 10, 2 ),
@@ -19,7 +20,7 @@ descuento INT
 
 CREATE TABLE Usuarios 
 (
-id_Usuario serial PRIMARY KEY,
+id_Usuario serial PRIMARY KEY NOT NULL,
 nombreUsuario VARCHAR ( 50 ) UNIQUE NOT NULL,
 nombre VARCHAR ( 50 ),
 apellidos VARCHAR ( 100 ),
@@ -65,6 +66,15 @@ PRIMARY KEY (id_Rol, id_Usuario),
 foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario),
 foreign key (id_Rol) REFERENCES Roles(id_Rol)
 );
+
+CREATE TABLE Imagen
+(
+id_Imagen serial PRIMARY KEY NOT NULL,
+id_Producto INT NOT NULL,
+Imagen LONGBLOB,
+foreign key (id_Producto) REFERENCES Productos(id_Producto)
+);
+
 
 CREATE TABLE SPRING_SESSION (
 	PRIMARY_ID CHAR(36) NOT NULL,
