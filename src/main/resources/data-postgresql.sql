@@ -7,6 +7,15 @@ INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VA
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES('Razer BlackWidow V3 Pro','El primer y más icónico teclado mecánico para juegos del mundo hace su próxima evolución revolucionaria. Entra a un nuevo meta inalámbrico con el Razer BlackWidow V3 Pro.',329.99,5);
 INSERT INTO Productos(tituloProducto, descripcionProducto, precio, descuento) VALUES('Sony PlayStation 5 Standard + Ratchet & Clank','PlayStation® 5: Jugar no tiene límites. Experimenta cargas superrápidas gracias a una unidad de estado sólido (SSD) de alta velocidad, una inmersión más profunda con retroalimentación háptica, gatillos adaptables y audio 3D.',579.99,10);
 
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(1, LOAD_FILE('./static/img/pc1.jpg'));
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(2, LOAD_FILE('./static/img/pc2.jpg'));
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(3, LOAD_FILE('./static/img/pc3.jpg'));
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(4, LOAD_FILE('./static/img/pc4.jpg'));
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(5, LOAD_FILE('./static/img/pc5.jpg'));
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(6, LOAD_FILE('./static/img/pc6.jpg'));
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(7, LOAD_FILE('./static/img/pc7.jpg'));
+INSERT INTO Imagen(id_Producto, Imagen) VALUES(8, LOAD_FILE('./static/img/pc8.jpg'));
+
 INSERT INTO Usuarios(nombreUsuario, nombre, apellidos, contrasenia, email, fechaNacimiento, numeroTarjeta, titularTarjeta, codigoSeguridad, direccionFacturacion) VALUES('erick', 'Erick', 'Jaquez', '$2a$10$QZNeYmpAQxPhaoHI5boMVunUHScXf4Miqsj/ybhjqXmAZvkbxv0Xu', 'ff@bruh.es', '2002-05-29', 515454153, 'Erick', 214, 'Algun sitio');
 INSERT INTO Usuarios(nombreUsuario, nombre, apellidos, contrasenia, email, fechaNacimiento, numeroTarjeta, titularTarjeta, codigoSeguridad, direccionFacturacion) VALUES('luis', 'Luis', 'Martinez', '$2a$10$GGKnxwVNXW5Nv4gOfEK04O3GetwwQ474sdC5E03TroYaCfIx1ItaS', 'ereasgfawdf@ff.com', '1994-06-15', 12342456454, 'Luis', 452, 'Lugar lugar'); 
 
