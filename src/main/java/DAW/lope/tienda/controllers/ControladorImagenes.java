@@ -1,8 +1,11 @@
 package DAW.lope.tienda.controllers;
 
+import java.net.http.HttpHeaders;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,7 +24,7 @@ import DAW.lope.tienda.servicios.ServicioImagen;
 import DAW.lope.tienda.servicios.ServicioProductos;
 
 @Controller
-@RequestMapping("/imagenes")
+@RequestMapping(value = "/imagenes")
 public class ControladorImagenes {
 
 	@Autowired
@@ -67,17 +70,17 @@ public class ControladorImagenes {
 	}
 
 	@GetMapping(value = "/{id}")
-	public @ResponseBody ResponseEntity<byte[]> getImageAsResponseEntity(@PathVariable int id) {
+	public @ResponseBody ResponseEntity getImageAsResponseEntity(@PathVariable int id) {
 
 		try {
 			Imagen imagesObj = imgServicio.obtenerImagen(id);
 			byte[] media = imagesObj.getImagen();
-
-			ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(media, HttpStatus.OK);
+			
+			ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, HttpStatus.OK);
 			return responseEntity;
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
 	}
 }
