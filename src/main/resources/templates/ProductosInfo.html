@@ -55,7 +55,7 @@
 			<br>
 			
 			<div th:if="${rol == 'Admin'}">
-				<form th:action="@{/producto/{id}/imagen(id=${producto.id_Producto})}" method="POST"  enctype="multipart/form-data">
+				<form th:action="@{/imagenes/producto/{id}/imagen(id=${producto.id_Producto})}" method="POST"  enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="formFile" class="form-label mt-5"> Subir o Actualizar Imagen </label>
 						<input class="form-control" type="file" id="formFile" name="file">
