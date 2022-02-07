@@ -71,7 +71,7 @@ CREATE TABLE Imagen
 (
 id_Imagen serial PRIMARY KEY NOT NULL,
 id_Producto INT NOT NULL,
-Imagen LONGBLOB,
+Imagen BYTEA,
 foreign key (id_Producto) REFERENCES Productos(id_Producto)
 );
 

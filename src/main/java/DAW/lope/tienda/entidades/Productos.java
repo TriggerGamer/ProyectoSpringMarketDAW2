@@ -66,6 +66,14 @@ public class Productos implements Serializable {
 		return id_Producto;
 	}
 
+	public Set<Imagen> getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(Set<Imagen> imagen) {
+		this.imagen = imagen;
+	}
+
 	public Set<ProductosCompras> getCompra() {
 		return compra;
 	}

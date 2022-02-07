@@ -120,8 +120,8 @@ public class ControladorProductos {
 	public String infoProductos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
-		Productos productos = servicioProductos.findProductoById(id_Producto);
-		modelo.addAttribute("producto", productos);
+		Productos producto = servicioProductos.findProductoById(id_Producto);
+		modelo.addAttribute("producto", producto);
 
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");

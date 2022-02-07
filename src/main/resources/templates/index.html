@@ -22,7 +22,7 @@
 		<div class="imagenescambio">
 			<div class="imginutiles" th:each="producto: ${Productos}">
 				<a th:href="@{/producto/{id}(id=${producto.id_Producto})}">
-					<img th:src="@{/img/pc{id}.jpg(id=${producto.id_Producto})}">
+					<img th:src="@{/{id}(id=${producto.id_Producto})}">
 				</a>
 			</div>
 		</div>

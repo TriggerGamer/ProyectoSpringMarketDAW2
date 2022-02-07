@@ -13,9 +13,9 @@
 
 <body>
 	<header th:replace="nav/header.html"> </header>
-	
+
 	<br>
-	
+
 	<div class="container-fluid">
 
 		<table class="table">
@@ -49,8 +49,20 @@
 		</table>
 
 		<div th:each="rol : ${roles}">
-			<a th:if="${rol == 'Admin'}" th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button class="mt-2 btn btn-secondary btn-lg"> Borrar
-					Producto </button> </a>
+			<a th:if="${rol == 'Admin'}" th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button
+					class="mt-2 btn btn-secondary btn-lg"> Borrar Producto </button> </a>
+
+			<br>
+			
+			<div th:if="${rol == 'Admin'}">
+				<form th:action="@{/producto/{id}/imagen(id=${producto.id_Producto})}" method="POST"  enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="formFile" class="form-label mt-5"> Subir o Actualizar Imagen </label>
+						<input class="form-control" type="file" id="formFile" name="file">
+					</div>
+					<input class="mt-2 btn btn-success btn-lg" type="submit" value="Enviar"> 
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

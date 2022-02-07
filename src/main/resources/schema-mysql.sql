@@ -33,12 +33,12 @@ FOREIGN KEY (id_Usuario) REFERENCES Usuarios(id_Usuario)
 );
 
 create table ProductosCompras(
-id_Compra int(10) NOT NULL,
-id_Producto int(10) NOT Null,
+compra_id_Compra int(10) NOT NULL,
+producto_id_Producto int(10) NOT NUll,
 numeroUnidades int(3) NOT NULL,
-PRIMARY KEY(id_Compra, id_Producto),
-foreign key (id_Producto) REFERENCES Productos(id_Producto),
-foreign key (id_Compra) REFERENCES Compras(id_Compra) ON DELETE CASCADE
+PRIMARY KEY(compra_id_Compra, producto_id_Producto),
+foreign key (producto_id_Producto) REFERENCES Productos(id_Producto),
+foreign key (compra_id_Compra) REFERENCES Compras(id_Compra) ON DELETE CASCADE
 );
 
 create table Roles(
