@@ -1,4 +1,4 @@
-package DAW.lope.tienda.modelo;
+package DAW.lope.tienda.repositorios;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package DAW.lope.tienda.modelo;
+package DAW.lope.tienda.repositorios;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;

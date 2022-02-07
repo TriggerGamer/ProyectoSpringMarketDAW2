@@ -1,4 +1,4 @@
-package DAW.lope.tienda.modelo;
+package DAW.lope.tienda.repositorios;
 
 public interface DaoGenerico<T> {
 		T crear(T t);

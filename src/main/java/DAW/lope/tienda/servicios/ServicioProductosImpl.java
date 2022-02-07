@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.entidades.ProductosCompras;
-import DAW.lope.tienda.modelo.ProductosDao;
+import DAW.lope.tienda.repositorios.ProductosDao;
 
 @Transactional
 @Service

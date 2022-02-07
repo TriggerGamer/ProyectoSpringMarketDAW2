@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import DAW.lope.tienda.entidades.Rol;
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.modelo.RolDao;
-import DAW.lope.tienda.modelo.UsuariosDao;
+import DAW.lope.tienda.repositorios.RolDao;
+import DAW.lope.tienda.repositorios.UsuariosDao;
 
 @Transactional
 @Service

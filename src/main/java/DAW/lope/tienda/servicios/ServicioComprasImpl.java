@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import DAW.lope.tienda.entidades.Compras;
 
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.modelo.ComprasDao;
-import DAW.lope.tienda.modelo.ProductosComprasDao;
-import DAW.lope.tienda.modelo.ProductosDao;
-import DAW.lope.tienda.modelo.UsuariosDao;
+import DAW.lope.tienda.repositorios.ComprasDao;
+import DAW.lope.tienda.repositorios.ProductosComprasDao;
+import DAW.lope.tienda.repositorios.ProductosDao;
+import DAW.lope.tienda.repositorios.UsuariosDao;
 
 @Transactional
 @Service
