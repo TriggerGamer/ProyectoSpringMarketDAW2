@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import DAW.lope.tienda.entidades.Imagen;
-import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.servicios.ServicioImagen;
 import DAW.lope.tienda.servicios.ServicioProductos;
 
 @Controller
-@RequestMapping(value = "/imagenes")
+@RequestMapping(value = "/img")
 public class ControladorImagenes {
 
 	@Autowired
@@ -31,15 +29,15 @@ public class ControladorImagenes {
 	@Autowired
 	ServicioProductos ServicioProducto;
 
-	@GetMapping(value = "/producto/{idProducto}/img")
+	/* @GetMapping(value = "/producto/{idProducto}/img")
 	public ModelAndView actualizarFotoPerfil(HttpServletRequest request, @PathVariable("idProducto") int idProducto) {
 
 		ModelAndView mav = new ModelAndView();
 
-		Productos profesor = ServicioProducto.findProductoById(idProducto);
+		Productos p = ServicioProducto.findProductoById(idProducto);
 		Imagen img = null;
-		if (!profesor.getImagen().isEmpty()) {
-			for (Imagen i : profesor.getImagen()) {
+		if (!p.getImagen().isEmpty()) {
+			for (Imagen i : p.getImagen()) {
 				img = i;
 				break;
 			}
@@ -48,7 +46,7 @@ public class ControladorImagenes {
 		mav.addObject("profesor", profesor);
 		mav.setViewName("/imagen/imagen_subir");
 		return mav;
-	}
+	}*/ 
 
 	@PostMapping(value = "/producto/{idProducto}/imagen")
 	public String fileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request,
@@ -67,7 +65,7 @@ public class ControladorImagenes {
 		}
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/producto/{id}/imagen")
 	public @ResponseBody ResponseEntity getImageAsResponseEntity(@PathVariable int id) {
 
 		try {
