@@ -67,5 +67,4 @@ public class Imagen implements Serializable {
 		Imagen = imagen;
 	}
 	
-	
 }
