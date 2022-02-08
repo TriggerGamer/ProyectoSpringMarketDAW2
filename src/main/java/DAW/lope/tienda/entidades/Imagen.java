@@ -12,10 +12,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity(name = "Imagen")
 @Table(name = "Imagen")
 public class Imagen implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -2803090463325137236L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -27,17 +30,17 @@ public class Imagen implements Serializable {
 	private Productos producto;
 	
 	@Lob
-	@Column(name = "Imagen", columnDefinition="BLOB")
+	@Type(type="org.hibernate.type.BinaryType")
+	@Column(name = "Imagen")
 	private byte[] Imagen; 
 	
 	public Imagen() {
 		super();
 	}
 	
-	public Imagen(int id_Imagen, byte[] Imagen) {
+	public Imagen(byte[] Imagen) {
 		super();
-		this.id_Imagen = id_Imagen;
-		this.Imagen = Imagen;
+			this.Imagen = Imagen;
 	}
 
 	public int getId_Imagen() {

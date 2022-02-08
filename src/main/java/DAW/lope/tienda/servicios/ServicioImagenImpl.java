@@ -62,10 +62,9 @@ public class ServicioImagenImpl implements ServicioImagen {
 				}
 				return null;
 			} else {
-				Imagen img = new Imagen(id_Producto, image);
+				Imagen img = new Imagen(image);
 				img.setProducto(p);
 				p.addImagen(img);
-				imagenRepository.save(img);
 				productosdao.actualizar(p);
 				return true;
 			}
