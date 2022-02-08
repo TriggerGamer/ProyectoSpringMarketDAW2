@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/producto/{id_Producto}",
 	                            "/carrito/guardar/{id_Producto}",
 	                            "/carrito/borrar/{id_Producto}",
+	                            "/imagenes/**",
 	                            "/carrito/listar",
 	                            "/acceso-denegado",
 	                            "/webjars/**").permitAll()
