@@ -66,6 +66,12 @@ public class Usuario implements Serializable {
 	@JoinTable(name = "UsuarioRol", joinColumns = @JoinColumn(name = "id_Usuario"), inverseJoinColumns = @JoinColumn(name = "id_Rol"))
 	private Set<Rol> roles = new HashSet<>();
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Preguntas> preguntas = new HashSet<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Respuestas> respuestas = new HashSet<>();
+	
 	public Usuario() {
 	}
 

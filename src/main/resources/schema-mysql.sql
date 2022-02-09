@@ -61,6 +61,26 @@ Imagen LONGBLOB,
 foreign key (id_Producto) REFERENCES Productos(id_Producto)
 );
 
+create table Preguntas(
+id_Pregunta int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+id_Producto int(10) NOT NULL,
+id_Usuario int(10) NOT NULL,
+pregunta VARCHAR(300) NOT NULL,
+fecha_Pregunta DATE,
+foreign key (id_Producto) REFERENCES Productos(id_Producto),
+foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario)
+);
+
+create table Respuesta(
+id_Respuesta int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+id_Pregunta int(10) NOT NULL,
+id_Usuario int(10) NOT NULL,
+respuesta VARCHAR(300) NOT NULL,
+fecha_Respuesta DATE,
+foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario),
+foreign key (id_Pregunta) REFERENCES Preguntas(id_Pregunta)
+);
+
 CREATE TABLE `SPRING_SESSION` (
 `PRIMARY_ID` char(36) NOT NULL,
  `SESSION_ID` char(36) NOT NULL,
