@@ -191,7 +191,7 @@ public class Usuario implements Serializable {
 
 	public void setCompras(Set<Compras> compras) {
 		this.compras = compras;
-	}
+	}	
 
 	public Set<Rol> getRoles() {
 		return roles;
@@ -201,6 +201,23 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 	
+	
+	public Set<Preguntas> getPreguntas() {
+		return preguntas;
+	}
+
+	public void setPreguntas(Set<Preguntas> preguntas) {
+		this.preguntas = preguntas;
+	}
+
+	public Set<Respuestas> getRespuestas() {
+		return respuestas;
+	}
+
+	public void setRespuestas(Set<Respuestas> respuestas) {
+		this.respuestas = respuestas;
+	}
+
 	public boolean anadirRol(Rol rol) {
 	    rol.addUsuario(this);
 		return getRoles().add(rol);
@@ -209,5 +226,15 @@ public class Usuario implements Serializable {
 	public boolean anadirCompra(Compras compra) {
 	    compra.addUsuario(this);
 		return getCompras().add(compra);
+	}
+	
+	public void anadirPregunta(Preguntas pregunta) {
+	    pregunta.setUsuario(this);
+	    getPreguntas().add(pregunta);
+	}
+	
+	public void anadirRespuesta(Respuestas respuesta) {
+	    respuesta.setUsuario(this);
+		getRespuestas().add(respuesta);
 	}
 }
