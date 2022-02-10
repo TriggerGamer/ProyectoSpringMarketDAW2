@@ -52,17 +52,8 @@
 		<div th:each="rol : ${roles}">
 			<a th:if="${rol == 'Admin'}" th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button
 					class="mt-2 btn btn-secondary btn-lg"> Borrar Producto </button> </a>
-			
-			<div class="input-group" th:if="${rol == 'Registrado'}">
-				<button type="submit">
-					<span class="input-group-text border-0" id="search-addon">
-						<i class="bi bi-search"></i>
-					</span>
-				</button>
-				<input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-					aria-describedby="search-addon" />
 
-			</div>
+
 			<div th:if="${rol == 'Admin'}">
 				<form th:action="@{/img/producto/{id}/imagen(id=${producto.id_Producto})}" method="POST"
 					enctype="multipart/form-data">
@@ -73,6 +64,17 @@
 					<input class="mt-2 btn btn-success btn-lg" type="submit" value="Enviar">
 				</form>
 			</div>
+			
+			<div class="input-group" th:if="${rol == 'Registrado' || rol == 'Admin'}">
+				<button type="submit">
+					<span class="input-group-text border-0" id="search-addon">
+						<i class="bi bi-search"></i>
+					</span>
+				</button>
+				<input type="text" class="form-control rounded" placeholder="Haz tu pregunta..." aria-describedby="search-addon" />				
+			</div>	
+		</div>
+		<div>
 		</div>
 	</div>
 </body>

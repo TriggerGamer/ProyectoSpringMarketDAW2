@@ -35,6 +35,19 @@ public class Respuestas implements Serializable{
 	
 	@Column(name="fecha_Respuesta")
 	private String fecha_Respuesta;
+	
+	public Respuestas() {
+		
+	}
+
+	public Respuestas(int id_Respuesta, Preguntas pregunta, Usuario usuario, String respuesta, String fecha_Respuesta) {
+		super();
+		this.id_Respuesta = id_Respuesta;
+		this.pregunta = pregunta;
+		this.usuario = usuario;
+		this.respuesta = respuesta;
+		this.fecha_Respuesta = fecha_Respuesta;
+	}
 
 	public int getId_Respuesta() {
 		return id_Respuesta;

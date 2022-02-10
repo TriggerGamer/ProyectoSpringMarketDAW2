@@ -44,6 +44,21 @@ public class Preguntas implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Respuestas> respuestas = new HashSet<>();
 	
+	public Preguntas() {
+		
+	}
+
+	public Preguntas(int id_Pregunta, Productos producto, Usuario usuario, String pregunta, String fecha_Pregunta,
+			Set<Respuestas> respuestas) {
+		super();
+		this.id_Pregunta = id_Pregunta;
+		this.producto = producto;
+		this.usuario = usuario;
+		this.pregunta = pregunta;
+		this.fecha_Pregunta = fecha_Pregunta;
+		this.respuestas = respuestas;
+	}
+
 	public int getId_Pregunta() {
 		return id_Pregunta;
 	}
