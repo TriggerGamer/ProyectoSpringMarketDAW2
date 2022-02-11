@@ -122,6 +122,20 @@ public class Productos implements Serializable {
 		this.descuento = descuento;
 	}
 	
+	
+	public Set<Preguntas> getPreguntas() {
+		return preguntas;
+	}
+
+	public void setPreguntas(Set<Preguntas> preguntas) {
+		this.preguntas = preguntas;
+	}
+
+	public void anadirPregunta(Preguntas pregunta) {
+	    pregunta.setProducto(this);
+	    getPreguntas().add(pregunta);
+	}
+	
 	public void addImagen(Imagen img) {
 		this.imagen.add(img);
 		img.setProducto(this);

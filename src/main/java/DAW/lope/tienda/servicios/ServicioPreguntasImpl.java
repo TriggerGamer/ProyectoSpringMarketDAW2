@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.entidades.Preguntas;
+import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.repositorios.PreguntasRepository;
 
@@ -21,12 +22,20 @@ public class ServicioPreguntasImpl implements ServicioPreguntas{
 	@Autowired
 	private ServicioUsuarios servicioUsuarios;
 	
+	@Autowired
+	private ServicioProductos servicioProductos;
+	
 	@Override
 	public int guardarPregunta(Preguntas pregunta, int idUsuario, int idProducto) {
 		try {
 			Usuario usuario = servicioUsuarios.findUsuarioById(idUsuario);
+			Productos producto = servicioProductos.findProductoById(idProducto);
 			pregunta.setUsuario(usuario);
-			usuario.anadirPregunta(pregunta);			
+			pregunta.setProducto(producto);
+			
+			usuario.anadirPregunta(pregunta);
+			producto.anadirPregunta(pregunta);
+			
 			preguntasRepository.save(pregunta);
 			
 			return 1;
@@ -36,7 +45,7 @@ public class ServicioPreguntasImpl implements ServicioPreguntas{
 	}
 
 	@Override
-	public void borrarPregunta(int idUsuario, int idPregunta) {
+	public void borrarPregunta(int idPregunta) {
 		
 		try {
 			preguntasRepository.deleteById(idPregunta);

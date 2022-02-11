@@ -1,7 +1,9 @@
 package DAW.lope.tienda.seguridad;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,12 +45,15 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("Registrado")) {
-				session.setAttribute("rol", "Registrado");
+				session.setAttribute("rol2", "Registrado");
 				isRegistrado = true;
 				break;
 			} else if (grantedAuthority.getAuthority().equals("Admin")) {
-				session.setAttribute("rol", "Admin");
 				isAdmin = true;
+				
+				session.setAttribute("rol", "Admin");
+				session.setAttribute("rol2", "Registrado");
+				
 				break;
 			}
 		}
