@@ -1,7 +1,6 @@
 package DAW.lope.tienda.servicios;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,12 +42,12 @@ public class ServicioRespuestasImpl implements ServicioRespuestas{
 	}
 
 	@Override
-	public int editarRespuesta(int idRespuesta, String respuesta) {
+	public Respuestas editarRespuesta(int idRespuesta, String respuesta) {
 		
 		Respuestas editarRespuesta = respuestasRepository.getById(idRespuesta);
 		
 		editarRespuesta.setRespuesta(respuesta);
 		
-		return 0;
+		return editarRespuesta;
 	}
 }
