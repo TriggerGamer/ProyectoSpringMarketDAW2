@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>DAW.lope</groupId>
 	<artifactId>tienda</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.3.5</version>
 	<name>Tienda</name>
 	<description>Tienda con Spring </description>
 	<properties>
