@@ -2,7 +2,6 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -65,22 +64,4 @@ public class Rol implements Serializable {
 		usuario.getRoles().add(this);
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(Usuarios, id_Rol, nombreRol);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Rol other = (Rol) obj;
-		return Objects.equals(Usuarios, other.Usuarios) && id_Rol == other.id_Rol
-				&& Objects.equals(nombreRol, other.nombreRol);
-	}
-	
 }

@@ -1,7 +1,6 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -88,27 +87,6 @@ public class Respuestas implements Serializable{
 
 	public void setFecha_Respuesta(String fecha_Respuesta) {
 		this.fecha_Respuesta = fecha_Respuesta;
-	}
-	
-	
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(fecha_Respuesta, id_Respuesta, pregunta, respuesta, usuario);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Respuestas other = (Respuestas) obj;
-		return Objects.equals(fecha_Respuesta, other.fecha_Respuesta) && id_Respuesta == other.id_Respuesta
-				&& Objects.equals(pregunta, other.pregunta) && Objects.equals(respuesta, other.respuesta)
-				&& Objects.equals(usuario, other.usuario);
 	}
 	
 }

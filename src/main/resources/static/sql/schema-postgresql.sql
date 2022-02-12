@@ -88,7 +88,7 @@ foreign key (id_Producto) REFERENCES Productos(id_Producto),
 foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario)
 );
 
-CREATE TABLE Respuesta
+CREATE TABLE Respuestas
 (
 id_Respuesta Serial PRIMARY KEY NOT NULL,
 id_Pregunta INT NOT NULL,
