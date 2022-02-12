@@ -11,6 +11,6 @@ import DAW.lope.tienda.entidades.Compras;
 
 @Repository
 public interface CompraRepository extends JpaRepository<Compras, Integer>{
-	@Query("SELECT u FROM Compras WHERE id_Usuario = :id")
+	@Query("SELECT c FROM Compras c WHERE id_Usuario = :id")
 	List<Compras> findComprasbyidUsuario(@Param("id") int id);
 }

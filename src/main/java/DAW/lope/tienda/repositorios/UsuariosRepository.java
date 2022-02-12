@@ -7,5 +7,5 @@ import DAW.lope.tienda.entidades.Usuario;
 
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
-	Usuario findByUsername(String nombreUsuario);
+	Usuario findBynombreUsuario(String nombreUsuario);
 }

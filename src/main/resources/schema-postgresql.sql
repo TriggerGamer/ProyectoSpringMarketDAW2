@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS ProductosCompras;
 DROP TABLE IF EXISTS UsuarioRol;
 DROP TABLE IF EXISTS Imagen;
+DROP TABLE IF EXISTS Respuestas;
+DROP TABLE IF EXISTS Preguntas;
 DROP TABLE IF EXISTS Productos;
 DROP TABLE  IF EXISTS Compras;
 DROP TABLE IF EXISTS Roles;
@@ -75,6 +77,27 @@ Imagen BYTEA,
 foreign key (id_Producto) REFERENCES Productos(id_Producto)
 );
 
+CREATE TABLE Preguntas
+(
+id_Pregunta Serial PRIMARY KEY NOT NULL,
+id_Producto INT NOT NULL,
+id_Usuario INT NOT NULL,
+pregunta VARCHAR ( 300 ) NOT NULL,
+fecha_Pregunta DATE NOT NULL,
+foreign key (id_Producto) REFERENCES Productos(id_Producto),
+foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario)
+);
+
+CREATE TABLE Respuestas
+(
+id_Respuesta Serial PRIMARY KEY NOT NULL,
+id_Pregunta INT NOT NULL,
+id_Usuario INT NOT NULL,
+respuesta VARCHAR ( 300 ) NOT NULL,
+fecha_Respuesta DATE NOT NULL,
+foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario),
+foreign key (id_Pregunta) REFERENCES Preguntas(id_Pregunta)
+);
 
 CREATE TABLE SPRING_SESSION (
 	PRIMARY_ID CHAR(36) NOT NULL,

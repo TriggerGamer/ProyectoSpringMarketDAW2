@@ -71,7 +71,7 @@ foreign key (id_Producto) REFERENCES Productos(id_Producto),
 foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario)
 );
 
-create table Respuesta(
+create table Respuestas(
 id_Respuesta int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 id_Pregunta int(10) NOT NULL,
 id_Usuario int(10) NOT NULL,
