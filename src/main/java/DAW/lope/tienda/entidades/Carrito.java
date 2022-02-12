@@ -2,8 +2,10 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
+
 public class Carrito implements Serializable {
+	
+	private static final long serialVersionUID = 2956724154503745381L;
 	private int id_Producto;
 	private String nombreProducto;
 	private int numeroUnidades;

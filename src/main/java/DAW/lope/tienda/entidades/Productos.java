@@ -3,6 +3,7 @@ package DAW.lope.tienda.entidades;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -154,8 +155,28 @@ public class Productos implements Serializable {
 			iterator.remove();
 		}
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(compra, descripcionProducto, descuento, id_Producto, imagen, precio, preguntas,
+				tituloProducto);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Productos other = (Productos) obj;
+		return Objects.equals(compra, other.compra) && Objects.equals(descripcionProducto, other.descripcionProducto)
+				&& descuento == other.descuento && id_Producto == other.id_Producto
+				&& Objects.equals(imagen, other.imagen)
+				&& Double.doubleToLongBits(precio) == Double.doubleToLongBits(other.precio)
+				&& Objects.equals(preguntas, other.preguntas) && Objects.equals(tituloProducto, other.tituloProducto);
+	}
 	
 }
 

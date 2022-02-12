@@ -2,6 +2,7 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -237,4 +238,31 @@ public class Usuario implements Serializable {
 	    respuesta.setUsuario(this);
 		getRespuestas().add(respuesta);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellidos, codigoSeguridad, compras, contrasenia, direccionFacturacion, email,
+				fechaNacimiento, id_Usuario, nombre, nombreUsuario, numeroTarjeta, preguntas, respuestas, roles,
+				titularTarjeta);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(apellidos, other.apellidos) && codigoSeguridad == other.codigoSeguridad
+				&& Objects.equals(compras, other.compras) && Objects.equals(contrasenia, other.contrasenia)
+				&& Objects.equals(direccionFacturacion, other.direccionFacturacion)
+				&& Objects.equals(email, other.email) && Objects.equals(fechaNacimiento, other.fechaNacimiento)
+				&& id_Usuario == other.id_Usuario && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(nombreUsuario, other.nombreUsuario) && numeroTarjeta == other.numeroTarjeta
+				&& Objects.equals(preguntas, other.preguntas) && Objects.equals(respuestas, other.respuestas)
+				&& Objects.equals(roles, other.roles) && Objects.equals(titularTarjeta, other.titularTarjeta);
+	}
+	
 }

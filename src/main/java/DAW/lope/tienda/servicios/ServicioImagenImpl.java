@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import DAW.lope.tienda.entidades.Imagen;
 import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.repositorios.ImagenRepository;
-import DAW.lope.tienda.repositorios.ProductosDao;
+import DAW.lope.tienda.repositorios.ProductosRepository;
 
 @Transactional
 @Service
@@ -20,7 +20,7 @@ public class ServicioImagenImpl implements ServicioImagen {
 	private ImagenRepository imagenRepository;
 
 	@Autowired
-	private ProductosDao productosdao;
+	private ProductosRepository productosRepository;
 
 	@Override
 	public int guardarImagen(Imagen img) {
@@ -47,7 +47,7 @@ public class ServicioImagenImpl implements ServicioImagen {
 	@Override
 	public Boolean actualizarImagen(int id_Producto, MultipartFile file) {
 		
-		Productos p = productosdao.findById(id_Producto);
+		Productos p = productosRepository.getById(id_Producto);
 
 		if (p == null)
 			return false;
@@ -66,7 +66,7 @@ public class ServicioImagenImpl implements ServicioImagen {
 				img.setProducto(p);
 				p.addImagen(img);
 				imagenRepository.save(img);
-				productosdao.actualizar(p);
+				productosRepository.save(p);
 				return true;
 			}
 

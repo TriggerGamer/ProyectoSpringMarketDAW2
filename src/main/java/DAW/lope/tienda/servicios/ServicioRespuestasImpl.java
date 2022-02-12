@@ -45,11 +45,9 @@ public class ServicioRespuestasImpl implements ServicioRespuestas{
 	@Override
 	public int editarRespuesta(int idRespuesta, String respuesta) {
 		
-		Optional<Respuestas> editarRespuesta = respuestasRepository.findById(idRespuesta);
+		Respuestas editarRespuesta = respuestasRepository.getById(idRespuesta);
 		
-		Respuestas respuesta1 = editarRespuesta.get();
-		
-		respuesta1.setRespuesta(respuesta);
+		editarRespuesta.setRespuesta(respuesta);
 		
 		return 0;
 	}
