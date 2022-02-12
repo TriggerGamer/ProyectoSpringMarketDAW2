@@ -2,6 +2,7 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -99,6 +100,31 @@ public class Preguntas implements Serializable {
 		this.fecha_Pregunta = fecha_Pregunta;
 	}
 	
-	
+	public Set<Respuestas> getRespuestas() {
+		return respuestas;
+	}
 
+	public void setRespuestas(Set<Respuestas> respuestas) {
+		this.respuestas = respuestas;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(fecha_Pregunta, id_Pregunta, pregunta, producto, respuestas, usuario);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Preguntas other = (Preguntas) obj;
+		return Objects.equals(fecha_Pregunta, other.fecha_Pregunta) && id_Pregunta == other.id_Pregunta
+				&& Objects.equals(pregunta, other.pregunta) && Objects.equals(producto, other.producto)
+				&& Objects.equals(respuestas, other.respuestas) && Objects.equals(usuario, other.usuario);
+	}
+	
 }

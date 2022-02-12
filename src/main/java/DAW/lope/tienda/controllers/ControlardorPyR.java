@@ -1,5 +1,6 @@
 package DAW.lope.tienda.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,26 +39,16 @@ public class ControlardorPyR {
 		} catch (Exception e) {
 			idUsuario = 1;
 		}
-		pregunta1.setFecha_Pregunta(pregunta);
+		pregunta1.setPregunta(pregunta);
 
 		servicioPreguntas.guardarPregunta(pregunta1, idProducto, idUsuario);
 		return "";
 	}
-	
+
 	@ResponseBody
-	@PostMapping("/borrar/pregunta/{id}")
-	public String borrarPreguntas(@PathVariable int idPregunta, HttpSession session) {
-		Preguntas pregunta1 = new Preguntas();
-
-		int idUsuario;
-
-		try {
-			idUsuario = (int) session.getAttribute("id_Usuario");
-		} catch (Exception e) {
-			idUsuario = 1;
-		}
-	
-		servicioPreguntas.borrarPregunta(idPregunta, idUsuario);
+	@PostMapping("/borrar/pregunta/{idPregunta}")
+	public String borrarPreguntas(@PathVariable int idPregunta) {
+		servicioPreguntas.borrarPregunta(idPregunta);
 		return "";
 	}
 
@@ -69,15 +60,71 @@ public class ControlardorPyR {
 	}
 
 	@ResponseBody
-	@PostMapping("/crear/respuesta/{id}")
-	public String crearRespuesta(@PathVariable int id) {
+	@GetMapping("/obtener/idUsuario")
+	public int obteneridUsuario(HttpSession session) {
+
+		int idUsuario;
+
+		try {
+			idUsuario = (int) session.getAttribute("id_Usuario");
+		} catch (Exception e) {
+			idUsuario = 1;
+		}
+
+		return idUsuario;
+	}
+
+	@ResponseBody
+	@GetMapping("/obtener/roles")
+	public List<String> obtenerRoles(HttpSession session) {
+		
+		String rol = (String) session.getAttribute("rol");
+		String rol2 = (String) session.getAttribute("rol2"); 
+		
+		List<String> roles = new ArrayList<String>();
+		roles.add(rol);
+		roles.add(rol2);
+		
+		return roles;
+	}
+
+	@ResponseBody
+	@PostMapping("/crear/respuesta/{idPregunta}")
+	public String crearRespuesta(@PathVariable int idPregunta, @RequestParam String respuesta, HttpSession session) {
+		Respuestas respuesta1 = new Respuestas();
+
+		int idUsuario;
+
+		try {
+			idUsuario = (int) session.getAttribute("id_Usuario");
+		} catch (Exception e) {
+			idUsuario = 1;
+		}
+		respuesta1.setRespuesta(respuesta);
+
+		servicioRespuestas.guardarRespuesta(respuesta1, idUsuario, idPregunta);
+		return "";
+	}
+	
+	@ResponseBody
+	@PostMapping("/borrar/respuesta/{idRespuesta}")
+	public String borrarRespuestas(@PathVariable int idRespuesta) {
+		servicioPreguntas.borrarPregunta(idRespuesta);
 		return "";
 	}
 
 	@ResponseBody
+	@PostMapping("/editar/respuesta/{idRespuesta}")
+	public String editarRespuesta(@PathVariable int idRespuesta, @RequestParam String respuesta) {
+		Respuestas respuesta1 = new Respuestas();
+		respuesta1.setRespuesta(respuesta);
+		servicioRespuestas.editarRespuesta(idRespuesta, respuesta);
+		return "";
+	}
+	
+	@ResponseBody
 	@GetMapping("/obtener/respuesta")
 	public List<Respuestas> obtenerRespuestas() {
-
 		return servicioRespuestas.buscarTodas();
 	}
 }

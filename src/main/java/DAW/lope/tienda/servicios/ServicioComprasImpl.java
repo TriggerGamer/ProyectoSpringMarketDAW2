@@ -1,6 +1,5 @@
 package DAW.lope.tienda.servicios;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,60 +10,71 @@ import org.springframework.transaction.annotation.Transactional;
 import DAW.lope.tienda.entidades.Compras;
 
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.repositorios.ComprasDao;
-import DAW.lope.tienda.repositorios.ProductosComprasDao;
-import DAW.lope.tienda.repositorios.ProductosDao;
-import DAW.lope.tienda.repositorios.UsuariosDao;
+import DAW.lope.tienda.repositorios.CompraRepository;
+import DAW.lope.tienda.repositorios.ProductosComprasRepository;
+import DAW.lope.tienda.repositorios.ProductosRepository;
+import DAW.lope.tienda.repositorios.UsuariosRepository;
 
 @Transactional
 @Service
 public class ServicioComprasImpl implements ServicioCompras {
 	
 	@Autowired
-	ComprasDao comprasdao;
+	CompraRepository comprasRepository;
 	
 	@Autowired
-	ProductosDao productosdao;
+	ProductosRepository productosRepository;
 	
 	@Autowired
-	ProductosComprasDao productoscomprasdao;
+	ProductosComprasRepository productosComprasRepository;
 	
 	@Autowired
-	UsuariosDao usuariodao;
+	UsuariosRepository usuarioRepository;
+	
 
 	@Override
 	public Compras crear(int id_usuario, Compras compras) {
 		
-		Usuario usuario = usuariodao.findById(id_usuario);
-		compras.setFechaDePedido(LocalDateTime.now());
-		//usuario.anadirCompra(compras);
+		Usuario usuario = usuarioRepository.getById(id_usuario);
+		
+		if(compras.getFechaDePedido() == null || compras.getFechaDePedido() == "") {
+			String f = LocalDateTime.now().toString();
+			String nuevo[] = f.split("T");
+			compras.setFechaDePedido(nuevo[0]);
+		}		
+		
+		usuario.anadirCompra(compras);
 		compras.addUsuario(usuario);
-		return comprasdao.crear(compras);
+		
+		return comprasRepository.save(compras);
 	}
 
-	@Override
-	public boolean borrar(int id) {
-		//comprasdao.deleteProductosCompraById(id);
-		return comprasdao.deleteCompraById(id);
-	}
 	
 	@Override
 	public Compras getComprasbyId(int id) {
 		
-		Compras compras = new Compras();		
-		List<Compras> compras1 = comprasdao.comprasUsuario(id);		
-		compras = compras1.get(0);		
-		return compras;
+		try {
+			Compras compras = comprasRepository.getById(id);			
+			return compras;
+		}catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	@Override
-	public List<Compras> findComprasUsuario(int id) {
-		return comprasdao.comprasUsuario(id);
+	public List<Compras> findComprasUsuario(int idUsuario) {
+		return comprasRepository.findComprasbyidUsuario(idUsuario);
 	}
 
 	@Override
-	public void borrar(Object id) {
-		comprasdao.borrar(id);
+	public void borrar(int id) {
+		
+		try {
+			comprasRepository.deleteById(id);
+		}catch (Exception e) {
+			
+		}
 	}
 	
 }

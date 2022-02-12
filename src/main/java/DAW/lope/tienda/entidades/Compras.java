@@ -1,8 +1,8 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -32,7 +32,7 @@ public class Compras implements Serializable {
 	private Usuario usuario;
 
 	@Column(name = "fechaDeCompra")
-	private LocalDateTime fechaDePedido;
+	private String fechaDePedido;
 
 	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<ProductosCompras> productos = new HashSet<>();
@@ -41,7 +41,7 @@ public class Compras implements Serializable {
 	public Compras() {
 	}
 
-	public Compras(int id_Compra, Usuario usuario, LocalDateTime fechaDePedido) {
+	public Compras(int id_Compra, Usuario usuario, String fechaDePedido) {
 		this.id_Compra = id_Compra;
 		this.usuario = usuario;
 		this.fechaDePedido = fechaDePedido;
@@ -68,11 +68,11 @@ public class Compras implements Serializable {
 		this.id_Compra = id_Compra;
 	}
 
-	public LocalDateTime getFechaDePedido() {
+	public String getFechaDePedido() {
 		return fechaDePedido;
 	}
 
-	public void setFechaDePedido(LocalDateTime fechaDePedido) {
+	public void setFechaDePedido(String fechaDePedido) {
 		this.fechaDePedido = fechaDePedido;
 	}
 
@@ -95,4 +95,24 @@ public class Compras implements Serializable {
 		this.productos.add(productoscompra);
 		productos.getCompra().add(productoscompra);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(fechaDePedido, id_Compra, productos, usuario);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Compras other = (Compras) obj;
+		return Objects.equals(fechaDePedido, other.fechaDePedido) && id_Compra == other.id_Compra
+				&& Objects.equals(productos, other.productos) && Objects.equals(usuario, other.usuario);
+	}
+	
+	
 }

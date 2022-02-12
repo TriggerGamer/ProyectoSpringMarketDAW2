@@ -41,19 +41,20 @@ public class ProductosComprasId implements Serializable {
 	}
 
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
- 
-        if (o == null || getClass() != o.getClass())
-            return false;
- 
-        ProductosComprasId that = (ProductosComprasId) o;
-        return Objects.equals(idCompra, that.idCompra) &&
-               Objects.equals(idProducto, that.idProducto);
-    }
- 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCompra, idProducto);
-    }
+	public int hashCode() {
+		return Objects.hash(idCompra, idProducto);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductosComprasId other = (ProductosComprasId) obj;
+		return idCompra == other.idCompra && idProducto == other.idProducto;
+	}
+	
 }

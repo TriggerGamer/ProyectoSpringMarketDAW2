@@ -1,6 +1,7 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -31,8 +32,6 @@ public class ProductosCompras implements Serializable {
         this.producto = productos;	
 		this.id = new ProductosComprasId(productos.getId_Producto(), compra.getId_Compra());
 	}
-	
-	
 
 	public int getNumeroUnidades() {
 		return numeroUnidades;
@@ -65,5 +64,24 @@ public class ProductosCompras implements Serializable {
 	public void setCompra(Compras compra) {
 		this.compra = compra;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(compra, id, numeroUnidades, producto);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductosCompras other = (ProductosCompras) obj;
+		return Objects.equals(compra, other.compra) && Objects.equals(id, other.id)
+				&& numeroUnidades == other.numeroUnidades && Objects.equals(producto, other.producto);
+	}
+	
 	
 }

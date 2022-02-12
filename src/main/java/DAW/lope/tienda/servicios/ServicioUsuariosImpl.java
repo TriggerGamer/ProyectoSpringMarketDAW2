@@ -1,7 +1,6 @@
 package DAW.lope.tienda.servicios;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,37 +13,37 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import DAW.lope.tienda.entidades.Rol;
 import DAW.lope.tienda.entidades.Usuario;
-import DAW.lope.tienda.repositorios.RolDao;
-import DAW.lope.tienda.repositorios.UsuariosDao;
+import DAW.lope.tienda.repositorios.RolRepository;
+import DAW.lope.tienda.repositorios.UsuariosRepository;
 
 @Transactional
 @Service
 public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsService {
 	
 	@Autowired
-	UsuariosDao usuariodao;
+	UsuariosRepository usuarioRepository;
 	
 	@Autowired
-	RolDao roldao;
+	RolRepository rolRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;	
 
 	@Override
 	public Usuario login(String nombreUsuario) {
-		return usuariodao.findByName(nombreUsuario);
+		return usuarioRepository.findByUsername(nombreUsuario);
 	}
 
 	@Override
 	public Usuario findUsuarioById(int id){
-		return usuariodao.findById(id);
+		return usuarioRepository.getById(id);
 	}
 
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		Usuario usuario = usuariodao.findByName(username);
+		Usuario usuario = usuarioRepository.findByUsername(username);
 		
 		Set<Rol> roles = usuario.getRoles();
 		
@@ -59,14 +58,17 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 	@Override
 	public Usuario crear(Usuario usuario) {		
 		usuario.setContrasenia(bCryptPasswordEncoder.encode(usuario.getContrasenia()));
-		Rol rol = roldao.findById(2);
+		Rol rol = rolRepository.getById(2);
 		usuario.anadirRol(rol);
-		return usuariodao.crear(usuario);
+		return usuarioRepository.save(usuario);
 	}
 
 	@Override
-	public void borrar(Object id) {
-		usuariodao.borrar(id);
+	public void borrar(int idUsuario) {
+		try {
+			usuarioRepository.deleteById(idUsuario);
+		} catch (Exception e) {
+		}
 	}
 
 }

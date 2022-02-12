@@ -8,46 +8,50 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.entidades.Productos;
-import DAW.lope.tienda.entidades.ProductosCompras;
-import DAW.lope.tienda.repositorios.ProductosDao;
+import DAW.lope.tienda.repositorios.ProductosRepository;
 
 @Transactional
 @Service
 public class ServicioProductosImpl implements ServicioProductos {
 
 	@Autowired
-	ProductosDao productosdao;
+	ProductosRepository productosRepository;
 
 	@Override
 	public List<Productos> findEight() {
-		return productosdao.findEight();
+		return productosRepository.findTop8ByOderByid_ProductoAsc();
 	}
 
 	@Override
 	public List<Productos> getProductoByName(String name) {
-		return productosdao.getProductoByName(name);
+		return productosRepository.findByNameContaining(name);
 	}
 
 
 	@Override
 	public Productos findProductoById(int id) {
 
-		return productosdao.findById(id);
+		return productosRepository.getById(id);
 	}
 
 	@Override
 	public List<Productos> findAll() {
-		return productosdao.findAll();
+		return productosRepository.findAll();
 	}
 
 	@Override
 	public Productos crear(Productos productos) {
-		return productosdao.crear(productos);
+		return productosRepository.save(productos);
 	}
 
 	@Override
-	public void borrar(Object id) {		
-		productosdao.borrar(id);		
+	public void borrar(int idProducto) {
+		try {
+			productosRepository.deleteById(idProducto);		
+		}catch (Exception e) {
+			
+		}
+		
 	}
 
 }
