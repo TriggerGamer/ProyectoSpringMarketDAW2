@@ -23,7 +23,7 @@ public class ServicioProductosImpl implements ServicioProductos {
 
 	@Override
 	public List<Productos> getProductoByName(String name) {
-		return productosRepository.findBytituloProductoContaining(name);
+		return productosRepository.findBytituloProductoContainingIgnoreCase(name);
 	}
 
 

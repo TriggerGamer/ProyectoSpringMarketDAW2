@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioUsuarios;
 
@@ -21,13 +23,13 @@ public class ControladorUsuarios {
 	// Metodos para registro de usuarios
 	@GetMapping(value = "/usuario/signup")
 	public String registrarUsuario_get(HttpSession session, Model modelo) {
-		
+
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
-		String roles =  (String) session.getAttribute("rol");
-		
+		String roles = (String) session.getAttribute("rol");
+
 		modelo.addAttribute("roles", roles);
-		
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -71,8 +73,8 @@ public class ControladorUsuarios {
 		// Session Usuarios
 
 		String nombre = (String) session.getAttribute("user");
-		String roles =  (String) session.getAttribute("rol");
-		
+		String roles = (String) session.getAttribute("rol");
+
 		modelo.addAttribute("roles", roles);
 		if (nombre == null) {
 			nombre = "f amigo";
@@ -104,17 +106,16 @@ public class ControladorUsuarios {
 		// Session Usuarios
 		String nombre = (String) session.getAttribute("user");
 		int id;
-		
+
 		try {
 			id = (int) session.getAttribute("id_Usuario");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			id = 1;
 		}
 		modelo.addAttribute("id_usuario", id);
-		String roles =  (String) session.getAttribute("rol");
+		String roles = (String) session.getAttribute("rol");
 		modelo.addAttribute("roles", roles);
-		
+
 		if (nombre == null) {
 			nombre = "f amigo";
 			modelo.addAttribute("usuario1", nombre);
@@ -126,37 +127,42 @@ public class ControladorUsuarios {
 
 		return "UsuariosInfo";
 	}
-	
+
+	// Obtener Usuario
+	@ResponseBody
+	@GetMapping("/usuario/{idUsuario}")
+	public Usuario obtenerUsuario(@PathVariable int idUsuario) {
+		return servicioUsuarios.findUsuarioById(idUsuario);
+	}
+
 	// Métodos para ver la info de un usuario
-		@GetMapping(value = "/acceso-denegado")
-		public String usuario_incorrecto(Model modelo, HttpSession session) {
-			
+	@GetMapping(value = "/acceso-denegado")
+	public String usuario_incorrecto(Model modelo, HttpSession session) {
 
-			// Session Usuarios
-			String nombre = (String) session.getAttribute("user");
-			int id;
-			
-			try {
-				id = (int) session.getAttribute("id_Usuario");
-			}
-			catch (Exception e) {
-				id = 1;
-			}
-			
-			modelo.addAttribute("id_usuario", id);
-			String roles =  (String) session.getAttribute("rol");
-			modelo.addAttribute("roles", roles);
-			
-			if (nombre == null) {
-				nombre = "f amigo";
-				modelo.addAttribute("usuario1", nombre);
-				modelo.addAttribute("usuario2", "");
-			} else {
-				modelo.addAttribute("usuario1", nombre);
-				modelo.addAttribute("usuario2", nombre);
-			}
+		// Session Usuarios
+		String nombre = (String) session.getAttribute("user");
+		int id;
 
-			return "UsuarioIncorrecto";
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		} catch (Exception e) {
+			id = 1;
 		}
-	
+
+		modelo.addAttribute("id_usuario", id);
+		String roles = (String) session.getAttribute("rol");
+		modelo.addAttribute("roles", roles);
+
+		if (nombre == null) {
+			nombre = "f amigo";
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", "");
+		} else {
+			modelo.addAttribute("usuario1", nombre);
+			modelo.addAttribute("usuario2", nombre);
+		}
+
+		return "UsuarioIncorrecto";
+	}
+
 }

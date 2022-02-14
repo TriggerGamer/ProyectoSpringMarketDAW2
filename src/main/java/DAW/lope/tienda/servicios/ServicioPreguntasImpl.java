@@ -1,5 +1,6 @@
 package DAW.lope.tienda.servicios;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +28,31 @@ public class ServicioPreguntasImpl implements ServicioPreguntas{
 	
 	@Override
 	public int guardarPregunta(Preguntas pregunta, int idUsuario, int idProducto) {
+		
 		try {
+			
+			String f = LocalDateTime.now().toString();
+			String nuevo[] = f.split("T");
+			String fecha = nuevo[0];
+			
+			pregunta.setFecha_Pregunta(fecha);
+			
 			Usuario usuario = servicioUsuarios.findUsuarioById(idUsuario);
 			Productos producto = servicioProductos.findProductoById(idProducto);
+			
 			pregunta.setUsuario(usuario);
+			
 			pregunta.setProducto(producto);
 			
 			usuario.anadirPregunta(pregunta);
+			
 			producto.anadirPregunta(pregunta);
 			
-			preguntasRepository.save(pregunta);
+			//preguntasRepository.save(pregunta);
 			
 			return 1;
 		} catch (Exception e) {
+			
 			return 0;
 		}
 	}

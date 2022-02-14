@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Usuarios")
 
@@ -201,7 +203,7 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 	
-	
+	@JsonManagedReference
 	public Set<Preguntas> getPreguntas() {
 		return preguntas;
 	}
@@ -210,6 +212,7 @@ public class Usuario implements Serializable {
 		this.preguntas = preguntas;
 	}
 
+	@JsonManagedReference
 	public Set<Respuestas> getRespuestas() {
 		return respuestas;
 	}

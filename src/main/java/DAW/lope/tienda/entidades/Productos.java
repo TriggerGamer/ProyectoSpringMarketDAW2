@@ -19,6 +19,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalIdCache;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name = "Productos")
 @Table(name = "Productos")
 @NaturalIdCache
@@ -44,10 +46,10 @@ public class Productos implements Serializable {
 	@Column(name = "descuento")
 	private int descuento;
 
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<ProductosCompras> compra = new HashSet<>();
 	
-	@OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Imagen> imagen = new HashSet<>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -122,7 +124,7 @@ public class Productos implements Serializable {
 		this.descuento = descuento;
 	}
 	
-	
+	@JsonManagedReference
 	public Set<Preguntas> getPreguntas() {
 		return preguntas;
 	}

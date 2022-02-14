@@ -37,8 +37,8 @@ public class ServicioRespuestasImpl implements ServicioRespuestas{
 	}
 
 	@Override
-	public List<Respuestas> buscarTodas() {
-		return respuestasRepository.findAll();
+	public List<Respuestas> buscarRespuestasPorPregunta(int idPregunta) {
+		return respuestasRepository.findRespuestasFromPregunta(idPregunta);
 	}
 
 	@Override

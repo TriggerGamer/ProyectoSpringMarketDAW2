@@ -11,7 +11,7 @@ import DAW.lope.tienda.entidades.Productos;
 @Repository
 public interface ProductosRepository extends JpaRepository<Productos, Integer> {
 
-	List<Productos> findBytituloProductoContaining(String tituloProducto);
+	List<Productos> findBytituloProductoContainingIgnoreCase(String tituloProducto);
 
 	@Query(value = "SELECT * FROM Productos ORDER BY id_Producto LIMIT 8", nativeQuery = true)
 	List<Productos> findEight();
