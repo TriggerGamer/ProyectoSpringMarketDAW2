@@ -51,14 +51,6 @@ function obtenerRespuestas(idPregunta){
 		})
 }
 
-function obtenerUsuarios(idUsuario){
-	fetch('/usuario/' + idUsuario, { headers: { "Content-Type": "application/json; charset=utf-8" } })
-		.then(res => res.json())
-		.then(response => {
-			return response.nombreUsuario;
-		})
-}
-
 function anadirInfo(responsePreguntas){
 
 	let divInfo = document.getElementById("PyR");
@@ -69,7 +61,7 @@ function anadirInfo(responsePreguntas){
 		let p2 = document.createElement("p");
 
 		p.textContent = "pregunta: " + preguntita.pregunta
-		p2.textContent = obtenerUsuarios(preguntita.idUsuario) + " " +  preguntita.fecha_Pregunta;
+		p2.textContent = preguntita.idUsuario + " " +  preguntita.fecha_Pregunta;
 		p2.setAttribute("class", "ml-6");
 
 		divInfo.appendChild(p);

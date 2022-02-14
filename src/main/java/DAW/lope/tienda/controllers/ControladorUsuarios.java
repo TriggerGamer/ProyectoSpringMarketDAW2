@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import DAW.lope.tienda.entidades.Usuario;
 import DAW.lope.tienda.servicios.ServicioUsuarios;
@@ -126,13 +125,6 @@ public class ControladorUsuarios {
 		}
 
 		return "UsuariosInfo";
-	}
-
-	// Obtener Usuario
-	@ResponseBody
-	@GetMapping("/usuario/{idUsuario}")
-	public Usuario obtenerUsuario(@PathVariable int idUsuario) {
-		return servicioUsuarios.findUsuarioById(idUsuario);
 	}
 
 	// Métodos para ver la info de un usuario
