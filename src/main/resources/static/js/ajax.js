@@ -7,6 +7,7 @@ function crearPreguntas(event) {
 	event.preventDefault();
 	
 	let enlace = document.getElementById("formPreguntas").action;
+	
 	var csrfToken = $("[name='_csrf']").attr("value");
 	fetch(enlace, {
 		headers: { "Content-Type": "application/json; charset=utf-8",'X-CSRF-TOKEN': csrfToken }, method: 'POST',
@@ -35,8 +36,12 @@ function crearRespuestas(event) {
 function obtenerPreguntas(){
 
 	var csrfToken = $("[name='_csrf']").attr("value");
+	
+	let enlace = document.getElementById("formPreguntas").action;
+	let contenedor = enlace.split("/");
+	let idProducto = contenedor[5];
 
-	fetch('/obtener/preguntas', { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
+	fetch('/obtener/preguntas/' + idProducto, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
 		.then(res => res.json())
 		.then(response => {
 			anadirInfo(response);
@@ -61,7 +66,7 @@ function anadirInfo(responsePreguntas){
 		let p2 = document.createElement("p");
 
 		p.textContent = "pregunta: " + preguntita.pregunta
-		p2.textContent = preguntita.idUsuario + " " +  preguntita.fecha_Pregunta;
+		p2.textContent = preguntita.nombre_usuario + " " +  preguntita.fecha;
 		p2.setAttribute("class", "ml-6");
 
 		divInfo.appendChild(p);

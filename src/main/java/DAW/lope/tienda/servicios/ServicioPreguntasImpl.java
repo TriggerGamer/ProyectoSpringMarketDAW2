@@ -1,12 +1,14 @@
 package DAW.lope.tienda.servicios;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import DAW.lope.tienda.Dtos.PreguntasDto;
 import DAW.lope.tienda.entidades.Preguntas;
 import DAW.lope.tienda.entidades.Productos;
 import DAW.lope.tienda.entidades.Usuario;
@@ -70,7 +72,24 @@ public class ServicioPreguntasImpl implements ServicioPreguntas{
 	}
 
 	@Override
-	public List<Preguntas> buscarTodas() {
-		return preguntasRepository.findAll();
+	public List<PreguntasDto> buscarPorProducto(int idProducto) {
+
+		List<PreguntasDto> preguntas = new ArrayList<>();
+		List<Preguntas> preguntas1 = preguntasRepository.findPreguntasOfProductos(idProducto);
+		
+		for (Preguntas pregunta : preguntas1) {
+			
+			PreguntasDto preguntas2 = new PreguntasDto();
+			
+			preguntas2.setId_pregunta(pregunta.getId_Pregunta());
+			preguntas2.setPregunta(pregunta.getPregunta());
+			preguntas2.setFecha(pregunta.getFecha_Pregunta());
+			preguntas2.setId_usuario(pregunta.getUsuario().getId_Usuario());
+			preguntas2.setNombre_usuario(pregunta.getUsuario().getNombreUsuario());
+			
+			preguntas.add(preguntas2);
+		}
+		
+		return preguntas;
 	}
 }
