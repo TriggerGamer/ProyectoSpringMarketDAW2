@@ -62,16 +62,36 @@ function anadirInfo(responsePreguntas){
 
 	for(let preguntita of responsePreguntas){
 		
-		let p = document.createElement("p");
-		let p2 = document.createElement("p");
+		let divContenedor = document.createElement("div");
+		let divHeader = document.createElement("div");
+		let divBody = document.createElement("div");
+		let headerFecha = document.createElement('div');
+		let pregunta = document.createElement('p');
+		let botonRespuestas = document.createElement('button');
+		
+		botonRespuestas.setAttribute('class', 'btn btn-lg btn-primary');
+		botonRespuestas.setAttribute('type', 'button');
+		divContenedor.setAttribute("class", "card text-white bg-primary mb-3");
+		divContenedor.setAttribute("style", "max-width: 100%;");
+		divHeader.setAttribute("class", "card-header");
+		divBody.setAttribute("class", "card-body");
+		headerFecha.setAttribute("class", "card-title");
+		headerFecha.setAttribute("style", "float:right;");
+		pregunta.setAttribute('class', 'card-text');
+		
+		divHeader.textContent = 'Usuairo: ' + preguntita.nombre_usuario ;
+		headerFecha.textContent = 'Fecha de creación: ' +preguntita.fecha;
+		pregunta.textContent = preguntita.pregunta;
+		botonRespuestas.textContent = "Deja tu respuesta";
+		
+		divInfo.appendChild(divContenedor);				
+		divContenedor.appendChild(divHeader);		
+		divContenedor.appendChild(divBody);	
+		divContenedor.appendChild(botonRespuestas);
+		
+		divHeader.appendChild(headerFecha);
+		divBody.appendChild(pregunta);
 
-		p.textContent = "pregunta: " + preguntita.pregunta
-		p2.textContent = preguntita.nombre_usuario + " " +  preguntita.fecha;
-		p2.setAttribute("class", "ml-6");
-
-		divInfo.appendChild(p);
-		divInfo.appendChild(document.createElement("br"));
-		divInfo.appendChild(p2);
 	}
 }
 

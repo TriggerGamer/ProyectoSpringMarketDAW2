@@ -51,7 +51,7 @@ public class ControlardorPyR {
 
 		int id= servicioPreguntas.guardarPregunta(pregunta, idProducto, idUsuario);
 		
-		Preguntas dto = new Preguntas(id, null, null, null, json.get("pregunta"), null);
+		PreguntasDto dto = new PreguntasDto(id, json.get("pregunta"), idUsuario, null, null);
 		
 		return new ResponseEntity<Object>(dto, HttpStatus.OK);
 	}
