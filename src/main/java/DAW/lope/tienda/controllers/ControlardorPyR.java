@@ -49,7 +49,7 @@ public class ControlardorPyR {
 		}
 		pregunta.setPregunta(json.get("pregunta"));
 
-		int id= servicioPreguntas.guardarPregunta(pregunta, idProducto, idUsuario);
+		int id= servicioPreguntas.guardarPregunta(pregunta, idUsuario, idProducto);
 		
 		PreguntasDto dto = new PreguntasDto(id, json.get("pregunta"), idUsuario, null, null);
 		
