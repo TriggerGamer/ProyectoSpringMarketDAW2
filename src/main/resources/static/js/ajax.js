@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function crearPreguntas(event) {
 	event.preventDefault();
-	
+
 	let enlace = document.getElementById("formPreguntas").action;
-	
+
 	var csrfToken = $("[name='_csrf']").attr("value");
 	fetch(enlace, {
-		headers: { "Content-Type": "application/json; charset=utf-8",'X-CSRF-TOKEN': csrfToken }, method: 'POST',
+		headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST',
 		credentials: 'same-origin',
 		body: JSON.stringify({ pregunta: $('#Pregunta').val() })
 	})
@@ -33,10 +33,10 @@ function crearRespuestas(event) {
 		})
 }
 
-function obtenerPreguntas(){
+function obtenerPreguntas() {
 
 	var csrfToken = $("[name='_csrf']").attr("value");
-	
+
 	let enlace = document.getElementById("formPreguntas").action;
 	let contenedor = enlace.split("/");
 	let idProducto = contenedor[5];
@@ -48,27 +48,27 @@ function obtenerPreguntas(){
 		})
 }
 
-function obtenerRespuestas(idPregunta){
+function obtenerRespuestas(idPregunta) {
 	fetch('/obtener/respuestas/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8" } })
 		.then(res => res.json())
 		.then(response => {
-			
+
 		})
 }
 
-function anadirInfo(responsePreguntas){
+function anadirInfo(responsePreguntas) {
 
 	let divInfo = document.getElementById("PyR");
 
-	for(let preguntita of responsePreguntas){
-		
+	for (let preguntita of responsePreguntas) {
+
 		let divContenedor = document.createElement("div");
 		let divHeader = document.createElement("div");
 		let divBody = document.createElement("div");
 		let headerFecha = document.createElement('div');
 		let pregunta = document.createElement('p');
 		let botonRespuestas = document.createElement('button');
-		
+
 		botonRespuestas.setAttribute('class', 'btn btn-lg btn-primary');
 		botonRespuestas.setAttribute('type', 'button');
 		divContenedor.setAttribute("class", "card text-white bg-primary mb-3");
@@ -78,20 +78,49 @@ function anadirInfo(responsePreguntas){
 		headerFecha.setAttribute("class", "card-title");
 		headerFecha.setAttribute("style", "float:right;");
 		pregunta.setAttribute('class', 'card-text');
-		
-		divHeader.textContent = 'Usuairo: ' + preguntita.nombre_usuario ;
-		headerFecha.textContent = 'Fecha de creación: ' +preguntita.fecha;
+
+		divHeader.textContent = 'Usuairo: ' + preguntita.nombre_usuario;
+		headerFecha.textContent = 'Fecha de creación: ' + preguntita.fecha;
 		pregunta.textContent = preguntita.pregunta;
 		botonRespuestas.textContent = "Deja tu respuesta";
-		
-		divInfo.appendChild(divContenedor);				
-		divContenedor.appendChild(divHeader);		
-		divContenedor.appendChild(divBody);	
+
+		divInfo.appendChild(divContenedor);
+		divContenedor.appendChild(divHeader);
+		divContenedor.appendChild(divBody);
 		divContenedor.appendChild(botonRespuestas);
-		
+
 		divHeader.appendChild(headerFecha);
 		divBody.appendChild(pregunta);
 
 	}
+}
+
+function eliminarPregunta(idPregunta) {	
+	let csrfToken = $("[name='_csrf']").attr("value");
+
+	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
+		.then(res => res.json())
+		.then(response => {
+			
+		})
+}
+function eliminarRespuesta(idRespuesta) {	
+	let csrfToken = $("[name='_csrf']").attr("value");
+
+	fetch('/borrar/respuesta/' + idRespuesta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
+		.then(res => res.json())
+		.then(response => {
+
+		})
+}
+
+function editarRespuesta(idRespuesta) {	
+	let csrfToken = $("[name='_csrf']").attr("value");
+
+	fetch('/editar/respuesta/' + idRespuesta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
+		.then(res => res.json())
+		.then(response => {
+
+		})
 }
 
