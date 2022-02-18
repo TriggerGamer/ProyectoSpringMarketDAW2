@@ -49,7 +49,7 @@ nombre_Rol varchar(50)
 create table UsuarioRol(
 id_Rol int(10),
 id_Usuario int(10),
-PRIMARY KEY (id_Rol, id_Usuario),
+PRIMARY KEY (id_Usuario, id_Rol),
 foreign key (id_Usuario) REFERENCES Usuarios(id_Usuario),
 foreign key (id_Rol) REFERENCES Roles(id_Rol)
 );

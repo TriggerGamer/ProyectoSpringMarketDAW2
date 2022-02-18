@@ -32,7 +32,7 @@ function crearRespuestas(event) {
 
 	fetch('/buscar', {
 		headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST',
-		body: JSON.stringify({ nombre: $('#Buscarnombre').val() })
+		body: JSON.stringify({ respuesta: $('#respuesta').val() })
 	})
 		.then(res => res.json())
 		.then(response => {
@@ -54,7 +54,6 @@ function obtenerPreguntas() {
 			anadirInfo(response);
 		})
 }
-
 
 function obtenerRespuestas(idPregunta){
 
@@ -81,8 +80,6 @@ function anadirInfo(responsePreguntas) {
 		let headerFecha = document.createElement('div');
 		let pregunta = document.createElement('p');
 		let botonRespuestas = document.createElement('button');
-
-
 		let borrarPregunta = document.createElement('button');
 		
 		divContenedor.setAttribute("class", "centro card border-info mb-3");
@@ -98,8 +95,17 @@ function anadirInfo(responsePreguntas) {
 		botonRespuestas.setAttribute('class', 'btn btn-outline-warning');
 		botonRespuestas.setAttribute('name', 'crearRespuesta');
 		
+		botonRespuestas.addEventListener('click', () => {
+			anadirRespuesta(preguntita.id_pregunta);
+		});
+		
 		borrarPregunta.setAttribute('class', 'btn btn-outline-danger ms-4');
 		borrarPregunta.setAttribute('name', 'borrarPregunta');
+		
+		borrarPregunta.addEventListener('click', () => {
+			eliminarPregunta(preguntita.id_pregunta);
+		});
+		
 		
 		divHeader.textContent = 'Usuario: ' + preguntita.nombre_usuario ;
 		headerFecha.textContent = 'Fecha de creación: ' + preguntita.fecha;
@@ -118,20 +124,6 @@ function anadirInfo(responsePreguntas) {
 
 		obtenerRespuestas(preguntita.id_pregunta);
 	}
-	
-	/* var borrar = document.getElementsByName("borrarPregunta");
-		for (let elementos of borrar) {
-			elementos.addEventListener("click", function() {
-
-			});
-	}
-
-	var responder = document.getElementsByName("crearRespuesta");
-	for (let elementos of responder) {
-			elementos.addEventListener("click", function() {
-
-			});
-	} */
 }
 
 function eliminarPregunta(idPregunta) {	
@@ -140,9 +132,10 @@ function eliminarPregunta(idPregunta) {
 	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
 		.then(res => res.json())
 		.then(response => {
-			
+			obtenerPreguntas();
 		})
 }
+
 function eliminarRespuesta(idRespuesta) {	
 	let csrfToken = $("[name='_csrf']").attr("value");
 
@@ -161,5 +154,28 @@ function editarRespuesta(idRespuesta) {
 		.then(response => {
 
 		})
+}
+
+function anadirRespuesta(idPregunta) {
+
+	let divInfo = document.getElementById("card-body");
+	
+	let formRespuestas = document.createElement('form');
+	let areaRespuesta = document.createElement('textarea');
+	let botonEnviar = document.createElement('button');
+	
+	formRespuestas.setAttribute('action','/crear/respuesta/' + idPregunta);
+	formRespuestas.setAttribute('method','POST');
+	
+	areaRespuesta.setAttribute('id', 'respuesta');
+	
+	botonEnviar.setAttribute('class', 'btn btn-outline-warning');
+	botonEnviar.setAttribute('name', 'responderPregunta');
+	botonEnviar.setAttribute('type', 'submit');
+	botonEnviar.textContent = "Enviar";
+	
+	divInfo.appendChild(formRespuestas);
+	formRespuestas.appendChild(areaRespuesta);
+	formRespuestas.appendChild(botonEnviar);
 }
 

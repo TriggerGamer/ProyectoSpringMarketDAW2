@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Roles")
 @Table(name = "Roles")
 public class Rol implements Serializable {
 	
