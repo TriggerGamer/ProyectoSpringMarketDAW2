@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import DAW.lope.tienda.Dtos.PreguntasDto;
+import DAW.lope.tienda.Dtos.RespuestasDto;
 import DAW.lope.tienda.entidades.Preguntas;
 import DAW.lope.tienda.entidades.Respuestas;
 import DAW.lope.tienda.servicios.ServicioPreguntas;
@@ -86,7 +87,7 @@ public class ControlardorPyR {
 
 	@ResponseBody
 	@GetMapping("/obtener/respuesta/{idPregunta}")
-	public List<Respuestas> obtenerRespuestas(@PathVariable int idPregunta) {
+	public List<RespuestasDto> obtenerRespuestas(@PathVariable int idPregunta) {
 		return servicioRespuestas.buscarRespuestasPorPregunta(idPregunta);
 	}
 
