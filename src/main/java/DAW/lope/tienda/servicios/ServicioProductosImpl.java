@@ -2,7 +2,6 @@ package DAW.lope.tienda.servicios;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +18,12 @@ public class ServicioProductosImpl implements ServicioProductos {
 
 	@Override
 	public List<Productos> findEight() {
-		return productosRepository.findTop8ByOderByid_ProductoAsc();
+		return productosRepository.findEight();
 	}
 
 	@Override
 	public List<Productos> getProductoByName(String name) {
-		return productosRepository.findByNameContaining(name);
+		return productosRepository.findBytituloProductoContainingIgnoreCase(name);
 	}
 
 

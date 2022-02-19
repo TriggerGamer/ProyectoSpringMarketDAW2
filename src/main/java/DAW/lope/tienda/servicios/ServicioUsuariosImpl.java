@@ -31,7 +31,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 
 	@Override
 	public Usuario login(String nombreUsuario) {
-		return usuarioRepository.findByUsername(nombreUsuario);
+		return usuarioRepository.findBynombreUsuario(nombreUsuario);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		Usuario usuario = usuarioRepository.findByUsername(username);
+		Usuario usuario = usuarioRepository.findBynombreUsuario(username);
 		
 		Set<Rol> roles = usuario.getRoles();
 		
@@ -58,7 +58,9 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 	@Override
 	public Usuario crear(Usuario usuario) {		
 		usuario.setContrasenia(bCryptPasswordEncoder.encode(usuario.getContrasenia()));
-		Rol rol = rolRepository.getById(2);
+		int idRol = 2;
+		Rol rol = rolRepository.findRegistradoRol(idRol);
+		
 		usuario.anadirRol(rol);
 		return usuarioRepository.save(usuario);
 	}

@@ -2,7 +2,6 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="Preguntas")
 public class Preguntas implements Serializable {
@@ -28,11 +30,11 @@ public class Preguntas implements Serializable {
 	@Column(name = "id_Pregunta")
 	private int id_Pregunta;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Producto")
 	private Productos producto;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Usuario")
 	private Usuario usuario;
 	
@@ -68,6 +70,7 @@ public class Preguntas implements Serializable {
 		this.id_Pregunta = id_Pregunta;
 	}
 
+	@JsonBackReference
 	public Productos getProducto() {
 		return producto;
 	}
@@ -76,6 +79,7 @@ public class Preguntas implements Serializable {
 		this.producto = producto;
 	}
 
+	@JsonBackReference
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -100,31 +104,13 @@ public class Preguntas implements Serializable {
 		this.fecha_Pregunta = fecha_Pregunta;
 	}
 	
+	@JsonManagedReference
 	public Set<Respuestas> getRespuestas() {
 		return respuestas;
 	}
 
 	public void setRespuestas(Set<Respuestas> respuestas) {
 		this.respuestas = respuestas;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(fecha_Pregunta, id_Pregunta, pregunta, producto, respuestas, usuario);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Preguntas other = (Preguntas) obj;
-		return Objects.equals(fecha_Pregunta, other.fecha_Pregunta) && id_Pregunta == other.id_Pregunta
-				&& Objects.equals(pregunta, other.pregunta) && Objects.equals(producto, other.producto)
-				&& Objects.equals(respuestas, other.respuestas) && Objects.equals(usuario, other.usuario);
 	}
 	
 }

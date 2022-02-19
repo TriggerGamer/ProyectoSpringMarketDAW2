@@ -3,7 +3,6 @@ package DAW.lope.tienda.entidades;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalIdCache;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity(name = "Productos")
 @Table(name = "Productos")
@@ -45,10 +46,10 @@ public class Productos implements Serializable {
 	@Column(name = "descuento")
 	private int descuento;
 
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<ProductosCompras> compra = new HashSet<>();
 	
-	@OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Imagen> imagen = new HashSet<>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -123,7 +124,7 @@ public class Productos implements Serializable {
 		this.descuento = descuento;
 	}
 	
-	
+	@JsonManagedReference
 	public Set<Preguntas> getPreguntas() {
 		return preguntas;
 	}
@@ -154,28 +155,6 @@ public class Productos implements Serializable {
 			img.setProducto(null);
 			iterator.remove();
 		}
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(compra, descripcionProducto, descuento, id_Producto, imagen, precio, preguntas,
-				tituloProducto);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Productos other = (Productos) obj;
-		return Objects.equals(compra, other.compra) && Objects.equals(descripcionProducto, other.descripcionProducto)
-				&& descuento == other.descuento && id_Producto == other.id_Producto
-				&& Objects.equals(imagen, other.imagen)
-				&& Double.doubleToLongBits(precio) == Double.doubleToLongBits(other.precio)
-				&& Objects.equals(preguntas, other.preguntas) && Objects.equals(tituloProducto, other.tituloProducto);
 	}
 	
 }

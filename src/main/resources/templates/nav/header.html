@@ -4,10 +4,11 @@
 
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jaquez y Luis">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap(1).css}">
 	<meta name="viewport" content="width=device-width">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap(1).css}">
+	
 	<script type="text/javascript"  th:src="@{/js/jquery-3.6.0.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 
@@ -26,7 +27,7 @@
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<div class="navbar-collapse">
 						<nav class="navbar-nav enlace">
-							<a class="nav-link text-white" href="/index">INICIO</a>
+							<a class="nav-link text-white" href="/">INICIO</a>
 							<div class="nav-item" th:if="${roles == 'Admin'}">
 								<a class="nav-link text-white" th:href="@{/producto/crear}">AÑADIR PRODUCTO </a>
 							</div>

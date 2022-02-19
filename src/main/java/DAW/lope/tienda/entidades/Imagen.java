@@ -1,11 +1,10 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +26,7 @@ public class Imagen implements Serializable {
 	@Column(name = "id_Imagen")
 	private int id_Imagen;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Producto")
 	private Productos producto;
 	
@@ -67,28 +66,6 @@ public class Imagen implements Serializable {
 
 	public void setImagen(byte[] imagen) {
 		Imagen = imagen;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(Imagen);
-		result = prime * result + Objects.hash(id_Imagen, producto);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Imagen other = (Imagen) obj;
-		return Arrays.equals(Imagen, other.Imagen) && id_Imagen == other.id_Imagen
-				&& Objects.equals(producto, other.producto);
 	}
 	
 }

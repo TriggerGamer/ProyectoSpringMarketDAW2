@@ -2,12 +2,12 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,14 +27,14 @@ public class Compras implements Serializable {
 	@Column(name = "id_Compra")
 	private int id_Compra;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Usuario")
 	private Usuario usuario;
 
 	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
 
-	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<ProductosCompras> productos = new HashSet<>();
 	
 	
@@ -96,23 +96,5 @@ public class Compras implements Serializable {
 		productos.getCompra().add(productoscompra);
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(fechaDePedido, id_Compra, productos, usuario);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Compras other = (Compras) obj;
-		return Objects.equals(fechaDePedido, other.fechaDePedido) && id_Compra == other.id_Compra
-				&& Objects.equals(productos, other.productos) && Objects.equals(usuario, other.usuario);
-	}
-	
 	
 }

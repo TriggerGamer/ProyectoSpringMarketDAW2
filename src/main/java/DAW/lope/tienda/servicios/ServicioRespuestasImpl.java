@@ -1,12 +1,13 @@
 package DAW.lope.tienda.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import DAW.lope.tienda.Dtos.RespuestasDto;
 import DAW.lope.tienda.entidades.Respuestas;
 import DAW.lope.tienda.repositorios.RespuestasRepository;
 
@@ -36,19 +37,38 @@ public class ServicioRespuestasImpl implements ServicioRespuestas{
 			
 		}
 	}
-
+	
 	@Override
-	public List<Respuestas> buscarTodas() {
-		return respuestasRepository.findAll();
+	public List<RespuestasDto> buscarRespuestasPorPregunta(int idPregunta) {
+		List<RespuestasDto> respuetas = new ArrayList<>();
+		List<Respuestas> respuetas1 = respuestasRepository.findRespuestasFromPregunta(idPregunta);
+		
+		for (Respuestas respueta : respuetas1) {
+			
+			RespuestasDto respueta1 = new RespuestasDto();
+			
+			respueta1.setId_respuesta(respueta.getId_Respuesta());
+			respueta1.setRespuesta(respueta.getRespuesta());
+			respueta1.setId_pregunta(idPregunta);
+			respueta1.setFecha(respueta.getFecha_Respuesta());
+			respueta1.setId_usuario(respueta.getUsuario().getId_Usuario());
+			respueta1.setNombre_usuario(respueta.getUsuario().getNombreUsuario());
+			
+			respuetas.add(respueta1);
+		}
+		
+		return respuetas;
 	}
+	
+	
 
 	@Override
-	public int editarRespuesta(int idRespuesta, String respuesta) {
+	public Respuestas editarRespuesta(int idRespuesta, String respuesta) {
 		
 		Respuestas editarRespuesta = respuestasRepository.getById(idRespuesta);
 		
 		editarRespuesta.setRespuesta(respuesta);
 		
-		return 0;
+		return editarRespuesta;
 	}
 }

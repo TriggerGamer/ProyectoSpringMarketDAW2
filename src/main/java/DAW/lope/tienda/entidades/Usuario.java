@@ -2,7 +2,6 @@ package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Usuarios")
@@ -202,7 +203,7 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 	
-	
+	@JsonManagedReference
 	public Set<Preguntas> getPreguntas() {
 		return preguntas;
 	}
@@ -211,6 +212,7 @@ public class Usuario implements Serializable {
 		this.preguntas = preguntas;
 	}
 
+	@JsonManagedReference
 	public Set<Respuestas> getRespuestas() {
 		return respuestas;
 	}
@@ -239,30 +241,4 @@ public class Usuario implements Serializable {
 		getRespuestas().add(respuesta);
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(apellidos, codigoSeguridad, compras, contrasenia, direccionFacturacion, email,
-				fechaNacimiento, id_Usuario, nombre, nombreUsuario, numeroTarjeta, preguntas, respuestas, roles,
-				titularTarjeta);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(apellidos, other.apellidos) && codigoSeguridad == other.codigoSeguridad
-				&& Objects.equals(compras, other.compras) && Objects.equals(contrasenia, other.contrasenia)
-				&& Objects.equals(direccionFacturacion, other.direccionFacturacion)
-				&& Objects.equals(email, other.email) && Objects.equals(fechaNacimiento, other.fechaNacimiento)
-				&& id_Usuario == other.id_Usuario && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(nombreUsuario, other.nombreUsuario) && numeroTarjeta == other.numeroTarjeta
-				&& Objects.equals(preguntas, other.preguntas) && Objects.equals(respuestas, other.respuestas)
-				&& Objects.equals(roles, other.roles) && Objects.equals(titularTarjeta, other.titularTarjeta);
-	}
-	
 }

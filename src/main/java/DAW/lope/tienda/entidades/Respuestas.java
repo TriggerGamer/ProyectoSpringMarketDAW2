@@ -1,16 +1,18 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="Respuestas")
@@ -23,11 +25,11 @@ public class Respuestas implements Serializable{
 	@Column(name = "id_Respuesta")
 	private int id_Respuesta;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Pregunta")
 	private Preguntas pregunta;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Usuario")
 	private Usuario usuario;
 	
@@ -58,6 +60,7 @@ public class Respuestas implements Serializable{
 		this.id_Respuesta = id_Respuesta;
 	}
 
+	@JsonBackReference
 	public Preguntas getPregunta() {
 		return pregunta;
 	}
@@ -66,6 +69,7 @@ public class Respuestas implements Serializable{
 		this.pregunta = pregunta;
 	}
 
+	@JsonBackReference
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -88,27 +92,6 @@ public class Respuestas implements Serializable{
 
 	public void setFecha_Respuesta(String fecha_Respuesta) {
 		this.fecha_Respuesta = fecha_Respuesta;
-	}
-	
-	
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(fecha_Respuesta, id_Respuesta, pregunta, respuesta, usuario);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Respuestas other = (Respuestas) obj;
-		return Objects.equals(fecha_Respuesta, other.fecha_Respuesta) && id_Respuesta == other.id_Respuesta
-				&& Objects.equals(pregunta, other.pregunta) && Objects.equals(respuesta, other.respuesta)
-				&& Objects.equals(usuario, other.usuario);
 	}
 	
 }
