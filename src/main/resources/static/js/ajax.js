@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function crearPreguntas(event) {
 	event.preventDefault();
-
 	let enlace = document.getElementById("formPreguntas").action;
 
 	var csrfToken = $("[name='_csrf']").attr("value");
@@ -45,7 +44,7 @@ function crearRespuestas(idPregunta /* event */) {
 function obtenerPreguntas() {
 
 	var csrfToken = $("[name='_csrf']").attr("value");
-
+	
 	let enlace = window.location.href;
 	let contenedor = enlace.split("/");
 	let idProducto = contenedor[4];
@@ -83,33 +82,33 @@ function anadirInfo(responsePreguntas) {
 		let pregunta = document.createElement('p');
 		let botonRespuestas = document.createElement('button');
 		let borrarPregunta = document.createElement('button');
-
+		
 		divContenedor.setAttribute("class", "centro card border-info mb-3");
 		divContenedor.setAttribute("style", "max-width: 75%;");
-
+		
 		divHeader.setAttribute("class", "card-header");
 		divBody.setAttribute("class", "card-body");
-		divBody.setAttribute("id", "body");
+		divBody.setAttribute("id", "card-body");
 
 		headerFecha.setAttribute("style", "float:right;");
 		pregunta.setAttribute("class", "card-text");
-
+		
 		botonRespuestas.setAttribute('class', 'btn btn-outline-warning');
 		botonRespuestas.setAttribute('name', 'crearRespuesta');
-
+		
 		botonRespuestas.addEventListener('click', () => {
 			anadirRespuesta(preguntita.id_pregunta);
 		});
-
+		
 		borrarPregunta.setAttribute('class', 'btn btn-outline-danger ms-4');
 		borrarPregunta.setAttribute('name', 'borrarPregunta');
-
+		
 		borrarPregunta.addEventListener('click', () => {
 			eliminarPregunta(preguntita.id_pregunta);
 		});
-
-
-		divHeader.textContent = 'Usuario: ' + preguntita.nombre_usuario;
+		
+		
+		divHeader.textContent = 'Usuario: ' + preguntita.nombre_usuario ;
 		headerFecha.textContent = 'Fecha de creación: ' + preguntita.fecha;
 		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
 		botonRespuestas.textContent = "Responder";
@@ -129,6 +128,7 @@ function anadirInfo(responsePreguntas) {
 }
 
 function eliminarPregunta(idPregunta) {
+
 	let csrfToken = $("[name='_csrf']").attr("value");
 
 	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
@@ -139,6 +139,7 @@ function eliminarPregunta(idPregunta) {
 }
 
 function eliminarRespuesta(idRespuesta) {
+
 	let csrfToken = $("[name='_csrf']").attr("value");
 
 	fetch('/borrar/respuesta/' + idRespuesta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
@@ -147,6 +148,7 @@ function eliminarRespuesta(idRespuesta) {
 
 		})
 }
+
 
 function editarRespuesta(idRespuesta) {
 	let csrfToken = $("[name='_csrf']").attr("value");

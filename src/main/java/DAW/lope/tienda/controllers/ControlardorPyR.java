@@ -61,7 +61,7 @@ public class ControlardorPyR {
 	@PostMapping("/crear/respuesta/{idPregunta}")
 	public ResponseEntity<Object> crearRespuesta(@PathVariable int idPregunta, @RequestBody Map<String, String> json,
 			HttpSession session) {
-		
+
 		Respuestas respuesta = new Respuestas();
 
 		int idUsuario;
@@ -71,7 +71,7 @@ public class ControlardorPyR {
 		} catch (Exception e) {
 			idUsuario = 1;
 		}
-		
+
 		respuesta.setRespuesta(json.get("respuesta"));
 
 		int id = servicioRespuestas.guardarRespuesta(respuesta, idUsuario, idPregunta);
@@ -79,13 +79,13 @@ public class ControlardorPyR {
 		RespuestasDto dto = new RespuestasDto(id, json.get("respuesta"), idPregunta, idUsuario, null, null);
 
 		return new ResponseEntity<Object>(dto, HttpStatus.OK);
+
 	}
 
 	// Obtener Preguntas y Respuestas
 	@ResponseBody
 	@GetMapping("/obtener/preguntas/{idProducto}")
 	public List<PreguntasDto> obtenerPreguntas(@PathVariable int idProducto) {
-
 		return servicioPreguntas.buscarPorProducto(idProducto);
 	}
 
