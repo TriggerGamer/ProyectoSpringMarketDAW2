@@ -136,7 +136,7 @@ public class ControlardorPyR {
 	@ResponseBody
 	@PostMapping("/borrar/respuesta/{idRespuesta}")
 	public String borrarRespuestas(@PathVariable int idRespuesta) {
-		servicioPreguntas.borrarPregunta(idRespuesta);
+		servicioRespuestas.borrarRespuesta(idRespuesta);
 		return "true";
 	}
 
@@ -145,8 +145,11 @@ public class ControlardorPyR {
 	@PostMapping("/editar/respuesta/{idRespuesta}")
 	public ResponseEntity<Object> editarRespuesta(@PathVariable int idRespuesta,
 			@RequestBody Map<String, String> json) {
-		Respuestas respuesta = servicioRespuestas.editarRespuesta(idRespuesta, json.get("respuesta"));
-		return new ResponseEntity<Object>(respuesta, HttpStatus.OK);
+		
+			servicioRespuestas.editarRespuesta(idRespuesta, json.get("respuesta"));
+			
+			RespuestasDto dto = new RespuestasDto(idRespuesta, json.get("respuesta"), 0, 0, null, null);
+		return new ResponseEntity<Object>(dto, HttpStatus.OK);
 	}
 	
 }
