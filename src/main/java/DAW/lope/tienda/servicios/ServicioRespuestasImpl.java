@@ -1,5 +1,6 @@
 package DAW.lope.tienda.servicios;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAW.lope.tienda.Dtos.RespuestasDto;
+import DAW.lope.tienda.entidades.Preguntas;
 import DAW.lope.tienda.entidades.Respuestas;
+import DAW.lope.tienda.entidades.Usuario;
+import DAW.lope.tienda.repositorios.PreguntasRepository;
 import DAW.lope.tienda.repositorios.RespuestasRepository;
 
 @Transactional
@@ -17,11 +21,33 @@ public class ServicioRespuestasImpl implements ServicioRespuestas{
 
 	@Autowired
 	private RespuestasRepository respuestasRepository;
+	
+	@Autowired
+	private PreguntasRepository preguntasRepository;
+	
+	@Autowired
+	private ServicioUsuarios servicioUsuarios;
 
 	@Override
 	public int guardarRespuesta(Respuestas respuesta, int idUsuario, int idPregunta) {
 		try {
-			respuestasRepository.save(respuesta);
+			
+			String f = LocalDateTime.now().toString();
+			String nuevo[] = f.split("T");
+			String fecha = nuevo[0];
+			
+			respuesta.setFecha_Respuesta(fecha);
+			
+			Usuario usuario = servicioUsuarios.findUsuarioById(idUsuario);
+			Preguntas pregunta = preguntasRepository.getById(idPregunta);
+			
+			respuesta.setUsuario(usuario);
+			respuesta.setPregunta(pregunta);
+			
+			usuario.anadirRespuesta(respuesta);
+			
+			pregunta.anadirRespuesta(respuesta);
+			
 			return 1;
 		} catch (Exception e) {
 			return 0;

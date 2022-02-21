@@ -88,7 +88,7 @@ function anadirInfo(responsePreguntas) {
 		
 		divHeader.setAttribute("class", "card-header");
 		divBody.setAttribute("class", "card-body");
-		divBody.setAttribute("id", "card-body");
+		divBody.setAttribute("id", "body");
 
 		headerFecha.setAttribute("style", "float:right;");
 		pregunta.setAttribute("class", "card-text");

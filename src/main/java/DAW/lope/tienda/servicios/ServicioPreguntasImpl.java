@@ -43,14 +43,11 @@ public class ServicioPreguntasImpl implements ServicioPreguntas{
 			Productos producto = servicioProductos.findProductoById(idProducto);
 			
 			pregunta.setUsuario(usuario);
-			
 			pregunta.setProducto(producto);
 			
 			usuario.anadirPregunta(pregunta);
 			
 			producto.anadirPregunta(pregunta);
-			
-			//preguntasRepository.save(pregunta);
 			
 			return 1;
 		} catch (Exception e) {

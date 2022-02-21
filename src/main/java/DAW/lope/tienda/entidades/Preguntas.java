@@ -113,4 +113,9 @@ public class Preguntas implements Serializable {
 		this.respuestas = respuestas;
 	}
 	
+	public void anadirRespuesta(Respuestas respuesta) {
+	    respuesta.setPregunta(this);
+		getRespuestas().add(respuesta);
+	}
+	
 }
