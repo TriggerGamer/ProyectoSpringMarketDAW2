@@ -43,8 +43,9 @@ function obtenerPreguntas() {
 
 	let p3 = '/obtener/idUsuario';
 	let p4 = '/obtener/preguntas/' + idProducto;
+	let p5 = '/obtener/roles';
 	
-	var requestsArray = [p3, p4];
+	var requestsArray = [p3, p4, p5];
 
 	Promise.all(requestsArray.map((request) => {
 		return fetch(request,  { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } }).then((response) => {
@@ -54,12 +55,12 @@ function obtenerPreguntas() {
 		});
 	})).then((response) => {
 		console.log('values', response);
-		anadirPregunta(response[0], response[1]);
+		anadirPregunta(response[0], response[1], response[2]);
 		
 	});
 }
 
-function anadirPregunta(idUsuario, responsePreguntas) {
+function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 
 	let divInfo = document.getElementById("PyR");
 	divInfo.replaceChildren();
@@ -113,7 +114,7 @@ function anadirPregunta(idUsuario, responsePreguntas) {
 		divBody.appendChild(pregunta);
 		divBody.appendChild(botonRespuestas);
 		
-		if (idUsuario == preguntita.id_usuario) {
+		if (idUsuario == preguntita.id_usuario || rolUsuario[0] == 'Admin' ) {
 			divBody.appendChild(borrarPregunta);
 		}
 
