@@ -127,7 +127,7 @@ public class ControlardorPyR {
 
 	// Borrar Preguntas y Respuestas
 	@ResponseBody
-	@GetMapping("/borrar/pregunta/{idPregunta}")
+	@PostMapping("/borrar/pregunta/{idPregunta}")
 	public String borrarPreguntas(@PathVariable int idPregunta) {
 		servicioPreguntas.borrarPregunta(idPregunta);
 		return "true";

@@ -57,21 +57,30 @@ function imprimirRespuestas(response) {
 
 	let divContenedor = document.getElementById("divContenedor");
 	let divRespuestas = document.createElement("div");
-
-
+	
 	divContenedor.appendChild(divRespuestas);
 
 	for (let respuesta of response) {
 
+		let divHeader = document.createElement("div");
 		let respuesta1 = document.createElement('p');
 		let divRespuesta = document.createElement("div");
 		let botonBorrar = document.createElement('button');
 		let botonEditar = document.createElement('button');
+		let headerFecha = document.createElement('div');
+
+
+		headerFecha.setAttribute("style", "float:right;");
+		headerFecha.textContent = 'Fecha de creación: ' + respuesta.fecha;
+
 
 
 		botonBorrar.setAttribute('class', 'btn btn-outline-danger');
 		botonBorrar.setAttribute('name', 'borrarRespuesta');
 		botonBorrar.textContent = "Borrar";
+		
+		divHeader.setAttribute("class", "card-header");
+		divHeader.textContent = 'Usuario: ' + respuesta.nombre_usuario;
 
 
 		divRespuesta.setAttribute("style", "max-width: 75%;");
@@ -108,8 +117,9 @@ function imprimirRespuestas(response) {
 			});
 		});
 
+		divRespuestas.appendChild(divHeader);
+		divHeader.appendChild(headerFecha);
 		divRespuestas.appendChild(divRespuesta);
-
 		divRespuesta.appendChild(respuesta1);
 		divRespuesta.appendChild(botonBorrar);
 		divRespuesta.appendChild(botonEditar);
@@ -173,7 +183,7 @@ function anadirInfo(responsePreguntas) {
 
 		divHeader.textContent = 'Usuario: ' + preguntita.nombre_usuario;
 		headerFecha.textContent = 'Fecha de creación: ' + preguntita.fecha;
-		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
+		pregunta.textContent = preguntita.pregunta;
 		botonRespuestas.textContent = "Responder";
 		borrarPregunta.textContent = "Borrar";
 
@@ -194,7 +204,7 @@ function eliminarPregunta(idPregunta) {
 
 	let csrfToken = $("[name='_csrf']").attr("value");
 
-	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
+	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST'  })
 		.then(res => res.json())
 		.then(response => {
 			obtenerPreguntas();
