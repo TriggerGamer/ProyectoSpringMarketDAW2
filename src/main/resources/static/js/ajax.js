@@ -46,11 +46,22 @@ function obtenerPreguntas() {
 	let contenedor = enlace.split("/");
 	let idProducto = contenedor[4];
 
-	fetch('/obtener/preguntas/' + idProducto, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
-		.then(res => res.json())
-		.then(response => {
-			anadirInfo(response);
-		})
+	let p3 = '/obtener/idUsuario';
+	let p4 = '/obtener/preguntas/' + idProducto;
+	
+	var requestsArray = [p3, p4];
+
+	Promise.all(requestsArray.map((request) => {
+		return fetch(request,  { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } }).then((response) => {
+			return response.json();
+		}).then((data) => {
+			return data;
+		});
+	})).then((response) => {
+		console.log('values', response);
+		anadirInfo(response[0], response[1]);
+		
+	});
 }
 
 function imprimirRespuestas(response) {
@@ -130,7 +141,7 @@ function obtenerRespuestas(idPregunta) {
 		})
 }
 
-function anadirInfo(responsePreguntas) {
+function anadirInfo(idUsuario, responsePreguntas) {
 
 	let divInfo = document.getElementById("PyR");
 	divInfo.replaceChildren();
@@ -184,7 +195,10 @@ function anadirInfo(responsePreguntas) {
 		divHeader.appendChild(headerFecha);
 		divBody.appendChild(pregunta);
 		divBody.appendChild(botonRespuestas);
-		divBody.appendChild(borrarPregunta);
+		
+		if (idUsuario == preguntita.id_usuario) {
+			divBody.appendChild(borrarPregunta);
+		}
 
 		obtenerRespuestas(preguntita.id_pregunta);
 	}
