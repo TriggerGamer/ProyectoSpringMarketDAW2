@@ -1,7 +1,16 @@
+/* 
+	Funciones que se ejecutan al cargar la página
+*/
+
 document.addEventListener("DOMContentLoaded", function() {
 	obtenerPreguntas();
 	$("#EnviarPregunta").click(crearPreguntas);
 });
+
+
+/*
+	Todo el código para preguntas
+*/
 
 function crearPreguntas(event) {
 	event.preventDefault();
@@ -24,20 +33,6 @@ function crearPreguntas(event) {
 		})
 }
 
-function crearRespuestas(idPregunta) {
-
-	var csrfToken = $("[name='_csrf']").attr("value");
-
-	fetch('/crear/respuesta/' + idPregunta, {
-		headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST',
-		body: JSON.stringify({ respuesta: $('#respuesta').val() })
-	})
-		.then(res => res.json())
-		.then(response => {
-			obtenerPreguntas();
-		})
-}
-
 function obtenerPreguntas() {
 
 	var csrfToken = $("[name='_csrf']").attr("value");
@@ -46,101 +41,25 @@ function obtenerPreguntas() {
 	let contenedor = enlace.split("/");
 	let idProducto = contenedor[4];
 
-	fetch('/obtener/preguntas/' + idProducto, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
-		.then(res => res.json())
-		.then(response => {
-			anadirInfo(response);
-		})
-}
-
-function imprimirRespuestas(response) {
-
-	let divContenedor = document.getElementById("divContenedor");
-	let divRespuestas = document.createElement("div");
+	let p3 = '/obtener/idUsuario';
+	let p4 = '/obtener/preguntas/' + idProducto;
 	
-	divContenedor.appendChild(divRespuestas);
+	var requestsArray = [p3, p4];
 
-	for (let respuesta of response) {
-
-		let divHeader = document.createElement("div");
-		let respuesta1 = document.createElement('p');
-		let divRespuesta = document.createElement("div");
-		let botonBorrar = document.createElement('button');
-		let botonEditar = document.createElement('button');
-		let headerFecha = document.createElement('div');
-
-
-		headerFecha.setAttribute("style", "float:right;");
-		headerFecha.textContent = 'Fecha de creación: ' + respuesta.fecha;
-
-
-
-		botonBorrar.setAttribute('class', 'btn btn-outline-danger');
-		botonBorrar.setAttribute('name', 'borrarRespuesta');
-		botonBorrar.textContent = "Borrar";
+	Promise.all(requestsArray.map((request) => {
+		return fetch(request,  { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } }).then((response) => {
+			return response.json();
+		}).then((data) => {
+			return data;
+		});
+	})).then((response) => {
+		console.log('values', response);
+		anadirPregunta(response[0], response[1]);
 		
-		divHeader.setAttribute("class", "card-header");
-		divHeader.textContent = 'Usuario: ' + respuesta.nombre_usuario;
-
-
-		divRespuesta.setAttribute("style", "max-width: 75%;");
-		divRespuesta.setAttribute("class", "card-body");
-		divRespuesta.setAttribute("id", "divRespuestas");
-
-		botonEditar.setAttribute('class', 'btn btn-outline-warning ms-4');
-		botonEditar.setAttribute('name', 'editarRespuesta');
-		botonEditar.textContent = "Editar";
-		respuesta1.textContent = "Respuesta: " + respuesta.respuesta;
-
-
-		botonBorrar.addEventListener('click', () => {
-			eliminarRespuesta(respuesta.id_respuesta);
-		});
-
-		botonEditar.addEventListener('click', () => {
-			let guardar = document.createElement('button');
-			let areaRespuesta = document.createElement('textarea');
-			areaRespuesta.setAttribute('id', 'respuestaEditada');
-			areaRespuesta.setAttribute('class', 'form-group');
-			areaRespuesta.setAttribute('placeholder', respuesta.respuesta);
-			
-			guardar.setAttribute('class', 'btn btn-outline-success ms-4');
-			guardar.setAttribute('name', 'guardarRespuesta');
-			guardar.setAttribute('type', 'submit');
-			guardar.textContent = "Guardar";
-			
-			divRespuesta.appendChild(areaRespuesta);
-			divRespuesta.appendChild(guardar);
-			
-			guardar.addEventListener('click', () => {
-				editarRespuesta(respuesta.id_respuesta);
-			});
-		});
-
-		divRespuestas.appendChild(divHeader);
-		divHeader.appendChild(headerFecha);
-		divRespuestas.appendChild(divRespuesta);
-		divRespuesta.appendChild(respuesta1);
-		divRespuesta.appendChild(botonBorrar);
-		divRespuesta.appendChild(botonEditar);
-
-
-	}
+	});
 }
 
-function obtenerRespuestas(idPregunta) {
-
-	var csrfToken = $("[name='_csrf']").attr("value");
-
-	fetch('/obtener/respuesta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
-
-		.then(res => res.json())
-		.then(response => {
-			imprimirRespuestas(response);
-		})
-}
-
-function anadirInfo(responsePreguntas) {
+function anadirPregunta(idUsuario, responsePreguntas) {
 
 	let divInfo = document.getElementById("PyR");
 	divInfo.replaceChildren();
@@ -180,10 +99,9 @@ function anadirInfo(responsePreguntas) {
 			eliminarPregunta(preguntita.id_pregunta);
 		});
 
-
 		divHeader.textContent = 'Usuario: ' + preguntita.nombre_usuario;
 		headerFecha.textContent = 'Fecha de creación: ' + preguntita.fecha;
-		pregunta.textContent = preguntita.pregunta;
+		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
 		botonRespuestas.textContent = "Responder";
 		borrarPregunta.textContent = "Borrar";
 
@@ -194,7 +112,10 @@ function anadirInfo(responsePreguntas) {
 		divHeader.appendChild(headerFecha);
 		divBody.appendChild(pregunta);
 		divBody.appendChild(botonRespuestas);
-		divBody.appendChild(borrarPregunta);
+		
+		if (idUsuario == preguntita.id_usuario) {
+			divBody.appendChild(borrarPregunta);
+		}
 
 		obtenerRespuestas(preguntita.id_pregunta);
 	}
@@ -204,11 +125,114 @@ function eliminarPregunta(idPregunta) {
 
 	let csrfToken = $("[name='_csrf']").attr("value");
 
-	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST'  })
+	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
 		.then(res => res.json())
 		.then(response => {
 			obtenerPreguntas();
 		})
+}
+
+/* 
+	Todo el código para respuestas
+*/
+
+function crearRespuestas(idPregunta) {
+
+	var csrfToken = $("[name='_csrf']").attr("value");
+
+	fetch('/crear/respuesta/' + idPregunta, {
+		headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST',
+		body: JSON.stringify({ respuesta: $('#respuesta').val() })
+	})
+		.then(res => res.json())
+		.then(response => {
+			obtenerPreguntas();
+		})
+}
+
+function obtenerRespuestas(idPregunta) {
+
+	var csrfToken = $("[name='_csrf']").attr("value");
+
+	fetch('/obtener/respuesta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
+
+		.then(res => res.json())
+		.then(response => {
+			imprimirRespuestas(response);
+		})
+}
+
+
+function imprimirRespuestas(response) {
+
+	let divContenedor = document.getElementById("divContenedor");
+	let divRespuestas = document.createElement("div");
+	
+	divContenedor.appendChild(divRespuestas);
+
+	for (let respuesta of response) {
+
+		let divHeader = document.createElement("div");
+		let respuesta1 = document.createElement('p');
+		let divRespuesta = document.createElement("div");
+		let botonBorrar = document.createElement('button');
+		let botonEditar = document.createElement('button');
+		let headerFecha = document.createElement('div');
+
+
+		headerFecha.setAttribute("style", "float:right;");
+		headerFecha.textContent = 'Fecha de creación: ' + respuesta.fecha;
+
+
+		botonBorrar.setAttribute('class', 'btn btn-outline-danger');
+		botonBorrar.setAttribute('name', 'borrarRespuesta');
+		botonBorrar.textContent = "Borrar";
+		
+		divHeader.setAttribute("class", "card-header");
+		divHeader.textContent = 'Usuario: ' + respuesta.nombre_usuario;
+
+		divRespuesta.setAttribute("style", "max-width: 75%;");
+		divRespuesta.setAttribute("class", "card-body");
+		divRespuesta.setAttribute("id", "divRespuestas");
+
+		botonEditar.setAttribute('class', 'btn btn-outline-warning ms-4');
+		botonEditar.setAttribute('name', 'editarRespuesta');
+		botonEditar.textContent = "Editar";
+		respuesta1.textContent = "Respuesta: " + respuesta.respuesta;
+
+		botonBorrar.addEventListener('click', () => {
+			eliminarRespuesta(respuesta.id_respuesta);
+		});
+
+		botonEditar.addEventListener('click', () => {
+			let guardar = document.createElement('button');
+			let areaRespuesta = document.createElement('textarea');
+			areaRespuesta.setAttribute('id', 'respuestaEditada');
+			areaRespuesta.setAttribute('class', 'form-group');
+			areaRespuesta.setAttribute('placeholder', respuesta.respuesta);
+			
+			guardar.setAttribute('class', 'btn btn-outline-success ms-4');
+			guardar.setAttribute('name', 'guardarRespuesta');
+			guardar.setAttribute('type', 'submit');
+			guardar.textContent = "Guardar";
+			
+			divRespuesta.appendChild(areaRespuesta);
+			divRespuesta.appendChild(guardar);
+			
+			guardar.addEventListener('click', () => {
+				editarRespuesta(respuesta.id_respuesta);
+			});
+		});
+
+		divRespuestas.appendChild(divHeader);
+		divHeader.appendChild(headerFecha);
+		divRespuestas.appendChild(divRespuesta);
+		divRespuesta.appendChild(respuesta1);
+		divRespuesta.appendChild(botonBorrar);
+		divRespuesta.appendChild(botonEditar);
+
+
+	}
 }
 
 function eliminarRespuesta(idRespuesta) {
@@ -256,14 +280,8 @@ function anadirRespuesta(idPregunta) {
 	let botonEnviar = document.createElement('button');
 	let csrf = document.createElement('input');
 
-
-
-
 	areaRespuesta.setAttribute('id', 'respuesta');
 	areaRespuesta.setAttribute('class', 'form-group');
-
-
-
 
 	botonEnviar.setAttribute('class', 'btn btn-outline-warning');
 	botonEnviar.setAttribute('type', 'submit');
@@ -273,10 +291,8 @@ function anadirRespuesta(idPregunta) {
 		crearRespuestas(idPregunta);
 	});
 
-
 	div.appendChild(areaRespuesta);
 	div.appendChild(document.createElement('br'));
 	div.appendChild(botonEnviar);
-
 
 }
