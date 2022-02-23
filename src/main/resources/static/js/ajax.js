@@ -14,23 +14,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function crearPreguntas(event) {
 	event.preventDefault();
-	let enlace = document.getElementById("formPreguntas").action;
+	try {
+		let enlace = document.getElementById("formPreguntas").action;
 
-	var csrfToken = $("[name='_csrf']").attr("value");
+		var csrfToken = $("[name='_csrf']").attr("value");
 
-	fetch(enlace, {
-		headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST',
-		credentials: 'same-origin',
-		body: JSON.stringify({ pregunta: $('#Pregunta').val() })
-	})
-		.then(function(response) {
-			if (response.ok) {
-				return response.json();
-			}
+		fetch(enlace, {
+			headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST',
+			credentials: 'same-origin',
+			body: JSON.stringify({ pregunta: $('#Pregunta').val() })
 		})
-		.then(response => {
-			obtenerPreguntas();
-		})
+			.then(function(response) {
+				if (response.ok) {
+					return response.json();
+				}
+			})
+			.then(response => {
+				obtenerPreguntas();
+			})
+	} catch (error) {
+		window.location('/usuario/login');
+	}
 }
 
 function obtenerPreguntas() {
@@ -47,7 +51,7 @@ function obtenerPreguntas() {
 	var requestsArray = [p3, p4];
 
 	Promise.all(requestsArray.map((request) => {
-		return fetch(request,  { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } }).then((response) => {
+		return fetch(request,  { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, credentials: 'same-origin' }).then((response) => {
 			return response.json();
 		}).then((data) => {
 			return data;
@@ -76,11 +80,11 @@ function anadirPregunta(idUsuario, responsePreguntas) {
 
 		divContenedor.setAttribute("class", "centro card border-info mb-3");
 		divContenedor.setAttribute("style", "max-width: 75%;");
-		divContenedor.setAttribute("id", "divContenedor");
+		divContenedor.setAttribute("id", "divContenedor"+preguntita.id_pregunta);
 
 		divHeader.setAttribute("class", "card-header");
 		divBody.setAttribute("class", "card-body");
-		divBody.setAttribute("id", "body");
+		divBody.setAttribute("id", "body" + preguntita.id_pregunta);
 
 		headerFecha.setAttribute("style", "float:right;");
 		pregunta.setAttribute("class", "card-text");
@@ -88,8 +92,20 @@ function anadirPregunta(idUsuario, responsePreguntas) {
 		botonRespuestas.setAttribute('class', 'btn btn-outline-warning');
 		botonRespuestas.setAttribute('name', 'crearRespuesta');
 
+		let contador = 0;
 		botonRespuestas.addEventListener('click', () => {
-			anadirRespuesta(preguntita.id_pregunta);
+
+			if (contador == 1) {
+				let RespuestaDiv = document.getElementById("div-respuesta" + preguntita.id_pregunta);
+				RespuestaDiv.replaceChildren();
+				RespuestaDiv.appendChild(document.createElement('p'));
+				contador = 0;
+			}
+			else if(contador == 0){
+				anadirRespuesta(preguntita.id_pregunta);
+				contador = 1;
+			}
+			
 		});
 
 		borrarPregunta.setAttribute('class', 'btn btn-outline-danger ms-4');
@@ -100,7 +116,7 @@ function anadirPregunta(idUsuario, responsePreguntas) {
 		});
 
 		divHeader.textContent = 'Usuario: ' + preguntita.nombre_usuario;
-		headerFecha.textContent = 'Fecha de creación: ' + preguntita.fecha;
+		headerFecha.textContent = 'Fecha: ' + preguntita.fecha;
 		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
 		botonRespuestas.textContent = "Responder";
 		borrarPregunta.textContent = "Borrar";
@@ -165,12 +181,14 @@ function obtenerRespuestas(idPregunta) {
 
 function imprimirRespuestas(response) {
 
-	let divContenedor = document.getElementById("divContenedor");
-	let divRespuestas = document.createElement("div");
 	
-	divContenedor.appendChild(divRespuestas);
 
 	for (let respuesta of response) {
+		
+		let divContenedor = document.getElementById("divContenedor"+ respuesta.id_pregunta);
+		let divRespuestas = document.createElement("div");
+	
+		divContenedor.appendChild(divRespuestas);
 
 		let divHeader = document.createElement("div");
 		let respuesta1 = document.createElement('p');
@@ -181,7 +199,7 @@ function imprimirRespuestas(response) {
 
 
 		headerFecha.setAttribute("style", "float:right;");
-		headerFecha.textContent = 'Fecha de creación: ' + respuesta.fecha;
+		headerFecha.textContent = 'Fecha: ' + respuesta.fecha;
 
 
 		botonBorrar.setAttribute('class', 'btn btn-outline-danger');
@@ -260,8 +278,8 @@ function editarRespuesta(idRespuesta) {
 
 function anadirRespuesta(idPregunta) {
 
-	let bodyRespuesta = document.getElementById("body");
-	let RespuestaDiv = document.getElementById("div-respuesta");
+	let bodyRespuesta = document.getElementById("body" + idPregunta);
+	let RespuestaDiv = document.getElementById("div-respuesta" + idPregunta);
 	let div;
 
 	if (RespuestaDiv != null) {
@@ -271,8 +289,8 @@ function anadirRespuesta(idPregunta) {
 	else {
 		div = document.createElement('div');
 
-		div.setAttribute("id", "div-respuesta");
-
+		div.setAttribute("id", "div-respuesta"+idPregunta);
+		
 		bodyRespuesta.appendChild(div);
 	}
 

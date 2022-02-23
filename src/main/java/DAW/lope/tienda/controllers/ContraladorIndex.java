@@ -1,6 +1,7 @@
 package DAW.lope.tienda.controllers;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -42,10 +43,19 @@ public class ContraladorIndex {
 		}
 		
 		modelo.addAttribute("id_usuario", id);
-		String roles = (String) session.getAttribute("rol");
-		if (roles == null) {
+		
+		List<String> roles = new ArrayList<String>();
+		
+		String rol1 = (String) session.getAttribute("rol");
+		String rol2 = (String) session.getAttribute("rol2");
+		
+		roles.add(rol1);
+		roles.add(rol2);
+		
+		if (rol1 == null) {
 			session.setAttribute("rol", "Publico");
 		}
+		
 		modelo.addAttribute("roles", roles);
 
 		if (nombre == null) {

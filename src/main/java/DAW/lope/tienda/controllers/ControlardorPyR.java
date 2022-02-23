@@ -105,7 +105,7 @@ public class ControlardorPyR {
 		try {
 			idUsuario = (int) session.getAttribute("id_Usuario");
 		} catch (Exception e) {
-			idUsuario = 1;
+			idUsuario = 0;
 		}
 
 		return idUsuario;
