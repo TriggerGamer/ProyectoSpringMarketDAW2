@@ -89,7 +89,7 @@ public class ControladorUsuarios {
 
 	// Métodos desloguear un usuario
 	@GetMapping(value = "/usuario/logOut")
-	public String usuarioLOGOUT_get(Model modelo, HttpSession session) {
+	public String usuarioLOGOUT() {
 
 		return "redirect:/index";
 	}

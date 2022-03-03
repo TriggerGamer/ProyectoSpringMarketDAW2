@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -44,12 +45,14 @@
 								<span th:text="${producto.precio} + ' €'"></span> <small class="text-success"
 									th:text="'('+ ${producto.descuento} + '%) Descuento'"></small>
 							</h2>
-							
-							<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET" class="text-center">
-								<input type="number" name="numeroProductos" placeholder="Numero de productos" style="font-size: 0.9vw;">
+
+							<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET"
+								class="text-center">
+								<input type="number" name="numeroProductos" placeholder="Numero de productos"
+									style="font-size: 0.9vw;">
 								<input class="btn btn-success mt-2" type="submit" value="Añadir al carrito">
 							</form>
-							
+
 							<div th:each="rol : ${roles}" class="text-center">
 								<a th:if="${rol == 'Admin'}"
 									th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button
