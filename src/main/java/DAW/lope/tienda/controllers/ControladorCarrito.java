@@ -71,7 +71,6 @@ public class ControladorCarrito {
 	public String carrito_listar(Model modelo, HttpSession session) {
 
 		// Session Usuarios
-		String nombre = (String) session.getAttribute("user");
 		int id;
 		
 		try {
@@ -82,17 +81,6 @@ public class ControladorCarrito {
 		}
 		
 		modelo.addAttribute("id_usuario", id);
-		String roles = (String) session.getAttribute("rol");
-		modelo.addAttribute("roles", roles);
-
-		if (nombre == null) {
-			nombre = "f amigo";
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", "");
-		} else {
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", nombre);
-		}
 		
 		// Coger los atributos del carrito en session
 		@SuppressWarnings("unchecked")
@@ -107,7 +95,7 @@ public class ControladorCarrito {
 		modelo.addAttribute("vacio", vacio);
 		modelo.addAttribute("novacio", null);
 
-		return "carrito";
+		return "Carrito";
 	}
 	
 	@GetMapping(value = "/carrito/borrar/{id_Producto}")

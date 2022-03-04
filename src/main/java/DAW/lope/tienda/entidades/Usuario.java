@@ -31,11 +31,11 @@ public class Usuario implements Serializable {
 	@Column(name = "id_Usuario")
 	private int id_Usuario;
 
-	@Column(name = "nombre")
-	private String nombre;
-
 	@Column(name = "nombreUsuario")
 	private String nombreUsuario;
+	
+	@Column(name = "nombre")
+	private String nombre;
 
 	@Column(name = "apellidos")
 	private String apellidos;

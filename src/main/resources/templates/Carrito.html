@@ -49,7 +49,7 @@
 			<a class="btn btn-lg btn-outline-primary" th:href="@{/producto/buscar}"> Seguir comprando </a>
 		</div>
 
-		<div th:if="${vacio != novacio}" class="center">
+		<div sec:authorize="isAuthenticated()" th:if="${vacio != novacio}" class="center">
 			<form th:action="@{/compra}" method="POST">
 				<input class="btn btn-success btn-lg mt-2" type="submit" value="Comprar">
 			</form>

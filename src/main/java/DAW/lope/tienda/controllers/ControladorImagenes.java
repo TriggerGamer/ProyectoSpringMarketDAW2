@@ -29,25 +29,6 @@ public class ControladorImagenes {
 	@Autowired
 	ServicioProductos ServicioProducto;
 
-	/* @GetMapping(value = "/producto/{idProducto}/img")
-	public ModelAndView actualizarFotoPerfil(HttpServletRequest request, @PathVariable("idProducto") int idProducto) {
-
-		ModelAndView mav = new ModelAndView();
-
-		Productos p = ServicioProducto.findProductoById(idProducto);
-		Imagen img = null;
-		if (!p.getImagen().isEmpty()) {
-			for (Imagen i : p.getImagen()) {
-				img = i;
-				break;
-			}
-		}
-		mav.addObject("imagen", img);
-		mav.addObject("profesor", profesor);
-		mav.setViewName("/imagen/imagen_subir");
-		return mav;
-	}*/ 
-
 	@PostMapping(value = "/producto/{idProducto}/imagen")
 	public String fileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request,
 			@PathVariable("idProducto") int idProducto) {
