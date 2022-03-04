@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,14 +27,14 @@ public class Compras implements Serializable {
 	@Column(name = "id_Compra")
 	private int id_Compra;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Usuario")
 	private Usuario usuario;
 
 	@Column(name = "fechaDeCompra")
 	private String fechaDePedido;
 
-	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<ProductosCompras> productos = new HashSet<>();
 	
 	

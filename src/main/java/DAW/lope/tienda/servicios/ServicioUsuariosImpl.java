@@ -58,7 +58,9 @@ public class ServicioUsuariosImpl implements ServicioUsuarios, UserDetailsServic
 	@Override
 	public Usuario crear(Usuario usuario) {		
 		usuario.setContrasenia(bCryptPasswordEncoder.encode(usuario.getContrasenia()));
-		Rol rol = rolRepository.getById(2);
+		int idRol = 2;
+		Rol rol = rolRepository.findRegistradoRol(idRol);
+		
 		usuario.anadirRol(rol);
 		return usuarioRepository.save(usuario);
 	}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+	<title> Carrito </title>
+
+	<meta charset='utf-8'>
+	<meta name="author" content="Erick Jaquez y Luis">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap(1).css}">
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+
+</head>
+
+<body>
+
+	<header th:replace="nav/header.html"> </header>
+
+	<br>
+
+	<div class="container-fluid">
+
+		<table th:each="compra: ${carrito}" class="table">
+			<thead>
+				<tr class="table-info text-start">
+					<th scope="col"> Identificador de Producto </th>
+					<th scope="col"> Nombre del producto </th>
+					<th scope="col"> Número de Unidades </th>
+					<th scope="col"> </th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr class="table-info text-start">
+					<td scope="row" th:text="${compra.id_Producto}" />
+					<td scope="row" th:text="${compra.nombreProducto}" />
+					<td scope="row" th:text="${compra.numeroUnidades}" />
+					<td scope="row"> <a th:href="@{/carrito/borrar/{id}(id=${compra.id_Producto})}"> <button
+								class="btn btn-success"> Borrar del carrito </button> </a> </td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="center">
+			<a class="btn btn-lg btn-outline-primary" th:href="@{/producto/buscar}"> Seguir comprando </a>
+		</div>
+
+		<div sec:authorize="isAuthenticated()" th:if="${vacio != novacio}" class="center">
+			<form th:action="@{/compra}" method="POST">
+				<input class="btn btn-success btn-lg mt-2" type="submit" value="Comprar">
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

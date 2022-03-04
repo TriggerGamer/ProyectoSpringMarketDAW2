@@ -42,7 +42,6 @@ public class ControladorCompras {
 		Compras compra = new Compras();
 		compra = servicioCompras.crear(id_Usuario, compra);
 		
-		
 		// Obtener el carrito de la compra de session
 		@SuppressWarnings("unchecked")
 		List<Carrito> carrito = (List<Carrito>) session.getAttribute("carrito");
@@ -55,8 +54,6 @@ public class ControladorCompras {
 			// Guardar cada producto a la compra
 			compra.anadirProductos(productos, carrito2.getNumeroUnidades());
 		}
-		
-		
 		
 		session.setAttribute("carrito", null);
 		session.setAttribute("vacio", null);
@@ -83,20 +80,6 @@ public class ControladorCompras {
 		// Obtener las compras
 		List<Compras> compras = servicioCompras.findComprasUsuario(id);
 		modelo.addAttribute("compras", compras);
-
-		// session Usuarios
-		String nombre = (String) session.getAttribute("user");
-		String roles = (String) session.getAttribute("rol");
-		modelo.addAttribute("roles", roles);
-
-		if (nombre == null) {
-			nombre = "f amigo";
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", "");
-		} else {
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", nombre);
-		}
 
 		return "ListaCompras";
 	}

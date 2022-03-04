@@ -1,4 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang='es' xml:lang="es"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -7,83 +9,101 @@
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jaquez y Luis">
 	<meta name="viewport" content="width=device-width">
-	
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap(1).css}">
-	<link rel="shortcut icon" th:href="@{/img/favicon.ico}"> 
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+
+	<script type="text/javascript" th:src="@{/js/ajax.js}"></script>
 
 </head>
 
 <body>
-	<header th:replace="nav/header.html"> </header>
+
+	<header th:replace="/nav/header.html"> </header>
 
 	<br>
 
 	<div class="container-fluid">
 
-		<table class="table">
-			<thead>
-				<tr class="table-info text-start">
-					<th scope="col"> Identificador de Producto </th>
-					<th scope="col"> Nombre de Producto </th>
-					<th scope="col"> Descripcion del Producto </th>
-					<th scope="col"> Precio </th>
-					<th scope="col"> Descuento </th>
-					<th scope="col"> </th>
-				</tr>
-			</thead>
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+					<h3 class="card-title" th:text="${producto.tituloProducto}"></h3>
+					<div class="row">
+						<div class="col-lg-5 col-md-5 col-sm-6">
+							<div class="white-box text-center"><img
+									th:src="@{/img/producto/{id}/imagen(id=${producto.id_Producto})}"
+									class="img-responsive"></div>
+						</div>
+						<div class="col-lg-7 col-md-7 col-sm-6">
+							<h2 class="box-title mt-5"> Descripcion: </h2>
+							<p th:text="${producto.descripcionProducto}" style="font-size: 1vw;"></p>
+							<h2 class="mt-4"> Precio:
+								<span th:text="${producto.precio} + ' €'"></span> <small class="text-success"
+									th:text="'('+ ${producto.descuento} + '% Descuento)'"></small>
+							</h2>
 
-			<tbody>
-				<tr class="table-info text-start">
-					<td scope="row" th:text="${producto.id_Producto}" />
-					<td scope="row" th:text="${producto.tituloProducto}" />
-					<td scope="row" th:text="${producto.descripcionProducto}" />
-					<td scope="row" th:text="${producto.precio} + ' €'" />
-					<td scope="row" th:text="${producto.descuento} + ' %'" />
-					<td scope="row">
-						<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET">
-							<input type="number" name="numeroProductos" placeholder="Numero de productos que desea"
-								size="500">
-							<input class="btn btn-success mt-2" type="submit" value="Añadir al carrito">
-						</form>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+							<form th:action="@{/carrito/guardar/{id}(id=${producto.id_Producto})}" method="GET"
+								class="text-center mt-5">
+								<div class="form-group">
+									<input type="number" name="numeroProductos" placeholder="Número de productos"
+										style="font-size: 1vw;">
+									<input class="btn btn-success mt-3" type="submit" value="Añadir al carrito">
+								</div>
 
-		<div th:each="rol : ${roles}">
-			<a th:if="${rol == 'Admin'}" th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"> <button
-					class="mt-2 btn btn-secondary btn-lg"> Borrar Producto </button> </a>
+							</form>
 
+							<div sec:authorize="hasAuthority('Admin')" class="text-center mt-3">
+								<a th:href="@{/producto/borrar/{id}(id=${producto.id_Producto})}"
+									class="mt-2 btn btn-secondary btn-lg">
+									Borrar Producto </a>
+							</div>
 
-			<div th:if="${rol == 'Admin'}">
-				<form th:action="@{/img/producto/{id}/imagen(id=${producto.id_Producto})}" method="POST"
-					enctype="multipart/form-data">
-					<div class="form-group">
-						<label for="formFile" class="form-label mt-5"> Subir o Actualizar Imagen </label>
-						<input class="form-control" type="file" id="formFile" name="file">
+						</div>
 					</div>
-					<input class="mt-2 btn btn-success btn-lg" type="submit" value="Enviar">
-				</form>
-			</div>
-			<form th:action="@{/crear/pregunta/{id}(id=${producto.id_Producto})}" method="POST">
-			<div class="input-group" th:if="${rol == 'Registrado' || rol == 'Admin'}">
-				<button type="submit">
-					<span class="input-group-text border-0" id="search-addon">
-						<i class="bi bi-search"></i>
-					</span>
-				</button>
-				<input type="text" class="form-control rounded" placeholder="Haz tu pregunta..." aria-describedby="search-addon" />				
-			</div>
-			</form>
-			
-			<!--Contenerdor de Preguntas y respuestas-->
-			<div id="PyR">
-		
+				</div>
 			</div>
 		</div>
-		
+
+		<div sec:authorize="hasAuthority('Admin')">
+			<form class="mt-5" th:action="@{/img/producto/{id}/imagen(id=${producto.id_Producto})}" method="POST"
+				enctype="multipart/form-data">
+
+				<div class="form-group">
+					<label for="formFile" class="form-label"> Subir o Actualizar Imagen </label>
+					<input class="form-control" type="file" id="formFile" name="file">
+
+					<input class="btn btn-success btn-lg" type="submit" value="Enviar">
+				</div>
+			</form>
+		</div>
+
+
+		<div class="mt-4">
+			<p class="text-center">Comentarios:</p>
+
+			<form class="mt-4 mb-5" sec:authorize="isAuthenticated()"
+				th:action="@{/crear/pregunta/{id}(id=${producto.id_Producto})}" method="POST" id="formPreguntas">
+
+				<div class="input-group">
+					<button type="submit" id="EnviarPregunta">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+							class="bi bi-search" viewBox="0 0 16 16">
+							<path
+								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+						</svg>
+					</button>
+
+					<input type="text" class="form-control" placeholder="Haz tu pregunta..." id="Pregunta" />
+				</div>
+			</form>
+
+			<!-- Contenerdor de Preguntas y respuestas -->
+			<div id="PyR"></div>
+		</div>
 	</div>
 </body>
 

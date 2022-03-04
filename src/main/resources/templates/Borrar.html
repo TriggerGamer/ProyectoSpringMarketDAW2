@@ -3,7 +3,7 @@
 
 <head>
 
-	<title> Acceso a usuarios </title>
+	<title> Borrar producto </title>
 
 	<meta charset='utf-8'>
 	<meta name="author" content="Erick Jaquez y Luis">
@@ -23,31 +23,7 @@
 	<br>
 
 	<div class="container-fluid">
-
-		<h1 class="display-1 text-danger alert alert-danger center"> Acceso denegado </h1>
-
-		<p class="center text-danger"> Usted no tiene acceso a esta página </p>
-
-		<br>
-
-		<div class="center">
-			<p> ¿Tienes cuenta? </p>
-			<a class="btn btn-outline-primary btn-lg" th:href="@{/usuario/login}"> Iniciar sesion </a>
-		</div>
-
-		<br>
-
-		<div class="center">
-			<p> ¿No tienes cuenta? </p>
-			<a class="btn btn-outline-danger btn-lg" th:href="@{/usuario/signup}"> Regístrate </a>
-		</div>
-
-		<br>
-
-		<div class="center">
-			<p> ¿Volver a inicio? </p>
-			<a class="btn btn-outline-info btn-lg" th:href="@{/index}"> Inicio </a>
-		</div>
+		<h1 th:text="${borrar}"> </h1>
 	</div>
 
 </body>

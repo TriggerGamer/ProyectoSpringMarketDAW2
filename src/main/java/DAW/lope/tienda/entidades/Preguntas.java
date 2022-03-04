@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="Preguntas")
 public class Preguntas implements Serializable {
@@ -27,11 +30,11 @@ public class Preguntas implements Serializable {
 	@Column(name = "id_Pregunta")
 	private int id_Pregunta;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Producto")
 	private Productos producto;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Usuario")
 	private Usuario usuario;
 	
@@ -67,6 +70,7 @@ public class Preguntas implements Serializable {
 		this.id_Pregunta = id_Pregunta;
 	}
 
+	@JsonBackReference
 	public Productos getProducto() {
 		return producto;
 	}
@@ -75,6 +79,7 @@ public class Preguntas implements Serializable {
 		this.producto = producto;
 	}
 
+	@JsonBackReference
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -99,12 +104,18 @@ public class Preguntas implements Serializable {
 		this.fecha_Pregunta = fecha_Pregunta;
 	}
 	
+	@JsonManagedReference
 	public Set<Respuestas> getRespuestas() {
 		return respuestas;
 	}
 
 	public void setRespuestas(Set<Respuestas> respuestas) {
 		this.respuestas = respuestas;
+	}
+	
+	public void anadirRespuesta(Respuestas respuesta) {
+	    respuesta.setPregunta(this);
+		getRespuestas().add(respuesta);
 	}
 	
 }

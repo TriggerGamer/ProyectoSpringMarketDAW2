@@ -31,16 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/index",
 	                            "/js/**",
 	                            "/css/**",
+	                            "/bootstrap/**",
 	                            "/img/**",
-	                            "/usuario/login",
-	                            "/usuario/signup",
+	                            "/usuario/**",
 	                            "/producto/buscar",
 	                            "/producto/{id_Producto}",
-	                            "/carrito/guardar/{id_Producto}",
-	                            "/carrito/borrar/{id_Producto}",
+	                            "/carrito/**",
+	                            "/obtener/**",
 	                            "/imagenes/**",
-	                            "/carrito/listar",
-	                            "/acceso-denegado",
 	                            "/webjars/**").permitAll()
 	                    .antMatchers(
 	                    		"/producto/crear",
@@ -60,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                .logout()
 	                    .invalidateHttpSession(true)
 	                    .clearAuthentication(true)
-	                    .logoutUrl("/usuario/logOut")
-	                    .logoutRequestMatcher(new AntPathRequestMatcher("/usuario/logOut"))
+	                    .logoutUrl("/usuario/logout")
+	                    .logoutRequestMatcher(new AntPathRequestMatcher("/usuario/logout"))
 	                    .logoutSuccessUrl("/index")
 	                    .permitAll()
 	        		.and()

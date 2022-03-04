@@ -17,38 +17,28 @@
 </head>
 
 <body>
-
 	<header th:replace="nav/header.html"> </header>
 
 	<br>
 
 	<div class="container-fluid">
+		<div class="row form-inline">
+			<div class="col-4 centro">
+				<form class="" th:action="@{/usuario/login}" method="POST">
+					<input class="form-control" name="nombreUsuario" size="20" type="text"
+						placeholder="Nombre de Usuario">
+					<input class="form-control" name="contrasenia" size="20" type="password" placeholder="Contraseña">
 
-		<h1 class="display-1 text-danger alert alert-danger center"> Acceso denegado </h1>
-
-		<p class="center text-danger"> Usted no tiene acceso a esta página </p>
-
-		<br>
-
-		<div class="center">
-			<p> ¿Tienes cuenta? </p>
-			<a class="btn btn-outline-primary btn-lg" th:href="@{/usuario/login}"> Iniciar sesion </a>
+					<input class="btn btn-outline-primary btn-lg" type="submit" value="Entrar">
+				</form>
+			</div>
 		</div>
-
-		<br>
-
-		<div class="center">
-			<p> ¿No tienes cuenta? </p>
-			<a class="btn btn-outline-danger btn-lg" th:href="@{/usuario/signup}"> Regístrate </a>
-		</div>
-
-		<br>
-
-		<div class="center">
-			<p> ¿Volver a inicio? </p>
-			<a class="btn btn-outline-info btn-lg" th:href="@{/index}"> Inicio </a>
+		<div th:if="${param.error}" class="row">
+			<p class="alert alert-danger"> Usuario o Contraseña Incorrectos </p>
 		</div>
 	</div>
+
+	<br>
 
 </body>
 
