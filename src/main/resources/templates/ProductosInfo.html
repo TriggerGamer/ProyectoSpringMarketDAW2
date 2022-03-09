@@ -62,27 +62,28 @@
 									Borrar Producto </a>
 							</div>
 
+							<div sec:authorize="hasAuthority('Admin')">
+								<form class="mt-5" th:action="@{/img/producto/{id}/imagen(id=${producto.id_Producto})}"
+									method="POST" enctype="multipart/form-data">
+
+									<div class="form-group">
+										<label for="formFile" class="form-label"> Subir o Actualizar Imagen </label>
+										<input class="form-control" type="file" id="formFile" name="file">
+
+										<input class="btn btn-success btn-lg" type="submit" value="Enviar">
+									</div>
+								</form>
+							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div sec:authorize="hasAuthority('Admin')">
-			<form class="mt-5" th:action="@{/img/producto/{id}/imagen(id=${producto.id_Producto})}" method="POST"
-				enctype="multipart/form-data">
-
-				<div class="form-group">
-					<label for="formFile" class="form-label"> Subir o Actualizar Imagen </label>
-					<input class="form-control" type="file" id="formFile" name="file">
-
-					<input class="btn btn-success btn-lg" type="submit" value="Enviar">
-				</div>
-			</form>
-		</div>
-
-
-		<div class="mt-4">
+	<div class="mt-4 container">
+	
+			<div class="card">
 			<p class="text-center">Comentarios:</p>
 
 			<form class="mt-4 mb-5" sec:authorize="isAuthenticated()"
@@ -103,7 +104,7 @@
 
 			<!-- Contenerdor de Preguntas y respuestas -->
 			<div id="PyR"></div>
-		</div>
+			</div>
 	</div>
 </body>
 
