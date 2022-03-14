@@ -52,7 +52,7 @@ function obtenerPreguntas() {
 	var requestsArray = [p3, p4, p5];
 
 	Promise.all(requestsArray.map((request) => {
-		return fetch(request, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, credentials: 'same-origin' }).then((response) => {
+		return fetch(request, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, credentials: 'same-origin', method: 'GET' }).then((response) => {
 			return response.json();
 		}).then((data) => {
 			return data;
@@ -142,7 +142,7 @@ function eliminarPregunta(idPregunta) {
 
 	let csrfToken = $("[name='_csrf']").attr("value");
 
-	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken } })
+	fetch('/borrar/pregunta/' + idPregunta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken, method: 'GET' } })
 		.then(res => res.json())
 		.then(response => {
 			obtenerPreguntas();
@@ -277,7 +277,7 @@ function eliminarRespuesta(idRespuesta) {
 
 	let csrfToken = $("[name='_csrf']").attr("value");
 
-	fetch('/borrar/respuesta/' + idRespuesta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'POST' })
+	fetch('/borrar/respuesta/' + idRespuesta, { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': csrfToken }, method: 'GET' })
 		.then(res => res.json())
 		.then(response => {
 			obtenerPreguntas();
