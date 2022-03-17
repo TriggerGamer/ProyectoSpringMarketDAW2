@@ -14,20 +14,30 @@ import DAW.lope.tienda.servicios.ServicioProductos;
 
 @Controller
 public class ContraladorIndex {
-	
-	//Conexión a los Servicios
+
+	// Conexión a los Servicios
 	@Autowired
 	ServicioProductos servicioProductos;
 
-	//Métodos para la página principal
+	// Métodos para la página principal
 
-	@GetMapping(value={"/index","/"})
+	@GetMapping(value = { "/index", "/" })
 	public String index_get(Model modelo, HttpSession session) {
 
 		// Productos
 		List<Productos> Productos = servicioProductos.findEight();
 		modelo.addAttribute("Productos", Productos);
-		
+
+		// Session Usuarios
+		int id;
+
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		} catch (Exception e) {
+			id = 1;
+		}
+		modelo.addAttribute("id_usuario", id);
+
 		return "Index";
 	}
 
