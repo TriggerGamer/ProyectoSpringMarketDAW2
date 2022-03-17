@@ -70,29 +70,43 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 	divInfo.replaceChildren();
 
 	for (let preguntita of responsePreguntas) {
-
+		
+		let li = document.createElement("li");
+		
 		let divContenedor = document.createElement("div");
-		let divHeader = document.createElement("div");
-		let divBody = document.createElement("div");
-		let headerFecha = document.createElement('div');
-		let pregunta = document.createElement('p');
-		let botonRespuestas = document.createElement('button');
-		let borrarPregunta = document.createElement('button');
-
-		divContenedor.setAttribute("class", "centro card border-info mb-3");
-		divContenedor.setAttribute("style", "max-width: 75%;");
+		divContenedor.setAttribute("class", "d-flex");
 		divContenedor.setAttribute("id", "divContenedor" + preguntita.id_pregunta);
+	
+		let divLeft = document.createElement("div");
+		divLeft.setAttribute("class", "left");
+		
+		let divRight = document.createElement("div");
+		divRight.setAttribute("class", "right");
+		divRight.setAttribute("id", "body" + preguntita.id_pregunta);
+		
+		let h4 = document.createElement("h4");
+		h4.textContent = preguntita.nombre_usuario;
+		divRight.appendChild(h4);
+		
+		let divP = document.createElement('div');
+		divP.setAttribute("class", "review-description");
+		let pregunta = document.createElement('p');
+		pregunta.setAttribute("class", "fs-2");
+		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
+		divP.appendChild(pregunta);
+		divRight.appendChild(divP);
+		
+		let spanFecha = document.createElement('span');
+		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100");
+		spanFecha.textContent = 'Fecha: ' + preguntita.fecha;
+		divRight.appendChild(spanFecha);
 
-		divHeader.setAttribute("class", "card-header");
-		divBody.setAttribute("class", "card-body");
-		divBody.setAttribute("id", "body" + preguntita.id_pregunta);
-
-		headerFecha.setAttribute("style", "float:right;");
-		pregunta.setAttribute("class", "card-text");
-
+		let botonRespuestas = document.createElement('button');
 		botonRespuestas.setAttribute('class', 'btn btn-outline-warning');
 		botonRespuestas.setAttribute('name', 'crearRespuesta');
-
+		
+		botonRespuestas.textContent = "Responder";
+		
 		let contador = 0;
 		botonRespuestas.addEventListener('click', () => {
 			//let linea = document.getElementById('idBody');
@@ -108,31 +122,39 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 			}
 
 		});
-
+		
+		let borrarPregunta = document.createElement('button');
+		borrarPregunta.textContent = "Borrar";
+		
 		borrarPregunta.setAttribute('class', 'btn btn-outline-danger ms-4');
 		borrarPregunta.setAttribute('name', 'borrarPregunta');
 
 		borrarPregunta.addEventListener('click', () => {
 			eliminarPregunta(preguntita.id_pregunta);
 		});
-
-		divHeader.textContent = 'Usuario: ' + preguntita.nombre_usuario;
-		headerFecha.textContent = 'Fecha: ' + preguntita.fecha;
-		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
-		botonRespuestas.textContent = "Responder";
-		borrarPregunta.textContent = "Borrar";
-
-		divInfo.appendChild(divContenedor);
-		divContenedor.appendChild(divHeader);
-		divContenedor.appendChild(divBody);
-
-		divHeader.appendChild(headerFecha);
-		divBody.appendChild(pregunta);
-		divBody.appendChild(botonRespuestas);
-
+		
+		let divBotones = document.createElement('div');
+		divBotones.setAttribute("class", "helpful-thumbs");
+		
+		let divbtn1 = document.createElement('div');
+		divbtn1.setAttribute("class", "helpful-thumb");
+		divbtn1.appendChild(botonRespuestas);
+		
+		let divbtn2 = document.createElement('div');
+		divbtn2.setAttribute("class", "helpful-thumb");
+		
 		if (idUsuario == preguntita.id_usuario || rolUsuario[0] == 'Admin') {
-			divBody.appendChild(borrarPregunta);
+			divbtn2.appendChild(borrarPregunta);
 		}
+		
+		divBotones.appendChild(divbtn1);
+		divBotones.appendChild(divbtn2);
+		divRight.appendChild(divBotones);
+		
+		li.appendChild(divLeft);
+		li.appendChild(divRight);
+		
+		divInfo.appendChild(li);
 
 		obtenerRespuestas(preguntita.id_pregunta, idUsuario, rolUsuario);
 	}

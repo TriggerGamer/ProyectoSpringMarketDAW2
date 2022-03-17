@@ -71,21 +71,6 @@ public class ControladorUsuarios {
 	@GetMapping(value = "/login")
 	public String loginUsuario_get(Model modelo, HttpSession session) {
 
-		// Session Usuarios
-
-		String nombre = (String) session.getAttribute("user");
-		String roles = (String) session.getAttribute("rol");
-
-		modelo.addAttribute("roles", roles);
-		if (nombre == null) {
-			nombre = "f amigo";
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", "");
-		} else {
-			modelo.addAttribute("usuario1", nombre);
-			modelo.addAttribute("usuario2", nombre);
-		}
-
 		return "Login";
 	}
 

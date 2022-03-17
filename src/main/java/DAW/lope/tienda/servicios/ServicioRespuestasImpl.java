@@ -1,5 +1,6 @@
 package DAW.lope.tienda.servicios;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +33,8 @@ public class ServicioRespuestasImpl implements ServicioRespuestas{
 	public int guardarRespuesta(Respuestas respuesta, int idUsuario, int idPregunta) {
 		try {
 			
-			String f = LocalDateTime.now().toString();
-			String nuevo[] = f.split("T");
-			String fecha = nuevo[0];
+			long now = System.currentTimeMillis();
+			Date fecha = new Date(now);
 			
 			respuesta.setFecha_Respuesta(fecha);
 			
@@ -73,10 +73,12 @@ public class ServicioRespuestasImpl implements ServicioRespuestas{
 			
 			RespuestasDto respueta1 = new RespuestasDto();
 			
+			String fecha = respueta.getFecha_Respuesta().toString();
+			
 			respueta1.setId_respuesta(respueta.getId_Respuesta());
 			respueta1.setRespuesta(respueta.getRespuesta());
 			respueta1.setId_pregunta(idPregunta);
-			respueta1.setFecha(respueta.getFecha_Respuesta());
+			respueta1.setFecha(fecha);
 			respueta1.setId_usuario(respueta.getUsuario().getId_Usuario());
 			respueta1.setNombre_usuario(respueta.getUsuario().getNombreUsuario());
 			

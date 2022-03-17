@@ -1,6 +1,7 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public class Preguntas implements Serializable {
 	private String pregunta;
 	
 	@Column(name="fecha_Pregunta")
-	private String fecha_Pregunta;
+	private Date fecha_Pregunta;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Respuestas> respuestas = new HashSet<>();
@@ -51,7 +52,7 @@ public class Preguntas implements Serializable {
 		
 	}
 
-	public Preguntas(int id_Pregunta, Productos producto, Usuario usuario, String pregunta, String fecha_Pregunta,
+	public Preguntas(int id_Pregunta, Productos producto, Usuario usuario, String pregunta, Date fecha_Pregunta,
 			Set<Respuestas> respuestas) {
 		super();
 		this.id_Pregunta = id_Pregunta;
@@ -96,11 +97,11 @@ public class Preguntas implements Serializable {
 		this.pregunta = pregunta;
 	}
 
-	public String getFecha_Pregunta() {
+	public Date getFecha_Pregunta() {
 		return fecha_Pregunta;
 	}
 
-	public void setFecha_Pregunta(String fecha_Pregunta) {
+	public void setFecha_Pregunta(Date fecha_Pregunta) {
 		this.fecha_Pregunta = fecha_Pregunta;
 	}
 	

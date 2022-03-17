@@ -1,6 +1,7 @@
 package DAW.lope.tienda.entidades;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,13 +38,13 @@ public class Respuestas implements Serializable{
 	private String respuesta;
 	
 	@Column(name="fecha_Respuesta")
-	private String fecha_Respuesta;
+	private Date fecha_Respuesta;
 	
 	public Respuestas() {
 		
 	}
 
-	public Respuestas(int id_Respuesta, Preguntas pregunta, Usuario usuario, String respuesta, String fecha_Respuesta) {
+	public Respuestas(int id_Respuesta, Preguntas pregunta, Usuario usuario, String respuesta, Date fecha_Respuesta) {
 		super();
 		this.id_Respuesta = id_Respuesta;
 		this.pregunta = pregunta;
@@ -86,11 +87,11 @@ public class Respuestas implements Serializable{
 		this.respuesta = respuesta;
 	}
 
-	public String getFecha_Respuesta() {
+	public Date getFecha_Respuesta() {
 		return fecha_Respuesta;
 	}
 
-	public void setFecha_Respuesta(String fecha_Respuesta) {
+	public void setFecha_Respuesta(Date fecha_Respuesta) {
 		this.fecha_Respuesta = fecha_Respuesta;
 	}
 	
