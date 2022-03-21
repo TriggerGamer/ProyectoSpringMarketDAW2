@@ -87,20 +87,20 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 		divRight.setAttribute("id", "body" + preguntita.id_pregunta);
 
 		let h2 = document.createElement("h2");
-		h2.setAttribute("class", "fw-bold fs-1");
+		h2.setAttribute("class", "fw-bold fs-4");
 		h2.textContent = preguntita.nombre_usuario;
 		divRight.appendChild(h2);
 
 		let divP = document.createElement('div');
 		divP.setAttribute("class", "review-description");
 		let pregunta = document.createElement('p');
-		pregunta.setAttribute("class", "fs-3");
+		pregunta.setAttribute("class", "fs-5");
 		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
 		divP.appendChild(pregunta);
 		divRight.appendChild(divP);
 
 		let spanFecha = document.createElement('span');
-		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-4");
+		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-5");
 		spanFecha.textContent = 'Fecha: ' + preguntita.fecha;
 		divRight.appendChild(spanFecha);
 
@@ -227,20 +227,20 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 		divRight.setAttribute("class", "right");
 
 		let h2 = document.createElement("h2");
-		h2.setAttribute("class", "fw-bold fs-1");
+		h2.setAttribute("class", "fw-bold fs-4");
 		h2.textContent = respuesta.nombre_usuario;
 		divRight.appendChild(h2);
 
 		let divP = document.createElement('div');
 		divP.setAttribute("class", "review-description");
 		let respuestas = document.createElement('p');
-		respuestas.setAttribute("class", "fs-3");
+		respuestas.setAttribute("class", "fs-5");
 		respuestas.textContent = "Respuesta: " + respuesta.respuesta;
 		divP.appendChild(respuestas);
 		divRight.appendChild(divP);
 
 		let spanFecha = document.createElement('span');
-		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-4");
+		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-5");
 		spanFecha.textContent = 'Fecha: ' + respuesta.fecha;
 		divRight.appendChild(spanFecha);
 
