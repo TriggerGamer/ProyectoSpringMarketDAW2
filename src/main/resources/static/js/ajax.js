@@ -72,7 +72,6 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 	for (let preguntita of responsePreguntas) {
 
 		let li = document.createElement("li");
-		li.setAttribute("id", "li" + preguntita.id_pregunta);
 
 		let divContenedor = document.createElement("div");
 		divContenedor.setAttribute("class", "d-flex");
@@ -212,7 +211,7 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 
 	for (let respuesta of response) {
 
-		let li = document.getElementById("li" + respuesta.id_pregunta);
+		let divContenedor = document.getElementById("body" + respuesta.id_pregunta);
 
 		let divRespuestas = document.createElement("div");
 		divRespuestas.setAttribute("class", "response-item mt-3 d-flex");
@@ -308,7 +307,7 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 		divRespuestas.appendChild(divLeft);
 		divRespuestas.appendChild(divRight);
 
-		li.appendChild(divRespuestas);
+		divContenedor.appendChild(divRespuestas);
 
 	}
 }
