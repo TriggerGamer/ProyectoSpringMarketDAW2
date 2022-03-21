@@ -37,7 +37,7 @@
 
 				</div>
 
-				<form class="navbar-nav me-4 form-inline" th:action="@{/producto/buscar}" method="GET">
+				<form class="navbar-nav mt-2 me-4 form-inline" th:action="@{/producto/buscar}" method="GET">
 					<div class="form-group nav-item">
 						<input class="form-control mt-2" type="search" name="nombre"
 							placeholder="Nombre del producto..." size="30">
@@ -45,7 +45,7 @@
 					<button class="nav-item btn btn-outline-info btn-primary m-2 btn-lg" type="submit"> Buscar </button>
 				</form>
 
-				<div class="navbar-nav form-inline">
+				<div class="navbar-nav">
 					<div class="nav-item me-3" sec:authorize="isAnonymous()">
 						<a th:href="@{/usuario/login}" class="btn btn-primary btn-outline-info btn-lg">
 							Entrar </a>
@@ -59,7 +59,7 @@
 						<a th:href="@{/usuario/logout}" class="btn btn-primary btn-outline-info btn-lg">Salir</a>
 					</div>
 
-					<div class="nav-item form-inline">
+					<div class="nav-item">
 						<a th:href="@{/carrito/listar}">
 							<div class="carrito m-3"> </div>
 						</a>
