@@ -73,25 +73,25 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 
 		let li = document.createElement("li");
 		li.setAttribute("id", "li" + preguntita.id_pregunta);
-		
+
 		let divContenedor = document.createElement("div");
 		divContenedor.setAttribute("class", "d-flex");
-		
+
 		let divLeft = document.createElement("div");
 		divLeft.setAttribute("class", "left");
-		let cosa = document.createElement("div");
-		cosa.setAttribute("style", "width:100; height:100");
-		divLeft.appendChild(cosa);
-		
+		let spanfoto = document.createElement("i");
+		spanfoto.setAttribute("class", "bi bi-person-circle");
+		divLeft.appendChild(spanfoto);
+
 		let divRight = document.createElement("div");
 		divRight.setAttribute("class", "right");
 		divRight.setAttribute("id", "body" + preguntita.id_pregunta);
-		
+
 		let h2 = document.createElement("h2");
 		h2.setAttribute("class", "fw-bold fs-1");
 		h2.textContent = preguntita.nombre_usuario;
 		divRight.appendChild(h2);
-		
+
 		let divP = document.createElement('div');
 		divP.setAttribute("class", "review-description");
 		let pregunta = document.createElement('p');
@@ -99,7 +99,7 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
 		divP.appendChild(pregunta);
 		divRight.appendChild(divP);
-		
+
 		let spanFecha = document.createElement('span');
 		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-4");
 		spanFecha.textContent = 'Fecha: ' + preguntita.fecha;
@@ -108,9 +108,9 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 		let botonRespuestas = document.createElement('button');
 		botonRespuestas.setAttribute('class', 'btn btn-outline-warning');
 		botonRespuestas.setAttribute('name', 'crearRespuesta');
-		
+
 		botonRespuestas.textContent = "Responder";
-		
+
 		let contador = 0;
 		botonRespuestas.addEventListener('click', () => {
 			//let linea = document.getElementById('idBody');
@@ -126,38 +126,40 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 			}
 
 		});
-		
+
 		let borrarPregunta = document.createElement('button');
 		borrarPregunta.textContent = "Borrar";
-		
+
 		borrarPregunta.setAttribute('class', 'btn btn-outline-danger ms-4');
 		borrarPregunta.setAttribute('name', 'borrarPregunta');
 
 		borrarPregunta.addEventListener('click', () => {
 			eliminarPregunta(preguntita.id_pregunta);
 		});
-		
+
 		let divBotones = document.createElement('div');
 		divBotones.setAttribute("class", "helpful-thumbs");
-		
+
 		let divbtn1 = document.createElement('div');
 		divbtn1.setAttribute("class", "helpful-thumb");
 		divbtn1.appendChild(botonRespuestas);
-		
+
 		let divbtn2 = document.createElement('div');
 		divbtn2.setAttribute("class", "helpful-thumb");
-		
+
 		if (idUsuario == preguntita.id_usuario || rolUsuario[0] == 'Admin') {
 			divbtn2.appendChild(borrarPregunta);
 		}
-		
+
 		divBotones.appendChild(divbtn1);
 		divBotones.appendChild(divbtn2);
 		divRight.appendChild(divBotones);
+
+		divContenedor.appendChild(divLeft);
+		divContenedor.appendChild(divRight);
 		
-		li.appendChild(divLeft);
-		li.appendChild(divRight);
-		
+		li.appendChild(divContenedor);
+
 		divInfo.appendChild(li);
 
 		obtenerRespuestas(preguntita.id_pregunta, idUsuario, rolUsuario);
@@ -211,38 +213,38 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 	for (let respuesta of response) {
 
 		let li = document.getElementById("li" + respuesta.id_pregunta);
-		
-		let divRespuestas= document.createElement("div");
+
+		let divRespuestas = document.createElement("div");
 		divRespuestas.setAttribute("class", "response-item mt-3 d-flex");
 		divRespuestas.setAttribute("id", "divRespuestas" + respuesta.id_pregunta);
-		
+
 		let divLeft = document.createElement("div");
 		divLeft.setAttribute("class", "left");
-		let cosa = document.createElement("div");
-		cosa.setAttribute("style", "width:100; height:100");
-		divLeft.appendChild(cosa);
-		
+		let spanfoto = document.createElement("i");
+		spanfoto.setAttribute("class", "bi bi-person-circle");
+		divLeft.appendChild(spanfoto);
+
 		let divRight = document.createElement("div");
 		divRight.setAttribute("class", "right");
-		
+
 		let h2 = document.createElement("h2");
 		h2.setAttribute("class", "fw-bold fs-1");
 		h2.textContent = respuesta.nombre_usuario;
 		divRight.appendChild(h2);
-		
+
 		let divP = document.createElement('div');
 		divP.setAttribute("class", "review-description");
-		let pregunta = document.createElement('p');
-		pregunta.setAttribute("class", "fs-3");
-		pregunta.textContent = "Pregunta: " + respuesta.respuesta;
-		divP.appendChild(pregunta);
+		let respuestas = document.createElement('p');
+		respuestas.setAttribute("class", "fs-3");
+		respuestas.textContent = "Respuesta: " + respuesta.respuesta;
+		divP.appendChild(respuestas);
 		divRight.appendChild(divP);
-		
+
 		let spanFecha = document.createElement('span');
 		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-4");
 		spanFecha.textContent = 'Fecha: ' + respuesta.fecha;
 		divRight.appendChild(spanFecha);
-		
+
 		let botonBorrar = document.createElement('button');
 		let botonEditar = document.createElement('button');
 
@@ -253,23 +255,23 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 		botonEditar.setAttribute('class', 'btn btn-outline-warning ms-4');
 		botonEditar.setAttribute('name', 'editarRespuesta');
 		botonEditar.textContent = "Editar";
-		
-	
+
+
 		botonBorrar.addEventListener('click', () => {
 			eliminarRespuesta(respuesta.id_respuesta);
 		});
-		
-						
+
+
 		let contador = 0;
 		botonEditar.addEventListener('click', () => {
-			contador ++;
-			if(contador%2 == 1){
-				
+			contador++;
+			if (contador % 2 == 1) {
+
 				let guardar = document.createElement('button');
 				let areaRespuesta = document.createElement('textarea');
 				let div = document.createElement('div');
-				
-				div.setAttribute('id',  'idpregunta' + respuesta.id_pregunta)
+
+				div.setAttribute('id', 'idpregunta' + respuesta.id_pregunta)
 				areaRespuesta.setAttribute('id', 'respuestaEditada');
 				areaRespuesta.setAttribute('class', 'form-group');
 				areaRespuesta.setAttribute('placeholder', respuesta.respuesta);
@@ -288,24 +290,24 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 				guardar.addEventListener('click', () => {
 					editarRespuesta(respuesta.id_respuesta);
 				});
-			}else{
+			} else {
 				let bodyRespuesta = document.getElementById("divRespuestas" + respuesta.id_pregunta);
 				let borrar = document.getElementById('idpregunta' + respuesta.id_pregunta);
 				bodyRespuesta.removeChild(borrar);
-			}			
+			}
 		});
-		
+
 		if (idUsuario == respuesta.id_usuario || rolUsuario[0] == 'Admin') {
 			divRight.appendChild(botonBorrar);
 		}
-		
+
 		if (idUsuario == respuesta.id_usuario) {
 			divRight.appendChild(botonEditar);
 		}
-		
+
 		divRespuestas.appendChild(divLeft);
 		divRespuestas.appendChild(divRight);
-		
+
 		li.appendChild(divRespuestas);
 
 	}

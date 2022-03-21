@@ -24,7 +24,7 @@ public class ControladorProductos {
 
 	// Métodos para buscar un producto
 	@GetMapping(value = "/buscar")
-	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo) {
+	public String buscarProducto_get(@RequestParam(value = "nombre", required = false) String busqueda, Model modelo, HttpSession session) {
 
 		if(busqueda == null) {
 			busqueda = " ";
@@ -33,6 +33,17 @@ public class ControladorProductos {
 		// Declarar la lista para obtener los datos
 		List<Productos> productos = servicioProductos.getProductoByName(busqueda);
 		modelo.addAttribute("productos", productos);
+		
+		int id;
+		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
+		modelo.addAttribute("id_usuario", id);
 
 		return "BuscarProducto";
 	}
@@ -85,11 +96,22 @@ public class ControladorProductos {
 
 	// Métodos para ver la info de un producto
 	@GetMapping(value = "/{id_Producto}")
-	public String infoProductos_get(Model modelo, @PathVariable int id_Producto) {
+	public String infoProductos_get(Model modelo, @PathVariable int id_Producto, HttpSession session) {
 
 		// Declarar la lista para obtener los datos
 		Productos producto = servicioProductos.findProductoById(id_Producto);
 		modelo.addAttribute("producto", producto);
+		
+		int id;
+		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
+		modelo.addAttribute("id_usuario", id);
 		
 		return "ProductosInfo";
 	}

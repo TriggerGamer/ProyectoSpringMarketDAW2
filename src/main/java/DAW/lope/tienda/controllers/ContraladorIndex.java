@@ -28,6 +28,17 @@ public class ContraladorIndex {
 		List<Productos> Productos = servicioProductos.findEight();
 		modelo.addAttribute("Productos", Productos);
 		
+		int id;
+		
+		try {
+			id = (int) session.getAttribute("id_Usuario");
+		}
+		catch (Exception e) {
+			id = 1;
+		}
+		
+		modelo.addAttribute("id_usuario", id);
+		
 		return "Index";
 	}
 
