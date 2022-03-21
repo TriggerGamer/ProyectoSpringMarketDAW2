@@ -16,7 +16,7 @@
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
 			<!-- Logo de la página -->
-			<a class="navbar-brand" href="/"><img class="foto" th:src="@{/img/logo.png}" /></a>
+			<a class="navbar-brand" href="/"><img class="ms-3 foto img-responsive" th:src="@{/img/logo.png}" /></a>
 
 			<!-- Boton Responsive -->
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
@@ -39,7 +39,7 @@
 
 				<form class="navbar-nav me-4 form-inline" th:action="@{/producto/buscar}" method="GET">
 					<div class="form-group nav-item">
-						<input class="form-control form-control-md" type="search" name="nombre"
+						<input class="form-control mt-2" type="search" name="nombre"
 							placeholder="Nombre del producto..." size="30">
 					</div>
 					<button class="nav-item btn btn-outline-info btn-primary m-2 btn-lg" type="submit"> Buscar </button>
@@ -61,7 +61,7 @@
 
 					<div class="nav-item form-inline">
 						<a th:href="@{/carrito/listar}">
-							<div class="carrito m-2"> </div>
+							<div class="carrito m-3"> </div>
 						</a>
 					</div>
 				</div>
