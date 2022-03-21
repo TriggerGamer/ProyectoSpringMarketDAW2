@@ -70,43 +70,47 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 	divInfo.replaceChildren();
 
 	for (let preguntita of responsePreguntas) {
-		
+
 		let li = document.createElement("li");
-		
+		li.setAttribute("id", "li" + preguntita.id_pregunta);
+
 		let divContenedor = document.createElement("div");
 		divContenedor.setAttribute("class", "d-flex");
-		divContenedor.setAttribute("id", "divContenedor" + preguntita.id_pregunta);
-	
+
 		let divLeft = document.createElement("div");
 		divLeft.setAttribute("class", "left");
-		
+		let spanfoto = document.createElement("i");
+		spanfoto.setAttribute("class", "bi bi-person-circle");
+		divLeft.appendChild(spanfoto);
+
 		let divRight = document.createElement("div");
 		divRight.setAttribute("class", "right");
 		divRight.setAttribute("id", "body" + preguntita.id_pregunta);
-		
-		let h4 = document.createElement("h4");
-		h4.textContent = preguntita.nombre_usuario;
-		divRight.appendChild(h4);
-		
+
+		let h2 = document.createElement("h2");
+		h2.setAttribute("class", "fw-bold fs-1");
+		h2.textContent = preguntita.nombre_usuario;
+		divRight.appendChild(h2);
+
 		let divP = document.createElement('div');
 		divP.setAttribute("class", "review-description");
 		let pregunta = document.createElement('p');
-		pregunta.setAttribute("class", "fs-2");
+		pregunta.setAttribute("class", "fs-3");
 		pregunta.textContent = "Pregunta: " + preguntita.pregunta;
 		divP.appendChild(pregunta);
 		divRight.appendChild(divP);
-		
+
 		let spanFecha = document.createElement('span');
-		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100");
+		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-4");
 		spanFecha.textContent = 'Fecha: ' + preguntita.fecha;
 		divRight.appendChild(spanFecha);
 
 		let botonRespuestas = document.createElement('button');
 		botonRespuestas.setAttribute('class', 'btn btn-outline-warning');
 		botonRespuestas.setAttribute('name', 'crearRespuesta');
-		
+
 		botonRespuestas.textContent = "Responder";
-		
+
 		let contador = 0;
 		botonRespuestas.addEventListener('click', () => {
 			//let linea = document.getElementById('idBody');
@@ -122,38 +126,40 @@ function anadirPregunta(idUsuario, responsePreguntas, rolUsuario) {
 			}
 
 		});
-		
+
 		let borrarPregunta = document.createElement('button');
 		borrarPregunta.textContent = "Borrar";
-		
+
 		borrarPregunta.setAttribute('class', 'btn btn-outline-danger ms-4');
 		borrarPregunta.setAttribute('name', 'borrarPregunta');
 
 		borrarPregunta.addEventListener('click', () => {
 			eliminarPregunta(preguntita.id_pregunta);
 		});
-		
+
 		let divBotones = document.createElement('div');
 		divBotones.setAttribute("class", "helpful-thumbs");
-		
+
 		let divbtn1 = document.createElement('div');
 		divbtn1.setAttribute("class", "helpful-thumb");
 		divbtn1.appendChild(botonRespuestas);
-		
+
 		let divbtn2 = document.createElement('div');
 		divbtn2.setAttribute("class", "helpful-thumb");
-		
+
 		if (idUsuario == preguntita.id_usuario || rolUsuario[0] == 'Admin') {
 			divbtn2.appendChild(borrarPregunta);
 		}
-		
+
 		divBotones.appendChild(divbtn1);
 		divBotones.appendChild(divbtn2);
 		divRight.appendChild(divBotones);
+
+		divContenedor.appendChild(divLeft);
+		divContenedor.appendChild(divRight);
 		
-		li.appendChild(divLeft);
-		li.appendChild(divRight);
-		
+		li.appendChild(divContenedor);
+
 		divInfo.appendChild(li);
 
 		obtenerRespuestas(preguntita.id_pregunta, idUsuario, rolUsuario);
@@ -206,52 +212,66 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 
 	for (let respuesta of response) {
 
-		let divContenedor = document.getElementById("divContenedor" + respuesta.id_pregunta);
+		let li = document.getElementById("li" + respuesta.id_pregunta);
+
 		let divRespuestas = document.createElement("div");
+		divRespuestas.setAttribute("class", "response-item mt-3 d-flex");
+		divRespuestas.setAttribute("id", "divRespuestas" + respuesta.id_pregunta);
 
-		divContenedor.appendChild(divRespuestas);
+		let divLeft = document.createElement("div");
+		divLeft.setAttribute("class", "left");
+		let spanfoto = document.createElement("i");
+		spanfoto.setAttribute("class", "bi bi-person-circle");
+		divLeft.appendChild(spanfoto);
 
-		let divHeader = document.createElement("div");
-		let respuesta1 = document.createElement('p');
-		let divRespuesta = document.createElement("div");
+		let divRight = document.createElement("div");
+		divRight.setAttribute("class", "right");
+
+		let h2 = document.createElement("h2");
+		h2.setAttribute("class", "fw-bold fs-1");
+		h2.textContent = respuesta.nombre_usuario;
+		divRight.appendChild(h2);
+
+		let divP = document.createElement('div');
+		divP.setAttribute("class", "review-description");
+		let respuestas = document.createElement('p');
+		respuestas.setAttribute("class", "fs-3");
+		respuestas.textContent = "Respuesta: " + respuesta.respuesta;
+		divP.appendChild(respuestas);
+		divRight.appendChild(divP);
+
+		let spanFecha = document.createElement('span');
+		spanFecha.setAttribute("class", "publish py-3 d-inline-block w-100 fs-4");
+		spanFecha.textContent = 'Fecha: ' + respuesta.fecha;
+		divRight.appendChild(spanFecha);
+
 		let botonBorrar = document.createElement('button');
 		let botonEditar = document.createElement('button');
-		let headerFecha = document.createElement('div');
-
-
-		headerFecha.setAttribute("style", "float:right;");
-		headerFecha.textContent = 'Fecha: ' + respuesta.fecha;
-
 
 		botonBorrar.setAttribute('class', 'btn btn-outline-danger');
 		botonBorrar.setAttribute('name', 'borrarRespuesta');
 		botonBorrar.textContent = "Borrar";
 
-		divHeader.setAttribute("class", "card-header");
-		divHeader.textContent = 'Usuario: ' + respuesta.nombre_usuario;
-
-		divRespuesta.setAttribute("style", "max-width: 75%;");
-		divRespuesta.setAttribute("class", "card-body");
-		divRespuesta.setAttribute("id", "divRespuestas" + respuesta.id_pregunta);
-
 		botonEditar.setAttribute('class', 'btn btn-outline-warning ms-4');
 		botonEditar.setAttribute('name', 'editarRespuesta');
 		botonEditar.textContent = "Editar";
-		respuesta1.textContent = "Respuesta: " + respuesta.respuesta;
+
 
 		botonBorrar.addEventListener('click', () => {
 			eliminarRespuesta(respuesta.id_respuesta);
 		});
-						
+
+
 		let contador = 0;
 		botonEditar.addEventListener('click', () => {
-			contador ++;
-			if(contador%2 == 1){
+			contador++;
+			if (contador % 2 == 1) {
+
 				let guardar = document.createElement('button');
 				let areaRespuesta = document.createElement('textarea');
 				let div = document.createElement('div');
-				
-				div.setAttribute('id',  'idpregunta' + respuesta.id_pregunta )
+
+				div.setAttribute('id', 'idpregunta' + respuesta.id_pregunta)
 				areaRespuesta.setAttribute('id', 'respuestaEditada');
 				areaRespuesta.setAttribute('class', 'form-group');
 				areaRespuesta.setAttribute('placeholder', respuesta.respuesta);
@@ -270,27 +290,25 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 				guardar.addEventListener('click', () => {
 					editarRespuesta(respuesta.id_respuesta);
 				});
-			}else{
+			} else {
 				let bodyRespuesta = document.getElementById("divRespuestas" + respuesta.id_pregunta);
 				let borrar = document.getElementById('idpregunta' + respuesta.id_pregunta);
 				bodyRespuesta.removeChild(borrar);
-			}			
+			}
 		});
 
-		divRespuestas.appendChild(divHeader);
-		divHeader.appendChild(headerFecha);
-		divRespuestas.appendChild(divRespuesta);
-		divRespuesta.appendChild(respuesta1);
-		
 		if (idUsuario == respuesta.id_usuario || rolUsuario[0] == 'Admin') {
-			divRespuesta.appendChild(botonBorrar);
+			divRight.appendChild(botonBorrar);
 		}
-		
-		if (idUsuario == respuesta.id_usuario) {
-			divRespuesta.appendChild(botonEditar);
-		}
-		
 
+		if (idUsuario == respuesta.id_usuario) {
+			divRight.appendChild(botonEditar);
+		}
+
+		divRespuestas.appendChild(divLeft);
+		divRespuestas.appendChild(divRight);
+
+		li.appendChild(divRespuestas);
 
 	}
 }
