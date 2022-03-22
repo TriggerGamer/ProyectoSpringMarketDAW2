@@ -255,11 +255,9 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 		botonEditar.setAttribute('name', 'editarRespuesta');
 		botonEditar.textContent = "Editar";
 
-
 		botonBorrar.addEventListener('click', () => {
 			eliminarRespuesta(respuesta.id_respuesta);
 		});
-
 
 		let contador = 0;
 		botonEditar.addEventListener('click', () => {
@@ -280,11 +278,13 @@ function imprimirRespuestas(response, idUsuario, rolUsuario) {
 				guardar.setAttribute('type', 'submit');
 				guardar.textContent = "Guardar";
 
-				divRespuesta.appendChild(div);
+				
 				div.appendChild(document.createElement('hr'));
 				div.appendChild(areaRespuesta);
 				div.appendChild(document.createElement('br'));
 				div.appendChild(guardar);
+				
+				divRespuestas.appendChild(div);
 
 				guardar.addEventListener('click', () => {
 					editarRespuesta(respuesta.id_respuesta);
@@ -355,12 +355,15 @@ function anadirRespuesta(idPregunta) {
 		bodyRespuesta.appendChild(div);
 	}
 
+	let form = document.createElement('div');
+	form.setAttribute("class", "text-center form-group");
+	
 	let areaRespuesta = document.createElement('textarea');
 	let botonEnviar = document.createElement('button');
-	let csrf = document.createElement('input');
-
+	
 	areaRespuesta.setAttribute('id', 'respuesta');
-	areaRespuesta.setAttribute('class', 'form-group');
+	areaRespuesta.setAttribute('class', 'thing');
+	areaRespuesta.setAttribute('placeholder', 'Respuesta');
 
 	botonEnviar.setAttribute('class', 'btn btn-outline-warning');
 	botonEnviar.setAttribute('type', 'submit');
@@ -369,10 +372,12 @@ function anadirRespuesta(idPregunta) {
 	botonEnviar.addEventListener('click', () => {
 		crearRespuestas(idPregunta);
 	});
+	
+	form.appendChild(areaRespuesta);
+	form.appendChild(document.createElement('br'));
+	form.appendChild(botonEnviar);
 
-	div.appendChild(document.createElement('hr'))
-	div.appendChild(areaRespuesta);
-	div.appendChild(document.createElement('br'));
-	div.appendChild(botonEnviar);
-
+	div.appendChild(document.createElement('hr'));
+	div.appendChild(form);
+	
 }
